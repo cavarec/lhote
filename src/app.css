@@ -1,0 +1,21 @@
+/* Design system : palette de l'étape 5 (§7.2). Seuls les jetons sont posés ici. */
+:root {
+  --ink: #1a1a1a;
+  --parchment: #f4ede0;
+  --blood: #8b2e2e;
+  --mist: #6b6358;
+  --veil: rgba(26, 26, 26, 0.06);
+
+  --font-narration: 'Crimson Pro', Literata, Georgia, serif;
+  --font-ui: Inter, system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-narration);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}

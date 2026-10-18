@@ -1,0 +1,16 @@
+{
+  // Worker lhote-api + Pages Function proxy. Pas de DOM : APIs Workers uniquement.
+  // Le moteur (src/lib/engine) et le contenu sont partagés avec le front : ils ne
+  // doivent donc utiliser que des APIs présentes des deux côtés (ex. crypto.subtle).
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": [
+    "worker/**/*.ts",
+    "functions/**/*.ts",
+    "src/lib/engine/**/*.ts",
+    "content/**/*.ts"
+  ]
+}

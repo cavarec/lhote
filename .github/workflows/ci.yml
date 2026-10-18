@@ -1,0 +1,66 @@
+name: CI
+
+# Lint + types + tests + e2e. Ne déploie JAMAIS rien.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Commits conventionnels (PR uniquement)
+        if: github.event_name == 'pull_request'
+        run: >
+          npx commitlint
+          --from "${{ github.event.pull_request.base.sha }}"
+          --to "${{ github.event.pull_request.head.sha }}"
+          --verbose
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Détecter les tests e2e
+        id: detect
+        run: |
+          if compgen -G "tests/e2e/*.spec.ts" > /dev/null; then
+            echo "has_specs=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_specs=false" >> "$GITHUB_OUTPUT"
+            echo "Aucun test e2e pour l'instant : étapes suivantes ignorées."
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.detect.outputs.has_specs == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - if: steps.detect.outputs.has_specs == 'true'
+        run: npm ci
+      - if: steps.detect.outputs.has_specs == 'true'
+        run: npx playwright install --with-deps chromium
+      - if: steps.detect.outputs.has_specs == 'true'
+        run: npm run build
+      - if: steps.detect.outputs.has_specs == 'true'
+        run: npm run test:e2e

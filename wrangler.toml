@@ -1,0 +1,18 @@
+# L'Hôte — Cloudflare Pages : front statique + Function proxy /api/*.
+#
+# Pages ne contient AUCUN Durable Object ni KV : tout l'état vit dans le Worker
+# `lhote-api` (voir worker/wrangler.toml). Pages l'appelle en same-origin via le
+# service binding `API` (functions/api/[[path]].ts).
+#
+# Le projet Pages est en Direct Upload (jamais connecté à Git) :
+#   npx wrangler pages project create lhote --production-branch=main
+# Il se déploie uniquement par tag (voir .github/workflows/deploy.yml).
+# Ordre de déploiement : Worker d'abord, Pages ensuite.
+
+name = "lhote"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "dist"
+
+[[services]]
+binding = "API"
+service = "lhote-api"

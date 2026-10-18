@@ -1,0 +1,29 @@
+# L'Hôte — Worker `lhote-api` : API /api/*, Durable Object `Chronology`, KV `TRACES`.
+# Déployé uniquement par .github/workflows/deploy.yml (sur tag vX.Y.Z), jamais à la main.
+
+name = "lhote-api"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+# --- Durable Object : chronologie par joueur (stockage SQLite) -----------------
+[[durable_objects.bindings]]
+name = "CHRONOLOGY"
+class_name = "Chronology"
+
+# Toute modification incompatible de la classe exige une NOUVELLE entrée avec un
+# nouveau tag. Ne jamais modifier une migration déjà déployée.
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Chronology"]
+
+# --- KV : traces anonymisées d'autres joueurs ------------------------------------
+# À créer une fois, puis à coller ci-dessous :
+#   npx wrangler kv namespace create TRACES
+#   npx wrangler kv namespace create TRACES --preview
+# scripts/check-tag.sh refuse tout déploiement tant que REMPLACER_ est présent.
+[[kv_namespaces]]
+binding = "TRACES"
+id = "REMPLACER_PAR_ID_KV"
+preview_id = "REMPLACER_PAR_ID_KV_PREVIEW"
+
+# Pas de D1, R2, Queues ni Workers AI : volontairement absents.
