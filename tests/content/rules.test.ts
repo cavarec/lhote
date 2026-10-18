@@ -23,13 +23,13 @@ describe('contenu réel', () => {
     expect(formatViolations(checkCatalog(catalog))).toBe('');
   });
 
-  it('l’échantillon de voix validé respecte les règles, s’il existe', () => {
+  it('l’échantillon de voix validé existe et respecte les règles', () => {
     const path = new URL('../../content/VOIX.md', import.meta.url);
-    if (!existsSync(path)) return;
-    const text = readFileSync(path, 'utf8')
-      .split('\n')
-      .filter((line) => !line.startsWith('#') && !line.startsWith('>'))
-      .join('\n');
+    expect(existsSync(path)).toBe(true);
+    // Seul l'échantillon est du texte joueur ; les principes qui précèdent sont de la consigne.
+    const marker = '## Échantillon de référence';
+    const full = readFileSync(path, 'utf8');
+    const text = full.slice(full.indexOf('\n', full.indexOf(marker)));
     expect(formatViolations(checkText({ where: 'VOIX.md', text }))).toBe('');
   });
 });
