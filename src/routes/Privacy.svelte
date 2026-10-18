@@ -33,6 +33,8 @@
   async function erase(): Promise<void> {
     try {
       await game.game.deleteEverything();
+      // La copie d'état gardée par le service worker appartient au joueur effacé.
+      if ('caches' in globalThis) await caches.delete('lhote-state');
       location.reload();
     } catch {
       message = 'Suppression impossible sans connexion : rien n’a été effacé.';

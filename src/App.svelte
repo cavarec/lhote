@@ -14,9 +14,18 @@
 
   onMount(() => {
     void game.boot();
-    const online = () => void game.syncPending();
+    game.online = navigator.onLine;
+    const online = () => {
+      game.online = true;
+      void game.syncPending();
+    };
+    const offline = () => (game.online = false);
     window.addEventListener('online', online);
-    return () => window.removeEventListener('online', online);
+    window.addEventListener('offline', offline);
+    return () => {
+      window.removeEventListener('online', online);
+      window.removeEventListener('offline', offline);
+    };
   });
 
   // Réglages de lecture appliqués au document.

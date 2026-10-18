@@ -286,3 +286,24 @@ describe('disjoncteur', () => {
     expect(client.circuitOpen).toBe(false);
   });
 });
+
+describe('hors ligne déclaré par le navigateur', () => {
+  it('ne réessaie pas quand le navigateur se sait hors ligne', async () => {
+    const fetchFn = vi.fn(() => {
+      throw new TypeError('Failed to fetch');
+    });
+    const delays: number[] = [];
+    const client = new ApiClient({
+      playerId: PLAYER,
+      fetchFn: fetchFn as unknown as typeof fetch,
+      sleepFn: (ms) => {
+        delays.push(ms);
+        return Promise.resolve();
+      },
+      isOnline: () => false,
+    });
+    await expect(client.leap()).rejects.toMatchObject({ kind: 'network', offline: true });
+    expect(fetchFn).toHaveBeenCalledTimes(1);
+    expect(delays).toEqual([]);
+  });
+});
