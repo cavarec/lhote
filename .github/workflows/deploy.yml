@@ -56,6 +56,11 @@ jobs:
       - name: Déployer le Worker (API + Durable Object)
         run: npx wrangler deploy --config worker/wrangler.toml --var APP_VERSION:${GITHUB_REF_NAME#v}
 
+      # Crée le projet Pages (Direct Upload) au premier déploiement ; s'il existe déjà, la commande
+      # échoue et on continue : le déploiement qui suit échouerait clairement pour toute autre cause.
+      - name: S'assurer que le projet Pages existe
+        run: npx wrangler pages project create lhote --production-branch=main || echo "Projet Pages déjà présent."
+
       - name: Déployer Pages
         run: npx wrangler pages deploy dist --project-name=lhote --branch=main
 

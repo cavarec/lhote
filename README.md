@@ -37,11 +37,7 @@ Le build tourne sur GitHub Actions et `wrangler pages deploy` envoie `dist/` à 
 
 ## Mise en place unique
 
-1. **Projet Pages en Direct Upload**, jamais connecté à Git :
-   ```bash
-   npx wrangler pages project create lhote --production-branch=main
-   ```
-   Cloudflare ne permet pas de convertir un projet connecté à Git en Direct Upload (à vérifier dans le tableau de bord). Si `lhote` est déjà connecté à GitHub, supprime-le et recrée-le ainsi. Il n'y a alors ni déploiement automatique à désactiver, ni branche de preview.
+1. **Projet Pages en Direct Upload** : `deploy.yml` le crée tout seul au premier déploiement (`wrangler pages project create lhote`), sans lien avec Git. Ne connecte jamais le dépôt à Cloudflare (ni Pages, ni « Workers Builds ») : un build lancé par Cloudflare contournerait la règle « seul un tag déploie ». Si un projet `lhote` déjà connecté à GitHub existe, supprime-le : Cloudflare ne convertit pas un projet connecté à Git en Direct Upload.
 2. **Namespace KV** des traces, puis colle les deux identifiants dans `worker/wrangler.toml` (en remplacement de `REMPLACER_PAR_ID_KV` et `REMPLACER_PAR_ID_KV_PREVIEW`) :
    ```bash
    npx wrangler kv namespace create TRACES
