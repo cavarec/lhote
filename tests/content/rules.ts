@@ -19,6 +19,7 @@ export const MENT_EXCEPTIONS: ReadonlySet<string> = new Set([
   'ferment',
   'referment',
   'dorment',
+  'endorment',
   'moment',
   'instant',
   'vêtement',
