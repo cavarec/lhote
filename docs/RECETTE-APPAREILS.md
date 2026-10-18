@@ -2,7 +2,7 @@
 
 À faire une fois après le premier déploiement (v0.1.0), puis avant chaque release qui touche l'interface, le service worker ou le stockage. Compte une demi-heure par appareil. Les tests automatiques (Playwright, axe, Lighthouse) ne remplacent pas ces vérifications : ils tournent sur Chromium de bureau.
 
-Adresse du jeu : `https://lhote.pages.dev` (ou la valeur de la variable GitHub `SITE_URL`).
+Adresse du jeu : celle de ton projet Pages `lhote` (tableau de bord Cloudflare → Workers & Pages) ou affichée à la fin du workflow Deploy. Attention : `lhote.pages.dev` appartient à quelqu'un d'autre, ce n'est pas le jeu.
 
 ## iOS Safari (iPhone, iOS récent)
 

@@ -5,10 +5,10 @@
   import {
     availableResolutions,
     chooseDialogue,
+    clueGroups,
     leanToward,
-    revealClue,
+    revealClues,
     speakerFor,
-    visibleInvestigation,
   } from '../lib/game/beats';
   import { game } from '../lib/stores/game.svelte';
 
@@ -30,7 +30,7 @@
     premise.openingDialogue.choices?.find((c) => c.id === leap.choices['dialogue']) ??
       null,
   );
-  const clues = $derived(visibleInvestigation(premise, leap));
+  const groups = $derived(clueGroups(premise, leap));
   const resolutions = $derived(availableResolutions(premise, leap));
 
   function choose(id: string): void {
@@ -92,21 +92,18 @@
         <p>Ce que vous pouvez examiner.</p>
       </div>
       <ul class="choices">
-        {#each clues as { index, item } (index)}
-          {@const seen = leap.choices[`clue-${index}`] === 'seen'}
+        {#each groups as group (group.kind)}
           <li>
-            {#if seen}
-              <p class="narration npc">{item.text}</p>
+            {#if group.seen}
+              {#each group.texts as text, i (i)}
+                <p class="narration npc">{text}</p>
+              {/each}
             {:else}
               <button
                 class="choice"
-                onclick={() => game.update((l) => revealClue(l, index))}
+                onclick={() => game.update((l) => revealClues(l, group.indices))}
               >
-                {item.kind === 'material'
-                  ? 'Regarder autour de soi'
-                  : item.kind === 'bodily'
-                    ? 'Écouter ce corps'
-                    : 'Observer les autres'}
+                {group.label}
               </button>
             {/if}
           </li>

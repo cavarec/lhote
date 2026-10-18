@@ -61,14 +61,23 @@ jobs:
       - name: S'assurer que le projet Pages existe
         run: npx wrangler pages project create lhote --production-branch=main || echo "Projet Pages déjà présent."
 
+      # Le nom `lhote.pages.dev` est pris par un tiers : l'adresse réelle du projet est celle que
+      # wrangler affiche. On la lit ici pour vérifier CE déploiement, pas une adresse devinée.
       - name: Déployer Pages
-        run: npx wrangler pages deploy dist --project-name=lhote --branch=main
+        id: pages
+        shell: bash
+        run: |
+          npx wrangler pages deploy dist --project-name=lhote --branch=main | tee pages.log
+          url="$(grep -oE 'https://[a-z0-9.-]+\.pages\.dev' pages.log | tail -n1)"
+          [ -n "$url" ] || { echo "Adresse du déploiement introuvable dans la sortie de wrangler." >&2; exit 1; }
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Déployé sur $url"
 
       # Le déploiement n'est « réussi » que si le site répond avec la version du tag, que le
       # Worker et son Durable Object répondent, et que l'app shell est servi.
       - name: Vérifier le site en ligne
         env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://lhote.pages.dev' }}
+          SITE_URL: ${{ steps.pages.outputs.url }}
         run: |
           expected="${GITHUB_REF_NAME#v}"
           for attempt in $(seq 1 12); do

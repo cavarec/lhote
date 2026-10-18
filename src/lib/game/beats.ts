@@ -112,6 +112,54 @@ export function visibleInvestigation(
     .filter(({ item }) => item.revealsArtifact === undefined || leap.artifactId !== null);
 }
 
+export type ClueKind = InvestigationItem['kind'];
+
+export interface ClueGroup {
+  kind: ClueKind;
+  label: string;
+  indices: number[];
+  texts: string[];
+  seen: boolean;
+}
+
+const CLUE_ORDER: { kind: ClueKind; label: string }[] = [
+  { kind: 'material', label: 'Regarder autour de soi' },
+  { kind: 'bodily', label: 'Écouter ce corps' },
+  { kind: 'social', label: 'Observer les autres' },
+];
+
+/**
+ * Les indices regroupés par nature : un seul bouton par nature, même si la prémisse en compte
+ * plusieurs. Évite les libellés en double à l'écran.
+ */
+export function clueGroups(premise: Premise, leap: LeapState): ClueGroup[] {
+  const visible = visibleInvestigation(premise, leap);
+  return CLUE_ORDER.flatMap(({ kind, label }) => {
+    const items = visible.filter(({ item }) => item.kind === kind);
+    if (items.length === 0) return [];
+    const indices = items.map(({ index }) => index);
+    return [
+      {
+        kind,
+        label,
+        indices,
+        texts: items.map(({ item }) => item.text),
+        seen: indices.every((i) => leap.choices[`clue-${i}`] === 'seen'),
+      },
+    ];
+  });
+}
+
+export function revealClues(leap: LeapState, indices: number[]): LeapState {
+  return {
+    ...leap,
+    choices: {
+      ...leap.choices,
+      ...Object.fromEntries(indices.map((i) => [`clue-${i}`, 'seen'])),
+    },
+  };
+}
+
 export function revealClue(leap: LeapState, index: number): LeapState {
   return { ...leap, choices: { ...leap.choices, [`clue-${index}`]: 'seen' } };
 }

@@ -9,6 +9,8 @@ import {
   availableResolutions,
   BeatError,
   chooseDialogue,
+  clueGroups,
+  revealClues,
   completeBeat,
   currentBeat,
   leanToward,
@@ -103,6 +105,29 @@ describe('beats', () => {
     const withArtifact = visibleInvestigation(premise01, makeLeap({ artifactId: 'x' }));
     expect(withArtifact.length).toBeGreaterThanOrEqual(without.length);
     expect(without.every(({ item }) => item.revealsArtifact === undefined)).toBe(true);
+  });
+
+  it('regroupe les indices par nature, sans libellé en double', () => {
+    for (const premise of catalog.premises) {
+      const groups = clueGroups(
+        premise,
+        makeLeap({ artifactId: 'x', premiseId: premise.id }),
+      );
+      const labels = groups.map((g) => g.label);
+      expect(new Set(labels).size).toBe(labels.length);
+      expect(groups.length).toBeLessThanOrEqual(3);
+      // Aucun indice ne se perd dans le regroupement.
+      const total = groups.reduce((n, g) => n + g.indices.length, 0);
+      expect(total).toBe(premise.investigation.length);
+    }
+  });
+
+  it('un clic sur un groupe révèle tous ses indices', () => {
+    const leap = makeLeap();
+    const group = clueGroups(premise01, leap)[0]!;
+    expect(group.seen).toBe(false);
+    const after = revealClues(leap, group.indices);
+    expect(clueGroups(premise01, after)[0]?.seen).toBe(true);
   });
 
   it('note les indices vus et l’interprétation retenue', () => {
