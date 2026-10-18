@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.2.0] - 2026-10-19
+
+### Modifié
+
+- Les trois prémisses sont étoffées (environ 1 500 mots chacune au lieu de 850) : réveil plus long, orientation à huit indices, dialogue d'ouverture en six à huit répliques, enquête à dix indices, conclusions à quatre lignes. Un saut dure désormais 8 à 12 minutes. La structure, les identifiants et les issues ne changent pas.
+
 ## [0.1.1] - 2026-10-18
 
 ### Corrigé
