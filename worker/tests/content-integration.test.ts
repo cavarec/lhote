@@ -2,21 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { catalog as realCatalog } from '../../content';
 import type { ResolveResponse } from '../../src/lib/api/types';
 import { startLeap } from '../../src/lib/engine/leap';
-import { makeCatalog } from '../../src/lib/engine/test-fixtures';
 import type { Catalog, LeapState } from '../../src/lib/engine/types';
 import { createChronology } from '../../src/lib/engine/world';
 import { ChronologyService } from '../src/durable/service';
 import { makeDeps, uuid } from './helpers';
 
-// Chaque issue du contenu réel doit pouvoir être résolue par le vrai Worker. Les personnages et
-// les objets viennent de fixtures tant que 4d n'a pas écrit les vrais.
-const fixtures = makeCatalog();
-const catalog: Catalog = {
-  ...realCatalog,
-  characters: fixtures.characters,
-  artifacts: fixtures.artifacts,
-  fragments: fixtures.fragments,
-};
+// Chaque issue du contenu réel doit pouvoir être résolue par le vrai Worker.
+const catalog: Catalog = realCatalog;
 
 const PLAYER = uuid(42);
 

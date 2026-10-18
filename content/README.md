@@ -1,7 +1,7 @@
 # Contenu narratif
 
 Le contenu vit ici, en TypeScript typé. Le moteur le reçoit par injection (`content/index.ts`).
-Le ton et l'échantillon de référence sont dans `VOIX.md`. 4d complètera ce fichier (budget, probabilités).
+Le ton et l'échantillon de référence sont dans `VOIX.md`.
 
 ## Conventions
 
@@ -19,6 +19,33 @@ Le ton et l'échantillon de référence sont dans `VOIX.md`. 4d complètera ce f
   un objet.
 - **Choix** : 3 ou 4 options, avec au moins une neutre, une risquée et une informative.
 - **Résultats** : `resultText` fait de 2 à 5 lignes, séparées par `\n`.
+
+## Inventaire (MVP)
+
+| Contenu                    | Quantité                                                     | Fichier                        |
+| -------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| Prémisses                  | 3                                                            | `premises/premise-0{1,2,3}.ts` |
+| Personnages                | 8 (2 par archétype : sûr de lui, inquiet, hostile, innocent) | `characters/archetypes.ts`     |
+| Fractures                  | 6 (2 par prémisse)                                           | `fractures/index.ts`           |
+| Objets-traces              | 6                                                            | `artifacts/index.ts`           |
+| Fragments de méta-histoire | 10 (3 / 3 / 3 / 1 sur les 4 actes)                           | `fragments/index.ts`           |
+
+Le budget du §6.2 prévoyait 4 fractures. Chaque prémisse en a deux, qui tournent autour du même
+objet, pour que ses six résolutions restent justes quelle que soit la fracture tirée.
+
+## Répliques des personnages
+
+`Character.dialogues` a trois clés, présentes pour chaque personnage : `greeting` (première prise de
+parole), `doubt` (quand l'hôte se conduit de façon étrange) et `farewell` (dernière réplique). Elles ne
+citent ni lieu ni époque. `voice` est une consigne d'écriture interne, jamais affichée.
+
+## Probabilités du générateur
+
+Fixées dans `src/lib/engine/leap.ts` :
+
+- nouvel objet-trace proposé quand aucun objet n'est en transit : 1 saut sur 2 ;
+- trace d'un autre joueur : 1 saut sur 5 ;
+- fragment : le prochain non découvert, dans l'ordre des actes, un par saut.
 
 ## Règles vérifiées par la CI
 
