@@ -10,6 +10,10 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+### Corrigé
+
+- Le contrôle du site en ligne lit l'adresse réelle du déploiement Pages au lieu de supposer `lhote.pages.dev`, qui appartient à un tiers.
+
 ## [0.1.0] - 2026-10-18
 
 Première version : le jeu complet, jouable hors connexion.
