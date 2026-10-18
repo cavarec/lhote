@@ -1,5 +1,23 @@
-/* Design system : palette de l'étape 5 (§7.2). Seuls les jetons sont posés ici. */
+/* Design system (§7.2). Jetons, typographie, états d'interaction. Pas de framework CSS. */
+
+@font-face {
+  font-family: 'Crimson Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/crimson-pro-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Crimson Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/crimson-pro-latin-400-italic.woff2') format('woff2');
+}
+
 :root {
+  /* Palette. Rapports de contraste mesurés par tests/design/contrast.test.ts (AA, ≥ 4,5:1). */
   --ink: #1a1a1a;
   --parchment: #f4ede0;
   --blood: #8b2e2e;
@@ -7,15 +25,251 @@
   --veil: rgba(26, 26, 26, 0.06);
 
   --font-narration: 'Crimson Pro', Literata, Georgia, serif;
-  --font-ui: Inter, system-ui, sans-serif;
+  --font-ui: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Échelle de texte ajustable par le joueur (data-text-size sur <html>). */
+  --text-scale: 1;
+  --narration-size: calc(1.125rem * var(--text-scale));
+  --narration-leading: 1.7;
+  --ui-size: calc(0.9375rem * var(--text-scale));
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+
+  --measure: 34rem; /* largeur de lecture : environ 65 caractères */
+  --touch-min: 48px; /* cible tactile minimale */
+
+  /* Animations (600-800 ms pour les transitions de scène, 400 ms pour les fondus). */
+  --fade: 400ms;
+  --scene: 700ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+:root[data-text-size='large'] {
+  --text-scale: 1.15;
+}
+
+:root[data-text-size='xlarge'] {
+  --text-scale: 1.3;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html,
 body {
   margin: 0;
+  min-height: 100%;
   background: var(--parchment);
   color: var(--ink);
   font-family: var(--font-narration);
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: var(--narration-size);
+  line-height: var(--narration-leading);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-narration);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+h1 {
+  font-size: calc(2rem * var(--text-scale));
+}
+
+h2 {
+  font-size: calc(1.5rem * var(--text-scale));
+}
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+a {
+  color: var(--blood);
+  text-underline-offset: 0.2em;
+}
+
+/* Mise en page de lecture : une colonne centrée, jamais plus large que la mesure. */
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3);
+  padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+}
+
+.narration {
+  font-family: var(--font-narration);
+  font-size: var(--narration-size);
+  line-height: var(--narration-leading);
+}
+
+.narration p {
+  margin-bottom: var(--space-3);
+}
+
+/* Réplique d'un PNJ : un trait à gauche, pas de guillemets décoratifs. */
+.npc {
+  border-left: 2px solid var(--mist);
+  padding-left: var(--space-3);
+}
+
+.ui {
+  font-family: var(--font-ui);
+  font-size: var(--ui-size);
+  line-height: 1.4;
+}
+
+.muted {
+  color: var(--mist);
+}
+
+/* Boutons et choix : toujours au moins 48 px de haut. */
+.button,
+.choice {
+  display: block;
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-narration);
+  font-size: var(--narration-size);
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--fade) var(--ease),
+    color var(--fade) var(--ease);
+}
+
+.button:hover,
+.choice:hover {
+  background: var(--veil);
+}
+
+.button:active,
+.choice:active {
+  background: var(--ink);
+  color: var(--parchment);
+}
+
+.button[aria-disabled='true'],
+.button:disabled,
+.choice:disabled {
+  color: var(--mist);
+  border-color: var(--mist);
+  cursor: default;
+}
+
+.button--primary {
+  background: var(--ink);
+  color: var(--parchment);
+  text-align: center;
+}
+
+.button--primary:hover {
+  background: var(--blood);
+}
+
+.button--quiet {
+  border-color: transparent;
+  font-family: var(--font-ui);
+  font-size: var(--ui-size);
+  color: var(--mist);
+  text-align: center;
+}
+
+.choices {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cinq points de progression (§7.1). */
+.progress {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.progress__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--mist);
+  background: transparent;
+  transition: background-color var(--fade) var(--ease);
+}
+
+.progress__dot[data-state='done'] {
+  background: var(--mist);
+}
+
+.progress__dot[data-state='current'] {
+  background: var(--blood);
+  border-color: var(--blood);
+}
+
+/* Focus toujours visible (§7.3). */
+:focus-visible {
+  outline: 3px solid var(--blood);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Fondu d'entrée d'une scène. Aucun clignotement : l'opacité ne fait qu'avancer. */
+.fade-in {
+  animation: fade-in var(--scene) var(--ease) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mouvement réduit : plus d'animation, plus de transition. Le texte apparaît d'un bloc. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
