@@ -26,10 +26,10 @@ export type Phase = 'booting' | 'ready' | 'loading' | 'playing' | 'ended' | 'err
 class GameStore {
   phase = $state<Phase>('booting');
   settings = $state<Settings | null>(null);
-  session = $state<Session | null>(null);
-  outcome = $state<ResolveOutcome | null>(null);
+  session = $state.raw<Session | null>(null);
+  outcome = $state.raw<ResolveOutcome | null>(null);
   /** Le saut qui vient de se terminer, pour l'écran de fin. */
-  finished = $state<Session | null>(null);
+  finished = $state.raw<Session | null>(null);
   hasProgress = $state(false);
   /** L'épilogue se débloque quand tous les fragments sont retrouvés [À VALIDER]. */
   epilogueReady = $state(false);
@@ -92,8 +92,9 @@ class GameStore {
   async update(fn: (leap: Session['leap']) => Session['leap']): Promise<void> {
     if (!this.session || !this.controller) return;
     const leap = fn(this.session.leap);
-    this.session = { ...this.session, leap };
+    // On enregistre d'abord : ce qui est affiché est toujours ce qui a été sauvegardé.
     await this.controller.save(leap);
+    if (this.session) this.session = { ...this.session, leap };
   }
 
   async resolve(resolutionId: string): Promise<void> {
@@ -102,10 +103,8 @@ class GameStore {
     await this.run(async (c) => {
       this.outcome = await c.resolve(session, resolutionId);
       this.pending = await c.pendingCount();
-      const known = await c.refreshState().catch(() => null);
-      const total = session.catalog.fragments.length;
-      this.epilogueReady =
-        (known?.state.chronology.metaProgress.fragmentsDiscovered.length ?? 0) >= total;
+      // Le déblocage de l'épilogue se vérifie en arrière-plan : il ne retarde pas l'écran de fin.
+      void this.checkEpilogue();
       this.finished = session;
       this.session = null;
       this.hasProgress = false;
