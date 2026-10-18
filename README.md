@@ -50,7 +50,7 @@ Le build tourne sur GitHub Actions et `wrangler pages deploy` envoie `dist/` à 
    Tant qu'un `REMPLACER_` reste dans un `wrangler.toml`, `check-tag.sh` refuse le déploiement.
 3. **Token API Cloudflare** : modèle « Edit Cloudflare Workers », plus la permission _Cloudflare Pages : Edit_ (compte).
 4. **Secrets GitHub** (_Settings → Secrets and variables → Actions_) : `CLOUDFLARE_API_TOKEN` et `CLOUDFLARE_ACCOUNT_ID`.
-5. **Règles GitHub** (_Settings → Rules → Rulesets_) :
+5. **Règles GitHub** : `bash scripts/protect-repo.sh --dry-run` puis `bash scripts/protect-repo.sh` les posent pour toi (administrateur du dépôt, `gh` connecté). À la main, c'est _Settings → Rules → Rulesets_ :
    - `main` : PR obligatoire, checks `check` et `e2e` obligatoires.
    - Tags `v*` : création réservée à toi.
 
