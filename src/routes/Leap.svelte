@@ -2,6 +2,8 @@
   import type { DialogueLine } from '../../content/premises/types';
   import Progress from '../lib/components/Progress.svelte';
   import Scene from '../lib/components/Scene.svelte';
+  import Vignette from '../lib/components/Vignette.svelte';
+  import type { SceneKind } from '../lib/illustrations/scenes';
   import {
     availableResolutions,
     chooseDialogue,
@@ -37,6 +39,16 @@
   const locked = $derived(lockedResolutions(premise, leap));
   const left = $derived(investigationLeft(groups));
 
+  const sceneKind = $derived<SceneKind | undefined>(
+    game.beat === 'wakeup' ||
+      game.beat === 'orientation' ||
+      game.beat === 'dialogue' ||
+      game.beat === 'investigation' ||
+      game.beat === 'fracture'
+      ? game.beat
+      : undefined,
+  );
+
   function choose(id: string): void {
     void game.update((l) => chooseDialogue(l, premise, id).leap);
   }
@@ -50,6 +62,7 @@
   <h1 class="ui muted scene-title">{premise.title}</h1>
 
   {#key game.beat}
+    <Vignette premiseId={premise.id} kind={sceneKind} />
     {#if game.beat === 'wakeup'}
       <Scene lines={paragraphs(premise.wakeup)} {instant}>
         <button class="button button--primary next" onclick={() => game.advance()}>
