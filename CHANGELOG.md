@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.3.0] - 2026-10-19
+
+### Ajouté
+
+- Des illustrations d'ambiance dessinées en SVG (lavis d'encre, sans image à charger, donc disponibles hors connexion) : une par temps du récit et par prémisse, et une par issue sur l'écran de fin. Elles s'animent doucement (flamme, neige, balayage du fanal) et s'immobilisent si le système demande moins de mouvement.
+
 ## [0.1.1] - 2026-10-18
 
 ### Corrigé
