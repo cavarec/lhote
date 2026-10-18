@@ -152,6 +152,7 @@ export const premise02: Premise = {
   resolutions: [
     {
       id: 'tout-dire-au-chef',
+      requiresAny: ['fanal-eteint', 'ligne-grattee'],
       choiceText: 'Tout dire au chef du quai, même ce que tu ignores.',
       outcome: 'resolved',
       fractureRepaired: true,
@@ -183,6 +184,7 @@ export const premise02: Premise = {
     },
     {
       id: 'gratter-la-ligne',
+      requiresAny: ['ligne-grattee'],
       choiceText: 'Gratter la ligne du registre et écrire une nuit tranquille.',
       outcome: 'failed',
       fractureRepaired: false,
@@ -205,6 +207,7 @@ export const premise02: Premise = {
     },
     {
       id: 'rallumer-et-te-taire',
+      requiresAny: ['fanal-eteint'],
       choiceText: 'Rallumer le fanal et ne rien dire à personne.',
       outcome: 'failed',
       fractureRepaired: false,

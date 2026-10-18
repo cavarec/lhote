@@ -155,6 +155,7 @@ export const premise03: Premise = {
   resolutions: [
     {
       id: 'ouvrir-le-sept',
+      requiresAny: ['double-poincon', 'page-arrachee'],
       choiceText: 'Forcer la porte du compartiment sept devant tous.',
       outcome: 'resolved',
       fractureRepaired: true,
@@ -208,6 +209,7 @@ export const premise03: Premise = {
     },
     {
       id: 'ecrire-un-billet',
+      requiresAny: ['page-arrachee'],
       choiceText: 'Écrire un nouveau billet et le glisser sous la porte.',
       outcome: 'failed',
       fractureRepaired: false,

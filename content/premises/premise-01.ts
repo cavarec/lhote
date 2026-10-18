@@ -164,6 +164,7 @@ export const premise01: Premise = {
   resolutions: [
     {
       id: 'ouvrir-devant-tous',
+      requiresAny: ['reserve-presque-vide', 'cahier-modifie'],
       choiceText: 'Ouvrir la réserve devant tout le village.',
       outcome: 'resolved',
       fractureRepaired: true,
@@ -194,6 +195,7 @@ export const premise01: Premise = {
     },
     {
       id: 'corriger-le-cahier',
+      requiresAny: ['cahier-modifie'],
       choiceText: 'Corriger les chiffres et distribuer comme avant.',
       outcome: 'failed',
       fractureRepaired: false,
@@ -216,6 +218,7 @@ export const premise01: Premise = {
     },
     {
       id: 'donner-ta-part',
+      requiresAny: ['reserve-presque-vide'],
       choiceText: 'Donner ta propre part et te taire.',
       outcome: 'failed',
       fractureRepaired: false,

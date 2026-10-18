@@ -6,6 +6,8 @@
     availableResolutions,
     chooseDialogue,
     clueGroups,
+    investigationLeft,
+    lockedResolutions,
     leanToward,
     revealClues,
     speakerFor,
@@ -32,6 +34,8 @@
   );
   const groups = $derived(clueGroups(premise, leap));
   const resolutions = $derived(availableResolutions(premise, leap));
+  const locked = $derived(lockedResolutions(premise, leap));
+  const left = $derived(investigationLeft(groups));
 
   function choose(id: string): void {
     void game.update((l) => chooseDialogue(l, premise, id).leap);
@@ -89,7 +93,14 @@
       </Scene>
     {:else if game.beat === 'investigation'}
       <div class="narration fade-in">
-        <p>Ce que vous pouvez examiner.</p>
+        <p>
+          Tu ne peux pas tout examiner. Ce que tu laisses de côté, tu ne le sauras pas.
+        </p>
+        <p class="ui muted" aria-live="polite">
+          {left > 0
+            ? `Il te reste ${left} ${left > 1 ? 'gestes' : 'geste'}.`
+            : 'Le temps te manque. Tu sais ce que tu sais.'}
+        </p>
       </div>
       <ul class="choices">
         {#each groups as group (group.kind)}
@@ -101,7 +112,8 @@
             {:else}
               <button
                 class="choice"
-                onclick={() => game.update((l) => revealClues(l, group.indices))}
+                disabled={left === 0}
+                onclick={() => game.update((l) => revealClues(l, group.indices, premise))}
               >
                 {group.label}
               </button>
@@ -115,7 +127,7 @@
     {:else if game.beat === 'fracture' && fracture}
       <div class="narration fade-in">
         <h2>{fracture.title}</h2>
-        <p class="muted">Deux lectures sont possibles. Vous penchez pour…</p>
+        <p class="muted">Deux lectures sont possibles. Tu penches pour…</p>
       </div>
       <ul class="choices">
         {#each fracture.interpretations as text, i (i)}
@@ -153,6 +165,20 @@
             </button>
           </li>
         {/each}
+        {#each locked as r (r.id)}
+          <li>
+            <button
+              class="choice choice--locked"
+              disabled
+              aria-describedby="locked-{r.id}"
+            >
+              {r.choiceText}
+            </button>
+            <p class="ui muted" id="locked-{r.id}">
+              Tu n’en sais pas assez pour tenter cela.
+            </p>
+          </li>
+        {/each}
       </ul>
       {#if game.problem}<p class="ui notice" role="alert">{game.problemMessage}</p>{/if}
     {/if}
@@ -167,6 +193,9 @@
   }
   .next {
     margin-top: var(--space-4);
+  }
+  .choice--locked {
+    opacity: 0.45;
   }
   .notice {
     margin-top: var(--space-3);
