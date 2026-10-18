@@ -1,5 +1,6 @@
 <script lang="ts">
   import Scene from '../lib/components/Scene.svelte';
+  import { installPrompt } from '../lib/pwa/install.svelte';
   import { game } from '../lib/stores/game.svelte';
 
   const outcome = $derived(game.outcome!);
@@ -29,6 +30,15 @@
         Hors connexion : cette fin sera enregistrée dès que le réseau reviendra.
       </p>
     {/if}
+    {#if installPrompt.available}
+      <div class="install ui">
+        <p>Retrouvez L'Hôte sur votre écran d'accueil, même sans réseau.</p>
+        <button class="button" onclick={() => installPrompt.install()}>Installer</button>
+        <button class="button button--quiet" onclick={() => installPrompt.dismiss()}>
+          Plus tard
+        </button>
+      </div>
+    {/if}
     <button class="button button--primary next" onclick={() => game.home()}>
       Revenir
     </button>
@@ -46,6 +56,11 @@
     padding: var(--space-2) var(--space-3);
     border-left: 2px solid var(--blood);
     background: var(--veil);
+  }
+  .install {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
   }
   .next {
     margin-top: var(--space-4);

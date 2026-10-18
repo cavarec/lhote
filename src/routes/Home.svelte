@@ -32,6 +32,14 @@
       fermeture.
     </p>
   {/if}
+  {#if !game.online}
+    <p class="ui notice" role="status">
+      Hors connexion. {game.hasProgress
+        ? 'Votre saut en cours reste jouable.'
+        : 'Le dernier saut reçu reste jouable ; un nouveau saut demande une connexion.'}
+      Connexion requise pour résoudre.
+    </p>
+  {/if}
   {#if game.pending > 0}
     <p class="ui notice" role="status">
       {game.pending} fin{game.pending > 1 ? 's' : ''} de saut en attente de connexion.
