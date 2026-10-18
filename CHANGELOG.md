@@ -10,8 +10,11 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.1.1] - 2026-10-18
+
 ### Corrigé
 
+- L'enquête regroupe les indices par nature (un bouton « Regarder autour de soi », « Écouter ce corps » ou « Observer les autres » au plus) au lieu de répéter le même libellé pour chaque indice.
 - Le contrôle du site en ligne lit l'adresse réelle du déploiement Pages au lieu de supposer `lhote.pages.dev`, qui appartient à un tiers.
 
 ## [0.1.0] - 2026-10-18

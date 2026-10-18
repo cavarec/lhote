@@ -16,6 +16,18 @@ test.describe('parcours complet', () => {
     await page.getByRole('button', { name: 'Retour' }).click();
   });
 
+  test('l’enquête ne propose jamais deux fois le même libellé', async ({ page }) => {
+    await startLeap(page);
+    await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.locator('.choice').first().click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.getByText('Ce que vous pouvez examiner.').waitFor();
+    const labels = await page.locator('.choice').allTextContents();
+    expect(labels.length).toBeGreaterThan(0);
+    expect(new Set(labels).size).toBe(labels.length);
+  });
+
   test('la partie reprend là où elle s’est arrêtée après un rechargement', async ({
     page,
   }) => {
