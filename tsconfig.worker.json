@@ -11,6 +11,7 @@
     "worker/**/*.ts",
     "functions/**/*.ts",
     "src/lib/engine/**/*.ts",
+    "src/lib/api/**/*.ts",
     "content/**/*.ts"
   ]
 }

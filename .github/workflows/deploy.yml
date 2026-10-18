@@ -54,7 +54,7 @@ jobs:
 
       # Le binding de Pages pointe sur lhote-api : le Worker passe donc en premier.
       - name: Déployer le Worker (API + Durable Object)
-        run: npx wrangler deploy --config worker/wrangler.toml
+        run: npx wrangler deploy --config worker/wrangler.toml --var APP_VERSION:${GITHUB_REF_NAME#v}
 
       - name: Déployer Pages
         run: npx wrangler pages deploy dist --project-name=lhote --branch=main

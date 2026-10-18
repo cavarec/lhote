@@ -5,6 +5,10 @@ name = "lhote-api"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
+# « dev » en local ; le déploiement par tag le remplace (--var APP_VERSION:vX.Y.Z).
+[vars]
+APP_VERSION = "dev"
+
 # --- Durable Object : chronologie par joueur (stockage SQLite) -----------------
 [[durable_objects.bindings]]
 name = "CHRONOLOGY"
