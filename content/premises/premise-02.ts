@@ -1,248 +1,263 @@
 import type { Premise } from './types';
 
-// Prémisse 2 : le veilleur du fanal. Une ville portuaire en reconstruction, une nuit qui a mal
-// tourné. Conventions : voir content/README.md. Le PNJ qui parle occupe l'emplacement « 1 ».
+// Prémisse 2 : un jour de pardon, dans une ville de pierre. Un prêtre doute au moment de porter
+// la chasse en procession. Inspirée de : la foi qui guérit et la vérité qui blesse.
+// Conventions : voir content/README.md.
+// - `npcId` est un emplacement (« 0 » ou « 1 »), pas un personnage : le texte ne dit donc ni « il »
+//   ni « elle » du personnage qui parle.
+// - Miroir : un autre te regarde (« tu as une drôle de tête aujourd'hui »).
+// - Corps hérité : la fièvre. Elle retire « reste calme » et ajoute « appuie-toi ». Elle explique
+//   aussi pourquoi l'hôte ne se souvient pas de la nuit.
 
-const EPOCH = 'une ville portuaire en reconstruction';
+const EPOCH = 'un jour de pardon, au tournant du siècle';
 
 export const premise02: Premise = {
   id: 'premise-02',
-  title: 'Le fanal',
+  title: 'Le jour du pardon',
   epoch: EPOCH,
 
-  // Beat 1 : le son et le sel d'abord.
+  // Beat 1 : l'encens, la cire, la chaleur de la fièvre. Aucune information.
   wakeup: [
-    'Quelque chose bat. Pas ton cœur : plus lent, plus large. Un coup, puis le vide, puis un autre coup.',
-    'Tu sens le sel avant tout le reste. Il colle à tes lèvres, à tes cils, au dos de ta langue.',
-    'Ton corps est assis, la tête contre un mur froid. Le mur vibre à chaque coup. Une odeur de métal chaud, de graisse, de poisson ancien.',
-    'Tu serres les doigts. Ils sont raides, pris dans quelque chose de sec. Du sel, encore, et un fil de laine.',
-    'Une cloche sonne au loin, deux fois. Dessous, l’eau frotte contre une coque, ou contre la pierre.',
-    'Tu ne sais pas depuis quand tu dors ici. Tu ne sais pas depuis quand tu es ce corps.',
-    'Quelqu’un siffle trois notes, en bas, et attend que tu répondes.',
-    'Une odeur de pain brûlé monte de l’escalier, très faible, et se perd. Quelqu’un a oublié un four, ou allumé un feu qu’il n’aurait pas dû.',
-    'Tu cherches ton nom. À la place, tu trouves un chiffre, trois fois répété, comme une consigne. Tu ne sais pas ce qu’il compte.',
-    'Tes genoux craquent quand tu les plies. Ce corps a passé des centaines de nuits ainsi, le dos au mur, à guetter quelque chose.',
-    'Le sifflement reprend, plus près. Trois notes, toujours les mêmes. Elles ont le ton d’un appel que l’on a déjà lancé plusieurs fois.',
+    'Il fait chaud et il fait froid. La chaleur est dans ta tête, le froid dans tes os. Les deux ne se parlent pas.',
+    'Tu sens de l’encens, de la cire chaude, de la pierre mouillée. Une odeur de lin amidonné, aussi, très près de ton visage.',
+    'Dehors, une foule respire. Des milliers de pieds sur des pavés, des toux, des enfants qu’on fait taire. Un chant monte et retombe.',
+    'Au-dessus, des cloches. Elles ne sonnent pas ensemble. L’une a de l’avance, l’autre du retard. Elles se rattrapent, puis se perdent.',
+    'Une bombarde aiguë reprend le même air, encore et encore. Un air qui n’a pas de fin, rien que des reprises.',
+    'Ta langue colle à ton palais. Tu as soif d’une soif de plusieurs jours, qui ne se dit pas, qui se supporte.',
+    'Tu cherches ce que tu as fait cette nuit. Tu ne trouves rien. Rien qu’un blanc propre, lavé, comme un linge.',
+    'Tes genoux te font mal. Pas d’une douleur de marche : d’une douleur d’avoir tenu longtemps la même position.',
+    'Tu serres quelque chose de froid dans le poing. Du métal, avec des dents. Tu ne sais pas depuis quand.',
+    'On frappe deux fois à une porte de bois épais. Une voix dit un mot que tu reconnais. Elle ne dit pas ton nom. Elle dit ton titre.',
     'Tu ouvres les yeux.',
   ].join('\n\n'),
 
-  // Beat 2 : orientation.
+  // Beat 2 : orientation. Les trois natures d'indice, la fièvre, l'absence de miroir.
   orientation: [
     {
       kind: 'material',
-      text: 'Une pièce ronde, vitrée sur tout le tour. Au centre, une grande lampe éteinte, plus haute que toi. Son verre est taillé en anneaux.',
+      text: 'Une sacristie voûtée, aux murs nus. Sur la table, une chasse d’argent ternie, grande comme un pain, fermée. Autour, des cierges, un encensoir, une chape pliée.',
     },
     {
       kind: 'material',
-      text: 'Dehors, le port. Des grues à moitié montées, des échafaudages sur les façades, des cales vides. Un seul navire est amarré.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Tu portes des gants troués. Sous la laine, les paumes sont dures, avec une cloque ouverte au pouce.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton dos est raide d’avoir dormi assis. Tes yeux brûlent. Tu as veillé toute la nuit, ou tu devais le faire.',
-    },
-    {
-      kind: 'social',
-      text: 'Sur le pupitre, un registre ouvert. Chaque ligne porte un nom de navire, une heure, et ton paraphe. La dernière ligne est vide.',
+      text: 'Par la fenêtre, une place pleine : bannières brodées, coiffes blanches, pèlerins à genoux. Au loin, deux flèches de pierre taillées dans un ciel pâle.',
     },
     {
       kind: 'material',
-      text: 'Près de la lampe, une boîte d’allumettes à moitié vide et un bidon de pétrole. Le bouchon du bidon est posé à côté, à l’envers.',
+      text: 'Dans ton poing, une clé de fer à tête ronde. Elle est tiède. Au cou, une chaîne la retient, et elle a laissé sa marque dans la paume.',
     },
     {
       kind: 'bodily',
-      text: 'Tes oreilles bourdonnent, comme après une cloche trop proche. Tu as entendu quelque chose de fort, cette nuit. Tu ne sais plus quoi.',
+      text: 'Ta chemise colle à ton dos. Tes dents claquent par instants. Une fièvre de plusieurs jours, qui s’est installée et ne bouge plus.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tu touches ton visage. Une barbe de deux jours, des joues brûlantes. Tu cherches un miroir. Il n’y en a pas : on n’en met pas dans une sacristie.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes mains sont longues, soignées, tachées de cire. Ce sont des mains qui bénissent. Elles ont tremblé cette nuit, et la cire a coulé dessus.',
     },
     {
       kind: 'social',
-      text: 'Au mur, un tableau des tours de veille. Ton nom y figure souvent, d’une écriture différente à chaque ligne. Hier soir, la case est barrée.',
+      text: 'Sur la porte, une feuille épinglée : l’ordre de la procession, les noms des porteurs. En bas, une ligne soulignée : « La chasse : le recteur. »',
+    },
+    {
+      kind: 'social',
+      text: 'Le murmure de la foule monte par la fenêtre. Quand tu t’y montres, il se tait. Mille visages se lèvent vers toi, puis se baissent.',
     },
   ],
 
-  // Beat 3 : premier contact. L'emplacement « 1 » monte l'escalier.
+  // Beat 3 : premier contact. L'emplacement « 1 » entre. Le choix risqué avoue le doute.
   openingDialogue: {
     npcId: '1',
     lines: [
       {
         speaker: 'narration',
-        text: 'L’escalier résonne. Quelqu’un monte vite et s’arrête sur le seuil, à bout de souffle.',
+        text: 'La porte s’ouvre à demi. Une silhouette entre, tient la porte avec le dos, comme pour empêcher quelqu’un de la suivre.',
       },
       {
         speaker: 'npc',
-        text: 'Le chef du quai veut le registre de la nuit. Tout de suite.',
+        text: 'Tu as une drôle de tête, aujourd’hui, recteur. Tu as dormi ?',
       },
       {
         speaker: 'narration',
-        text: 'Elle est jeune, mouillée jusqu’aux genoux. Elle tient son bonnet à deux mains, comme on tient une excuse.',
+        text: 'La personne te regarde longtemps. Elle cherche sur ton visage quelque chose qu’elle n’y trouve pas.',
       },
       {
         speaker: 'npc',
-        text: 'Il dit que la nuit a mal tourné. Il veut savoir ce que tu as vu. Tu étais de veille.',
+        text: 'Ils sont tous sur la place. Les porteurs attendent. Tout le monde attend la chasse.',
       },
       {
         speaker: 'npc',
-        text: 'J’ai sifflé trois fois en bas. Tu n’as pas répondu. J’ai cru que tu étais tombé. Ou pire.',
+        text: 'Il y a une femme du haut, avec son petit qui ne marche plus. Elle a fait la route à genoux. Elle dit que tu sais pourquoi.',
       },
       {
         speaker: 'narration',
-        text: 'Elle jette un coup d’œil vers la grande lampe, puis vers toi, très vite, comme si elle avait vu ce qu’elle ne devait pas voir.',
+        text: 'La personne regarde la chasse, sur la table. Son regard glisse dessus et s’en détourne, vite.',
       },
       {
         speaker: 'npc',
-        text: 'Il est en bas, sur le quai. Il n’a pas crié. C’est ça qui m’inquiète. Il ne crie jamais quand c’est grave.',
+        text: 'J’ai vu de la lumière sous cette porte, cette nuit. Très tard. Je n’ai pas frappé.',
       },
       {
         speaker: 'narration',
-        text: 'La personne attend. Elle regarde le registre, puis ton visage.',
+        text: 'Dehors, les cloches se rejoignent un instant, puis s’éloignent. Tu entends ton cœur dans tes tempes.',
       },
     ],
     choices: [
       {
-        id: 'questionner',
-        kind: 'informative',
-        text: '« Que veut-il savoir, au juste ? »',
-        reply: [
-          {
-            speaker: 'npc',
-            text: 'Ce qui est sorti du port. Ce qui s’est éteint. Qui était là. Tout ce que le registre doit dire.',
-          },
-          {
-            speaker: 'narration',
-            text: 'Elle énumère comme on récite une leçon apprise en chemin.',
-          },
-          {
-            speaker: 'npc',
-            text: 'Il a dit aussi de ne pas te laisser seul. Mais je n’ai pas compris pourquoi.',
-          },
-          {
-            speaker: 'narration',
-            text: 'Elle se mord la lèvre. Elle en a dit un peu trop, et elle le sait.',
-          },
-        ],
-      },
-      {
-        id: 'gagner-du-temps',
+        id: 'prendre-la-chape',
         kind: 'neutral',
-        text: '« Donne-moi un moment. Je descends. »',
+        text: '« Je suis prêt. Donne-moi la chape. »',
         reply: [
-          { speaker: 'npc', text: 'Dépêche-toi. Il n’est pas d’humeur.' },
           {
-            speaker: 'narration',
-            text: 'Ses pas redescendent, deux marches à la fois. Le sifflement reprend, plus bas.',
+            speaker: 'npc',
+            text: 'Bien. Tiens-toi à mon bras en descendant. Tu chancelles.',
           },
           {
             speaker: 'narration',
-            text: 'Tu restes seul avec la lampe. Elle te renvoie ton reflet en dix morceaux, tous un peu différents.',
+            text: 'La chape est lourde, brodée de fils d’or qui accrochent. Elle sent le camphre et le temps.',
           },
           {
             speaker: 'narration',
-            text: 'Le temps que tu as gagné est court. Tu le sens fondre, comme la cire d’une bougie sous ta paume.',
+            text: 'Tu la passes sur tes épaules. Elle te redresse. Pas ton esprit : ton dos.',
           },
         ],
       },
       {
-        id: 'avouer-le-trou',
-        kind: 'risky',
-        text: '« Je ne me souviens pas de la nuit. »',
+        id: 'demander-la-nuit',
+        kind: 'informative',
+        text: '« Qu’as-tu vu cette nuit, au juste ? »',
         reply: [
-          { speaker: 'npc', text: 'Tu ne te souviens pas ?' },
           {
-            speaker: 'narration',
-            text: 'Elle recule d’un pas. Dans ses yeux, quelque chose se referme, et ce n’est pas de la pitié.',
+            speaker: 'npc',
+            text: 'Une lueur de cierge sous la porte. Des pas, de long en large, jusqu’à l’aube. Puis plus rien.',
           },
           {
             speaker: 'npc',
-            text: 'Ne dis pas ça en bas. Ne le dis à personne. Promets-le-moi.',
+            text: 'À un moment, j’ai cru t’entendre parler. Pas à moi. À quelqu’un d’autre.',
           },
           {
             speaker: 'narration',
-            text: 'Sa voix tremble. Elle a peur pour toi, ou peur de toi. À cette heure, la différence est mince.',
+            text: 'La personne se mord l’intérieur de la joue. Elle ne te quitte pas des yeux.',
+          },
+        ],
+      },
+      {
+        id: 'avouer-le-doute',
+        kind: 'risky',
+        text: '« Je ne crois plus à ce qu’elle contient. »',
+        reply: [
+          { speaker: 'npc', text: 'Tu… Tu ne peux pas dire ça. Pas aujourd’hui.' },
+          {
+            speaker: 'narration',
+            text: 'La personne recule d’un pas, la main sur le chambranle. Dans ses yeux, de la peur, et autre chose qui ressemble à du soulagement.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Redis-le-moi quand ils seront partis. Pas avant. Pas devant eux.',
+          },
+        ],
+      },
+      {
+        id: 'prier-un-instant',
+        kind: 'neutral',
+        text: '« Laisse-moi un instant. Je dois prier. »',
+        reply: [
+          {
+            speaker: 'npc',
+            text: 'Un instant. Pas plus. La femme du haut ne tiendra pas.',
+          },
+          {
+            speaker: 'narration',
+            text: 'La porte se referme. Tu restes devant la table. Tes lèvres bougent. Tu ne sais pas quelles paroles elles prononcent.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Un mot revient, toujours le même. Ce n’est pas une prière. C’est un nom que tu ne connais pas.',
           },
         ],
       },
     ],
   },
 
-  // Beat 4 : enquête.
+  // Beat 4 : enquête. La chasse a été ouverte cette nuit ; quelqu'un l'a vu.
   investigation: [
     {
       kind: 'material',
-      text: 'Dans le tiroir du pupitre, un linge roulé. Il est lourd. Tu le déroules sur tes genoux.',
+      text: 'Dans le tiroir de la table, sous les nappes d’autel, un petit paquet noué d’une ficelle. Il est lourd et froid. Ta main ne tremble pas en le défaisant.',
       revealsArtifact: 'leap',
     },
     {
       kind: 'bodily',
-      text: 'Tu touches la grande lampe. Le verre est froid, mais la base est encore tiède. Elle a brûlé longtemps, puis elle s’est éteinte.',
-      revealsTruth: 'fanal-eteint',
+      text: 'Ta clé entre dans la serrure de la chasse sans résistance. Elle a l’habitude de ce geste. Le cuivre est usé là où tes doigts reposent : tu l’as ouverte cette nuit.',
+      revealsTruth: 'tu-as-ouvert-la-chasse',
     },
     {
       kind: 'material',
-      text: 'Au sol, des traces de bottes pleines de boue. Elles montent l’escalier et ne redescendent pas du même côté.',
-    },
-    {
-      kind: 'social',
-      text: 'Dans le registre, l’avant-dernière ligne a été grattée. L’encre en dessous est celle d’une autre main.',
-      revealsTruth: 'ligne-grattee',
-    },
-    {
-      kind: 'social',
-      text: 'Sur le quai, un homme t’observe depuis un moment. Quand tu le regardes, il fait semblant de réparer un filet.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton bras gauche porte la marque d’une corde, assez serrée pour laisser un sillon rouge.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ta bouche garde un goût amer sous le sel. Tu as bu quelque chose que tu ne te rappelles pas.',
+      text: 'Sur le bord de la chasse, des éclats de cire rouge brisée. Le sceau a été rompu, puis recollé avec de la salive et du pouce.',
     },
     {
       kind: 'material',
-      text: 'Sur le rebord de la vitre, trois mégots écrasés, de trois marques différentes. Tu ne fumes pas. Ce corps ne fume pas non plus.',
+      text: 'Trois cierges, consumés jusqu’au bout, au pied de l’autel. Quelqu’un a veillé ici, longtemps, et n’a pas voulu qu’on le voie.',
     },
     {
       kind: 'social',
-      text: 'Dans la poche du tablier, un papier plié en quatre. Un nom de navire, une heure, et un mot : « Tais-toi. » Ce n’est pas ton écriture.',
+      text: 'Le sacristain, ou celui qui en tient lieu, évite ton regard. Quand tu approches de la chasse, il retient son souffle.',
+      revealsTruth: 'sacristain-a-vu',
+    },
+    {
+      kind: 'social',
+      text: 'Une vieille, sur le seuil, te tend un cierge sans rien dire. Elle te regarde comme on regarde quelqu’un qui va tomber.',
+    },
+    {
+      kind: 'social',
+      text: 'Par la fenêtre, tu vois la femme du haut. Elle porte un enfant sur le dos, trop grand pour être porté. Elle ne pleure pas. Elle attend.',
     },
     {
       kind: 'bodily',
-      text: 'Tes mains cherchent un geste d’elles-mêmes. Elles se posent sur la molette de la lampe et la font tourner d’un cran. Elles savaient.',
+      text: 'Tu poses la main sur la pierre froide du mur. La fièvre recule un instant. Tu comprends qu’elle revient dès que tu t’en détaches.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes genoux portent l’empreinte du dallage : deux marques rouges, profondes. Tu as prié ici toute la nuit, à genoux, sans arrêt.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Un goût de cire et de larmes sèches reste sur tes lèvres. Tu as pleuré cette nuit, longtemps, sans te l’avouer.',
     },
   ],
 
-  // Beat 5 : la fracture.
+  // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-03', 'fracture-04'],
 
-  // Beat 6 : résolution.
+  // Beat 6 : résolution. Chaque issue est une histoire, aucune n'est un game over annoncé.
   resolutions: [
     {
-      id: 'tout-dire-au-chef',
-      requiresAny: ['fanal-eteint', 'ligne-grattee'],
-      choiceText: 'Tout dire au chef du quai, même ce que tu ignores.',
+      id: 'porter-la-chasse-ouverte',
+      requiresAny: ['tu-as-ouvert-la-chasse', 'sacristain-a-vu'],
+      choiceText: 'Porter la chasse ouverte en tête de la procession.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu poses le registre devant le chef et tu dis ce que tu sais. Puis ce que tu ne sais pas.',
-        'Il se tait longtemps. Il appelle deux hommes, et ils vont fouiller le quai.',
-        'Le fanal brillera encore ce soir. Il y aura quelqu’un d’autre pour le garder avec toi.',
-        'Dans l’escalier, la jeune voix te tend ton bonnet oublié. Elle sourit un peu. Elle ne siffle plus.',
+        'Tu sors sur la place, la chasse ouverte dans les mains. Un murmure traverse la foule, puis un silence.',
+        'Certains se détournent. D’autres s’approchent. La femme du haut pose sa main dans la chasse et dit : « C’est chaud. »',
+        'Personne ne sait ce qu’il voit. Personne ne demande. La procession se met en marche, et ce n’est plus la même.',
+        'Le soir, ta fièvre tombe. Quelqu’un a laissé un cierge allumé devant ta porte.',
       ].join('\n'),
       mutations: [
         {
           type: 'addTruth',
           truth: {
-            id: 'nuit-racontee',
-            summary: 'La nuit du port est écrite, avec ses trous.',
+            id: 'la-chasse-a-ete-ouverte',
+            summary: 'La foule a vu l’intérieur de la chasse, et personne ne l’a dit.',
             leapId: '',
           },
         },
         {
           type: 'addPerson',
           person: {
-            id: 'celle-qui-est-montee',
+            id: 'celui-qui-portait-la-clef',
             characterId: '1',
             status: 'saved',
             leapId: '',
@@ -252,23 +267,23 @@ export const premise02: Premise = {
       ],
     },
     {
-      id: 'gratter-la-ligne',
-      requiresAny: ['ligne-grattee'],
-      choiceText: 'Gratter la ligne du registre et écrire une nuit tranquille.',
+      id: 'refermer-et-mener',
+      requiresAny: ['tu-as-ouvert-la-chasse'],
+      choiceText: 'Refermer la chasse, la sceller de nouveau et mener la procession.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu grattes l’encre, puis tu écris : rien à signaler.',
-        'Ta main est sûre. Cela t’inquiète plus que le reste.',
-        'Le chef lit, hoche la tête et ne pose aucune question. C’est ce qui sonne faux.',
-        'Le soir, sur le registre, la page est propre. Tu la regardes longtemps. Elle a l’air de quelqu’un qui retient son souffle.',
+        'Tu refermes la chasse. La cire rouge coule, se fige, prend ton empreinte. Tu ne trembles plus.',
+        'Tu marches en tête, la chape sur le dos. La foule chante. Elle chante juste, comme si de rien n’était.',
+        'La femme du haut te touche la manche au passage. Son petit ne marche pas, mais il sourit.',
+        'Le soir, tu ne dors pas. Tu sais ce que contient la chasse. Tu es le seul à le savoir.',
       ].join('\n'),
       mutations: [
         {
           type: 'addScar',
           scar: {
-            id: 'nuit-effacee',
-            description: 'Une nuit effacée du registre.',
+            id: 'chasse-scellee-sur-un-secret',
+            description: 'Une chasse scellée de nouveau sur ce qu’elle cachait.',
             leapId: '',
             epoch: EPOCH,
           },
@@ -276,46 +291,45 @@ export const premise02: Premise = {
       ],
     },
     {
-      id: 'rallumer-et-te-taire',
-      requiresAny: ['fanal-eteint'],
-      choiceText: 'Rallumer le fanal et ne rien dire à personne.',
+      id: 'parler-au-sacristain',
+      requiresAny: ['sacristain-a-vu'],
+      choiceText: 'Prendre le sacristain à part et lui parler avant la procession.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu frottes l’allumette. La flamme prend, puis la grande lampe, anneau après anneau.',
-        'La lumière balaie le port. Un instant, elle éclaire un visage au bout de la jetée.',
-        'La personne qui t’a réveillé le voit aussi. Elle ne dira rien non plus.',
-        'Le visage lève la main, au ralenti, comme pour saluer. Puis la lumière passe, et la jetée est vide.',
+        'Tu fermes la porte. Tu poses la main sur l’épaule du sacristain. Il ne bouge pas.',
+        'Il dit : « J’ai vu, recteur. Je n’ai rien vu. » Il répète la phrase, comme une prière à l’envers.',
+        'La procession part sans l’un ni l’autre. On entend la foule s’éloigner, puis les cloches se taire une à une.',
       ].join('\n'),
       mutations: [
         {
-          type: 'addDoor',
-          door: {
-            id: 'jetee-eclairee',
-            label: 'La jetée, éclairée une nuit',
-            openedInLeap: '',
+          type: 'addPerson',
+          person: {
+            id: 'le-sacristain-qui-sait',
+            characterId: '1',
+            status: 'changed',
+            leapId: '',
             epoch: EPOCH,
           },
         },
       ],
     },
     {
-      id: 'suivre-lhomme-au-filet',
-      choiceText: 'Descendre sur le quai et suivre l’homme au filet.',
+      id: 'jeter-la-clef',
+      choiceText: 'Descendre à la rivière et jeter la clé de la chasse dans l’eau.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu descends. L’homme au filet s’éloigne sans courir, comme quelqu’un qui connaît ton pas.',
-        'Il te conduit jusqu’à un hangar. La porte est ouverte. À l’intérieur, une odeur de sel et d’huile.',
-        'Tu entres. Derrière toi, quelqu’un tire le verrou.',
-        'Dans le noir, tu entends respirer. Ils sont plusieurs. L’un d’eux, très bas, prononce ton nom.',
+        'Tu descends par la ruelle. La rivière est basse, verte, indifférente aux fêtes.',
+        'Tu arraches la chaîne. La clé disparaît sans bruit. Tes mains ne tremblent plus, et c’est ce qui t’inquiète.',
+        'Là-haut, les cloches sonnent une dernière fois. La procession part sans chasse, et personne n’ose dire pourquoi.',
       ].join('\n'),
       mutations: [
         {
           type: 'addDoor',
           door: {
-            id: 'hangar-du-quai',
-            label: 'Un hangar du quai, ouvert de l’extérieur',
+            id: 'clef-dans-la-riviere',
+            label: 'Une chasse que plus personne ne peut ouvrir',
             openedInLeap: '',
             epoch: EPOCH,
           },
@@ -323,7 +337,7 @@ export const premise02: Premise = {
         {
           type: 'addArtifact',
           artifact: {
-            id: 'objet-du-hangar',
+            id: 'objet-de-la-riviere',
             artifactId: 'leap',
             fromLeap: '',
             toLeap: null,
@@ -333,34 +347,32 @@ export const premise02: Premise = {
     },
     {
       id: 'avouer-ton-trou',
-      choiceText: 'Dire au chef que tu ne te souviens de rien, pas même de toi.',
+      choiceText: 'Dire à voix haute que tu ne sais pas qui tu es.',
       outcome: 'exposed',
       fractureRepaired: false,
       resultText: [
-        'Tu dis que tu ne te souviens de rien. Pas même de ton nom.',
-        'Le chef te regarde comme on regarde un outil cassé.',
-        'On te retire les clés du fanal. Quelqu’un d’autre montera ce soir.',
-        'Tu descends l’escalier pour la dernière fois. La jeune voix te regarde passer et ne siffle pas.',
+        'Tu dis que tu ne sais pas qui tu es. Que ce corps n’est pas le tien.',
+        'Le silence qui suit est plus lourd que la chape. Quelqu’un se signe. Quelqu’un pleure.',
+        'On t’emmène dans une chambre, en parlant bas. On te donne de l’eau, des draps, une chaise. On te retire la clé.',
       ].join('\n'),
       mutations: [],
     },
     {
-      id: 'plonger',
-      choiceText: 'Descendre à l’eau chercher ce qui est tombé du quai.',
+      id: 'monter-au-clocher',
+      choiceText: 'Monter au clocher regarder la ville et la foule avant de décider.',
       outcome: 'died',
       fractureRepaired: false,
       resultText: [
-        'Tu plonges. L’eau est plus froide que le sel ne le laissait croire.',
-        'Sous la surface, une forme claire, et une chaîne qui s’enroule à ta cheville.',
-        'La dernière lumière que tu vois est celle du jour, vue d’en dessous.',
-        'Là-haut, le fanal reste éteint. Personne ne montera pour l’allumer avant l’aube.',
+        'Tu montes l’escalier de pierre, marche après marche. La fièvre te serre les tempes.',
+        'Là-haut, la ville est un damier de toits et de bannières. La foule est un fleuve lent, qui attend.',
+        'Tu t’appuies à la balustrade. Elle est plus basse que tu ne croyais. Le ciel est très proche.',
       ].join('\n'),
       mutations: [
         {
           type: 'addScar',
           scar: {
-            id: 'corps-sous-le-quai',
-            description: 'Un corps pris par la chaîne, sous le quai.',
+            id: 'recteur-tombe-du-clocher',
+            description: 'Un prêtre tombé du clocher, un jour de pardon.',
             leapId: '',
             epoch: EPOCH,
           },

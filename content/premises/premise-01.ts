@@ -1,230 +1,225 @@
 import type { Premise } from './types';
 
-// Prémisse 1 : le premier saut, qui sert de tutoriel. Un hiver sans électricité, un village
-// coupé du monde, et un gardien qui distribue l'huile des lampes.
-//
-// Conventions de ce fichier (voir content/README.md) :
+// Prémisse 1 : un village de pêcheurs, la mer a rendu un corps. L'hôte lave les morts.
+// Inspirée de : les enfants que la mer garde, et le corps que l'on reconnaît trop vite.
+// Conventions : voir content/README.md.
 // - `npcId` est un emplacement (« 0 » ou « 1 »), pas un personnage : le générateur tire les deux ;
-// - dans une mutation, `characterId` « 0 » ou « 1 » est lui aussi un emplacement ;
-// - une trace d'objet utilise `artifactId: 'leap'` ; l'élément d'enquête qui `revealsArtifact` ne
-//   s'affiche que si le saut propose un objet.
+//   le texte ne dit donc ni « il » ni « elle » du personnage qui parle.
+// - Miroir : reflet dans l'eau (découverte ancienne, presque douce).
+// - Corps hérité : des mains qui tremblent, sauf au contact des morts. La condition est une clé.
+
+const EPOCH = 'un village de pêcheurs, à la fin du siècle dernier';
 
 export const premise01: Premise = {
   id: 'premise-01',
-  title: 'La réserve d’huile',
-  epoch: 'un hiver sans électricité',
+  title: 'Ce que rend la mer',
+  epoch: EPOCH,
 
-  // Beat 1 : réveil sensoriel, zéro information. C'est l'échantillon validé de VOIX.md.
+  // Beat 1 : le sel, la cire, le vinaigre. Aucune information.
   wakeup: [
-    'Le noir n’est pas tout à fait noir. Une lueur rouge traverse tes paupières et bat au rythme de ton cœur.',
-    'Tu ne bouges pas. Tu écoutes. Une goutte tombe quelque part, loin, puis une autre. Entre les deux, le silence s’étire.',
-    'L’air a un goût de cendre froide et de résine. Sous ton dos, quelque chose de dur et de plat craque quand tu respires.',
-    'Il fait froid. C’est un froid qui monte du sol et entre par les coudes. Quelque part, un chien aboie une fois, puis se tait.',
-    'Tu ouvres la bouche. Ta langue est sèche. Tu cherches un mot et tu n’en trouves aucun. Pas même ton nom.',
-    'Ta main droite glisse sur une étoffe rêche. Elle est large, calleuse. Tu ne la reconnais pas.',
-    'Au-dessus de toi, une planche grince. Des pas. Quelqu’un s’arrête et ne dit rien.',
-    'Une odeur de lait tourné flotte quelque part. Elle ne vient pas de la pièce. Elle vient de ce corps, de ses vêtements, de sa peau.',
-    'Tu essaies de te rappeler une chose. Une seule. Le visage d’un parent, un trajet, un jour de la semaine. Rien ne répond.',
-    'Tu avales. Ta gorge fait un bruit sec. Tu sais, sans savoir comment, que tu as déjà avalé ainsi bien des matins.',
-    'La planche, au-dessus, grince encore. Quelqu’un descend un escalier de bois, marche après marche, avec la lenteur de ceux qui portent un poids.',
+    'Le noir sent le sel et la laine mouillée. Une odeur plus fine passe dessous : du vinaigre, de la lavande, de la cire froide.',
+    'Tu écoutes. La mer respire au loin, un souffle long, puis le retrait des galets. Elle recommence. Elle a toute la journée.',
+    'Une goutte tombe sur de la pierre, à intervalles réguliers. Quelque part, quelqu’un renifle sans bruit et refuse de pleurer.',
+    'Tu es debout. Tu le sais à la raideur des genoux, au poids des épaules. Sous tes pieds, la terre battue est glacée.',
+    'Tes mains tremblent. Ce n’est pas le froid. C’est un tremblement ancien, installé là bien avant toi, comme un locataire.',
+    'Tu cherches ton nom. Tu trouves un mot à la place : une cloche, très loin, qui ne sonne pas.',
+    'Au cou, quelque chose de rêche : une cordelette, un nœud, un petit poids de coquille. Tes doigts le serrent sans toi.',
+    'Derrière une cloison, une voix chante trois notes, toujours les mêmes. Elle les a chantées des centaines de fois.',
+    'On frappe trois coups à plat sur du bois. Une pause. Trois autres. Le rythme est celui d’un usage, pas d’une urgence.',
+    'La porte s’ouvre sur la mer. Le vent entre, passe sur ta nuque et sort. Tu sais une chose : on t’attend.',
+    'Tu ouvres les yeux.',
   ].join('\n\n'),
 
-  // Beat 2 : orientation. Trois natures d'indice au moins, avant tout contact.
+  // Beat 2 : orientation. Les trois natures d'indice, le miroir et le corps hérité.
   orientation: [
     {
       kind: 'material',
-      text: 'Une lampe à huile éteinte, sur la table. Le verre est noir de suie. À côté, un trousseau de clés : une seule brille.',
+      text: 'Une pièce basse, au sol de terre battue. Sur une table longue, un drap blanc couvre une forme petite. Un seul pied dépasse, gris, sans chaussure.',
     },
     {
       kind: 'material',
-      text: 'Par la fenêtre, de la neige jusqu’aux toits. Aucune fumée ne monte des cheminées, sauf une. Aucun fil ne traverse le ciel.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Le bout de ton auriculaire gauche manque. La plaie est ancienne, lisse, sans douleur. Tes mains sont gercées jusqu’au poignet.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Tu as faim, mais c’est une faim habituée. Ce corps mange peu depuis longtemps.',
-    },
-    {
-      kind: 'social',
-      text: 'Une feuille est clouée au mur. Des noms, des traits à l’encre. En haut, une ligne soulignée : « Gardien de la réserve ».',
+      text: 'Aux poutres pendent des filets en réparation et des bouées de liège. Par la porte ouverte, une grève grise, la mer basse, des barques tirées au sec.',
     },
     {
       kind: 'material',
-      text: 'Sur le rebord de la fenêtre, une rangée de pots de verre vides. Chacun porte une étiquette de papier, un nom, une date effacée.',
+      text: 'Sur l’étagère, un bol de vinaigre, des bandes de lin pliées et un peigne d’os aux dents cassées. Tout est rangé comme pour une cérémonie.',
     },
     {
       kind: 'bodily',
-      text: 'Ton souffle fait de la buée. Tu comptes tes respirations sans le vouloir : douze, puis douze encore. Ce corps compte tout.',
+      text: 'Tes mains tremblent. Tu les serres l’une dans l’autre et le tremblement continue. Tu poses une paume sur la table : il s’arrête.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Un baquet d’eau claire, sur le banc. Tu te penches. Un visage creusé par les saisons te regarde d’en bas. Il n’a pas l’air surpris. C’est toi qui l’es.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tu as froid aux hanches, à force d’être debout. Ce corps veille des morts depuis des années, et il en a pris la patience.',
     },
     {
       kind: 'social',
-      text: 'Un manteau de laine pend à un clou. Sur la manche, un morceau d’étoffe rouge recousu à la main. Quelqu’un a pris soin de ce vêtement.',
+      text: 'Au mur, un tablier de toile cirée et un chapelet de coquilles. Sur le seuil, des sabots d’adulte et une paire de sabots d’enfant.',
+    },
+    {
+      kind: 'social',
+      text: 'Dehors, des voix d’hommes parlent bas. Quand tu bouges, elles s’arrêtent. Puis elles reprennent, plus bas encore.',
     },
   ],
 
-  // Beat 3 : premier contact. Le PNJ de l'emplacement « 0 » entre. Le choix risqué révèle trop tôt.
+  // Beat 3 : premier contact. L'emplacement « 0 » entre. Le choix risqué contredit trop tôt.
   openingDialogue: {
     npcId: '0',
     lines: [
       {
         speaker: 'narration',
-        text: 'On frappe deux fois. La porte s’ouvre avant que tu répondes. Le froid entre avec quelqu’un.',
-      },
-      { speaker: 'npc', text: 'Tu es levé. Bien. Ils sont déjà tous devant la réserve.' },
-      {
-        speaker: 'narration',
-        text: 'Elle secoue la neige de ses bottes sur le seuil. Ses gestes sont vifs, mais ses yeux sont cernés de gris.',
+        text: 'Quelqu’un entre en baissant la tête sous la poutre. Le froid de la grève reste collé à ses vêtements.',
       },
       {
         speaker: 'npc',
-        text: 'C’est jour de partage. Les familles attendent depuis l’aube. Les Morel sont venus à pied de la ferme du haut.',
+        text: 'Les hommes l’ont monté à l’aube. Ils n’ont pas voulu le laisser sur le sable.',
       },
       {
         speaker: 'npc',
-        text: 'J’ai dit à tout le monde que tu serais à l’heure. Tu l’es toujours. Alors, tu as la clé ?',
+        text: 'La famille vient à midi. Je leur ai dit que tu aurais fini. Dis-moi que tu auras fini.',
       },
       {
         speaker: 'narration',
-        text: 'Elle tend la main, sans y penser, comme on le fait avec quelqu’un en qui on a confiance. Puis elle la laisse retomber.',
+        text: 'La personne regarde le drap, puis ailleurs. Ses mains ne savent plus où se poser.',
+      },
+      {
+        speaker: 'npc',
+        text: 'La mère est dehors depuis trois nuits. Elle dit que c’est le petit. Elle l’a dit avant de le voir.',
+      },
+      {
+        speaker: 'npc',
+        text: 'Moi, je ne dis rien. Ce n’est pas à moi de dire. C’est à toi de regarder.',
       },
       {
         speaker: 'narration',
-        text: 'Dehors, une voix d’homme appelle un nom, et ce nom est peut-être le tien. Personne ne répond.',
+        text: 'Dans ton dos, le drap bouge un peu, soulevé par un courant d’air. Rien d’autre.',
       },
     ],
     choices: [
       {
-        id: 'attendre',
+        id: 'preparer',
         kind: 'neutral',
-        text: '« J’arrive. Laisse-moi un instant. »',
+        text: '« Je commence. Dis-leur d’attendre. »',
         reply: [
-          { speaker: 'npc', text: 'D’accord. Ne tarde pas. Les enfants ont froid.' },
-          {
-            speaker: 'narration',
-            text: 'La porte reste entrouverte derrière elle. Tu entends des voix, dehors, qui patientent.',
-          },
           {
             speaker: 'npc',
-            text: 'Et prends le manteau rouge. On te reconnaît à ce manteau.',
+            text: 'Je leur dirai que tu y es. Prends ton temps. Pas trop.',
           },
           {
             speaker: 'narration',
-            text: 'Elle sort. Un courant d’air froid passe sur ta nuque et fait vaciller la lampe éteinte, comme si elle respirait.',
+            text: 'La personne sort. Le seuil garde l’empreinte humide de ses pas, et la mer les efface de loin.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Tu restes avec la forme sous le drap. Elle est plus petite que tout ce que tu as vu aujourd’hui.',
           },
         ],
       },
       {
-        id: 'demander',
+        id: 'questionner',
         kind: 'informative',
-        text: '« Rappelle-moi comment se passe le partage. »',
+        text: '« Où l’a-t-on trouvé ? Dans quel état ? »',
         reply: [
           {
             speaker: 'npc',
-            text: 'Tu ouvres la réserve. Tu mesures une part par famille. Tu notes sur la feuille. Comme chaque semaine.',
-          },
-          {
-            speaker: 'narration',
-            text: 'Elle te dévisage une seconde de trop. Puis elle hausse les épaules.',
+            text: 'Sous les roches noires, là où la marée dépose ce qu’elle ne veut plus. Il était pris dans les algues.',
           },
           {
             speaker: 'npc',
-            text: 'Tu as la tête ailleurs, ce matin. Dors un peu, cette nuit. Si tu peux.',
+            text: 'Il tenait quelque chose dans le poing. Les hommes l’ont pris. Ils ne disent pas quoi.',
           },
           {
             speaker: 'narration',
-            text: 'Elle dit cela avec douceur. Pourtant, ses doigts se sont crispés sur le montant de la porte.',
+            text: 'La personne frotte ses manches. Elle en a trop dit, et elle le sait.',
           },
         ],
       },
       {
-        id: 'avouer-la-clé',
+        id: 'contredire',
         kind: 'risky',
-        text: '« Je ne sais pas où est la clé. »',
+        text: '« Ce n’est pas le petit. »',
         reply: [
           {
             speaker: 'npc',
-            text: 'Tu ne sais pas… Tu ne la quittes jamais, d’habitude.',
+            text: 'Tu ne l’as pas encore regardé. Comment tu peux dire ça ?',
           },
           {
             speaker: 'narration',
-            text: 'Sa voix a changé. Elle compte tes mots, un par un, comme on compte des pièces.',
+            text: 'La voix a changé. Elle est devenue très calme, comme celle de quelqu’un qui marche sur une planche.',
           },
           {
             speaker: 'npc',
-            text: 'Regarde dans tes poches. Regarde sous le lit. Tu dois bien l’avoir quelque part.',
-          },
-          {
-            speaker: 'narration',
-            text: 'Elle sourit, mais ce n’est pas un vrai sourire. Elle guette ta réponse comme on guette un pas sur la glace.',
+            text: 'Ne le dis pas à la mère. Ne le dis à personne. Pas avant d’avoir regardé.',
           },
         ],
       },
       {
-        id: 'prendre-le-trousseau',
+        id: 'lever-le-drap',
         kind: 'neutral',
-        text: 'Ne rien dire et prendre le trousseau.',
+        text: 'Ne rien dire et lever le drap.',
         reply: [
           {
             speaker: 'narration',
-            text: 'Le métal est glacé. Tes doigts se referment seuls sur la clé qui brille.',
+            text: 'Le lin glisse sous tes doigts. Il est humide et lourd, comme s’il avait gardé la mer.',
           },
-          { speaker: 'npc', text: 'Voilà. Je t’attends dehors.' },
+          { speaker: 'npc', text: 'Je sors. Je ne peux pas rester pour ça.' },
           {
             speaker: 'narration',
-            text: 'Elle hésite sur le seuil, comme si elle voulait ajouter un mot. Elle ne l’ajoute pas. La porte se referme.',
-          },
-          {
-            speaker: 'narration',
-            text: 'Le trousseau pèse dans ta paume. Six clés. Une seule est lisse, usée par des années de pouces.',
+            text: 'La porte claque. Tu ne vois pas encore le visage. Tu vois l’étoffe, et la façon dont elle a vieilli.',
           },
         ],
       },
     ],
   },
 
-  // Beat 4 : enquête. Des indices croisés : chacun éclaire les autres.
+  // Beat 4 : enquête. Le corps est dans l'eau depuis des années ; quelqu'un le sait.
   investigation: [
     {
       kind: 'material',
-      text: 'Sous le lit, un coffre. Un chiffon plié couvre quelque chose. Tu le soulèves, et ta main ne tremble pas.',
+      text: 'Dans le coffre à linge, sous les draps pliés, un objet enveloppé dans un chiffon. Il est lourd et froid. Ta main ne tremble pas en le touchant.',
       revealsArtifact: 'leap',
     },
     {
       kind: 'bodily',
-      text: 'Tu soulèves le couvercle de la réserve. Tes bras connaissent le geste. Ils savent aussi que le bidon est trop léger.',
-      revealsTruth: 'reserve-presque-vide',
+      text: 'Tes mains se posent sur le corps. Elles savent. Cette chair est devenue légère comme du bois. Elle est dans l’eau depuis des années, pas depuis trois jours.',
+      revealsTruth: 'noye-depuis-longtemps',
     },
     {
       kind: 'material',
-      text: 'La serrure de la réserve porte des rayures neuves. Quelqu’un a essayé de l’ouvrir de force, cette nuit ou la précédente.',
-    },
-    {
-      kind: 'social',
-      text: 'Dans le cahier, la dernière ligne est de ta main. Les chiffres ne sont pas ceux de la semaine passée.',
-      revealsTruth: 'cahier-modifie',
-    },
-    {
-      kind: 'social',
-      text: 'Un enfant te tire par la manche. Il dit que sa mère n’a rien reçu depuis deux semaines. Il ne pleure pas.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Une femme tousse, tout près. Elle te regarde comme on regarde quelqu’un qui doit quelque chose.',
+      text: 'La chemise de lin porte une marque brodée au col, au fil rouge : une ancre et deux lettres. Un point que plus personne ne fait au village.',
     },
     {
       kind: 'material',
-      text: 'Dans le fond de la réserve, des bidons alignés. Quatre portent une croix à la craie. Les croix sont fraîches, et ce n’est pas ta main qui les a tracées.',
+      text: 'Au creux de la main fermée, des algues, du sable et un petit éclat de bois peint. Quelqu’un a ouvert ce poing avant toi, puis l’a refermé.',
     },
     {
       kind: 'social',
-      text: 'Un vieil homme reste à l’écart, les mains dans les manches. Quand tu croises son regard, il hoche la tête une fois, comme pour dire qu’il sait.',
+      text: 'Une vieille s’approche de la porte, regarde le pied qui dépasse, et prononce un nom. Pas celui du petit. Puis elle recule et se signe.',
+      revealsTruth: 'vieux-nom',
+    },
+    {
+      kind: 'social',
+      text: 'Un homme au visage fermé reste sur le seuil. Il ne regarde pas le drap. Quand tu le regardes, il passe la langue sur ses lèvres.',
+    },
+    {
+      kind: 'social',
+      text: 'Un enfant glisse la tête dans l’encadrement et dit à voix basse : « Ce n’est pas lui, hein ? » Une main l’attire en arrière.',
     },
     {
       kind: 'bodily',
-      text: 'Tes jambes tremblent au moment de franchir le seuil de la réserve. Ce corps a peur de cette porte, et il ne te dit pas pourquoi.',
+      text: 'Ta bouche a un goût de sel et de fer. Tu as dû passer la nuit à jeûner. Ce corps tient debout par entêtement.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton pouce trouve une cicatrice ancienne au creux de l’autre paume. Une corde y a glissé, il y a longtemps, et ce corps s’en souvient.',
+    },
+    {
+      kind: 'material',
+      text: 'Par terre, près de la porte, des traces de bottes lourdes. Elles viennent de la grève, passent près de la table et repartent sans le drap.',
     },
   ],
 
@@ -234,111 +229,109 @@ export const premise01: Premise = {
   // Beat 6 : résolution. Chaque issue est une histoire, aucune n'est un game over annoncé.
   resolutions: [
     {
-      id: 'ouvrir-devant-tous',
-      requiresAny: ['reserve-presque-vide', 'cahier-modifie'],
-      choiceText: 'Ouvrir la réserve devant tout le village.',
+      id: 'laisser-la-mere-voir',
+      requiresAny: ['noye-depuis-longtemps', 'vieux-nom'],
+      choiceText: 'Faire entrer la mère avant la toilette et la laisser regarder.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu ouvres la réserve devant tous. Le bidon sonne creux, et personne ne parle.',
-        'Puis une femme pose sa propre lampe sur la table. D’autres la suivent.',
-        'Il restera peu d’huile cet hiver. Mais ce soir, plus personne ne compte dans le noir.',
-        'Le vieil homme s’approche et te serre le bras sans un mot. Sa main tremble, et la tienne aussi.',
+        'Tu ouvres la porte. La mère entre sans bruit et reste longtemps devant la table.',
+        'Elle touche la chemise brodée du bout du doigt. Elle dit : « Ce n’est pas lui. » Elle ne pleure pas. Elle respire enfin.',
+        'Les hommes sur le seuil ne bougent pas. Dehors, quelqu’un retire son bonnet.',
+        'Elle dit : « Merci de m’avoir laissée voir. » Elle part vers la grève, et elle regarde la mer avec d’autres yeux.',
       ].join('\n'),
       mutations: [
         {
-          type: 'addDoor',
-          door: {
-            id: 'reserve-ouverte',
-            label: 'La réserve, ouverte à tous',
-            openedInLeap: '',
-            epoch: 'un hiver sans électricité',
+          type: 'addTruth',
+          truth: {
+            id: 'le-corps-nest-pas-le-petit',
+            summary: 'Le corps rendu par la mer n’était pas celui de l’enfant disparu.',
+            leapId: '',
           },
         },
         {
-          type: 'addTruth',
-          truth: {
-            id: 'village-sait',
-            summary: 'Le village connaît l’état réel de la réserve.',
+          type: 'addPerson',
+          person: {
+            id: 'celle-qui-attendait',
+            characterId: '0',
+            status: 'saved',
             leapId: '',
+            epoch: EPOCH,
           },
         },
       ],
     },
     {
-      id: 'corriger-le-cahier',
-      requiresAny: ['cahier-modifie'],
-      choiceText: 'Corriger les chiffres et distribuer comme avant.',
+      id: 'laver-et-taire',
+      requiresAny: ['noye-depuis-longtemps'],
+      choiceText: 'Laver le corps, l’habiller, et ne rien dire de ce que tu sais.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu corriges le cahier. Tu distribues une mesure par famille.',
-        'Personne ne conteste. L’enfant te regarde longtemps, puis il s’en va.',
-        'La réserve tiendra trois jours de moins que prévu. Tu es seul à le savoir.',
-        'Le soir, tu allumes ta lampe. Sa flamme est trop haute pour l’huile qui reste. Tu la baisses, puis tu la souffles.',
+        'Tu laves le corps. Tes mains ne tremblent plus. Elles font ce qu’elles ont toujours fait.',
+        'À midi, la famille entre. La mère se jette sur le drap et dit le nom du petit, très fort.',
+        'Personne ne la corrige. On enterre demain, sous ce nom qui n’est pas le bon.',
+        'Tu vois la vieille, au fond, qui hoche la tête. Elle ne te regarde pas.',
       ].join('\n'),
       mutations: [
         {
           type: 'addScar',
           scar: {
-            id: 'mensonge-maintenu',
-            description: 'Un mensonge maintenu pour garder le calme.',
+            id: 'tombe-au-mauvais-nom',
+            description: 'Une tombe creusée sous un nom qui n’est pas celui du mort.',
             leapId: '',
-            epoch: 'un hiver sans électricité',
+            epoch: EPOCH,
           },
         },
       ],
     },
     {
-      id: 'donner-ta-part',
-      requiresAny: ['reserve-presque-vide'],
-      choiceText: 'Donner ta propre part et te taire.',
+      id: 'dire-le-vieux-nom',
+      requiresAny: ['vieux-nom'],
+      choiceText: 'Dire à voix haute le nom que la vieille a prononcé.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu vides ta ration dans la jarre de l’enfant. Tu ne dis pas pourquoi.',
-        'La personne qui t’a réveillé comprend, ou croit comprendre. Elle ne te regarde plus pareil.',
-        'La réserve ne s’est pas remplie. Mais quelqu’un a mangé ce soir.',
-        'Cette nuit, ton ventre gronde sous le manteau rouge. Tu écoutes ce bruit comme on écoute une promesse.',
-      ].join('\n'),
-      mutations: [
-        {
-          type: 'addPerson',
-          person: {
-            id: 'celui-qui-a-frappé',
-            characterId: '0',
-            status: 'changed',
-            leapId: '',
-            epoch: 'un hiver sans électricité',
-          },
-        },
-      ],
-    },
-    {
-      id: 'partir-avant-laube',
-      choiceText: 'Prendre le trousseau et quitter le village avant l’aube.',
-      outcome: 'failed',
-      fractureRepaired: false,
-      resultText: [
-        'Tu prends le trousseau. Tu glisses dans ta poche ce que tu peux emporter.',
-        'La neige efface tes pas derrière toi, un à un.',
-        'Au matin, les familles attendront devant une porte close. Toi, tu seras déjà loin.',
-        'Derrière une crête, tu te retournes. Une seule cheminée fume au village. Tu ne sais pas si tu l’as laissée allumée.',
+        'Tu dis le nom. Le silence tombe sur la pièce comme un filet mouillé.',
+        'La vieille ferme les yeux. L’homme du seuil s’en va, d’un pas qui n’a plus rien de calme.',
+        'La mère demande : « Qui est-ce ? » Personne ne répond. Les portes se ferment, l’une après l’autre.',
       ].join('\n'),
       mutations: [
         {
           type: 'addDoor',
           door: {
-            id: 'route-du-nord',
-            label: 'La route du nord, restée ouverte',
+            id: 'maison-fermee-au-village',
+            label: 'Une maison dont plus personne ne prononce le nom',
             openedInLeap: '',
-            epoch: 'un hiver sans électricité',
+            epoch: EPOCH,
+          },
+        },
+      ],
+    },
+    {
+      id: 'chercher-au-large',
+      choiceText: 'Prendre une barque et chercher l’enfant au large.',
+      outcome: 'failed',
+      fractureRepaired: false,
+      resultText: [
+        'Tu pousses la plus petite barque à l’eau. Tes mains tiennent les rames comme si elles avaient toujours su.',
+        'La côte devient une ligne grise. Tu appelles un nom. Une mouette répond, puis plus rien.',
+        'Au retour, la nuit tombe. La mère est sur la grève, immobile, et ne dit pas si elle espère encore.',
+      ].join('\n'),
+      mutations: [
+        {
+          type: 'addDoor',
+          door: {
+            id: 'barque-tiree-au-large',
+            label: 'Une barque partie au large, au jour du corps',
+            openedInLeap: '',
+            epoch: EPOCH,
           },
         },
         {
           type: 'addArtifact',
           artifact: {
-            id: 'objet-emporté',
+            id: 'objet-de-la-barque',
             artifactId: 'leap',
             fromLeap: '',
             toLeap: null,
@@ -347,37 +340,36 @@ export const premise01: Premise = {
       ],
     },
     {
-      id: 'dire-la-verite',
+      id: 'avouer-ton-trou',
       choiceText: 'Dire que tu ne sais pas qui tu es.',
       outcome: 'exposed',
       fractureRepaired: false,
       resultText: [
-        'Tu dis que tu ne sais pas qui tu es. Le silence dure.',
-        'Quelqu’un rit, et ce rire n’est pas amical.',
-        'On te prend le trousseau. Dans ton dos, la porte se ferme sur ce corps qui n’est pas le tien.',
-        'Quelqu’un te met une couverture sur les épaules. Ce geste est le plus doux de la journée, et le plus dur à supporter.',
+        'Tu dis que tu ne sais pas qui tu es. Que ces mains ne sont pas à toi.',
+        'Personne ne rit. Les hommes se signent. Quelqu’un recule jusqu’à la porte, puis dehors.',
+        'On te retire le tablier. Une autre lavera le corps, et ce sera quelqu’un qui sait ce qu’elle fait.',
       ].join('\n'),
       mutations: [],
     },
     {
-      id: 'marcher-dans-la-neige',
-      choiceText: 'Sortir seul dans la neige chercher de l’huile ailleurs.',
+      id: 'descendre-a-la-greve',
+      choiceText: 'Descendre aux roches noires voir d’où vient le corps.',
       outcome: 'died',
       fractureRepaired: false,
       resultText: [
-        'Tu marches jusqu’à ce que les arbres se ressemblent tous.',
-        'Le froid entre dans tes os, sans bruit. Tes jambes cessent de t’appartenir.',
-        'La dernière chose que tu entends est un chien, très loin, qui aboie une fois.',
-        'Puis la neige, qui tombe sur tes paupières, une à une, comme des doigts qui les ferment.',
+        'Tu descends à la marée basse. Les roches sont noires, luisantes, couvertes d’algues glissantes.',
+        'Tu trouves la crevasse où le corps a dormi. Tu t’y penches. Au fond, quelque chose de blanc.',
+        'La mer revient avant que tu l’aies compris. Elle n’a pas de hâte. Elle a toute la journée.',
       ].join('\n'),
       mutations: [
         {
           type: 'addScar',
           scar: {
-            id: 'corps-dans-la-neige',
-            description: 'Un corps retrouvé dans la neige, sans explication.',
+            id: 'laveuse-prise-par-la-maree',
+            description:
+              'Quelqu’un qui lavait les morts, pris par la marée aux roches noires.',
             leapId: '',
-            epoch: 'un hiver sans électricité',
+            epoch: EPOCH,
           },
         },
       ],

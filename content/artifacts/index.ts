@@ -5,15 +5,15 @@ import type { ArtifactDef } from './types';
 export const artifacts: readonly ArtifactDef[] = [
   {
     id: 'artifact-01',
-    name: 'Une clé sans serrure',
+    name: 'Une clé d’or',
     description:
-      'Elle est tiède, comme si quelqu’un venait de la lâcher. Aucune porte ne lui correspond.',
+      'Elle est plus lourde qu’elle ne devrait, et tiède, comme si quelqu’un venait de la lâcher. Aucune porte ne lui correspond.',
   },
   {
     id: 'artifact-02',
-    name: 'Un bouton de manteau',
+    name: 'Un peigne d’ivoire',
     description:
-      'Cousu à la hâte, il tient par un fil noir. Le tissu qu’il retenait a disparu.',
+      'Deux dents manquent. Il garde l’odeur de l’eau, et un long cheveu y est resté pris.',
   },
   {
     id: 'artifact-03',
@@ -23,9 +23,9 @@ export const artifacts: readonly ArtifactDef[] = [
   },
   {
     id: 'artifact-04',
-    name: 'Une carte pliée',
+    name: 'Un carnet de contes',
     description:
-      'Des routes tracées au crayon, sans nom de ville. Une croix marque l’endroit où tu te trouves.',
+      'Des histoires courtes, d’une écriture penchée. Chacune ressemble à un moment de ta vie, et aucune ne s’achève.',
   },
   {
     id: 'artifact-05',

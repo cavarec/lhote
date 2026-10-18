@@ -156,15 +156,15 @@ describe('beats', () => {
       premise01.investigation.findIndex((i) => i.revealsTruth === truth);
     const none = makeLeap();
     expect(availableResolutions(premise01, none).map((r) => r.id)).not.toContain(
-      'ouvrir-devant-tous',
+      'laisser-la-mere-voir',
     );
     expect(lockedResolutions(premise01, none).length).toBeGreaterThan(0);
-    const body = revealClue(makeLeap(), idx('reserve-presque-vide'));
-    expect(knownTruths(premise01, body).has('reserve-presque-vide')).toBe(true);
+    const body = revealClue(makeLeap(), idx('noye-depuis-longtemps'));
+    expect(knownTruths(premise01, body).has('noye-depuis-longtemps')).toBe(true);
     const ids = availableResolutions(premise01, body).map((r) => r.id);
-    expect(ids).toContain('ouvrir-devant-tous');
-    expect(ids).toContain('donner-ta-part');
-    expect(ids).not.toContain('corriger-le-cahier');
+    expect(ids).toContain('laisser-la-mere-voir');
+    expect(ids).toContain('laver-et-taire');
+    expect(ids).not.toContain('dire-le-vieux-nom');
   });
 
   it('impose l’issue exposée quand la suspicion est au maximum', () => {

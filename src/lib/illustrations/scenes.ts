@@ -23,155 +23,147 @@ function snow(n: number, seed: number): string {
   }).join('');
 }
 
-const village = (): string =>
-  `<path d="M0 150 L50 128 L100 150 L100 220 L0 220Z" ${ink(0.5)}/>` +
-  `<path d="M90 160 L150 124 L210 160 L210 220 L90 220Z" ${ink(0.62)}/>` +
-  `<path d="M200 150 L262 118 L330 150 L330 220 L200 220Z" ${ink(0.5)}/>` +
-  `<path d="M320 156 L370 130 L400 148 L400 220 L320 220Z" ${ink(0.62)}/>` +
-  `<rect x="236" y="96" width="9" height="26" ${ink(0.62)}/>` +
-  `<path class="drift" d="M240 92 C236 78 248 70 240 56 C236 46 246 38 242 28" ${line(0.35, 3)}/>`;
+const rocks = (): string =>
+  `<path d="M0 150 L40 118 L90 140 L140 108 L200 138 L260 112 L320 140 L400 116 V220 H0Z" ${ink(0.78)}/>`;
+
+const trunk = (x: number, w: number, o = 0.78): string =>
+  `<rect x="${x}" y="0" width="${w}" height="220" ${ink(o)}/>`;
+
+const faces = (n: number, cx: number, cy: number, r: number): string =>
+  Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * Math.PI * 2;
+    return `<circle cx="${(cx + Math.cos(a) * r).toFixed(1)}" cy="${(cy + Math.sin(a) * r * 0.45).toFixed(1)}" r="5" ${ink(0.85)}/>`;
+  }).join('');
 
 const SCENES: Record<string, Record<SceneKind, string>> = {
-  // ─── La réserve d'huile : un village sous la neige, une lampe sans huile.
+  // ─── Ce que rend la mer : un village de pêcheurs, un corps sous un drap.
   'premise-01': {
     wakeup:
-      `<ellipse class="glow pulse" cx="200" cy="112" rx="120" ry="52" ${warm(0.55)}/>` +
-      `<path d="M70 112 C120 70 280 70 330 112" ${line(0.5, 2)}/>` +
-      `<path d="M70 112 C120 148 280 148 330 112" ${line(0.35, 2)}/>` +
-      `<path d="M120 100 L112 90 M160 90 L156 78 M200 86 L200 72 M240 90 L244 78 M280 100 L288 90" ${line(0.3)}/>` +
-      `<circle class="fall" style="animation-duration:5s" cx="326" cy="40" r="2.4" ${ink(0.5)}/>`,
+      `<path class="drift" d="M0 80 C60 64 120 96 200 80 S340 64 400 80" ${line(0.3, 2)}/>` +
+      `<path class="drift" style="animation-delay:-3s" d="M0 112 C70 96 130 128 210 112 S340 96 400 112" ${line(0.4, 2)}/>` +
+      `<path class="drift" style="animation-delay:-6s" d="M0 144 C60 128 140 160 220 144 S350 128 400 144" ${line(0.5, 2)}/>` +
+      `<ellipse class="glow pulse" cx="200" cy="112" rx="70" ry="30" ${ink(0.12)}/>` +
+      `<circle class="fall" style="animation-duration:3s" cx="300" cy="40" r="3" ${ink(0.7)}/>`,
     orientation:
-      `<rect x="40" y="18" width="320" height="150" rx="3" ${line(0.6, 2)}/>` +
-      `<path d="M200 18 V168 M40 93 H360" ${line(0.5, 2)}/>` +
-      `<g>${snow(26, 7)}</g>${village()}` +
-      `<rect x="30" y="168" width="340" height="10" ${ink(0.7)}/>` +
-      `<rect x="88" y="152" width="22" height="16" ${ink(0.75)}/><rect x="94" y="140" width="10" height="12" ${line(0.7, 1.6)}/>` +
-      `<path d="M220 168 l4 -12 M232 168 l-2 -12 M244 168 l6 -10" ${line(0.7, 2)}/>` +
-      `<circle cx="262" cy="160" r="3.5" ${warm(0.7)}/>`,
+      `<rect x="0" y="0" width="400" height="220" ${ink(0.06)}/>` +
+      `<path d="M0 40 H400" ${line(0.7, 3)}/>` +
+      `<path d="M30 40 V110 M60 40 V96 M90 40 V120 M30 70 H90 M30 96 H90" ${line(0.4, 1.4)}/>` +
+      `<g><rect x="270" y="50" width="100" height="100" ${ink(0.1)}/><path d="M270 120 H370" ${line(0.5)}/><path d="M290 120 l14 -8 l14 8 M330 120 l14 -8 l14 8" ${ink(0.7)}/></g>` +
+      `<rect x="70" y="150" width="190" height="10" ${ink(0.85)}/><path d="M80 160 V210 M250 160 V210" ${line(0.8, 4)}/>` +
+      `<path d="M120 150 C124 126 170 126 176 150Z" ${ink(0.3)} stroke="currentColor" stroke-opacity=".7"/>` +
+      `<path d="M176 150 h18" ${line(0.7, 3)}/>`,
     dialogue:
-      `<rect x="0" y="0" width="400" height="220" ${ink(0.05)}/>` +
-      `<g>${snow(20, 3)}</g>` +
-      `<path d="M120 20 H280 V220 H120Z" ${ink(0.78)}/>` +
-      `<path class="glow flick" d="M206 24 H276 V220 H206Z" ${warm(0.5)}/>` +
-      `<path d="M206 24 H276 V220 H206Z" ${line(0.35)}/>` +
-      `<path d="M184 220 V128 C184 106 214 106 214 128 V220Z" ${ink(0.92)}/>` +
-      `<circle cx="199" cy="96" r="14" ${ink(0.92)}/>` +
-      `<path d="M60 220 L120 190 L160 220Z" ${ink(0.6)}/>`,
+      `<rect x="0" y="0" width="400" height="220" ${ink(0.06)}/>` +
+      `<path d="M120 20 H300 V220 H120Z" ${ink(0.8)}/>` +
+      `<path class="glow" d="M148 40 H280 V220 H148Z" ${ink(0.18)}/>` +
+      `<path d="M148 40 H280 V220 H148Z" ${line(0.3)}/>` +
+      `<path d="M0 156 L148 148 V220 H0Z" ${ink(0.4)}/>` +
+      `<path d="M200 220 V130 C200 110 236 110 236 130 V220Z" ${ink(0.95)}/><circle cx="222" cy="100" r="14" ${ink(0.95)}/>` +
+      `<path d="M120 20 H300" ${line(0.9, 6)}/>`,
     investigation:
-      `<rect x="30" y="170" width="340" height="12" ${ink(0.75)}/>` +
-      [60, 130, 200, 270]
-        .map(
-          (x, i) =>
-            `<rect x="${x}" y="${96 + (i % 2) * 6}" width="48" height="${74 - (i % 2) * 6}" rx="4" ${ink(0.62)}/>` +
-            `<rect x="${x + 14}" y="${86 + (i % 2) * 6}" width="20" height="12" ${ink(0.75)}/>` +
-            `<path d="M${x + 12} ${126 + (i % 2) * 6} l24 14 M${x + 36} ${126 + (i % 2) * 6} l-24 14" ${line(0.85, 3)} style="stroke:var(--blood)"/>`,
-        )
-        .join('') +
-      `<path d="M330 170 V110 L352 100 V170Z" ${ink(0.4)}/>`,
+      `<path d="M120 170 C110 120 150 86 200 86 C250 86 290 120 280 170Z" ${ink(0.78)}/>` +
+      `<path d="M158 112 C176 100 224 100 242 112" ${line(0.2, 2)} style="stroke:var(--parchment)"/>` +
+      `<path d="M158 170 q-10 20 -4 40 M190 172 q-4 26 4 44 M226 172 q8 20 0 40" ${line(0.7, 2.4)}/>` +
+      `<path d="M200 110 l14 10 M200 110 l-14 10" ${line(0.9, 2.4)} style="stroke:var(--blood)"/>` +
+      `<circle cx="320" cy="150" r="4" ${warm(0.8)}/>`,
     fracture:
-      `<ellipse class="glow" cx="200" cy="110" rx="90" ry="60" ${ink(0.1)}/>` +
-      `<path d="M150 170 V80 C150 66 160 60 172 60 H228 C240 60 250 66 250 80 V170Z" ${ink(0.8)}/>` +
-      `<rect x="182" y="46" width="36" height="16" rx="3" ${ink(0.9)}/>` +
-      `<path d="M158 150 H242" ${line(0.35)}/>` +
-      `<ellipse class="pulse" cx="200" cy="162" rx="30" ry="4" ${warm(0.65)}/>` +
-      `<path d="M100 170 H300" ${line(0.4, 2)}/>` +
-      `<circle class="fall" style="animation-duration:3.2s" cx="200" cy="120" r="2.4" ${warm(0.8)}/>`,
+      rocks() +
+      `<path d="M0 170 C60 160 120 176 200 166 S340 160 400 170 V220 H0Z" ${ink(0.3)}/>` +
+      `<path class="pulse" d="M0 176 C60 168 120 182 200 174 S340 168 400 176" ${line(0.6, 2)}/>` +
+      `<ellipse cx="200" cy="146" rx="22" ry="7" ${ink(0.98)}/><path d="M184 144 c8 -8 24 -8 32 0" fill="none" stroke="var(--parchment)" stroke-opacity=".8" stroke-width="2"/>` +
+      `<circle class="flick" cx="200" cy="140" r="3.4" ${warm(0.9)}/>`,
   },
 
-  // ─── Le fanal : un port en reconstruction, une grande lampe éteinte.
+  // ─── Le jour du pardon : une sacristie, une chasse d'argent, une foule sur la place.
   'premise-02': {
     wakeup:
-      `<circle class="pulse" cx="200" cy="110" r="22" ${line(0.6, 2)}/>` +
-      `<circle class="pulse" style="animation-delay:-.8s" cx="200" cy="110" r="52" ${line(0.4, 1.6)}/>` +
-      `<circle class="pulse" style="animation-delay:-1.6s" cx="200" cy="110" r="88" ${line(0.25, 1.4)}/>` +
-      `<circle class="pulse" style="animation-delay:-2.4s" cx="200" cy="110" r="130" ${line(0.15, 1.2)}/>` +
-      `<path d="M0 190 C60 180 90 200 150 190 S260 180 320 192 S380 184 400 190 V220 H0Z" ${ink(0.5)}/>`,
+      Array.from({ length: 11 }, (_, i) => {
+        const x = 40 + i * 32;
+        return `<rect x="${x}" y="150" width="4" height="26" ${ink(0.5)}/><ellipse class="flick" style="animation-delay:-${(i * 0.4).toFixed(1)}s" cx="${x + 2}" cy="${144 - (i % 3) * 4}" rx="4" ry="9" ${warm(0.8)}/>`;
+      }).join('') +
+      `<circle class="pulse" cx="200" cy="70" r="34" ${line(0.55, 2)}/><circle class="pulse" style="animation-delay:-1.4s" cx="200" cy="70" r="64" ${line(0.3, 1.6)}/>` +
+      `<ellipse class="glow" cx="200" cy="150" rx="170" ry="30" ${warm(0.2)}/>`,
     orientation:
-      `<path d="M0 150 H400 V220 H0Z" ${ink(0.4)}/>` +
-      `<path d="M0 150 C80 144 120 154 200 148 S320 144 400 150" ${line(0.4)}/>` +
-      `<path d="M30 150 V70 L60 56 V150 M70 150 V90 H110 V150" ${line(0.7, 2)}/>` +
-      `<path d="M30 70 H120 M120 70 L150 58 M150 58 V82" ${line(0.7, 2)}/>` +
-      `<path d="M300 150 L330 120 H380 L398 150Z" ${ink(0.78)}/><path d="M340 120 V86 M340 90 L372 120" ${line(0.7, 2)}/>` +
-      `<g><path d="M150 12 L250 12 L240 44 L160 44Z" ${ink(0.78)}/><rect x="178" y="44" width="44" height="88" rx="4" ${ink(0.12)} stroke="currentColor" stroke-opacity=".7" stroke-width="2"/>` +
-      `${[56, 72, 88, 104, 120].map((y) => `<path d="M178 ${y} H222" ${line(0.55)}/>`).join('')}</g>` +
-      `<rect x="160" y="132" width="80" height="10" ${ink(0.85)}/>`,
-    dialogue:
-      `<path d="M120 220 V20 M280 220 V20" ${line(0.35, 2)}/>` +
+      `<path d="M0 220 V90 C0 20 80 0 200 0 S400 20 400 90 V220Z" ${ink(0.72)}/>` +
+      `<path d="M150 50 V140 H250 V50 C250 22 150 22 150 50Z" ${ink(0.12)} stroke="currentColor" stroke-opacity=".6" stroke-width="2"/>` +
+      `<path d="M170 140 V80 l12 -18 l12 18 V140 M206 140 V76 l12 -22 l12 22 V140" ${ink(0.78)}/>` +
       Array.from(
         { length: 9 },
         (_, i) =>
-          `<path d="M${120 + i * 4} ${210 - i * 22} H${280 - i * 4}" ${line(0.35 + i * 0.04, 3)}/>`,
+          `<circle cx="${156 + i * 11}" cy="${126 + (i % 3) * 4}" r="3" ${ink(0.5)}/>`,
       ).join('') +
-      `<path d="M0 220 V0 H120 V220Z" ${ink(0.75)}/><path d="M280 220 V0 H400 V220Z" ${ink(0.75)}/>` +
-      `<path class="glow flick" d="M150 4 H250 V40 H150Z" ${warm(0.4)}/>` +
-      `<path d="M190 200 V150 C190 134 214 134 214 150 V200Z" ${ink(0.95)}/><circle cx="202" cy="124" r="11" ${ink(0.95)}/>` +
-      `<path d="M193 134 C200 128 210 128 214 134 L224 120 C214 112 190 112 186 128Z" ${ink(0.95)}/>`,
+      `<rect x="70" y="160" width="260" height="10" ${ink(0.9)}/>` +
+      `<g class="flick"><rect x="140" y="132" width="120" height="28" rx="3" ${ink(0.2)} stroke="currentColor" stroke-opacity=".9" stroke-width="2"/><path d="M140 132 L200 112 L260 132" ${line(0.9, 2)}/></g>` +
+      `<circle cx="200" cy="146" r="3" ${warm(0.9)}/>`,
+    dialogue:
+      `<rect x="0" y="0" width="400" height="220" ${ink(0.06)}/>` +
+      `<path d="M120 20 H280 V220 H120Z" ${ink(0.82)}/>` +
+      `<path class="glow flick" d="M176 28 H270 V220 H176Z" ${ink(0.3)}/>` +
+      `<path d="M120 20 L176 28 V220 H120Z" ${ink(0.95)}/>` +
+      `<path d="M210 220 V138 C210 118 250 118 250 138 V220Z" ${ink(0.95)}/><circle cx="230" cy="108" r="14" ${ink(0.95)}/>` +
+      `<path d="M0 220 V120 L40 100 L80 120 V220Z" ${ink(0.5)}/>` +
+      `<circle class="pulse" cx="330" cy="60" r="12" ${line(0.4, 2)}/>`,
     investigation:
-      `<rect x="40" y="150" width="320" height="14" ${ink(0.75)}/>` +
-      `<path d="M110 148 L200 132 L290 148 L290 100 L200 84 L110 100Z" ${ink(0.12)} stroke="currentColor" stroke-opacity=".7" stroke-width="2"/>` +
-      `<path d="M200 84 V132" ${line(0.6, 2)}/>` +
-      Array.from(
-        { length: 4 },
-        (_, i) =>
-          `<path d="M${124 + i * 0} ${108 + i * 8} H186 M214 ${108 + i * 8} H276" ${line(0.4)}/>`,
-      ).join('') +
-      `<path d="M214 118 H276" ${line(0.95, 4)} style="stroke:var(--bg, var(--parchment))"/><path d="M216 118 H274" ${line(0.7, 1.4)} style="stroke:var(--blood)"/>` +
-      `<rect x="310" y="132" width="22" height="16" rx="2" ${ink(0.8)}/><path d="M316 132 l3 -8 M324 132 l4 -6" ${line(0.7, 2)}/>`,
+      `<rect x="60" y="150" width="280" height="10" ${ink(0.88)}/>` +
+      `<g><rect x="132" y="108" width="136" height="42" rx="3" ${ink(0.22)} stroke="currentColor" stroke-opacity=".9" stroke-width="2"/><path d="M132 108 L200 84 L268 108" ${line(0.9, 2)}/>` +
+      `<rect x="192" y="124" width="16" height="14" rx="2" ${ink(0.9)}/><circle class="flick" cx="200" cy="130" r="2.4" ${warm(1)}/></g>` +
+      `<path d="M168 148 l-6 -10 l-12 8 M232 148 l8 -8 l10 10" ${line(0.9, 3)} style="stroke:var(--blood)"/>` +
+      [92, 108, 124]
+        .map((x) => `<rect x="${x - 60}" y="132" width="6" height="18" ${ink(0.6)}/>`)
+        .join('') +
+      `<path d="M300 150 v-34 M296 120 q4 -12 8 0" ${line(0.7, 2)}/>`,
     fracture:
-      `<ellipse class="glow sweep" cx="200" cy="80" rx="150" ry="34" ${ink(0.14)}/>` +
-      `<path d="M0 136 H400 V220 H0Z" ${ink(0.55)}/>` +
-      `<path d="M0 136 C60 128 90 142 150 134 S260 128 320 138 S380 130 400 136" ${line(0.5)}/>` +
-      `<path d="M276 134 C300 112 340 112 370 134Z" ${ink(0.9)}/><path d="M322 112 V62 M322 66 L354 106" ${line(0.8, 2)}/>` +
-      `<path d="M60 136 V96 H88 V136" ${line(0.7, 2)}/><circle class="flick" cx="74" cy="88" r="5" ${warm(0.8)}/>` +
-      `<path d="M0 174 C70 166 120 180 200 172 S330 166 400 174" ${line(0.3)}/>`,
+      `<ellipse class="glow pulse" cx="200" cy="96" rx="90" ry="60" ${warm(0.3)}/>` +
+      `<rect x="130" y="120" width="140" height="42" rx="3" ${ink(0.85)}/>` +
+      `<path d="M130 120 L90 90 L230 76 L270 120Z" ${ink(0.5)}/>` +
+      `<rect x="168" y="124" width="64" height="34" ${ink(0.06)}/>` +
+      `<rect class="sweep" x="188" y="132" width="26" height="18" ${warm(0.7)}/>` +
+      `<path d="M60 170 H340" ${line(0.5, 2)}/>`,
   },
 
-  // ─── Le compartiment sept : un train arrêté dans la plaine, une nuit d'été.
+  // ─── Une histoire qui te ressemble : une clairière, un feu, une fontaine noire.
   'premise-03': {
     wakeup:
-      `<path class="drift" d="M0 120 C60 100 100 140 160 118 S300 100 400 124" ${line(0.2, 14)} style="filter:blur(10px)"/>` +
-      `<circle class="glow pulse" cx="200" cy="100" r="46" ${warm(0.38)}/>` +
-      `<circle cx="200" cy="100" r="42" ${line(0.7, 2.4)}/><circle cx="200" cy="100" r="5" ${ink(0.8)}/>` +
-      `<path d="M200 100 V70" ${line(0.9, 2.4)}/>` +
-      `<path d="M30 190 H370" ${line(0.4, 2)}/>` +
+      `<ellipse class="glow pulse" cx="200" cy="150" rx="140" ry="50" ${warm(0.5)}/>` +
+      `<path d="M170 176 C176 130 196 112 200 90 C206 116 228 132 232 176Z" ${warm(0.75)} class="flick"/>` +
       Array.from(
-        { length: 14 },
+        { length: 12 },
         (_, i) =>
-          `<circle class="flick" style="animation-delay:-${(i * 0.37).toFixed(2)}s" cx="${24 + i * 26}" cy="${200 + (i % 3) * 4}" r="1.6" ${ink(0.5)}/>`,
-      ).join(''),
+          `<circle class="fall" style="animation-delay:-${(i * 0.7).toFixed(1)}s;animation-duration:${3 + (i % 4)}s" cx="${160 + i * 7}" cy="${70 + (i % 5) * 8}" r="1.5" ${warm(0.9)}/>`,
+      ).join('') +
+      trunk(10, 34, 0.7) +
+      trunk(356, 34, 0.7),
     orientation:
-      `<path d="M0 220 L130 160 V50 L0 0Z" ${ink(0.72)}/><path d="M400 220 L270 160 V50 L400 0Z" ${ink(0.72)}/>` +
-      `<path d="M130 50 H270 V160 H130Z" ${ink(0.28)}/>` +
-      `<path d="M0 220 L130 160 H270 L400 220Z" ${ink(0.5)}/>` +
-      `<path d="M150 60 H250 V150 H150Z" ${line(0.35)}/>` +
-      `<path d="M130 76 L96 96 V146 L130 150Z" ${line(0.4)}/><path d="M270 76 L304 96 V146 L270 150Z" ${line(0.4)}/>` +
-      `<g class="flick"><path d="M200 0 V28" ${line(0.7, 1.6)}/><path d="M188 28 H212 L208 42 H192Z" ${warm(0.85)}/></g>` +
-      `<ellipse class="glow" cx="200" cy="52" rx="110" ry="60" ${warm(0.2)}/>`,
+      trunk(20, 40) +
+      trunk(92, 24, 0.6) +
+      trunk(300, 30, 0.6) +
+      trunk(350, 44) +
+      `<ellipse class="glow flick" cx="200" cy="164" rx="80" ry="26" ${warm(0.45)}/>` +
+      `<path d="M184 180 C188 150 198 142 200 126 C204 148 214 154 218 180Z" ${warm(0.85)}/>` +
+      faces(9, 200, 164, 90) +
+      `<path d="M70 190 H130" ${line(0.4, 3)}/><ellipse cx="100" cy="186" rx="26" ry="8" ${ink(0.9)}/><ellipse cx="100" cy="184" rx="18" ry="4" ${ink(0.08)}/>`,
     dialogue:
-      `<path d="M0 220 V0 H110 V220Z" ${ink(0.72)}/><path d="M290 220 V0 H400 V220Z" ${ink(0.72)}/>` +
-      `<path d="M110 40 H290 V220 H110Z" ${ink(0.35)}/>` +
-      `<path d="M138 60 H252 V220 H138Z" ${ink(0.78)} />` +
-      `<text x="195" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="var(--blood)" fill-opacity=".9">7</text>` +
-      `<circle cx="226" cy="150" r="3" ${ink(0.95)} style="fill:var(--parchment)"/>` +
-      `<path class="glow flick" d="M138 214 H252 V220 H138Z" ${warm(0.9)}/>` +
-      `<path d="M300 220 V150 C300 130 332 130 332 150 V220Z" ${ink(0.95)}/><circle cx="316" cy="116" r="13" ${ink(0.95)}/>`,
+      trunk(0, 30, 0.7) +
+      trunk(370, 30, 0.7) +
+      `<ellipse class="glow flick" cx="200" cy="170" rx="120" ry="36" ${warm(0.4)}/>` +
+      `<path d="M104 220 V150 C104 124 160 124 160 150 V220Z" ${ink(0.95)}/><circle cx="132" cy="112" r="16" ${ink(0.95)}/>` +
+      `<path d="M176 220 V152 C176 128 230 128 230 152 V220Z" ${ink(0.95)}/><circle cx="203" cy="116" r="16" ${ink(0.95)}/>` +
+      `<path d="M148 112 q8 4 14 0" ${line(0.9, 2)} style="stroke:var(--parchment)"/>` +
+      `<path d="M300 220 V160 C300 140 340 140 340 160 V220Z" ${ink(0.55)}/><path d="M290 110 H350 L344 130 H296Z" ${ink(0.55)}/>`,
     investigation:
-      `<g transform="rotate(-6 200 110)"><rect x="110" y="64" width="180" height="92" rx="4" ${ink(0.1)} stroke="currentColor" stroke-opacity=".75" stroke-width="2"/>` +
-      `<path d="M126 88 H214 M126 104 H190 M126 120 H206" ${line(0.45, 1.6)}/>` +
-      `<circle cx="248" cy="90" r="9" ${line(0.9, 2.4)} style="stroke:var(--blood)"/><circle cx="266" cy="108" r="9" ${line(0.9, 2.4)} style="stroke:var(--blood)"/>` +
-      `<path d="M244 118 H290" ${line(0.35, 1.4)}/></g>` +
-      `<path d="M40 190 H360" ${line(0.4, 2)}/><circle class="flick" cx="330" cy="40" r="3" ${warm(0.8)}/>`,
+      `<rect x="40" y="160" width="320" height="14" ${ink(0.8)}/>` +
+      `<g transform="rotate(-4 200 120)"><path d="M120 150 L200 134 L280 150 V92 L200 76 L120 92Z" ${ink(0.1)} stroke="currentColor" stroke-opacity=".8" stroke-width="2"/><path d="M200 76 V134" ${line(0.6, 2)}/>` +
+      `${[102, 114, 126].map((y) => `<path d="M132 ${y} H190 M210 ${y} H268" ${line(0.4)}/>`).join('')}</g>` +
+      `<path d="M300 154 C316 130 340 140 336 156 C326 160 308 160 300 154Z" ${warm(0.8)}/>` +
+      `<ellipse class="glow flick" cx="200" cy="60" rx="140" ry="40" ${warm(0.18)}/>`,
     fracture:
-      `<rect x="0" y="0" width="400" height="220" ${ink(0.05)}/>` +
-      `<path d="M0 150 H400 V220 H0Z" ${ink(0.62)}/><path d="M0 150 C80 142 150 154 220 148 S340 144 400 150" ${line(0.4)}/>` +
-      `<circle class="glow sweep" cx="300" cy="140" r="26" ${warm(0.65)}/><circle class="sweep" cx="300" cy="140" r="5" ${warm(0.95)}/>` +
-      `<g><rect x="40" y="96" width="170" height="46" rx="3" ${ink(0.82)}/>${[56, 90, 124, 158].map((x) => `<rect x="${x}" y="106" width="22" height="14" ${ink(0.2)}/>`).join('')}<path d="M70 142 v8 M180 142 v8" ${line(0.8, 3)}/></g>` +
-      `<path class="glow flick" d="M122 124 H144 V142 H122Z" ${warm(0.85)}/>` +
-      Array.from(
-        { length: 10 },
-        (_, i) =>
-          `<circle class="flick" style="animation-delay:-${(i * 0.5).toFixed(1)}s" cx="${230 + i * 17}" cy="${178 + (i % 3) * 6}" r="1.5" ${ink(0.5)}/>`,
-      ).join(''),
+      trunk(0, 40, 0.7) +
+      trunk(360, 40, 0.7) +
+      trunk(120, 18, 0.45) +
+      trunk(270, 18, 0.45) +
+      `<ellipse cx="200" cy="150" rx="80" ry="24" ${ink(0.9)}/><ellipse cx="200" cy="146" rx="62" ry="16" ${ink(0.95)}/>` +
+      `<path d="M140 146 H260" ${line(0.2)} style="stroke:var(--parchment)"/>` +
+      `<circle class="flick" cx="330" cy="130" r="5" ${warm(0.95)}/><circle class="glow flick" cx="330" cy="130" r="14" ${warm(0.55)}/>`,
   },
 };
 
@@ -207,7 +199,7 @@ export function moodSvg(mood: Mood): string {
 }
 
 export const SCENE_LABELS: Record<SceneKind, string> = {
-  wakeup: 'Une lueur derrière les paupières.',
+  wakeup: 'Les yeux encore fermés.',
   orientation: 'Le lieu où tu te réveilles.',
   dialogue: 'Quelqu’un se tient dans l’encadrement.',
   investigation: 'Un détail qui n’est pas à sa place.',
