@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.5.1] - 2026-10-19
+
+### Corrigé
+
+- La publication automatique décrite dans le README n'était pas présente sur `main` : la fusion d'une nouvelle version ne déployait rien. Elle y est maintenant : fusionner une PR qui change la version de `package.json` déploie, vérifie le site, puis pose le tag `vX.Y.Z` (après le succès, jamais avant). La voie manuelle `npm run release` reste possible.
+
 ## [0.5.0] - 2026-10-19
 
 ### Modifié
@@ -29,10 +35,6 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 - Chaque scénario compte environ 1 500 mots : un saut dure 8 à 12 minutes.
 
 ## [0.1.1] - 2026-10-18
-
-### Modifié
-
-- Publication automatique : fusionner dans `main` une PR qui change la version de `package.json` déploie, vérifie le site, puis pose le tag `vX.Y.Z` (après le succès, jamais avant). La voie manuelle `npm run release` reste possible.
 
 ### Corrigé
 
