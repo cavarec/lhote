@@ -5,6 +5,10 @@ name = "lhote-api"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
+# « dev » en local ; le déploiement par tag le remplace (--var APP_VERSION:vX.Y.Z).
+[vars]
+APP_VERSION = "dev"
+
 # --- Durable Object : chronologie par joueur (stockage SQLite) -----------------
 [[durable_objects.bindings]]
 name = "CHRONOLOGY"
@@ -17,13 +21,13 @@ tag = "v1"
 new_sqlite_classes = ["Chronology"]
 
 # --- KV : traces anonymisées d'autres joueurs ------------------------------------
-# À créer une fois, puis à coller ci-dessous :
+# Créés dans le compte Cloudflare (lhote-api-TRACES et lhote-api-TRACES_preview). Pour les recréer :
 #   npx wrangler kv namespace create TRACES
 #   npx wrangler kv namespace create TRACES --preview
 # scripts/check-tag.sh refuse tout déploiement tant que REMPLACER_ est présent.
 [[kv_namespaces]]
 binding = "TRACES"
-id = "REMPLACER_PAR_ID_KV"
-preview_id = "REMPLACER_PAR_ID_KV_PREVIEW"
+id = "638fd45948ab41fca6ae3fc6749eeb19"
+preview_id = "a26578c02de04a8fb1449a4e53b23c00"
 
 # Pas de D1, R2, Queues ni Workers AI : volontairement absents.

@@ -50,7 +50,7 @@ Le build tourne sur GitHub Actions et `wrangler pages deploy` envoie `dist/` à 
    Tant qu'un `REMPLACER_` reste dans un `wrangler.toml`, `check-tag.sh` refuse le déploiement.
 3. **Token API Cloudflare** : modèle « Edit Cloudflare Workers », plus la permission _Cloudflare Pages : Edit_ (compte).
 4. **Secrets GitHub** (_Settings → Secrets and variables → Actions_) : `CLOUDFLARE_API_TOKEN` et `CLOUDFLARE_ACCOUNT_ID`.
-5. **Règles GitHub** (_Settings → Rules → Rulesets_) :
+5. **Règles GitHub** : `bash scripts/protect-repo.sh --dry-run` puis `bash scripts/protect-repo.sh` les posent pour toi (administrateur du dépôt, `gh` connecté). À la main, c'est _Settings → Rules → Rulesets_ :
    - `main` : PR obligatoire, checks `check` et `e2e` obligatoires.
    - Tags `v*` : création réservée à toi.
 
@@ -105,4 +105,4 @@ Pages ne contient ni Durable Object ni KV. Le binding de Pages pointe sur le Wor
 
 ## État d'avancement
 
-Étape 1 (fondations) en place : config, squelettes front et Worker, CI, déploiement par tag, scripts. Le moteur (étape 2), le Worker complet (étape 3), le contenu (étape 4), l'UI (étape 5) et la PWA (étape 6) restent à faire.
+Étapes 1 (fondations), 2 (moteur déterministe), 3 (Worker et Durable Object, voir `worker/README.md`) et 4 (contenu MVP : 3 prémisses, 8 personnages, 6 fractures, 6 objets, 10 fragments) en place. Le rate limiting ne protège pas contre la création massive de `playerId` (limite connue, v1). Étape 5 (UI) en place : design system, client d'API, IndexedDB, logique de jeu, écrans, accessibilité et tests e2e. Étape 6 (PWA hors connexion) en place. Étape 7 : vérification automatique du site en ligne après chaque déploiement, en-têtes de cache et recette sur appareils (`docs/RECETTE-APPAREILS.md`) ; la première mise en ligne attend la mise en place unique ci-dessus.

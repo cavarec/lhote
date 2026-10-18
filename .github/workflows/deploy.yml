@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -54,7 +54,30 @@ jobs:
 
       # Le binding de Pages pointe sur lhote-api : le Worker passe donc en premier.
       - name: Déployer le Worker (API + Durable Object)
-        run: npx wrangler deploy --config worker/wrangler.toml
+        run: npx wrangler deploy --config worker/wrangler.toml --var APP_VERSION:${GITHUB_REF_NAME#v}
 
       - name: Déployer Pages
         run: npx wrangler pages deploy dist --project-name=lhote --branch=main
+
+      # Le déploiement n'est « réussi » que si le site répond avec la version du tag, que le
+      # Worker et son Durable Object répondent, et que l'app shell est servi.
+      - name: Vérifier le site en ligne
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://lhote.pages.dev' }}
+        run: |
+          expected="${GITHUB_REF_NAME#v}"
+          for attempt in $(seq 1 12); do
+            version="$(curl -fsS "$SITE_URL/api/health" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{console.log(JSON.parse(s).version)}catch{console.log('')}})" || true)"
+            if [ "$version" = "$expected" ]; then break; fi
+            echo "Tentative $attempt : version en ligne '$version', attendue '$expected'."
+            sleep 10
+          done
+          [ "$version" = "$expected" ] || { echo "La version en ligne ne correspond pas." >&2; exit 1; }
+          curl -fsS "$SITE_URL/" | grep -q "L'Hôte"
+          curl -fsS -o /dev/null "$SITE_URL/manifest.webmanifest"
+          curl -fsS -o /dev/null "$SITE_URL/sw.js"
+          # Un vrai saut traverse Pages, le Worker, le Durable Object et le KV.
+          player="$(node -e "console.log(require('crypto').randomUUID())")"
+          curl -fsS -X POST -H "X-Player-Id: $player" "$SITE_URL/api/leap" | grep -q '"leap"'
+          # Nettoyage : le joueur de test ne doit pas subsister (RGPD).
+          curl -fsS -X DELETE -H "X-Player-Id: $player" "$SITE_URL/api/state" > /dev/null
