@@ -72,7 +72,8 @@ test.describe('accessibilité (WCAG AA)', () => {
     const page = await context.newPage();
     await page.goto('/');
     await page.getByRole('button', { name: 'Sauter' }).click();
-    await page.locator('.narration').first().click();
+    await page.locator('.scene-title').waitFor();
+    await page.locator('.narration.fade-in').first().click();
     await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toBeVisible({
       timeout: 2000,
     });

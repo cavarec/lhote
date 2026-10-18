@@ -22,6 +22,7 @@ test.describe('parcours complet', () => {
     await startLeap(page);
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
     await page.getByRole('button', { name: 'Continuer' }).click();
+    await expect(page.locator('.choice').first()).toBeVisible();
     await page.reload();
     await page.getByRole('button', { name: 'Reprendre le saut' }).click();
     // On est revenu au dialogue, pas au réveil.
