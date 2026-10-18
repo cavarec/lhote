@@ -19,6 +19,7 @@ export default defineConfig({
       'src/**/*.test.ts',
       'content/**/*.test.ts',
       'tests/content/**/*.test.ts',
+      'tests/design/**/*.test.ts',
       'worker/tests/**/*.test.ts',
     ],
     coverage: {

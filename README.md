@@ -105,4 +105,4 @@ Pages ne contient ni Durable Object ni KV. Le binding de Pages pointe sur le Wor
 
 ## État d'avancement
 
-Étapes 1 (fondations), 2 (moteur déterministe), 3 (Worker et Durable Object, voir `worker/README.md`) et 4 (contenu MVP : 3 prémisses, 8 personnages, 6 fractures, 6 objets, 10 fragments) en place. Le rate limiting ne protège pas contre la création massive de `playerId` (limite connue, v1). L'UI (étape 5) et la PWA (étape 6) restent à faire.
+Étapes 1 (fondations), 2 (moteur déterministe), 3 (Worker et Durable Object, voir `worker/README.md`) et 4 (contenu MVP : 3 prémisses, 8 personnages, 6 fractures, 6 objets, 10 fragments) en place. Le rate limiting ne protège pas contre la création massive de `playerId` (limite connue, v1). L'étape 5 (UI) est en cours : les fondations (5a : design system, client d'API, IndexedDB, logique de jeu, magasin) sont en place ; restent les écrans (5b) et l'accessibilité avec les tests e2e (5c). La PWA (étape 6) reste à faire.
