@@ -73,6 +73,8 @@ export interface ApiClientOptions {
   now?: () => number;
   timeoutMs?: number;
   retryDelaysMs?: readonly number[];
+  /** Le navigateur se sait hors ligne : inutile d'insister (par défaut `navigator.onLine`). */
+  isOnline?: () => boolean;
 }
 
 export class ApiClient {
@@ -84,6 +86,7 @@ export class ApiClient {
   private readonly now: () => number;
   private readonly timeoutMs: number;
   private readonly retryDelays: readonly number[];
+  private readonly isOnline: () => boolean;
 
   private failures = 0;
   private openUntil = 0;
@@ -97,6 +100,9 @@ export class ApiClient {
     this.now = options.now ?? Date.now;
     this.timeoutMs = options.timeoutMs ?? TIMEOUT_MS;
     this.retryDelays = options.retryDelaysMs ?? RETRY_DELAYS_MS;
+    this.isOnline =
+      options.isOnline ??
+      (() => typeof navigator === 'undefined' || navigator.onLine !== false);
   }
 
   /** Vrai tant que le disjoncteur refuse d'envoyer des requêtes. */
@@ -149,6 +155,8 @@ export class ApiClient {
         lastError = failure;
         const delay = this.retryDelays[attempt];
         if (!failure.retryable || delay === undefined) break;
+        // Hors ligne, les reprises à 1, 3 et 9 s ne servent à rien : on bascule tout de suite.
+        if (failure.kind === 'network' && !this.isOnline()) break;
         await this.sleepFn(
           failure.retryAfter !== null ? Math.min(failure.retryAfter, 30) * 1000 : delay,
         );

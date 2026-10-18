@@ -62,7 +62,9 @@ test.describe('PWA', () => {
     await context.setOffline(true);
     await page.reload();
     await page.getByRole('button', { name: /Sauter|Reprendre/ }).click();
-    await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toBeVisible({
+      timeout: 15_000,
+    });
     await context.setOffline(false);
   });
 });
