@@ -261,7 +261,7 @@ export class GameController {
     return !pending.some((p) => p.request.leapId === leapId);
   }
 
-  private async loadCatalog(): Promise<Catalog> {
+  async loadCatalog(): Promise<Catalog> {
     this.catalog ??= await this.deps.loadCatalog();
     return this.catalog;
   }

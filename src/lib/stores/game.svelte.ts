@@ -28,6 +28,11 @@ class GameStore {
   settings = $state<Settings | null>(null);
   session = $state<Session | null>(null);
   outcome = $state<ResolveOutcome | null>(null);
+  /** Le saut qui vient de se terminer, pour l'écran de fin. */
+  finished = $state<Session | null>(null);
+  hasProgress = $state(false);
+  /** L'épilogue se débloque quand tous les fragments sont retrouvés [À VALIDER]. */
+  epilogueReady = $state(false);
   problem = $state<GameProblem | null>(null);
   degraded = $state(false);
   firstVisit = $state(false);
@@ -53,7 +58,22 @@ class GameStore {
     this.firstVisit = firstVisit;
     this.settings = this.controller.settings;
     this.pending = await this.controller.pendingCount();
+    this.hasProgress = await this.controller.hasLeapInProgress();
     this.phase = 'ready';
+    void this.checkEpilogue();
+  }
+
+  private async checkEpilogue(): Promise<void> {
+    try {
+      const [catalog, known] = await Promise.all([
+        this.game.loadCatalog(),
+        this.game.refreshState(),
+      ]);
+      const found = known?.state.chronology.metaProgress.fragmentsDiscovered.length ?? 0;
+      this.epilogueReady = found >= catalog.fragments.length;
+    } catch {
+      // Sans état connu, l'épilogue reste verrouillé.
+    }
   }
 
   async start(): Promise<void> {
@@ -82,9 +102,40 @@ class GameStore {
     await this.run(async (c) => {
       this.outcome = await c.resolve(session, resolutionId);
       this.pending = await c.pendingCount();
+      const known = await c.refreshState().catch(() => null);
+      const total = session.catalog.fragments.length;
+      this.epilogueReady =
+        (known?.state.chronology.metaProgress.fragmentsDiscovered.length ?? 0) >= total;
+      this.finished = session;
       this.session = null;
+      this.hasProgress = false;
       this.phase = 'ended';
     }, 'playing');
+  }
+
+  /** Retour à l'accueil après un saut ou une erreur. */
+  home(): void {
+    this.outcome = null;
+    this.finished = null;
+    this.problem = null;
+    this.phase = this.session ? 'playing' : 'ready';
+  }
+
+  get problemMessage(): string {
+    switch (this.problem) {
+      case 'offline':
+        return 'Pas de connexion. Réessayez dans un instant.';
+      case 'no_leap_offline':
+        return 'Il faut une connexion pour recevoir un nouveau saut.';
+      case 'stale_leap':
+        return 'Ce saut n’est plus d’actualité. Relancez l’application.';
+      case 'invalid':
+        return 'Cette action n’a pas pu être validée.';
+      case 'rate_limited':
+        return 'Trop de demandes. Patientez quelques secondes.';
+      default:
+        return 'Quelque chose s’est mal passé. Réessayez.';
+    }
   }
 
   async syncPending(): Promise<void> {
@@ -95,6 +146,14 @@ class GameStore {
 
   async saveSettings(patch: Partial<Settings>): Promise<void> {
     if (this.controller) this.settings = await this.controller.updateSettings(patch);
+  }
+
+  /** Texte affiché d'un bloc : réglage du joueur ou préférence du système. */
+  get instant(): boolean {
+    const system =
+      typeof matchMedia === 'function' &&
+      matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return system || (this.settings?.reduceMotion ?? false);
   }
 
   get game(): GameController {
@@ -113,7 +172,7 @@ class GameStore {
       await action(this.controller);
     } catch (error) {
       this.problem = error instanceof GameError ? error.problem : 'server';
-      this.phase = fallback === 'playing' && this.session ? 'playing' : 'error';
+      this.phase = fallback === 'playing' && this.session ? 'playing' : 'ready';
     }
   }
 }
