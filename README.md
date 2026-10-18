@@ -6,29 +6,26 @@ Front Vite + Svelte 5 (TypeScript strict) sur Cloudflare Pages. API dans un Work
 
 ## Publier une version (l'essentiel)
 
-`main` est protégée : la version et le CHANGELOG passent par une PR. Un push sur `main` ne déploie jamais rien (il lance seulement la CI). **Seul un tag `vX.Y.Z` déploie**, et seul `npm run release` pousse ce tag.
+`main` est protégée : la version et le CHANGELOG passent par une PR. **Fusionner une PR qui change la version de `package.json` suffit** : le workflow `deploy.yml` déploie, vérifie le site en ligne, puis pose lui-même le tag `vX.Y.Z` si tout est bon. Une fusion qui ne change pas la version ne déploie rien.
 
 ```bash
-git switch -c release/0.1.0
+git switch -c release/0.2.0
 npm version minor --no-git-tag-version   # patch | minor | major
-# CHANGELOG.md : renommer « Non publié » en « [0.1.0] - AAAA-MM-JJ » (et garder un « Non publié » vide au-dessus)
-git commit -am "chore(release): v0.1.0"
-git push -u origin release/0.1.0         # ouvre la PR, attends la CI verte, merge
-
-git switch main && git pull
-npm run release -- --dry-run             # simule : vérifications, aucun effet
-npm run release                          # tag annoté + push de CE tag seul = UN déploiement
+# CHANGELOG.md : « ## [0.2.0] - AAAA-MM-JJ » (et garder un « Non publié » vide au-dessus)
+git commit -am "chore(release): v0.2.0"
+git push -u origin release/0.2.0         # ouvre la PR, attends la CI verte, fusionne : c'est tout
 ```
 
-Ne pousse jamais un tag à la main et n'utilise jamais `git push --tags` : il enverrait aussi d'anciens tags locaux.
+Voie manuelle, toujours possible : depuis `main` à jour, `npm run release` (ou `-- --dry-run` pour simuler) pose et pousse le tag, ce qui déclenche le même déploiement. Si le tag existe déjà, la fusion suivante ne redéploie pas. N'utilise jamais `git push --tags`.
 
 ## Ce qui déclenche quoi
 
 | Événement                                    | Workflow                               | Déploiement ?    |
 | -------------------------------------------- | -------------------------------------- | ---------------- |
 | Pull request                                 | `ci.yml` : lint, types, tests, e2e     | Non              |
-| Push sur `main`                              | `ci.yml` seulement                     | Non              |
-| Push d'un tag `vX.Y.Z`                       | `deploy.yml`                           | **Oui, un seul** |
+| Push sur `main`, version inchangée           | `ci.yml` ; `deploy.yml` s'arrête       | Non              |
+| Push sur `main`, nouvelle version            | `ci.yml` et `deploy.yml`               | **Oui, un seul** |
+| Push d'un tag `vX.Y.Z` à la main             | `deploy.yml`                           | **Oui, un seul** |
 | Push d'un tag mal formé (`v1`, `v1.0.0-rc1`) | `deploy.yml` s'arrête à `check-tag.sh` | Non              |
 
 `deploy.yml` enchaîne : `check-tag.sh` (format `vX.Y.Z`, `package.json` égal au tag, entrée CHANGELOG, aucun `REMPLACER_` dans les `wrangler.toml`) → commit taggé présent dans `main` → `npm ci` → lint → typecheck → tests → build → déploiement du Worker → déploiement de Pages. Un seul déploiement à la fois, jamais annulé en cours.
