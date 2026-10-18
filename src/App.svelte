@@ -26,6 +26,12 @@
     root.dataset['reduceMotion'] = String(game.settings?.reduceMotion ?? false);
   });
 
+  // L'écran de fin doit s'afficher même si le réseau tombe pendant le saut : on le charge dès
+  // que le saut commence.
+  $effect(() => {
+    if (game.phase === 'playing') void End();
+  });
+
   const back = () => (view = 'home');
 </script>
 

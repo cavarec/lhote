@@ -13,6 +13,11 @@ export default defineConfig({
     // Avec `npm run dev` actif, l'API répond sur le port 8788 (Pages -> Worker).
     proxy: { '/api': 'http://localhost:8788' },
   },
+  preview: {
+    port: 4173,
+    strictPort: true,
+    proxy: { '/api': 'http://localhost:8787' },
+  },
   test: {
     environment: 'node',
     include: [
