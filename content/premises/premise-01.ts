@@ -23,7 +23,10 @@ export const premise01: Premise = {
     'Tu ouvres la bouche. Ta langue est sèche. Tu cherches un mot et tu n’en trouves aucun. Pas même ton nom.',
     'Ta main droite glisse sur une étoffe rêche. Elle est large, calleuse. Tu ne la reconnais pas.',
     'Au-dessus de toi, une planche grince. Des pas. Quelqu’un s’arrête et ne dit rien.',
-    'Tu ouvres les yeux.',
+    'Une odeur de lait tourné flotte quelque part. Elle ne vient pas de la pièce. Elle vient de ce corps, de ses vêtements, de sa peau.',
+    'Tu essaies de te rappeler une chose. Une seule. Le visage d’un parent, un trajet, un jour de la semaine. Rien ne répond.',
+    'Tu avales. Ta gorge fait un bruit sec. Tu sais, sans savoir comment, que tu as déjà avalé ainsi bien des matins.',
+    'La planche, au-dessus, grince encore. Quelqu’un descend un escalier de bois, marche après marche, avec la lenteur de ceux qui portent un poids.',
   ].join('\n\n'),
 
   // Beat 2 : orientation. Trois natures d'indice au moins, avant tout contact.
@@ -48,6 +51,18 @@ export const premise01: Premise = {
       kind: 'social',
       text: 'Une feuille est clouée au mur. Des noms, des traits à l’encre. En haut, une ligne soulignée : « Gardien de la réserve ».',
     },
+    {
+      kind: 'material',
+      text: 'Sur le rebord de la fenêtre, une rangée de pots de verre vides. Chacun porte une étiquette de papier, un nom, une date effacée.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton souffle fait de la buée. Tu comptes tes respirations sans le vouloir : douze, puis douze encore. Ce corps compte tout.',
+    },
+    {
+      kind: 'social',
+      text: 'Un manteau de laine pend à un clou. Sur la manche, un morceau d’étoffe rouge recousu à la main. Quelqu’un a pris soin de ce vêtement.',
+    },
   ],
 
   // Beat 3 : premier contact. Le PNJ de l'emplacement « 0 » entre. Le choix risqué révèle trop tôt.
@@ -60,12 +75,24 @@ export const premise01: Premise = {
       },
       { speaker: 'npc', text: 'Tu es levé. Bien. Ils sont déjà tous devant la réserve.' },
       {
+        speaker: 'narration',
+        text: 'Elle secoue la neige de ses bottes sur le seuil. Ses gestes sont vifs, mais ses yeux sont cernés de gris.',
+      },
+      {
         speaker: 'npc',
-        text: 'C’est jour de partage. Les familles attendent depuis l’aube. Tu as la clé ?',
+        text: 'C’est jour de partage. Les familles attendent depuis l’aube. Les Morel sont venus à pied de la ferme du haut.',
+      },
+      {
+        speaker: 'npc',
+        text: 'J’ai dit à tout le monde que tu serais à l’heure. Tu l’es toujours. Alors, tu as la clé ?',
       },
       {
         speaker: 'narration',
-        text: 'La personne te regarde. Elle attend que tu parles.',
+        text: 'Elle tend la main, sans y penser, comme on le fait avec quelqu’un en qui on a confiance. Puis elle la laisse retomber.',
+      },
+      {
+        speaker: 'narration',
+        text: 'Dehors, une voix d’homme appelle un nom, et ce nom est peut-être le tien. Personne ne répond.',
       },
     ],
     choices: [
@@ -78,6 +105,14 @@ export const premise01: Premise = {
           {
             speaker: 'narration',
             text: 'La porte reste entrouverte derrière elle. Tu entends des voix, dehors, qui patientent.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Et prends le manteau rouge. On te reconnaît à ce manteau.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Elle sort. Un courant d’air froid passe sur ta nuque et fait vaciller la lampe éteinte, comme si elle respirait.',
           },
         ],
       },
@@ -94,6 +129,14 @@ export const premise01: Premise = {
             speaker: 'narration',
             text: 'Elle te dévisage une seconde de trop. Puis elle hausse les épaules.',
           },
+          {
+            speaker: 'npc',
+            text: 'Tu as la tête ailleurs, ce matin. Dors un peu, cette nuit. Si tu peux.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Elle dit cela avec douceur. Pourtant, ses doigts se sont crispés sur le montant de la porte.',
+          },
         ],
       },
       {
@@ -109,6 +152,14 @@ export const premise01: Premise = {
             speaker: 'narration',
             text: 'Sa voix a changé. Elle compte tes mots, un par un, comme on compte des pièces.',
           },
+          {
+            speaker: 'npc',
+            text: 'Regarde dans tes poches. Regarde sous le lit. Tu dois bien l’avoir quelque part.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Elle sourit, mais ce n’est pas un vrai sourire. Elle guette ta réponse comme on guette un pas sur la glace.',
+          },
         ],
       },
       {
@@ -121,6 +172,14 @@ export const premise01: Premise = {
             text: 'Le métal est glacé. Tes doigts se referment seuls sur la clé qui brille.',
           },
           { speaker: 'npc', text: 'Voilà. Je t’attends dehors.' },
+          {
+            speaker: 'narration',
+            text: 'Elle hésite sur le seuil, comme si elle voulait ajouter un mot. Elle ne l’ajoute pas. La porte se referme.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Le trousseau pèse dans ta paume. Six clés. Une seule est lisse, usée par des années de pouces.',
+          },
         ],
       },
     ],
@@ -155,6 +214,18 @@ export const premise01: Premise = {
       kind: 'bodily',
       text: 'Une femme tousse, tout près. Elle te regarde comme on regarde quelqu’un qui doit quelque chose.',
     },
+    {
+      kind: 'material',
+      text: 'Dans le fond de la réserve, des bidons alignés. Quatre portent une croix à la craie. Les croix sont fraîches, et ce n’est pas ta main qui les a tracées.',
+    },
+    {
+      kind: 'social',
+      text: 'Un vieil homme reste à l’écart, les mains dans les manches. Quand tu croises son regard, il hoche la tête une fois, comme pour dire qu’il sait.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes jambes tremblent au moment de franchir le seuil de la réserve. Ce corps a peur de cette porte, et il ne te dit pas pourquoi.',
+    },
   ],
 
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
@@ -172,6 +243,7 @@ export const premise01: Premise = {
         'Tu ouvres la réserve devant tous. Le bidon sonne creux, et personne ne parle.',
         'Puis une femme pose sa propre lampe sur la table. D’autres la suivent.',
         'Il restera peu d’huile cet hiver. Mais ce soir, plus personne ne compte dans le noir.',
+        'Le vieil homme s’approche et te serre le bras sans un mot. Sa main tremble, et la tienne aussi.',
       ].join('\n'),
       mutations: [
         {
@@ -203,6 +275,7 @@ export const premise01: Premise = {
         'Tu corriges le cahier. Tu distribues une mesure par famille.',
         'Personne ne conteste. L’enfant te regarde longtemps, puis il s’en va.',
         'La réserve tiendra trois jours de moins que prévu. Tu es seul à le savoir.',
+        'Le soir, tu allumes ta lampe. Sa flamme est trop haute pour l’huile qui reste. Tu la baisses, puis tu la souffles.',
       ].join('\n'),
       mutations: [
         {
@@ -226,6 +299,7 @@ export const premise01: Premise = {
         'Tu vides ta ration dans la jarre de l’enfant. Tu ne dis pas pourquoi.',
         'La personne qui t’a réveillé comprend, ou croit comprendre. Elle ne te regarde plus pareil.',
         'La réserve ne s’est pas remplie. Mais quelqu’un a mangé ce soir.',
+        'Cette nuit, ton ventre gronde sous le manteau rouge. Tu écoutes ce bruit comme on écoute une promesse.',
       ].join('\n'),
       mutations: [
         {
@@ -249,6 +323,7 @@ export const premise01: Premise = {
         'Tu prends le trousseau. Tu glisses dans ta poche ce que tu peux emporter.',
         'La neige efface tes pas derrière toi, un à un.',
         'Au matin, les familles attendront devant une porte close. Toi, tu seras déjà loin.',
+        'Derrière une crête, tu te retournes. Une seule cheminée fume au village. Tu ne sais pas si tu l’as laissée allumée.',
       ].join('\n'),
       mutations: [
         {
@@ -280,6 +355,7 @@ export const premise01: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Le silence dure.',
         'Quelqu’un rit, et ce rire n’est pas amical.',
         'On te prend le trousseau. Dans ton dos, la porte se ferme sur ce corps qui n’est pas le tien.',
+        'Quelqu’un te met une couverture sur les épaules. Ce geste est le plus doux de la journée, et le plus dur à supporter.',
       ].join('\n'),
       mutations: [],
     },
@@ -292,6 +368,7 @@ export const premise01: Premise = {
         'Tu marches jusqu’à ce que les arbres se ressemblent tous.',
         'Le froid entre dans tes os, sans bruit. Tes jambes cessent de t’appartenir.',
         'La dernière chose que tu entends est un chien, très loin, qui aboie une fois.',
+        'Puis la neige, qui tombe sur tes paupières, une à une, comme des doigts qui les ferment.',
       ].join('\n'),
       mutations: [
         {

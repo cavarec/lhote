@@ -19,6 +19,10 @@ export const premise02: Premise = {
     'Une cloche sonne au loin, deux fois. Dessous, l’eau frotte contre une coque, ou contre la pierre.',
     'Tu ne sais pas depuis quand tu dors ici. Tu ne sais pas depuis quand tu es ce corps.',
     'Quelqu’un siffle trois notes, en bas, et attend que tu répondes.',
+    'Une odeur de pain brûlé monte de l’escalier, très faible, et se perd. Quelqu’un a oublié un four, ou allumé un feu qu’il n’aurait pas dû.',
+    'Tu cherches ton nom. À la place, tu trouves un chiffre, trois fois répété, comme une consigne. Tu ne sais pas ce qu’il compte.',
+    'Tes genoux craquent quand tu les plies. Ce corps a passé des centaines de nuits ainsi, le dos au mur, à guetter quelque chose.',
+    'Le sifflement reprend, plus près. Trois notes, toujours les mêmes. Elles ont le ton d’un appel que l’on a déjà lancé plusieurs fois.',
     'Tu ouvres les yeux.',
   ].join('\n\n'),
 
@@ -44,6 +48,18 @@ export const premise02: Premise = {
       kind: 'social',
       text: 'Sur le pupitre, un registre ouvert. Chaque ligne porte un nom de navire, une heure, et ton paraphe. La dernière ligne est vide.',
     },
+    {
+      kind: 'material',
+      text: 'Près de la lampe, une boîte d’allumettes à moitié vide et un bidon de pétrole. Le bouchon du bidon est posé à côté, à l’envers.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes oreilles bourdonnent, comme après une cloche trop proche. Tu as entendu quelque chose de fort, cette nuit. Tu ne sais plus quoi.',
+    },
+    {
+      kind: 'social',
+      text: 'Au mur, un tableau des tours de veille. Ton nom y figure souvent, d’une écriture différente à chaque ligne. Hier soir, la case est barrée.',
+    },
   ],
 
   // Beat 3 : premier contact. L'emplacement « 1 » monte l'escalier.
@@ -59,8 +75,24 @@ export const premise02: Premise = {
         text: 'Le chef du quai veut le registre de la nuit. Tout de suite.',
       },
       {
+        speaker: 'narration',
+        text: 'Elle est jeune, mouillée jusqu’aux genoux. Elle tient son bonnet à deux mains, comme on tient une excuse.',
+      },
+      {
         speaker: 'npc',
         text: 'Il dit que la nuit a mal tourné. Il veut savoir ce que tu as vu. Tu étais de veille.',
+      },
+      {
+        speaker: 'npc',
+        text: 'J’ai sifflé trois fois en bas. Tu n’as pas répondu. J’ai cru que tu étais tombé. Ou pire.',
+      },
+      {
+        speaker: 'narration',
+        text: 'Elle jette un coup d’œil vers la grande lampe, puis vers toi, très vite, comme si elle avait vu ce qu’elle ne devait pas voir.',
+      },
+      {
+        speaker: 'npc',
+        text: 'Il est en bas, sur le quai. Il n’a pas crié. C’est ça qui m’inquiète. Il ne crie jamais quand c’est grave.',
       },
       {
         speaker: 'narration',
@@ -81,6 +113,14 @@ export const premise02: Premise = {
             speaker: 'narration',
             text: 'Elle énumère comme on récite une leçon apprise en chemin.',
           },
+          {
+            speaker: 'npc',
+            text: 'Il a dit aussi de ne pas te laisser seul. Mais je n’ai pas compris pourquoi.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Elle se mord la lèvre. Elle en a dit un peu trop, et elle le sait.',
+          },
         ],
       },
       {
@@ -93,6 +133,14 @@ export const premise02: Premise = {
             speaker: 'narration',
             text: 'Ses pas redescendent, deux marches à la fois. Le sifflement reprend, plus bas.',
           },
+          {
+            speaker: 'narration',
+            text: 'Tu restes seul avec la lampe. Elle te renvoie ton reflet en dix morceaux, tous un peu différents.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Le temps que tu as gagné est court. Tu le sens fondre, comme la cire d’une bougie sous ta paume.',
+          },
         ],
       },
       {
@@ -104,6 +152,14 @@ export const premise02: Premise = {
           {
             speaker: 'narration',
             text: 'Elle recule d’un pas. Dans ses yeux, quelque chose se referme, et ce n’est pas de la pitié.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Ne dis pas ça en bas. Ne le dis à personne. Promets-le-moi.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Sa voix tremble. Elle a peur pour toi, ou peur de toi. À cette heure, la différence est mince.',
           },
         ],
       },
@@ -143,6 +199,18 @@ export const premise02: Premise = {
       kind: 'bodily',
       text: 'Ta bouche garde un goût amer sous le sel. Tu as bu quelque chose que tu ne te rappelles pas.',
     },
+    {
+      kind: 'material',
+      text: 'Sur le rebord de la vitre, trois mégots écrasés, de trois marques différentes. Tu ne fumes pas. Ce corps ne fume pas non plus.',
+    },
+    {
+      kind: 'social',
+      text: 'Dans la poche du tablier, un papier plié en quatre. Un nom de navire, une heure, et un mot : « Tais-toi. » Ce n’est pas ton écriture.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes mains cherchent un geste d’elles-mêmes. Elles se posent sur la molette de la lampe et la font tourner d’un cran. Elles savaient.',
+    },
   ],
 
   // Beat 5 : la fracture.
@@ -160,6 +228,7 @@ export const premise02: Premise = {
         'Tu poses le registre devant le chef et tu dis ce que tu sais. Puis ce que tu ne sais pas.',
         'Il se tait longtemps. Il appelle deux hommes, et ils vont fouiller le quai.',
         'Le fanal brillera encore ce soir. Il y aura quelqu’un d’autre pour le garder avec toi.',
+        'Dans l’escalier, la jeune voix te tend ton bonnet oublié. Elle sourit un peu. Elle ne siffle plus.',
       ].join('\n'),
       mutations: [
         {
@@ -192,6 +261,7 @@ export const premise02: Premise = {
         'Tu grattes l’encre, puis tu écris : rien à signaler.',
         'Ta main est sûre. Cela t’inquiète plus que le reste.',
         'Le chef lit, hoche la tête et ne pose aucune question. C’est ce qui sonne faux.',
+        'Le soir, sur le registre, la page est propre. Tu la regardes longtemps. Elle a l’air de quelqu’un qui retient son souffle.',
       ].join('\n'),
       mutations: [
         {
@@ -215,6 +285,7 @@ export const premise02: Premise = {
         'Tu frottes l’allumette. La flamme prend, puis la grande lampe, anneau après anneau.',
         'La lumière balaie le port. Un instant, elle éclaire un visage au bout de la jetée.',
         'La personne qui t’a réveillé le voit aussi. Elle ne dira rien non plus.',
+        'Le visage lève la main, au ralenti, comme pour saluer. Puis la lumière passe, et la jetée est vide.',
       ].join('\n'),
       mutations: [
         {
@@ -237,6 +308,7 @@ export const premise02: Premise = {
         'Tu descends. L’homme au filet s’éloigne sans courir, comme quelqu’un qui connaît ton pas.',
         'Il te conduit jusqu’à un hangar. La porte est ouverte. À l’intérieur, une odeur de sel et d’huile.',
         'Tu entres. Derrière toi, quelqu’un tire le verrou.',
+        'Dans le noir, tu entends respirer. Ils sont plusieurs. L’un d’eux, très bas, prononce ton nom.',
       ].join('\n'),
       mutations: [
         {
@@ -268,6 +340,7 @@ export const premise02: Premise = {
         'Tu dis que tu ne te souviens de rien. Pas même de ton nom.',
         'Le chef te regarde comme on regarde un outil cassé.',
         'On te retire les clés du fanal. Quelqu’un d’autre montera ce soir.',
+        'Tu descends l’escalier pour la dernière fois. La jeune voix te regarde passer et ne siffle pas.',
       ].join('\n'),
       mutations: [],
     },
@@ -280,6 +353,7 @@ export const premise02: Premise = {
         'Tu plonges. L’eau est plus froide que le sel ne le laissait croire.',
         'Sous la surface, une forme claire, et une chaîne qui s’enroule à ta cheville.',
         'La dernière lumière que tu vois est celle du jour, vue d’en dessous.',
+        'Là-haut, le fanal reste éteint. Personne ne montera pour l’allumer avant l’aube.',
       ].join('\n'),
       mutations: [
         {

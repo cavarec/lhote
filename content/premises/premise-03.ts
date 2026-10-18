@@ -20,6 +20,10 @@ export const premise03: Premise = {
     'Tu respires par la bouche. Dans ta gorge, un goût de charbon et de menthe.',
     'Ta main plate tient un objet froid et rond contre ton ventre. Une montre. L’aiguille ne bouge pas.',
     'Une porte claque dans le couloir. Des voix, étouffées. Puis un nom. Tu ne sais pas si c’est le tien.',
+    'Une odeur de tabac froid traîne dans le couloir, mêlée à celle d’un parfum de fleur ancienne. Quelqu’un est passé ici il y a peu.',
+    'Tu essaies de dire ton nom à voix basse. Ta bouche forme une syllabe, puis une autre. Aucune ne te revient.',
+    'Le cuir de la ceinture frotte un point sensible, sur ta hanche. Ce corps porte cet uniforme depuis des années, et il en garde la forme.',
+    'Quelque part dans le train, un enfant pleure sans bruit, par à-coups. Une voix de femme lui répond, trop calme pour être sincère.',
     'Tu ouvres les yeux.',
   ].join('\n\n'),
 
@@ -45,6 +49,18 @@ export const premise03: Premise = {
       kind: 'social',
       text: 'À ta ceinture, un carnet de billets et un poinçon. Sur la couverture du carnet, une inscription : « Chef de train ».',
     },
+    {
+      kind: 'material',
+      text: 'Au bout du couloir, la porte du wagon suivant est entrouverte. Un rideau de velours la sépare d’un second couloir, plus sombre, plus silencieux.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ta nuque est moite et ta chemise colle au dos. Ce corps a couru, ou a eu peur, il y a peu de temps. Ton pouls ne redescend pas.',
+    },
+    {
+      kind: 'social',
+      text: 'Des têtes dépassent des portes, à demi tournées vers toi. Personne ne parle. Tous attendent que le chef décide quelque chose.',
+    },
   ],
 
   // Beat 3 : premier contact. L'emplacement « 0 » sort du compartiment sept.
@@ -60,8 +76,24 @@ export const premise03: Premise = {
         text: 'Chef ! Tu es là, enfin. Il y a un problème avec le sept.',
       },
       {
+        speaker: 'narration',
+        text: 'Elle est jeune, en robe d’été froissée. Sa main cherche un appui sur la paroi, puis le trouve sur ton bras.',
+      },
+      {
         speaker: 'npc',
-        text: 'Deux personnes disent que la place est à elles. Et maintenant, la porte ne s’ouvre plus.',
+        text: 'Deux personnes disent que la place est à elles. Chacune montre un billet. Les deux billets sont poinçonnés.',
+      },
+      {
+        speaker: 'npc',
+        text: 'Elles se sont disputées, puis plus rien. Une des deux est entrée, et on n’entend plus personne. Et maintenant, la porte ne s’ouvre plus.',
+      },
+      {
+        speaker: 'narration',
+        text: 'Dans le compartiment voisin, quelqu’un chuchote qu’il faut prévenir le chef. Elle baisse la voix pour que personne n’entende.',
+      },
+      {
+        speaker: 'npc',
+        text: 'Ça fait une heure que le train est arrêté. Personne ne sait pourquoi. Tu le sais, toi ?',
       },
       { speaker: 'narration', text: 'Elle te regarde. Tu es celui qui porte les clés.' },
     ],
@@ -76,6 +108,14 @@ export const premise03: Premise = {
             speaker: 'narration',
             text: 'Elle te tend un billet plié, tiède de sa main. Le poinçon est net.',
           },
+          {
+            speaker: 'npc',
+            text: 'C’est celui de la dame en gris. Elle jure qu’elle a payé le sept dès le départ.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Tu lis le billet. Une date, une gare de départ, un chiffre à l’encre. Le chiffre a été retouché.',
+          },
         ],
       },
       {
@@ -87,6 +127,14 @@ export const premise03: Premise = {
           {
             speaker: 'narration',
             text: 'Elle recule contre la vitre. Derrière elle, les champs ne bougent pas.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Dis-leur que ce n’est rien. Dis-leur que le train repart dans un instant.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Tu ne sais pas si c’est vrai. Elle non plus. Le silence s’installe entre elle et toi.',
           },
         ],
       },
@@ -100,6 +148,14 @@ export const premise03: Premise = {
             speaker: 'narration',
             text: 'Elle sourit pour te rassurer. Son sourire ne tient pas.',
           },
+          {
+            speaker: 'npc',
+            text: 'Le sept, chef. Le sept. Là, derrière moi. Tu m’as dit hier de ne laisser entrer personne.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Elle te regarde, et tu vois qu’elle hésite entre rire et pleurer. Elle a peur de ce que tu viens de dire.',
+          },
         ],
       },
       {
@@ -112,6 +168,14 @@ export const premise03: Premise = {
             text: 'Tu frappes deux fois, à plat. Rien ne répond. Quelqu’un, de l’autre côté, retient son souffle.',
           },
           { speaker: 'npc', text: 'Tu l’as entendu, toi aussi ?' },
+          {
+            speaker: 'narration',
+            text: 'Tu poses l’oreille contre le bois. Il est tiède. Derrière, un froissement de tissu, puis plus rien.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Ils sont deux là-dedans. Je les ai vus entrer. Un seul est ressorti.',
+          },
         ],
       },
     ],
@@ -146,6 +210,18 @@ export const premise03: Premise = {
       kind: 'bodily',
       text: 'Une goutte de sueur glisse dans ton dos. Tu n’as pas peur de la porte. Tu as peur de ce que tu feras derrière.',
     },
+    {
+      kind: 'material',
+      text: 'Dans le couloir, une valise ouverte, abandonnée. Un châle gris plié dessus. Une étiquette porte un numéro de place : un sept, barré puis réécrit.',
+    },
+    {
+      kind: 'social',
+      text: 'Le contrôleur du wagon voisin te fixe depuis un moment. Quand tu avances vers lui, il détourne les yeux et ouvre son carnet, comme pour s’occuper.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ta main droite cherche la poche haute de l’uniforme. Elle en sort une clé minuscule, que tu n’as jamais vue, mais que ta paume reconnaît.',
+    },
   ],
 
   // Beat 5 : la fracture.
@@ -163,6 +239,7 @@ export const premise03: Premise = {
         'Tu forces la serrure. La porte cède avec un bruit de bois sec.',
         'Personne ne crie. Les passagers regardent ce que tu regardes, et chacun comprend à son rythme.',
         'Le train repartira dans une heure. Cette fois, personne ne mentira sur la place sept.',
+        'La jeune femme en robe d’été s’assoit sur une marche du couloir. Elle laisse enfin tomber ses épaules.',
       ].join('\n'),
       mutations: [
         {
@@ -194,6 +271,7 @@ export const premise03: Premise = {
         'Tu donnes le signal. Le train frissonne et repart.',
         'Le sept reste fermé jusqu’au terminus. Les gens s’endorment, ou font semblant.',
         'Au matin, la porte est ouverte, la place vide. Tu ne sais pas quand c’est arrivé.',
+        'Sur la banquette, un châle gris est resté plié. Tu le prends. Il est encore tiède.',
       ].join('\n'),
       mutations: [
         {
@@ -217,6 +295,7 @@ export const premise03: Premise = {
         'Tu écris un billet pour ce voyage et tu le glisses sous la porte.',
         'Le papier disparaît, tiré de l’autre côté.',
         'Une voix très basse dit merci. Tu n’es pas sûr d’avoir bien fait.',
+        'Le train repart. À chaque station, tu passes devant le sept. À chaque fois, quelqu’un frappe deux coups, de l’intérieur.',
       ].join('\n'),
       mutations: [
         {
@@ -239,6 +318,7 @@ export const premise03: Premise = {
         'Tu ouvres la portière et tu sautes. Le gravier est chaud sous tes bottes.',
         'Les grillons se taisent, un à un, à mesure que tu avances.',
         'Derrière toi, le train attend. Devant toi, rien que la nuit et une lumière trop loin pour être un village.',
+        'Tu entends ton nom, très faible, porté par le vent. Cette fois, tu es presque sûr que c’est le tien.',
       ].join('\n'),
       mutations: [
         {
@@ -270,6 +350,7 @@ export const premise03: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Que ce corps n’est pas le tien.',
         'Les passagers se taisent. Quelqu’un recule, quelqu’un rit, quelqu’un se signe.',
         'On te prend le poinçon. On te fera descendre à la prochaine halte, si le train repart un jour.',
+        'La jeune femme en robe d’été baisse les yeux. Elle t’avait cru. Maintenant, elle ne sait plus ce qu’elle croit.',
       ].join('\n'),
       mutations: [],
     },
@@ -282,6 +363,7 @@ export const premise03: Premise = {
         'Tu grimpes par l’échelle. Le métal garde la chaleur du jour.',
         'D’en haut, la plaine est un lac noir. La lumière que tu cherches s’approche. Elle va vite.',
         'Tu comprends trop tard que ce n’est pas un village.',
+        'Les grillons se taisent d’un coup. Dans le train, plus bas, quelqu’un frappe deux coups contre une porte.',
       ].join('\n'),
       mutations: [
         {
