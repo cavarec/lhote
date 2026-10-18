@@ -100,9 +100,7 @@ export class ApiClient {
     this.now = options.now ?? Date.now;
     this.timeoutMs = options.timeoutMs ?? TIMEOUT_MS;
     this.retryDelays = options.retryDelaysMs ?? RETRY_DELAYS_MS;
-    this.isOnline =
-      options.isOnline ??
-      (() => typeof navigator === 'undefined' || navigator.onLine !== false);
+    this.isOnline = options.isOnline ?? browserIsOnline;
   }
 
   /** Vrai tant que le disjoncteur refuse d'envoyer des requêtes. */
@@ -229,4 +227,13 @@ async function toHttpError(response: Response): Promise<ApiClientError> {
     details,
     ...(Number.isFinite(header) && header > 0 ? { retryAfter: header } : {}),
   });
+}
+
+/**
+ * Lit `navigator.onLine` sans dépendre des types DOM : ce fichier est aussi compilé pour le
+ * Worker, qui n'a pas de `navigator.onLine`. Le cast est volontaire et limité à cette lecture.
+ */
+function browserIsOnline(): boolean {
+  const nav = (globalThis as { navigator?: { onLine?: boolean } }).navigator;
+  return nav?.onLine !== false;
 }
