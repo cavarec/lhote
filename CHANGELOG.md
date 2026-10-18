@@ -30,6 +30,10 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [0.1.1] - 2026-10-18
 
+### Modifié
+
+- Publication automatique : fusionner dans `main` une PR qui change la version de `package.json` déploie, vérifie le site, puis pose le tag `vX.Y.Z` (après le succès, jamais avant). La voie manuelle `npm run release` reste possible.
+
 ### Corrigé
 
 - L'enquête regroupe les indices par nature (un bouton « Regarder autour de soi », « Écouter ce corps » ou « Observer les autres » au plus) au lieu de répéter le même libellé pour chaque indice.

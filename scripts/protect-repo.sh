@@ -36,13 +36,17 @@ branch_rules='{
   ]
 }'
 
-# actor_id 5 = rôle « Admin » du dépôt : toi seul peux poser un tag, donc seul `npm run release` déploie.
+# actor_id 5 = rôle « Admin » du dépôt (toi) ; actor_id 15368 = l'application GitHub Actions, qui
+# pose le tag après un déploiement réussi. Personne d'autre ne peut créer un tag de version.
 tag_rules='{
   "name": "tags-de-release",
   "target": "tag",
   "enforcement": "active",
   "conditions": { "ref_name": { "include": ["refs/tags/v*"], "exclude": [] } },
-  "bypass_actors": [ { "actor_id": 5, "actor_type": "RepositoryRole", "bypass_mode": "always" } ],
+  "bypass_actors": [
+    { "actor_id": 5, "actor_type": "RepositoryRole", "bypass_mode": "always" },
+    { "actor_id": 15368, "actor_type": "Integration", "bypass_mode": "always" }
+  ],
   "rules": [
     { "type": "creation" },
     { "type": "update" },
