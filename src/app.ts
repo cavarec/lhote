@@ -1,10 +1,10 @@
 import { mount } from 'svelte';
 import './app.css';
-import Home from './routes/Home.svelte';
+import App from './App.svelte';
 
 const target = document.getElementById('app');
 if (!target) {
   throw new Error('Élément #app introuvable.');
 }
 
-mount(Home, { target });
+mount(App, { target });
