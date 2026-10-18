@@ -78,6 +78,8 @@ test.describe('accessibilité (WCAG AA)', () => {
       timeout: 2000,
     });
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
+    // La scène suivante n'existe qu'une fois l'état enregistré : on l'attend.
+    await page.getByRole('list', { name: 'Progression du saut' }).waitFor();
     await page.keyboard.press('Escape');
     await expect(page.getByRole('button', { name: 'Continuer' })).toBeVisible({
       timeout: 2000,
