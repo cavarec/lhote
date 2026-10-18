@@ -105,4 +105,4 @@ Pages ne contient ni Durable Object ni KV. Le binding de Pages pointe sur le Wor
 
 ## État d'avancement
 
-Étape 1 (fondations) en place : config, squelettes front et Worker, CI, déploiement par tag, scripts. Le moteur (étape 2), le Worker complet (étape 3), le contenu (étape 4), l'UI (étape 5) et la PWA (étape 6) restent à faire.
+Étapes 1 (fondations) et 2 (moteur déterministe, testé à plus de 80 %) en place. Le Worker complet (étape 3), le contenu (étape 4), l'UI (étape 5) et la PWA (étape 6) restent à faire.

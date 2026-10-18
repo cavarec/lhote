@@ -16,5 +16,12 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts', 'content/**/*.test.ts', 'tests/content/**/*.test.ts'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/lib/engine/**/*.ts'],
+      exclude: ['**/*.test.ts', '**/test-fixtures.ts', '**/types.ts'],
+      reporter: ['text', 'lcov'],
+      thresholds: { statements: 80, branches: 80, functions: 80, lines: 80 },
+    },
   },
 });
