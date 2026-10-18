@@ -4,6 +4,8 @@ import { makeArtifact } from './test-fixtures';
 import type { Door, Person, Scar, Truth, WorldMutation } from './types';
 import {
   applyMutations,
+  bindMutations,
+  LEAP_ARTIFACT,
   createChronology,
   createWorld,
   deliverTransitArtifact,
@@ -149,5 +151,89 @@ describe('objet en transit', () => {
     const world = { ...createWorld(), artifacts: [delivered, makeArtifact('fresh')] };
     const result = deliverTransitArtifact(world, 'leap-3');
     expect(result.artifacts.map((a) => a.toLeap)).toEqual(['leap-1', 'leap-3']);
+  });
+});
+
+describe('bindMutations', () => {
+  const context = (overrides = {}) => ({
+    leapId: 'L1',
+    characterIds: ['c-a', 'c-b'],
+    artifactId: null as string | null,
+    world: createWorld(),
+    ...overrides,
+  });
+
+  it('suffixe les identifiants et fixe le saut d’origine', () => {
+    const bound = bindMutations([addDoor, addPerson, addTruth, addScar], context());
+    expect(bound).toEqual([
+      { type: 'addDoor', door: { ...door, id: 'd1@L1', openedInLeap: 'L1' } },
+      {
+        type: 'addPerson',
+        person: { ...person, id: 'p1@L1', characterId: 'c1', leapId: 'L1' },
+      },
+      { type: 'addTruth', truth: { ...truth, id: 't1@L1', leapId: 'L1' } },
+      { type: 'addScar', scar: { ...scar, id: 's1@L1', leapId: 'L1' } },
+    ]);
+  });
+
+  it('permet à une même prémisse d’être résolue deux fois sans collision', () => {
+    const first = applyMutations(createWorld(), bindMutations([addDoor], context()));
+    const second = applyMutations(
+      first,
+      bindMutations([addDoor], context({ leapId: 'L2' })),
+    );
+    expect(second.doors.map((d) => d.id)).toEqual(['d1@L1', 'd1@L2']);
+  });
+
+  it('résout un emplacement de personnage « 0 » ou « 1 »', () => {
+    const slot = (characterId: string): WorldMutation => ({
+      type: 'addPerson',
+      person: { ...person, characterId },
+    });
+    const ids = (m: WorldMutation) =>
+      m.type === 'addPerson' ? m.person.characterId : '';
+    expect(ids(bindMutations([slot('0')], context())[0]!)).toBe('c-a');
+    expect(ids(bindMutations([slot('1')], context())[0]!)).toBe('c-b');
+    expect(ids(bindMutations([slot('2')], context())[0]!)).toBe('2');
+    expect(ids(bindMutations([slot('c9')], context())[0]!)).toBe('c9');
+    expect(ids(bindMutations([slot('1')], context({ characterIds: ['c-a'] }))[0]!)).toBe(
+      '1',
+    );
+  });
+
+  it('remplace l’objet « leap » par celui du saut, en transit', () => {
+    const mutation: WorldMutation = {
+      type: 'addArtifact',
+      artifact: { id: 'x', artifactId: LEAP_ARTIFACT, fromLeap: '', toLeap: null },
+    };
+    const [bound] = bindMutations([mutation], context({ artifactId: 'a2' }));
+    expect(bound).toEqual({
+      type: 'addArtifact',
+      artifact: { id: 'x@L1', artifactId: 'a2', fromLeap: 'L1', toLeap: null },
+    });
+  });
+
+  it('abandonne l’objet « leap » sans objet, ou si l’objet était déjà porté', () => {
+    const mutation: WorldMutation = {
+      type: 'addArtifact',
+      artifact: { id: 'x', artifactId: LEAP_ARTIFACT, fromLeap: '', toLeap: null },
+    };
+    expect(bindMutations([mutation], context())).toEqual([]);
+    const carried = {
+      ...createWorld(),
+      artifacts: [{ id: 'old', artifactId: 'a1', fromLeap: 'L0', toLeap: 'L1' }],
+    };
+    expect(
+      bindMutations([mutation], context({ artifactId: 'a1', world: carried })),
+    ).toEqual([]);
+  });
+
+  it('garde tel quel un objet d’identifiant précis', () => {
+    const mutation: WorldMutation = {
+      type: 'addArtifact',
+      artifact: { id: 'x', artifactId: 'a3', fromLeap: '', toLeap: null },
+    };
+    const [bound] = bindMutations([mutation], context());
+    expect(bound).toMatchObject({ artifact: { artifactId: 'a3', id: 'x@L1' } });
   });
 });

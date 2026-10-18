@@ -154,3 +154,92 @@ export function applyMutations(
   }
   return next;
 }
+
+/** Valeur de `artifactId` dans le contenu : « l'objet que ce saut propose » (voir bindMutations). */
+export const LEAP_ARTIFACT = 'leap';
+
+export interface BindContext {
+  leapId: string;
+  /** Personnages du saut : un `characterId` « 0 » ou « 1 » désigne leur emplacement. */
+  characterIds: readonly string[];
+  /** Objet proposé par ce saut, s'il y en a un. */
+  artifactId: string | null;
+  world: WorldState;
+}
+
+/**
+ * Rend les mutations du contenu applicables à un saut précis. Le contenu est statique et la même
+ * prémisse peut revenir : sans cette étape, ses identifiants entreraient en collision.
+ * - les identifiants sont suffixés par le saut (`door-1@<leapId>`) et les champs `leapId` fixés ;
+ * - `characterId` « 0 » ou « 1 » devient le personnage de cet emplacement ;
+ * - un objet d'`artifactId` « leap » devient l'objet du saut ; il disparaît s'il n'y en a pas,
+ *   ou si l'objet était déjà porté depuis un saut précédent (il ne se crée pas deux fois).
+ */
+export function bindMutations(
+  mutations: readonly WorldMutation[],
+  context: BindContext,
+): WorldMutation[] {
+  const { leapId } = context;
+  const suffix = (id: string): string => `${id}@${leapId}`;
+  const bound: WorldMutation[] = [];
+
+  for (const mutation of mutations) {
+    switch (mutation.type) {
+      case 'addDoor':
+        bound.push({
+          type: 'addDoor',
+          door: { ...mutation.door, id: suffix(mutation.door.id), openedInLeap: leapId },
+        });
+        break;
+      case 'addPerson': {
+        const slot = /^[01]$/.test(mutation.person.characterId)
+          ? context.characterIds[Number(mutation.person.characterId)]
+          : undefined;
+        bound.push({
+          type: 'addPerson',
+          person: {
+            ...mutation.person,
+            id: suffix(mutation.person.id),
+            characterId: slot ?? mutation.person.characterId,
+            leapId,
+          },
+        });
+        break;
+      }
+      case 'addTruth':
+        bound.push({
+          type: 'addTruth',
+          truth: { ...mutation.truth, id: suffix(mutation.truth.id), leapId },
+        });
+        break;
+      case 'addScar':
+        bound.push({
+          type: 'addScar',
+          scar: { ...mutation.scar, id: suffix(mutation.scar.id), leapId },
+        });
+        break;
+      case 'addArtifact': {
+        let artifactId = mutation.artifact.artifactId;
+        if (artifactId === LEAP_ARTIFACT) {
+          const carried = context.world.artifacts.some(
+            (a) => a.artifactId === context.artifactId && a.toLeap === leapId,
+          );
+          if (context.artifactId === null || carried) break;
+          artifactId = context.artifactId;
+        }
+        bound.push({
+          type: 'addArtifact',
+          artifact: {
+            ...mutation.artifact,
+            id: suffix(mutation.artifact.id),
+            artifactId,
+            fromLeap: leapId,
+            toLeap: null,
+          },
+        });
+        break;
+      }
+    }
+  }
+  return bound;
+}
