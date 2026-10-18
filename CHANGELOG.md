@@ -16,6 +16,8 @@ Première version : le jeu complet, jouable hors connexion.
 
 ### Ajouté
 
+- Le déploiement crée le projet Pages au premier passage : plus d'étape manuelle côté Cloudflare, hors jeton d'API.
+
 - Étape 7 : `deploy.yml` vérifie le site en ligne après le déploiement (version du tag, app shell, manifeste, service worker, un vrai saut de bout en bout puis suppression du joueur de test) ; en-têtes de cache (service worker toujours revalidé, fichiers à empreinte immuables) ; recette sur appareils iOS et Android (`docs/RECETTE-APPAREILS.md`).
 
 - Étape 6, PWA : manifeste (icônes 192/512 et maskable, standalone), service worker Workbox (precache de l'app shell et du contenu des 3 prémisses, `/api/leap` et `/api/resolve` en NetworkOnly, `/api/state` en NetworkFirst), bandeau hors connexion, invite d'installation après un saut terminé, mise à jour silencieuse. Tests e2e hors connexion. Lighthouse en local : performance 99, accessibilité 100, bonnes pratiques 100.
