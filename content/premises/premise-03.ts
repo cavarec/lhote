@@ -1,181 +1,256 @@
 import type { Premise } from './types';
 
-// Prémisse 3 : le chef de train. Une nuit d'été, un train arrêté au milieu des champs, un
-// compartiment qui ne s'ouvre plus. Conventions : voir content/README.md. Le PNJ qui parle
-// occupe l'emplacement « 0 ».
+// Prémisse 3 : une veillée dans une forêt, juste après la guerre. Un conteur raconte une histoire
+// qui ressemble trop à celle de l'hôte. Inspirée de : la fontaine qui fait venir l'orage, les
+// histoires qu'on n'écrit pas. Conventions : voir content/README.md.
+// - `npcId` est un emplacement (« 0 » ou « 1 ») : une voisine ou un voisin de veillée. Le conteur,
+//   lui, est un élément de décor : il ne ment jamais et ne dit jamais tout.
+// - Miroir : pas de reflet (l'eau de la fontaine ne rend rien).
+// - Corps hérité : la surdité d'une oreille. L'hôte lit sur les lèvres et ne capte que des
+//   morceaux. La condition est la clé : ses lèvres savent la suite avant le conteur.
 
-const EPOCH = 'un train arrêté en pleine nuit d’été';
+const EPOCH = 'une forêt, juste après la guerre';
 
 export const premise03: Premise = {
   id: 'premise-03',
-  title: 'Le compartiment sept',
+  title: 'Une histoire qui te ressemble',
   epoch: EPOCH,
 
-  // Beat 1 : la chaleur, les grillons, un nom qui n'est peut-être pas le tien.
+  // Beat 1 : la fumée, la mousse, une voix qu'on n'entend qu'en morceaux. Aucune information.
   wakeup: [
-    'Il fait chaud. Une chaleur épaisse, qui sent la poussière et le fer.',
-    'Quelque chose te serre la nuque. Du cuir, peut-être. Tu tournes la tête et ça grince.',
-    'Dehors, des grillons. Des milliers, tous au même endroit, comme une seule machine qui ne s’arrête pas.',
-    'Ton corps est debout, appuyé contre une paroi qui tremble encore un peu. Puis plus rien. Un silence de moteur coupé.',
-    'Tu respires par la bouche. Dans ta gorge, un goût de charbon et de menthe.',
-    'Ta main plate tient un objet froid et rond contre ton ventre. Une montre. L’aiguille ne bouge pas.',
-    'Une porte claque dans le couloir. Des voix, étouffées. Puis un nom. Tu ne sais pas si c’est le tien.',
+    'Une odeur de bois vert qui brûle, de terre mouillée, de champignons écrasés. Dessous, plus âcre, un relent de fumée froide.',
+    'Ton dos est chaud. Ton visage est froid. Le feu est devant toi, ou à côté, ou dans un souvenir. Tu ne sais pas lequel.',
+    'Une voix parle, quelque part. Elle monte et descend, très lente. Tu l’attrapes par morceaux : un mot entier, puis un trou.',
+    'D’un côté, rien qu’un sifflement. Une cloche cassée, au fond de ta tête, qui sonne toujours la même note.',
+    'De l’autre côté, la forêt respire. Des branches, un hibou, quelque chose de grand qui bouge et se tait.',
+    'Tes lèvres sont sèches. Elles remuent un peu, au rythme de la voix. Tu les arrêtes. Elles recommencent.',
+    'Tu as l’impression d’avoir entendu cette histoire. Pas ce soir. Avant. Dans une autre vie, dans un autre corps.',
+    'Un craquement. Une braise éclate et lance une étincelle. Tu la sens passer sur ta joue.',
+    'La voix s’arrête. Dans le silence, quelqu’un respire trop fort. Tu sens des regards se poser sur toi, un à un.',
     'Tu ouvres les yeux.',
   ].join('\n\n'),
 
-  // Beat 2 : orientation.
+  // Beat 2 : orientation. Les trois natures d'indice, la surdité, l'absence de reflet.
   orientation: [
     {
       kind: 'material',
-      text: 'Un couloir étroit, éclairé par une seule lampe jaune qui oscille. De chaque côté, des portes de bois verni, numérotées. Les cuivres sont ternis.',
+      text: 'Une clairière, un feu large, un cercle de visages éclairés par en dessous. Autour, des troncs énormes qui dépassent la lumière et montent dans la nuit.',
     },
     {
       kind: 'material',
-      text: 'Par la vitre baissée, des champs sans fin sous la lune. Pas une lumière. Pas un village. Le train est arrêté en pleine plaine.',
+      text: 'À dix pas, une fontaine de pierre bordée de mousse. Une écuelle de fer attend sur la margelle. L’eau est noire, immobile, très ancienne.',
+    },
+    {
+      kind: 'material',
+      text: 'Sur une souche, la sacoche de cuir du conteur, ouverte. Dedans, le dos d’un carnet à la couverture usée. Il le garde à portée de main.',
     },
     {
       kind: 'bodily',
-      text: 'Tu portes un uniforme trop serré aux épaules. Sous le col, la peau est irritée à force de frotter.',
+      text: 'Ton oreille gauche ne sert à rien. Tu tournes la tête pour prendre la voix dans la droite, et tu lis les lèvres de celui qui parle.',
     },
     {
       kind: 'bodily',
-      text: 'Ta bouche est sèche. Tu as soif, mais tu sais que l’eau du wagon est comptée.',
+      text: 'Tu te lèves pour boire à la fontaine. Tu te penches. L’eau ne te rend rien : ni visage, ni lune, ni même la flamme du feu. Tu recules.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes épaules sont larges, ton dos raide, tes mains durcies par la hache. Un corps qui coupe du bois depuis l’enfance, et qui a vu pire.',
     },
     {
       kind: 'social',
-      text: 'À ta ceinture, un carnet de billets et un poinçon. Sur la couverture du carnet, une inscription : « Chef de train ».',
+      text: 'Au ceinturon, un sifflet de garde et un petit registre de tournées. Les gens autour de toi te saluent d’un signe, comme on salue celui qui veille.',
+    },
+    {
+      kind: 'social',
+      text: 'Tous les visages sont tournés vers le conteur. Quelques-uns glissent vers toi, un instant, puis retournent au feu.',
     },
   ],
 
-  // Beat 3 : premier contact. L'emplacement « 0 » sort du compartiment sept.
+  // Beat 3 : premier contact. L'emplacement « 0 » s'assied à côté. Le choix risqué avoue trop tôt.
   openingDialogue: {
     npcId: '0',
     lines: [
       {
         speaker: 'narration',
-        text: 'Une porte s’ouvre à ta gauche. Une silhouette sort du compartiment sept et referme derrière elle, trop vite.',
+        text: 'Quelqu’un se glisse à côté de toi sur la souche. Son épaule touche la tienne. Il reste de la sciure dans ses cheveux.',
       },
       {
         speaker: 'npc',
-        text: 'Chef ! Tu es là, enfin. Il y a un problème avec le sept.',
+        text: 'Tu l’as entendue, celle-là ? Il dit que c’est l’histoire d’un homme qui se réveille dans la peau d’un autre.',
+      },
+      {
+        speaker: 'narration',
+        text: 'Tu lis ses lèvres plus que tu n’entends. Les mots arrivent un peu après le mouvement, comme un tonnerre après l’éclair.',
       },
       {
         speaker: 'npc',
-        text: 'Deux personnes disent que la place est à elles. Et maintenant, la porte ne s’ouvre plus.',
+        text: 'Ça n’a pas de sens, bien sûr. Mais il raconte bien. Il t’a regardé trois fois depuis le début.',
       },
-      { speaker: 'narration', text: 'Elle te regarde. Tu es celui qui porte les clés.' },
+      {
+        speaker: 'npc',
+        text: 'Les gens ont remarqué. Ils se demandent où il veut en venir. Moi aussi.',
+      },
+      {
+        speaker: 'narration',
+        text: 'Le conteur a repris. Sa voix est tranquille. Il ne regarde personne, et pourtant il te regarde.',
+      },
+      {
+        speaker: 'npc',
+        text: 'Après la guerre, ils racontent des choses qui ressemblent à ce qu’on a vu. C’est peut-être ça.',
+      },
     ],
     choices: [
       {
-        id: 'voir-les-billets',
+        id: 'ecouter',
+        kind: 'neutral',
+        text: '« Chut. Je veux entendre la suite. »',
+        reply: [
+          { speaker: 'npc', text: 'D’accord. Écoute bien. Tu en auras besoin.' },
+          {
+            speaker: 'narration',
+            text: 'Tu tournes ton oreille droite vers le feu. La voix du conteur entre, claire, lente, sans trou.',
+          },
+          {
+            speaker: 'narration',
+            text: 'Il parle d’un homme qui ne sait pas son nom. Il parle d’une forêt, d’une fontaine, d’une dette.',
+          },
+        ],
+      },
+      {
+        id: 'demander-l-histoire',
         kind: 'informative',
-        text: '« Montre-moi les billets. »',
+        text: '« Qu’a-t-il raconté jusqu’ici ? »',
         reply: [
-          { speaker: 'npc', text: 'Je n’en ai qu’un. L’autre est resté dans le sept.' },
+          {
+            speaker: 'npc',
+            text: 'Un homme se réveille près d’une fontaine, dans une forêt. Il porte l’uniforme d’un autre. Il ne sait plus qui il est.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Quelqu’un l’attend. Quelqu’un lui doit quelque chose, ou le contraire. On ne sait pas encore.',
+          },
           {
             speaker: 'narration',
-            text: 'Elle te tend un billet plié, tiède de sa main. Le poinçon est net.',
+            text: 'La personne baisse la voix. Sa main effleure ton coude, comme pour te réveiller.',
           },
         ],
       },
       {
-        id: 'rester-calme',
-        kind: 'neutral',
-        text: '« Reste ici. Je vais voir. »',
-        reply: [
-          { speaker: 'npc', text: 'Fais vite. Les gens commencent à s’agiter.' },
-          {
-            speaker: 'narration',
-            text: 'Elle recule contre la vitre. Derrière elle, les champs ne bougent pas.',
-          },
-        ],
-      },
-      {
-        id: 'nier-le-sept',
+        id: 'dire-que-cest-la-tienne',
         kind: 'risky',
-        text: '« Quel sept ? Je ne connais pas de sept. »',
+        text: '« Cette histoire, c’est la mienne. »',
         reply: [
-          { speaker: 'npc', text: 'Tu plaisantes ? C’est ton wagon.' },
+          { speaker: 'npc', text: 'Quoi ? Tu veux dire que tu lui as raconté ?' },
           {
             speaker: 'narration',
-            text: 'Elle sourit pour te rassurer. Son sourire ne tient pas.',
+            text: 'La personne se redresse. Autour de toi, des têtes se tournent. Une femme se signe.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Tais-toi. Ne dis plus rien. Pas devant eux. Laisse-le finir.',
           },
         ],
       },
       {
-        id: 'frapper',
+        id: 'regarder-le-conteur',
         kind: 'neutral',
-        text: 'Prendre le poinçon et frapper à la porte.',
+        text: 'Regarder le conteur sans rien dire.',
         reply: [
           {
             speaker: 'narration',
-            text: 'Tu frappes deux fois, à plat. Rien ne répond. Quelqu’un, de l’autre côté, retient son souffle.',
+            text: 'Il est assis au bord du feu, le visage dans l’ombre de son chapeau. Ses mains ne bougent pas. Il n’a besoin de rien.',
           },
-          { speaker: 'npc', text: 'Tu l’as entendu, toi aussi ?' },
+          {
+            speaker: 'narration',
+            text: 'Quand tes yeux croisent les siens, il sourit à peine. Il ne dit rien. Il continue, comme si tu avais répondu.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Tu vois ? Il fait ça avec tout le monde. Ça ne veut rien dire.',
+          },
         ],
       },
     ],
   },
 
-  // Beat 4 : enquête.
+  // Beat 4 : enquête. Ce qu'on entend à moitié, et ce que les lèvres savent déjà.
   investigation: [
     {
       kind: 'material',
-      text: 'Dans la poche de l’uniforme, un petit objet enveloppé dans un mouchoir. Il pèse plus qu’il ne devrait.',
+      text: 'Au pied de la souche, enveloppé dans un mouchoir, un petit objet qui ne devrait pas être là. Il est lourd et froid. Ta main ne tremble pas.',
       revealsArtifact: 'leap',
     },
     {
       kind: 'bodily',
-      text: 'Tes doigts reconnaissent le poinçon. Ils savent la pression qu’il faut sur le carton. Ils savent aussi que ce billet a été poinçonné deux fois.',
-      revealsTruth: 'double-poincon',
+      text: 'Tes lèvres bougent avant celles du conteur. Elles disent les mots avant lui. Tu connais cette histoire par cœur, ou ton corps la connaît.',
+      revealsTruth: 'levres-qui-savent',
     },
     {
       kind: 'material',
-      text: 'Sous la porte du sept, un filet de lumière qui bouge. Quelqu’un tient une bougie, ou une lampe, contre le sol.',
+      text: 'Le carnet du conteur est sorti de la sacoche. Ses pages sont couvertes d’une écriture fine, penchée, qui ressemble à celle de ton registre, trait pour trait.',
+    },
+    {
+      kind: 'material',
+      text: 'À côté du feu, un cercle de pierres plates. Sur l’une d’elles, une écuelle d’eau, intacte. Personne n’a bu. Personne n’a osé.',
     },
     {
       kind: 'social',
-      text: 'Une passagère t’attrape par la manche. Elle dit que le sept est réservé depuis le départ. Elle ne dit pas par qui.',
+      text: 'Un enfant, couché contre sa mère, te regarde sans cligner. Il dit tout bas : « C’est ton histoire. Il l’a dit tout à l’heure, quand tu dormais. »',
+      revealsTruth: 'carnet-a-ton-nom',
     },
     {
       kind: 'social',
-      text: 'Dans ton carnet, la page du sept est déchirée. Il reste une marge, et le haut d’un chiffre.',
-      revealsTruth: 'page-arrachee',
+      text: 'Un vieux, de l’autre côté du feu, crache dans les braises. Il murmure à son voisin des mots que tu ne perçois pas, et qui te concernent.',
+    },
+    {
+      kind: 'social',
+      text: 'La femme assise près de la fontaine se lève, remplit l’écuelle et la pose devant le conteur. Il boit sans cesser de parler.',
     },
     {
       kind: 'bodily',
-      text: 'Une goutte de sueur glisse dans ton dos. Tu n’as pas peur de la porte. Tu as peur de ce que tu feras derrière.',
+      text: 'Ta main gauche serre quelque chose que tu ne sens pas. Tu l’ouvres. Une feuille de chêne, pliée en quatre, avec un mot dessus. Un seul.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton cœur bat plus vite à chaque phrase. Ton corps connaît le moment où le conteur va se taire, et il redoute ce silence.',
+    },
+    {
+      kind: 'material',
+      text: 'Dans la cendre, au bord du feu, un bouton de manteau militaire et un bout de ruban noirci. Quelqu’un a brûlé un vêtement ici, il n’y a pas longtemps.',
     },
   ],
 
-  // Beat 5 : la fracture.
+  // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-05', 'fracture-06'],
 
-  // Beat 6 : résolution.
+  // Beat 6 : résolution. Chaque issue est une histoire, aucune n'est un game over annoncé.
   resolutions: [
     {
-      id: 'ouvrir-le-sept',
-      choiceText: 'Forcer la porte du compartiment sept devant tous.',
+      id: 'dire-la-fin-avec-lui',
+      requiresAny: ['levres-qui-savent', 'carnet-a-ton-nom'],
+      choiceText: 'Dire la fin de l’histoire à voix haute, en même temps que le conteur.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu forces la serrure. La porte cède avec un bruit de bois sec.',
-        'Personne ne crie. Les passagers regardent ce que tu regardes, et chacun comprend à son rythme.',
-        'Le train repartira dans une heure. Cette fois, personne ne mentira sur la place sept.',
+        'Tu te lèves. Tes lèvres disent les mots avant que ta tête les cherche. Le conteur les dit avec toi, à la même seconde.',
+        'La clairière se fige. L’histoire se termine : l’homme se réveille, et il choisit de rester dans le corps qui n’est pas le sien.',
+        'Personne n’applaudit. Un vieux jette une branche dans le feu. Le conteur ferme son carnet.',
+        'Il te regarde et dit : « Maintenant, elle est à toi. » Tu ne sais pas ce que cela veut dire. Tu sais que c’est vrai.',
       ].join('\n'),
       mutations: [
         {
           type: 'addTruth',
           truth: {
-            id: 'sept-ouvert',
-            summary: 'Ce qui se trouvait dans le compartiment sept est su de tous.',
+            id: 'l-histoire-a-sa-fin',
+            summary:
+              'Une histoire qui ressemblait à une vie a trouvé sa fin dans une forêt.',
             leapId: '',
           },
         },
         {
           type: 'addPerson',
           person: {
-            id: 'celle-du-couloir',
+            id: 'celui-qui-ecoutait',
             characterId: '0',
             status: 'saved',
             leapId: '',
@@ -185,21 +260,23 @@ export const premise03: Premise = {
       ],
     },
     {
-      id: 'redemarrer',
-      choiceText: 'Faire redémarrer le train sans ouvrir la porte.',
+      id: 'interrompre-le-conteur',
+      requiresAny: ['carnet-a-ton-nom'],
+      choiceText: 'Interrompre le conteur et jeter de l’eau sur le feu.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu donnes le signal. Le train frissonne et repart.',
-        'Le sept reste fermé jusqu’au terminus. Les gens s’endorment, ou font semblant.',
-        'Au matin, la porte est ouverte, la place vide. Tu ne sais pas quand c’est arrivé.',
+        'Tu prends l’écuelle et tu la renverses sur les braises. Une vapeur blanche monte, puis le noir.',
+        'Des cris. Des corps qui se heurtent. Une voix d’enfant qui répète ton nom, et ce n’est pas le bon.',
+        'Quand quelqu’un rallume, le conteur n’est plus là. Sa souche est vide. Sur la mousse, un carnet ouvert, sans page écrite.',
       ].join('\n'),
       mutations: [
         {
           type: 'addScar',
           scar: {
-            id: 'porte-restee-fermee',
-            description: 'Une porte restée fermée pendant un voyage entier.',
+            id: 'histoire-sans-fin',
+            description:
+              'Une histoire interrompue, et que personne ne peut plus achever.',
             leapId: '',
             epoch: EPOCH,
           },
@@ -207,43 +284,43 @@ export const premise03: Premise = {
       ],
     },
     {
-      id: 'ecrire-un-billet',
-      choiceText: 'Écrire un nouveau billet et le glisser sous la porte.',
+      id: 'prendre-le-carnet',
+      requiresAny: ['levres-qui-savent'],
+      choiceText: 'Prendre le carnet de contes dans la sacoche du conteur.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu écris un billet pour ce voyage et tu le glisses sous la porte.',
-        'Le papier disparaît, tiré de l’autre côté.',
-        'Une voix très basse dit merci. Tu n’es pas sûr d’avoir bien fait.',
+        'Tu glisses la main dans la sacoche. Le cuir est tiède. Tu ouvres le carnet à la lueur du feu.',
+        'La première page est de ta main. La deuxième aussi. Toutes les pages sont de ta main, et tu ne te souviens d’aucune.',
+        'Le conteur ne dit rien. Il achève sa phrase. Quand il se tait, il te regarde comme on regarde quelqu’un qu’on a attendu.',
       ].join('\n'),
       mutations: [
         {
-          type: 'addDoor',
-          door: {
-            id: 'billet-sous-la-porte',
-            label: 'Un compartiment qui s’ouvre de l’intérieur',
-            openedInLeap: '',
-            epoch: EPOCH,
+          type: 'addTruth',
+          truth: {
+            id: 'carnet-de-ta-main',
+            summary: 'Un carnet de contes est écrit de la main de celui qui le lit.',
+            leapId: '',
           },
         },
       ],
     },
     {
-      id: 'descendre-sur-la-voie',
-      choiceText: 'Descendre sur la voie et marcher vers les champs.',
+      id: 'quitter-la-clairiere',
+      choiceText: 'Quitter la clairière et marcher vers l’intérieur de la forêt.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu ouvres la portière et tu sautes. Le gravier est chaud sous tes bottes.',
-        'Les grillons se taisent, un à un, à mesure que tu avances.',
-        'Derrière toi, le train attend. Devant toi, rien que la nuit et une lumière trop loin pour être un village.',
+        'Tu te lèves sans bruit. Personne ne te retient. Le feu rapetisse dans ton dos.',
+        'Les troncs se resserrent. Le sentier se divise, puis se divise encore. Tu choisis à chaque fois la même main.',
+        'Plus loin, la voix du conteur te suit. Elle ne dit plus l’histoire. Elle dit où tu en es.',
       ].join('\n'),
       mutations: [
         {
           type: 'addDoor',
           door: {
-            id: 'voie-vers-la-plaine',
-            label: 'La voie, quittée à pied vers la plaine',
+            id: 'sentier-de-la-fontaine',
+            label: 'Un sentier qui s’enfonce dans la forêt, quitté pendant une veillée',
             openedInLeap: '',
             epoch: EPOCH,
           },
@@ -251,7 +328,7 @@ export const premise03: Premise = {
         {
           type: 'addArtifact',
           artifact: {
-            id: 'objet-de-la-voie',
+            id: 'objet-du-sentier',
             artifactId: 'leap',
             fromLeap: '',
             toLeap: null,
@@ -260,33 +337,34 @@ export const premise03: Premise = {
       ],
     },
     {
-      id: 'dire-la-verite',
-      choiceText: 'Dire que tu ne sais pas qui tu es.',
+      id: 'avouer-ton-trou',
+      choiceText: 'Dire à voix haute que tu ne sais pas qui tu es.',
       outcome: 'exposed',
       fractureRepaired: false,
       resultText: [
         'Tu dis que tu ne sais pas qui tu es. Que ce corps n’est pas le tien.',
-        'Les passagers se taisent. Quelqu’un recule, quelqu’un rit, quelqu’un se signe.',
-        'On te prend le poinçon. On te fera descendre à la prochaine halte, si le train repart un jour.',
+        'Le silence est total. Même le feu semble se retenir. Puis quelqu’un rit, tout bas, et ce rire se propage.',
+        'On te prend le sifflet. On te reconduit au village, entre deux hommes, en parlant de la guerre.',
       ].join('\n'),
       mutations: [],
     },
     {
-      id: 'monter-sur-le-toit',
-      choiceText: 'Monter sur le toit pour voir d’où vient la lumière.',
+      id: 'suivre-la-lueur',
+      choiceText: 'Suivre dans les arbres la petite lumière qui t’appelle.',
       outcome: 'died',
       fractureRepaired: false,
       resultText: [
-        'Tu grimpes par l’échelle. Le métal garde la chaleur du jour.',
-        'D’en haut, la plaine est un lac noir. La lumière que tu cherches s’approche. Elle va vite.',
-        'Tu comprends trop tard que ce n’est pas un village.',
+        'Tu l’as vue depuis longtemps, au bord de ton regard : une lueur verte, basse, qui bouge.',
+        'Tu la suis. Elle t’attend à chaque tournant, jamais plus près, jamais plus loin. Le sol devient mou.',
+        'Quand tu comprends que l’eau monte à tes genoux, tu ne vois plus le feu. Tu ne l’entends plus non plus.',
       ].join('\n'),
       mutations: [
         {
           type: 'addScar',
           scar: {
-            id: 'chef-disparu-sur-le-toit',
-            description: 'Un chef de train disparu sur le toit, une nuit d’été.',
+            id: 'garde-perdu-dans-le-marais',
+            description:
+              'Un garde de la forêt disparu dans le marais, une nuit de veillée.',
             leapId: '',
             epoch: EPOCH,
           },

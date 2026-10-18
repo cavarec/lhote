@@ -90,6 +90,16 @@ export const MENT_EXCEPTIONS: ReadonlySet<string> = new Set([
   'gouvernement',
   'appartement',
   'abonnement',
+  // Ajouts du lot de scénarios bretons : noms communs.
+  'encadrement',
+  'entêtement',
+  'soulagement',
+  'enterrement',
+  'sacrement',
+  'grondement',
+  'hurlement',
+  'clapotement',
+  'raisonnement',
 ]);
 
 /** Références interdites dans le texte joueur (§2.4) et jargon de jeu vidéo. */

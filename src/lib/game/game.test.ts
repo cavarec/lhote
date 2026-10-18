@@ -10,6 +10,10 @@ import {
   BeatError,
   chooseDialogue,
   clueGroups,
+  INVESTIGATION_BUDGET,
+  investigationLeft,
+  knownTruths,
+  lockedResolutions,
   revealClues,
   completeBeat,
   currentBeat,
@@ -135,8 +139,35 @@ describe('beats', () => {
     expect(leap.choices).toMatchObject({ 'clue-2': 'seen', fracture: '1' });
   });
 
+  it('l’enquête est limitée : une nature d’indice reste dans l’ombre', () => {
+    let leap = makeLeap();
+    const groups = () => clueGroups(premise01, leap);
+    expect(investigationLeft(groups())).toBe(INVESTIGATION_BUDGET);
+    leap = revealClues(leap, groups()[0]!.indices, premise01);
+    leap = revealClues(leap, groups()[1]!.indices, premise01);
+    expect(investigationLeft(groups())).toBe(0);
+    expect(() => revealClues(leap, groups()[2]!.indices, premise01)).toThrow(BeatError);
+    // Relire un groupe déjà vu reste permis.
+    expect(() => revealClues(leap, groups()[0]!.indices, premise01)).not.toThrow();
+  });
+
+  it('ce qui a été examiné décide des issues praticables', () => {
+    const idx = (truth: string) =>
+      premise01.investigation.findIndex((i) => i.revealsTruth === truth);
+    const none = makeLeap();
+    expect(availableResolutions(premise01, none).map((r) => r.id)).not.toContain(
+      'laisser-la-mere-voir',
+    );
+    expect(lockedResolutions(premise01, none).length).toBeGreaterThan(0);
+    const body = revealClue(makeLeap(), idx('noye-depuis-longtemps'));
+    expect(knownTruths(premise01, body).has('noye-depuis-longtemps')).toBe(true);
+    const ids = availableResolutions(premise01, body).map((r) => r.id);
+    expect(ids).toContain('laisser-la-mere-voir');
+    expect(ids).toContain('laver-et-taire');
+    expect(ids).not.toContain('dire-le-vieux-nom');
+  });
+
   it('impose l’issue exposée quand la suspicion est au maximum', () => {
-    expect(availableResolutions(premise01, makeLeap())).toEqual(premise01.resolutions);
     const forced = availableResolutions(premise01, makeLeap({ suspicion: 100 }));
     expect(forced.length).toBeGreaterThan(0);
     expect(forced.every((r) => r.outcome === 'exposed')).toBe(true);

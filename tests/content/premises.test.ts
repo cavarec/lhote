@@ -89,3 +89,37 @@ describe.each(catalog.premises.map((p) => [p.id, p] as const))('%s', (_id, premi
     expect(texts.reduce((sum, text) => sum + countWords(text), 0)).toBeGreaterThan(700);
   });
 });
+
+describe('verrous d’enquête', () => {
+  const natures = ['material', 'bodily', 'social'] as const;
+  for (const premise of catalog.premises) {
+    const truths = new Set(
+      premise.investigation.flatMap((i) => (i.revealsTruth ? [i.revealsTruth] : [])),
+    );
+    it(`${premise.id} : les vérités exigées existent`, () => {
+      for (const r of premise.resolutions) {
+        for (const t of r.requiresAny ?? [])
+          expect(truths.has(t), `${r.id} → ${t}`).toBe(true);
+      }
+    });
+    it(`${premise.id} : quelle que soit l’enquête, la résolution et une fuite restent possibles`, () => {
+      // Tous les couples de natures que le joueur peut choisir d’examiner.
+      for (let skip = 0; skip < natures.length; skip++) {
+        const seen = new Set(natures.filter((_, i) => i !== skip));
+        const known = new Set(
+          premise.investigation.flatMap((i) =>
+            seen.has(i.kind) && i.revealsTruth ? [i.revealsTruth] : [],
+          ),
+        );
+        const open = premise.resolutions.filter(
+          (r) => !r.requiresAny?.length || r.requiresAny.some((t) => known.has(t)),
+        );
+        expect(
+          open.some((r) => r.outcome === 'resolved'),
+          `sans ${natures[skip]}`,
+        ).toBe(true);
+        expect(open.length).toBeGreaterThanOrEqual(4);
+      }
+    });
+  }
+});

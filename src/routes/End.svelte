@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Vignette from '../lib/components/Vignette.svelte';
   import Scene from '../lib/components/Scene.svelte';
   import { installPrompt } from '../lib/pwa/install.svelte';
   import { game } from '../lib/stores/game.svelte';
@@ -18,6 +19,7 @@
 </script>
 
 <main class="page">
+  <Vignette mood={outcome.resolution.outcome} />
   <Scene {lines} {instant}>
     {#if fragment}
       <aside class="fragment fade-in" aria-label="Fragment retrouvé">

@@ -10,6 +10,24 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.5.0] - 2026-10-19
+
+### Modifié
+
+- Nouveaux scénarios, tirés des trois prémisses bretonnes du cahier des charges, à la place du village sous la neige, du fanal et du train :
+  - « Ce que rend la mer » : un village de pêcheurs, la mer a rendu un corps, et tu laves les morts ;
+  - « Le jour du pardon » : un prêtre fiévreux doit porter la chasse en procession, et il doute ;
+  - « Une histoire qui te ressemble » : une veillée en forêt, un conteur dont le récit te ressemble trop, et tu n'entends que d'une oreille.
+- Chaque scénario a son miroir (reflet dans l'eau, un autre te regarde, pas de reflet) et son corps hérité (mains qui tremblent, fièvre, surdité) qui sert aussi de clé à l'enquête. Les fractures ont deux lectures opposées (empêcher, laisser faire) et aucune n'est dite juste.
+- Trois objets-traces deviennent légendaires : une clé d'or, un peigne d'ivoire, un carnet de contes.
+- Les illustrations sont redessinées pour les nouveaux lieux (grève, sacristie, clairière).
+
+### Ajouté
+
+- Des illustrations d'ambiance dessinées en SVG (lavis d'encre, sans image à charger, donc disponibles hors connexion) : une par temps du récit et par prémisse, et une par issue sur l'écran de fin. Elles s'animent doucement et s'immobilisent si le système demande moins de mouvement.
+- L'enquête devient un choix : le temps manque pour tout examiner, le joueur n'ouvre que deux natures d'indice sur trois. Selon ce qu'il a appris, certaines issues restent praticables et d'autres sont grisées (« Tu n'en sais pas assez pour tenter cela »). La résolution reste toujours possible, quelle que soit l'enquête.
+- Chaque scénario compte environ 1 500 mots : un saut dure 8 à 12 minutes.
+
 ## [0.1.1] - 2026-10-18
 
 ### Corrigé

@@ -48,6 +48,12 @@ export interface Resolution {
   fractureRepaired: boolean;
   resultText: string;
   mutations: WorldMutation[];
+  /**
+   * Vérités dont l'une au moins doit avoir été apprise pendant l'enquête pour que cette issue
+   * soit praticable. Absent : toujours praticable. L'enquête étant limitée, ce que le joueur a
+   * choisi d'examiner décide de ce qu'il peut tenter.
+   */
+  requiresAny?: string[];
 }
 
 export interface Premise {

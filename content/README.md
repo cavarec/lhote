@@ -18,17 +18,23 @@ Le ton et l'échantillon de référence sont dans `VOIX.md`.
 - **Éléments d'enquête avec `revealsArtifact`** : l'interface ne les affiche que si le saut propose
   un objet.
 - **Choix** : 3 ou 4 options, avec au moins une neutre, une risquée et une informative.
+- **Verrous d'enquête** : `Resolution.requiresAny` liste des vérités (`revealsTruth` d'un indice) dont
+  l'une au moins doit avoir été apprise. Le joueur n'examine que deux natures d'indice sur trois, donc
+  ce qu'il a cherché décide des issues praticables. Un test vérifie que la résolution et au moins
+  quatre issues restent ouvertes quelle que soit l'enquête.
+- **Texte sans genre pour les personnages** : l'emplacement `'0'` ou `'1'` peut être n'importe quel
+  personnage ; on écrit « la personne », « quelqu'un », jamais « il » ni « elle » pour lui.
 - **Résultats** : `resultText` fait de 2 à 5 lignes, séparées par `\n`.
 
 ## Inventaire (MVP)
 
-| Contenu                    | Quantité                                                     | Fichier                        |
-| -------------------------- | ------------------------------------------------------------ | ------------------------------ |
-| Prémisses                  | 3                                                            | `premises/premise-0{1,2,3}.ts` |
-| Personnages                | 8 (2 par archétype : sûr de lui, inquiet, hostile, innocent) | `characters/archetypes.ts`     |
-| Fractures                  | 6 (2 par prémisse)                                           | `fractures/index.ts`           |
-| Objets-traces              | 6                                                            | `artifacts/index.ts`           |
-| Fragments de méta-histoire | 10 (3 / 3 / 3 / 1 sur les 4 actes)                           | `fragments/index.ts`           |
+| Contenu                    | Quantité                                                         | Fichier                        |
+| -------------------------- | ---------------------------------------------------------------- | ------------------------------ |
+| Prémisses                  | 3 : la mer rend un corps, le jour du pardon, la veillée en forêt | `premises/premise-0{1,2,3}.ts` |
+| Personnages                | 8 (2 par archétype : sûr de lui, inquiet, hostile, innocent)     | `characters/archetypes.ts`     |
+| Fractures                  | 6 (2 par prémisse)                                               | `fractures/index.ts`           |
+| Objets-traces              | 6                                                                | `artifacts/index.ts`           |
+| Fragments de méta-histoire | 10 (3 / 3 / 3 / 1 sur les 4 actes)                               | `fragments/index.ts`           |
 
 Le budget du §6.2 prévoyait 4 fractures. Chaque prémisse en a deux, qui tournent autour du même
 objet, pour que ses six résolutions restent justes quelle que soit la fracture tirée.

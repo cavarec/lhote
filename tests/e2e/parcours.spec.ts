@@ -22,10 +22,24 @@ test.describe('parcours complet', () => {
     await page.getByRole('button', { name: 'Continuer' }).click();
     await page.locator('.choice').first().click();
     await page.getByRole('button', { name: 'Continuer' }).click();
-    await page.getByText('Ce que vous pouvez examiner.').waitFor();
+    await page.getByText('Tu ne peux pas tout examiner.').waitFor();
     const labels = await page.locator('.choice').allTextContents();
     expect(labels.length).toBeGreaterThan(0);
     expect(new Set(labels).size).toBe(labels.length);
+  });
+
+  test('l’enquête est limitée : la troisième nature se ferme', async ({ page }) => {
+    await startLeap(page);
+    await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.locator('.choice').first().click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.getByText('Il te reste 2 gestes.').waitFor();
+    await page.locator('.choice:not([disabled])').first().click();
+    await page.getByText('Il te reste 1 geste.').waitFor();
+    await page.locator('.choice:not([disabled])').first().click();
+    await expect(page.getByText('Le temps te manque.')).toBeVisible();
+    await expect(page.locator('li .choice:not([disabled])')).toHaveCount(0);
   });
 
   test('la partie reprend là où elle s’est arrêtée après un rechargement', async ({
