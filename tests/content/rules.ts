@@ -14,6 +14,11 @@ export const MAX_RESULT_LINES = 5;
  * justifie en l'ajoutant ici, avec un commentaire. La liste est documentée dans content/README.md.
  */
 export const MENT_EXCEPTIONS: ReadonlySet<string> = new Set([
+  'comment',
+  // Formes verbales (3e personne du pluriel) qui finissent en -ment.
+  'ferment',
+  'referment',
+  'dorment',
   'moment',
   'instant',
   'vêtement',

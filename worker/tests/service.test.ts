@@ -214,6 +214,23 @@ describe('POST resolve', () => {
     expect(response.status).toBe(200);
   });
 
+  it('résout de nombreux sauts de suite, prémisses répétées comprises, sans collision', async () => {
+    const { service } = setup();
+    for (let i = 0; i < 12; i++) {
+      const { body } = await startLeap(service);
+      const response = await service.handle({
+        op: 'resolve',
+        playerId: PLAYER,
+        body: { leapId: body.leap.id, resolutionId: 'repair' },
+      });
+      expect(response.status).toBe(200);
+    }
+    const state = await service.handle({ op: 'state', playerId: PLAYER });
+    const { chronology } = state.body as StateResponse;
+    expect(chronology.history).toHaveLength(12);
+    expect(chronology.world.doors).toHaveLength(12);
+  });
+
   it('enchaîne un second saut après la résolution', async () => {
     const { service, leapId } = await started();
     await service.handle({

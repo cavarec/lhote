@@ -9,7 +9,7 @@ import { leapSeed, playerIdHash } from '../../../src/lib/engine/hash';
 import { generateLeap, resolveLeap, startLeap } from '../../../src/lib/engine/leap';
 import { clampSuspicion } from '../../../src/lib/engine/suspicion';
 import type { Catalog, Chronology, LeapState } from '../../../src/lib/engine/types';
-import { createChronology } from '../../../src/lib/engine/world';
+import { bindMutations, createChronology } from '../../../src/lib/engine/world';
 import { SlidingWindowLimiter } from '../middleware/ratelimit';
 import { ApiError, toErrorResponse, type ServiceResponse } from '../utils/errors';
 import { makeTraceFragment, traceKey, type TraceStore } from '../utils/traces';
@@ -202,7 +202,12 @@ export class ChronologyService {
         leapId: updated.id,
         outcome: resolution.outcome,
         fractureRepaired: resolution.fractureRepaired,
-        mutations: resolution.mutations,
+        mutations: bindMutations(resolution.mutations, {
+          leapId: updated.id,
+          characterIds: updated.characterIds,
+          artifactId: updated.artifactId,
+          world: chronology.world,
+        }),
         now,
       },
     );

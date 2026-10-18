@@ -1,11 +1,13 @@
 import type { Catalog } from '../src/lib/engine/types';
+import { fractures } from './fractures';
+import { premise01 } from './premises/premise-01';
 
-// Catalogue de contenu injecté dans le moteur. Vide jusqu'à l'étape 4 : tant qu'il l'est,
-// `POST /api/leap` répond 500 `content_error`.
+// Catalogue de contenu injecté dans le moteur. Incomplet jusqu'à 4d : tant qu'il manque des
+// personnages (au moins deux d'archétypes distincts), `POST /api/leap` répond 500 `content_error`.
 export const catalog: Catalog = {
-  premises: [],
+  premises: [premise01],
   characters: [],
-  fractures: [],
+  fractures,
   artifacts: [],
   fragments: [],
 };
