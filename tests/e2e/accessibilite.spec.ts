@@ -91,4 +91,22 @@ test.describe('accessibilité (WCAG AA)', () => {
     });
     await context.close();
   });
+  test('la page suit le texte qui s’écrit : le dernier paragraphe reste visible', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({
+      reducedMotion: 'no-preference',
+      viewport: { width: 390, height: 520 },
+    });
+    const page = await context.newPage();
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Sauter' }).click();
+    await page.locator('.scene-title').waitFor();
+    // Au bout de quelques secondes, le texte dépasse l'écran : le dernier paragraphe doit rester visible.
+    await expect
+      .poll(async () => page.evaluate(() => window.scrollY), { timeout: 30_000 })
+      .toBeGreaterThan(0);
+    await expect(page.locator('.narration p').last()).toBeInViewport();
+    await context.close();
+  });
 });
