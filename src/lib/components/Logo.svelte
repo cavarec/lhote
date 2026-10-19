@@ -68,39 +68,43 @@
   }
   .parasite {
     transform-origin: 60px 36px;
-    animation: coil 7s ease-in-out infinite;
+    animation: coil 14s ease-in-out infinite;
   }
   .thread {
     animation: creep 3s linear infinite;
   }
-  /* Le parasite sursaute deux fois par cycle, et l'œil cligne au même instant. */
+  /* Un cycle de 14 s : le parasite frémit sans cesse, sursaute une fois, et l'œil cligne à cet instant. */
   .eye {
     transform-origin: 60px 36px;
-    animation: blink 7s ease-in-out infinite;
+    animation: blink 14s ease-in-out infinite;
   }
   @keyframes coil {
     0%,
-    37%,
-    84%,
     100% {
-      transform: rotate(-6deg) scale(1);
+      transform: rotate(-3deg) scale(1);
     }
-    42%,
-    79% {
-      transform: rotate(12deg) scale(1.08);
+    25% {
+      transform: rotate(-1deg) scale(1.02);
+    }
+    47% {
+      transform: rotate(-3deg) scale(1);
+    }
+    52%,
+    60% {
+      transform: rotate(5deg) scale(1.05);
+    }
+    75% {
+      transform: rotate(2deg) scale(1.02);
     }
   }
   @keyframes blink {
     0%,
-    36%,
-    44%,
-    78%,
-    86%,
+    47%,
+    54%,
     100% {
       transform: scaleY(1);
     }
-    40%,
-    82% {
+    50.5% {
       transform: scaleY(0.06);
     }
   }

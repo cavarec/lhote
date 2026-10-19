@@ -113,6 +113,13 @@
 </main>
 
 <style>
+  /* Toute la page d'accueil est composée dans la police du récit. */
+  main .ui,
+  main .button--quiet,
+  .link {
+    font-family: var(--font-narration);
+    font-size: 1.125rem;
+  }
   .home-title {
     font-size: 2.5rem;
     margin: var(--space-5) 0 var(--space-2);
