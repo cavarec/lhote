@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.7.0] - 2026-10-19
+
+### Modifié
+
+- Les illustrations sont redessinées dans l'esprit de l'art celtique d'ornement : gravures au trait ocre sur parchemin, spirales, triskèles et volutes, filet d'ornement en haut et en bas. Les motifs sont construits par le code et ne copient aucune œuvre. Chaque histoire a ses images : vagues enroulées, cloche engloutie, roue du char et peigne pour la mer ; cloche, chasse et triskèle pour le pardon ; feu, fontaine noire et lueur pour la forêt. Les cinq images par histoire et les quatre ambiances de fin sont refaites.
+
 ## [0.6.0] - 2026-10-19
 
 ### Modifié

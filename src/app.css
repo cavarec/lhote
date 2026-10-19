@@ -23,6 +23,9 @@
   --blood: #8b2e2e;
   --mist: #6b6358;
   --veil: rgba(26, 26, 26, 0.06);
+  /* Illustrations seulement (jamais du texte) : trait ocre des gravures et lueur des feux follets. */
+  --ochre: #9a6532;
+  --sea: #3f7f77;
 
   --font-narration: 'Crimson Pro', Literata, Georgia, serif;
   --font-ui: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
