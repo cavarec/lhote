@@ -10,6 +10,20 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.10.0] - 2026-10-19
+
+### Ajouté
+
+- Deux histoires hors saison, dans les légendes bretonnes : « Le lavoir de minuit » (les lavandières de la nuit) et « Les cloches d'Ys ». Chacune a une seconde passe de dialogue, quatre coups de théâtre, six issues et ses illustrations. Quatre fractures de plus (14 au total).
+- « Laisser ta main faire » : au dialogue et à l'enquête, le corps hérité agit seul. Le résultat est fixé par l'histoire : il sauve, trahit ou révèle.
+- L'Observateur : un aparté à la fin d'un saut (utile, inutile, faux ou personnel). Les échos personnels : un souvenir qui n'est pas le tien, glissé dans l'orientation, un saut sur quatre.
+- Quatre personnages de métier breton (12 au total).
+- Vitesse d'écriture réglable (lente, normale, rapide, tout d'un coup) et bouton « Tout afficher ».
+
+### Modifié
+
+- Tutoiement partout dans l'interface, messages d'erreur compris. Un test le vérifie.
+
 ## [0.9.2] - 2026-10-19
 
 ### Corrigé
