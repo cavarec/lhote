@@ -2,6 +2,7 @@ import type { Character } from '../../../content/characters/types';
 import type { Outcome } from '../../../content/premises/types';
 import { EngineError } from './errors';
 import { createRng } from './rng';
+import { inSeason, premisesAt } from './season';
 import type {
   Act,
   Catalog,
@@ -28,6 +29,8 @@ export const TRACE_PROBABILITY = 0.2;
 export const TRACE_SALT = 0x9e3779b9;
 /** Une prémisse jouée dans les N derniers sauts n'est pas retirée. */
 export const RECENT_PREMISE_WINDOW = 2;
+/** Quand une prémisse de saison est ouverte et pas récente, chance qu'elle soit tirée. */
+export const SEASONAL_PROBABILITY = 0.5;
 
 /** Acte selon le numéro du saut (1-based) : 1–5, 6–12, 13–18, puis au-delà. */
 export function actForLeap(leapNumber: number): Act {
@@ -41,16 +44,25 @@ function pickPremiseId(
   rng: ReturnType<typeof createRng>,
   catalog: Catalog,
   history: readonly LeapResult[],
+  now: number,
 ): string {
+  // Hors saison, une prémisse de saison n'existe pas ; si tout le catalogue est de saison, on le garde.
+  const open = premisesAt(catalog.premises, now);
+  const pool = open.length > 0 ? open : catalog.premises;
   const recent = new Set(history.slice(-RECENT_PREMISE_WINDOW).map((r) => r.premiseId));
-  const fresh = catalog.premises.filter((p) => !recent.has(p.id));
+  const fresh = pool.filter((p) => !recent.has(p.id));
+  const seasonal = fresh.filter((p) => p.season && inSeason(p.season, now));
+  // Le tirage de la chance n'a lieu que s'il y a une fête : sans elle, les sauts restent ceux d'avant.
+  if (seasonal.length > 0 && rng.chance(SEASONAL_PROBABILITY)) {
+    return rng.pick(seasonal).id;
+  }
   if (fresh.length > 0) return rng.pick(fresh).id;
 
   // Catalogue trop petit : on prend la prémisse la moins récemment jouée.
   const lastIndex = (id: string): number =>
     history.map((r) => r.premiseId).lastIndexOf(id);
-  const oldest = Math.min(...catalog.premises.map((p) => lastIndex(p.id)));
-  return rng.pick(catalog.premises.filter((p) => lastIndex(p.id) === oldest)).id;
+  const oldest = Math.min(...pool.map((p) => lastIndex(p.id)));
+  return rng.pick(pool.filter((p) => lastIndex(p.id) === oldest)).id;
 }
 
 function pickCharacters(
@@ -96,7 +108,7 @@ export function generateLeap(input: GenerateLeapInput, catalog: Catalog): Genera
   }
   const rng = createRng(input.seed);
 
-  const premiseId = pickPremiseId(rng, catalog, input.history);
+  const premiseId = pickPremiseId(rng, catalog, input.history, input.now);
   const premise = catalog.premises.find((p) => p.id === premiseId);
   if (!premise) {
     throw new EngineError('empty_catalog', `Prémisse introuvable : ${premiseId}.`);

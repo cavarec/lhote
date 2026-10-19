@@ -5,6 +5,7 @@ import type {
   InvestigationItem,
   Premise,
   Resolution,
+  Twist,
 } from '../../../content/premises/types';
 import { applySuspicion, isExposed } from '../engine/suspicion';
 import type { Catalog, LeapState } from '../engine/types';
@@ -98,6 +99,32 @@ export function chooseDialogue(
       ...leap,
       suspicion: applySuspicion(leap.suspicion, choice.kind),
       choices: { ...leap.choices, dialogue: choice.id },
+    },
+  };
+}
+
+/** Applique un choix de la seconde passe du dialogue. Un seul par saut, après le premier. */
+export function chooseSecondRound(
+  leap: LeapState,
+  premise: Premise,
+  choiceId: string,
+): DialogueOutcome {
+  const round = premise.openingDialogue.secondRound;
+  if (!round) throw new BeatError('Ce dialogue n’a pas de seconde passe.');
+  if (leap.choices['dialogue'] === undefined) {
+    throw new BeatError('Le premier choix doit précéder le second.');
+  }
+  if (leap.choices['dialogue2'] !== undefined) {
+    throw new BeatError('Le choix a déjà été fait.');
+  }
+  const choice = round.choices.find((c) => c.id === choiceId);
+  if (!choice) throw new BeatError(`Choix inconnu : ${choiceId}.`);
+  return {
+    choice,
+    leap: {
+      ...leap,
+      suspicion: applySuspicion(leap.suspicion, choice.kind),
+      choices: { ...leap.choices, dialogue2: choice.id },
     },
   };
 }
@@ -197,6 +224,26 @@ export function revealClues(
 
 export function revealClue(leap: LeapState, index: number): LeapState {
   return { ...leap, choices: { ...leap.choices, [`clue-${index}`]: 'seen' } };
+}
+
+/**
+ * Le coup de théâtre de ce saut : le premier dont toutes les vérités exigées sont connues.
+ * `null` si la prémisse n'en a pas.
+ */
+export function activeTwist(premise: Premise, leap: LeapState): Twist | null {
+  const known = knownTruths(premise, leap);
+  return (
+    premise.twists?.find((t) => (t.requires ?? []).every((id) => known.has(id))) ?? null
+  );
+}
+
+/** Le coup de théâtre est en cours (« pending ») : le joueur l'a déclenché et doit le jouer. */
+export function twistPending(leap: LeapState): boolean {
+  return leap.choices['twist'] === 'pending';
+}
+
+export function startTwist(leap: LeapState): LeapState {
+  return { ...leap, choices: { ...leap.choices, twist: 'pending' } };
 }
 
 /** Quelle lecture de la fracture le joueur retient (0 ou 1). */

@@ -15,6 +15,10 @@ export const MAX_RESULT_LINES = 5;
  */
 export const MENT_EXCEPTIONS: ReadonlySet<string> = new Set([
   'comment',
+  'forment',
+  'fument',
+  'bourdonnement',
+  'entrebâillement',
   // Formes verbales (3e personne du pluriel) qui finissent en -ment.
   'ferment',
   'referment',
@@ -136,6 +140,19 @@ function dialogueTexts(where: string, dialogue: Dialogue): PlayerText[] {
       texts.push({ where: `${where}.choices[${i}].reply[${j}]`, text: line.text });
     });
   });
+  const round = dialogue.secondRound;
+  round?.lines.forEach((line, i) =>
+    texts.push({ where: `${where}.secondRound.lines[${i}]`, text: line.text }),
+  );
+  round?.choices.forEach((choice, i) => {
+    texts.push({ where: `${where}.secondRound.choices[${i}].text`, text: choice.text });
+    choice.reply.forEach((line, j) => {
+      texts.push({
+        where: `${where}.secondRound.choices[${i}].reply[${j}]`,
+        text: line.text,
+      });
+    });
+  });
   return texts;
 }
 
@@ -156,6 +173,11 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
       texts.push({ where: `${at}.investigation[${i}]`, text: item.text }),
     );
     texts.push(...dialogueTexts(`${at}.openingDialogue`, premise.openingDialogue));
+    premise.twists?.forEach((twist, i) =>
+      twist.lines.forEach((line, j) =>
+        texts.push({ where: `${at}.twists[${i}].lines[${j}]`, text: line.text }),
+      ),
+    );
     premise.resolutions.forEach((r) => {
       texts.push(
         { where: `${at}.resolution ${r.id}.choiceText`, text: r.choiceText },
@@ -273,6 +295,26 @@ export function checkPremise(premise: Premise): Violation[] {
   violations.push(
     ...checkDialogueChoices(`${at}.openingDialogue`, premise.openingDialogue),
   );
+  const round = premise.openingDialogue.secondRound;
+  if (round) {
+    violations.push(
+      ...checkDialogueChoices(`${at}.openingDialogue.secondRound`, {
+        npcId: premise.openingDialogue.npcId,
+        lines: round.lines,
+        choices: round.choices,
+      }),
+    );
+  }
+  // Un coup de théâtre sans condition sert de repli : il doit être le dernier.
+  premise.twists?.forEach((twist, i, all) => {
+    if (twist.requires === undefined && i !== all.length - 1) {
+      violations.push({
+        where: `${at}.twists[${i}]`,
+        rule: 'twists',
+        message: 'Un coup de théâtre sans condition doit venir en dernier.',
+      });
+    }
+  });
 
   for (const resolution of premise.resolutions) {
     const where = `${at}.resolution ${resolution.id}`;

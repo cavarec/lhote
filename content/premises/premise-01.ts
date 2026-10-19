@@ -179,6 +179,102 @@ export const premise01: Premise = {
         ],
       },
     ],
+
+    // Seconde passe : le temps presse, la famille approche.
+    secondRound: {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'La porte se rouvre avant que tu aies rien décidé. La personne est essoufflée, comme après une course sur les galets.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Ils sont en avance. La mère marche déjà vers la maison, et elle ne marche pas seule.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Les hommes veulent creuser ce soir. Ils disent que la mer reprend ce qu’on lui laisse.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dehors, un essieu grince. Il se rapproche, au pas, par à-coups. Aucune charrette n’est en vue.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Alors ? Qu’est-ce que je leur dis, à la porte ?',
+        },
+      ],
+      choices: [
+        {
+          id: 'gagner-du-temps',
+          kind: 'neutral',
+          text: '« Dis-leur que la toilette n’est pas finie. Une heure. »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Une heure. Je ne sais pas si la mère l’entendra comme ça.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne ressort. Tu entends sa voix, basse, puis celle de la mère, qui ne baisse pas.',
+            },
+          ],
+        },
+        {
+          id: 'ecouter-lessieu',
+          kind: 'informative',
+          text: '« Cet essieu. Qui l’a entendu avant moi ? »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Tout le village. Trois nuits. Il passe toujours par le chemin des roches, jamais plus loin.',
+            },
+            {
+              speaker: 'npc',
+              text: 'La vieille dit que c’est l’Ankou qui vient chercher son compte. Moi, je dis que le bois travaille.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne n’a pas l’air de le croire elle-même.',
+            },
+          ],
+        },
+        {
+          id: 'refuser-de-laisser-entrer',
+          kind: 'risky',
+          text: '« Personne n’entre avant que j’aie fini. Même la mère. »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Même la mère ? Tu sais ce que tu demandes ? Ils vont enfoncer la porte.',
+            },
+            {
+              speaker: 'narration',
+              text: 'Le regard de la personne glisse sur toi, sur tes mains, sur le drap. Elle cherche ce qui ne va pas, et elle commence à le trouver.',
+            },
+          ],
+        },
+        {
+          id: 'demander-le-nom',
+          kind: 'informative',
+          text: '« Qui, dans ce village, a perdu quelqu’un à la mer il y a longtemps ? »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Longtemps comment ? Ici, tout le monde a perdu quelqu’un.',
+            },
+            {
+              speaker: 'npc',
+              text: 'Si tu veux un nom, demande à la vieille. Mais ne le demande pas devant les hommes.',
+            },
+            {
+              speaker: 'narration',
+              text: 'Elle se tait, puis ajoute à voix très basse : « Et ne le demande pas devant la mère. »',
+            },
+          ],
+        },
+      ],
+    },
   },
 
   // Beat 4 : enquête. Le corps est dans l'eau depuis des années ; quelqu'un le sait.
@@ -231,8 +327,95 @@ export const premise01: Premise = {
       text: 'Dans les cheveux du mort, un peigne d’os est resté pris, aux dents cassées. Il ressemble à celui de ton étagère, à deux dents près.',
     },
     {
+      kind: 'social',
+      text: 'L’homme du seuil sort de sa poche un bout de cordelette, le serre dans son poing et le range. Le nœud est celui que tu portes au cou.',
+    },
+    {
+      kind: 'material',
+      text: 'Sous la table, une flaque s’étend. L’eau ne coule pas vers la porte, comme elle le devrait. Elle remonte, pouce à pouce, vers le mur de la grève.',
+    },
+    {
       kind: 'material',
       text: 'Par terre, près de la porte, des traces de bottes lourdes. Elles viennent de la grève, passent près de la table et repartent sans le drap.',
+    },
+  ],
+
+  // Entre l'enquête et la fracture : un coup de théâtre, selon ce que tu as appris.
+  twists: [
+    {
+      requires: ['noye-depuis-longtemps', 'vieux-nom'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'L’essieu s’arrête devant ta porte. Pas de pas, pas de voix. Juste le bois qui se tait, comme une main qu’on lève pour frapper.',
+        },
+        {
+          speaker: 'narration',
+          text: 'La vieille est là, à ton coude. Elle n’a pas bougé et pourtant elle est là. Elle prononce le nom une deuxième fois.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Celui-là a quitté le village il y a longtemps, sur une nuit sans lune. Il devait revenir. On a juré qu’on ne le dirait pas.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Sur la table, le poing fermé du mort s’est ouvert tout seul. Dans la paume, il y a un morceau de peigne d’os. Il manque deux dents au tien.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dehors, la mère appelle. Ce n’est plus un nom qu’elle crie. C’est ta porte qu’elle frappe, du plat de la main.',
+        },
+      ],
+    },
+    {
+      requires: ['noye-depuis-longtemps'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Tu retires les mains du corps. Elles ne tremblent pas. Elles savent ce qu’elles ont senti : des années, pas des nuits.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Alors la cloche de la baie sonne. Trois coups, sous l’eau, très loin et très nets. Tout le village l’entend, tu le sais au silence.',
+        },
+        {
+          speaker: 'narration',
+          text: 'La mère frappe à la porte. « Ouvrez. Je sais que c’est lui. » Sa voix n’a plus d’espoir. Elle a de l’entêtement, ce qui est pire.',
+        },
+      ],
+    },
+    {
+      requires: ['vieux-nom'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'La vieille est revenue sur le seuil, la main sur la bouche. Elle regarde le nom qu’elle a dit comme on regarde un chien qu’on a lâché.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Ne le redis pas ici. Le sable a des oreilles. Il y a des hommes qui ont creusé pour que ce nom reste en dessous.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dehors, une pelle racle un caillou. On a commencé à creuser sans attendre ta réponse.',
+        },
+      ],
+    },
+    {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Tu n’as pas fini de regarder quand la porte s’ouvre. La mère entre sans attendre, suivie du froid de la grève et de deux hommes.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Elle s’arrête devant la table. Ses yeux passent sur le drap, puis sur toi. Elle dit, très bas : « Tu sais déjà, toi. »',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu ne sais pas encore. Mais tu as l’impression que tout le monde, ici, a pris de l’avance sur toi.',
+        },
+      ],
     },
   ],
 
@@ -252,6 +435,7 @@ export const premise01: Premise = {
         'Elle touche la chemise brodée du bout du doigt. Elle dit : « Ce n’est pas lui. » Elle ne pleure pas. Elle respire enfin.',
         'Les hommes sur le seuil ne bougent pas. Dehors, quelqu’un retire son bonnet.',
         'Elle dit : « Merci de m’avoir laissée voir. » Elle part vers la grève, et elle regarde la mer avec d’autres yeux.',
+        'Derrière toi, le drap retombe. Sous la table, la flaque s’est retirée vers la porte, goutte à goutte, comme si on venait de la rappeler.',
       ].join('\n'),
       mutations: [
         {
@@ -285,6 +469,7 @@ export const premise01: Premise = {
         'À midi, la famille entre. La mère se jette sur le drap et dit le nom du petit, très fort.',
         'Personne ne la corrige. On enterre demain, sous ce nom qui n’est pas le bon.',
         'Tu vois la vieille, au fond, qui hoche la tête. Elle ne te regarde pas.',
+        'Cette nuit-là, l’essieu grince jusqu’à l’aube. Cette fois, il va jusqu’à la tombe, et il s’y arrête.',
       ].join('\n'),
       mutations: [
         {
@@ -308,6 +493,7 @@ export const premise01: Premise = {
         'Tu dis le nom. Le silence tombe sur la pièce comme un filet mouillé.',
         'La vieille ferme les yeux. L’homme du seuil s’en va, d’un pas qui n’a plus rien de calme.',
         'La mère demande : « Qui est-ce ? » Personne ne répond. Les portes se ferment, l’une après l’autre.',
+        'Seule la cloche de la baie répond. Elle sonne trois fois, sous l’eau, et plus personne ne fait semblant de ne pas l’entendre.',
       ].join('\n'),
       mutations: [
         {
@@ -330,6 +516,7 @@ export const premise01: Premise = {
         'Tu pousses la plus petite barque à l’eau. Tes mains tiennent les rames comme si elles avaient toujours su.',
         'La côte devient une ligne grise. Tu appelles un nom. Une mouette répond, puis plus rien.',
         'Au retour, la nuit tombe. La mère est sur la grève, immobile, et ne dit pas si elle espère encore.',
+        'Dans le fond de la barque, une chose que tu n’y avais pas mise : un peigne d’os, mouillé, dont il manque deux dents.',
       ].join('\n'),
       mutations: [
         {
@@ -361,6 +548,7 @@ export const premise01: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Que ces mains ne sont pas à toi.',
         'Personne ne rit. Les hommes se signent. Quelqu’un recule jusqu’à la porte, puis dehors.',
         'On te retire le tablier. Une autre lavera le corps, et ce sera quelqu’un qui sait ce qu’elle fait.',
+        'Sur le seuil, en partant, tu entends l’essieu. Il grince derrière toi, au pas, et il te suit jusqu’à la dernière maison.',
       ].join('\n'),
       mutations: [],
     },
@@ -373,6 +561,7 @@ export const premise01: Premise = {
         'Tu descends à la marée basse. Les roches sont noires, luisantes, couvertes d’algues glissantes.',
         'Tu trouves la crevasse où le corps a dormi. Tu t’y penches. Au fond, quelque chose de blanc.',
         'La mer revient avant que tu l’aies compris. Elle n’a pas de hâte. Elle a toute la journée.',
+        'Sous l’eau qui monte, tu entends une cloche. Elle sonne pour toi, et tu comprends enfin que c’était le sens du bruit.',
       ].join('\n'),
       mutations: [
         {

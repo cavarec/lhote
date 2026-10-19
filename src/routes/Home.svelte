@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { catalog } from '../../content';
+  import { currentSeason } from '../lib/engine/season';
   import { game } from '../lib/stores/game.svelte';
+  import { shareGame, type ShareResult } from '../lib/utils/share';
 
   let {
     onstart,
@@ -18,6 +21,26 @@
   } = $props();
 
   const resuming = $derived(game.hasProgress);
+  const season = currentSeason(catalog.premises, Date.now());
+
+  let shared = $state<ShareResult | null>(null);
+  const sharedMessage = $derived(
+    shared === 'copied'
+      ? 'Le lien est copié.'
+      : shared === 'failed'
+        ? 'Impossible de partager d’ici. Le lien est lhote.atao.dev.'
+        : '',
+  );
+
+  async function share(): Promise<void> {
+    shared = await shareGame({
+      share:
+        typeof navigator.share === 'function'
+          ? navigator.share.bind(navigator)
+          : undefined,
+      clipboard: navigator.clipboard,
+    });
+  }
 </script>
 
 <main class="page fade-in">
@@ -27,6 +50,12 @@
       ? 'Quelqu’un dort dans un corps qui n’est pas le sien.'
       : 'Le monde vous attend.'}
   </p>
+
+  {#if season}
+    <p class="narration muted season">
+      Ces jours-ci, c’est {season.label}. Une histoire de saison peut t’attendre.
+    </p>
+  {/if}
 
   {#if game.degraded}
     <p class="ui notice" role="status">
@@ -70,12 +99,44 @@
     >
     <button class="button button--quiet" onclick={onsources}>Sources</button>
   </div>
+
+  <div class="quiet-links ui muted">
+    <button class="link" onclick={share}>Partager</button>
+    <span aria-hidden="true">·</span>
+    <a class="link" href="/nouveautes.xml" rel="alternate" type="application/atom+xml"
+      >S’abonner aux nouveautés</a
+    >
+  </div>
+  <p class="ui muted" role="status" aria-live="polite">{sharedMessage}</p>
 </main>
 
 <style>
   .home-title {
     font-size: 2.5rem;
     margin: var(--space-5) 0 var(--space-2);
+  }
+  .season {
+    margin-top: var(--space-2);
+  }
+  .quiet-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+  .link {
+    min-height: 48px;
+    padding: 0 var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
   }
   .notice {
     margin-top: var(--space-3);

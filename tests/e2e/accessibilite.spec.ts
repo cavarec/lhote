@@ -31,12 +31,17 @@ test.describe('accessibilité (WCAG AA)', () => {
     await page.getByRole('button', { name: 'Continuer' }).click();
     await audit(page);
     await page.locator('.choice').first().click();
+    await audit(page);
+    await page.locator('.choice').first().click();
     await page.getByRole('button', { name: 'Continuer' }).waitFor();
     await audit(page);
     await page.getByRole('button', { name: 'Continuer' }).click();
     await audit(page);
     await page.locator('.choice').first().click();
     await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.getByRole('button', { name: 'Faire face' }).waitFor();
+    await audit(page);
+    await page.getByRole('button', { name: 'Faire face' }).click();
     await audit(page);
     await page.locator('.choice').first().click();
     await page.getByRole('button', { name: 'Décider' }).click();

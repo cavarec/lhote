@@ -5,8 +5,12 @@
   import Vignette from '../lib/components/Vignette.svelte';
   import type { SceneKind } from '../lib/illustrations/scenes';
   import {
+    activeTwist,
     availableResolutions,
     chooseDialogue,
+    chooseSecondRound,
+    startTwist,
+    twistPending,
     clueGroups,
     investigationLeft,
     lockedResolutions,
@@ -34,6 +38,12 @@
     premise.openingDialogue.choices?.find((c) => c.id === leap.choices['dialogue']) ??
       null,
   );
+  const round = $derived(premise.openingDialogue.secondRound ?? null);
+  const chosen2 = $derived(
+    round?.choices.find((c) => c.id === leap.choices['dialogue2']) ?? null,
+  );
+  const twist = $derived(activeTwist(premise, leap));
+  const twistOn = $derived(twistPending(leap));
   const groups = $derived(clueGroups(premise, leap));
   const resolutions = $derived(availableResolutions(premise, leap));
   const locked = $derived(lockedResolutions(premise, leap));
@@ -48,6 +58,15 @@
       ? game.beat
       : undefined,
   );
+
+  function choose2(id: string): void {
+    void game.update((l) => chooseSecondRound(l, premise, id).leap);
+  }
+
+  function afterInvestigation(): void {
+    if (twist && !twistOn) void game.update((l) => startTwist(l));
+    else game.advance();
+  }
 
   function choose(id: string): void {
     void game.update((l) => chooseDialogue(l, premise, id).leap);
@@ -98,11 +117,46 @@
             npcName={speaker?.name ?? null}
             {instant}
           >
-            <button class="button button--primary next" onclick={() => game.advance()}>
-              Continuer
-            </button>
+            {#if !round}
+              <button class="button button--primary next" onclick={() => game.advance()}>
+                Continuer
+              </button>
+            {:else}
+              <Scene lines={round.lines} npcName={speaker?.name ?? null} {instant}>
+                {#if !chosen2}
+                  <ul class="choices">
+                    {#each round.choices as c (c.id)}
+                      <li>
+                        <button class="choice" onclick={() => choose2(c.id)}>
+                          {c.text}
+                        </button>
+                      </li>
+                    {/each}
+                  </ul>
+                {:else}
+                  <Scene
+                    lines={[{ speaker: 'player', text: chosen2.text }, ...chosen2.reply]}
+                    npcName={speaker?.name ?? null}
+                    {instant}
+                  >
+                    <button
+                      class="button button--primary next"
+                      onclick={() => game.advance()}
+                    >
+                      Continuer
+                    </button>
+                  </Scene>
+                {/if}
+              </Scene>
+            {/if}
           </Scene>
         {/if}
+      </Scene>
+    {:else if game.beat === 'investigation' && twistOn && twist}
+      <Scene lines={twist.lines} npcName={speaker?.name ?? null} {instant}>
+        <button class="button button--primary next" onclick={() => game.advance()}>
+          Faire face
+        </button>
       </Scene>
     {:else if game.beat === 'investigation'}
       <div class="narration fade-in">
@@ -134,7 +188,7 @@
           </li>
         {/each}
       </ul>
-      <button class="button button--primary next" onclick={() => game.advance()}>
+      <button class="button button--primary next" onclick={afterInvestigation}>
         Continuer
       </button>
     {:else if game.beat === 'fracture' && fracture}

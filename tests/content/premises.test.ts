@@ -3,9 +3,15 @@ import { catalog } from '../../content';
 import { countWords } from './rules';
 
 describe('catalogue de prémisses', () => {
-  it('contient trois prémisses aux identifiants neutres et uniques', () => {
+  it('contient cinq prémisses aux identifiants neutres et uniques', () => {
     const ids = catalog.premises.map((p) => p.id);
-    expect(ids).toEqual(['premise-01', 'premise-02', 'premise-03']);
+    expect(ids).toEqual([
+      'premise-01',
+      'premise-02',
+      'premise-03',
+      'premise-04',
+      'premise-05',
+    ]);
   });
 
   it('n’utilise chaque fracture qu’une fois, et toutes existent', () => {

@@ -19,6 +19,7 @@ import {
 } from './test-fixtures';
 import type { Catalog, WorldMutation } from './types';
 import { createChronology, createWorld } from './world';
+import { currentSeason, inSeason } from './season';
 
 const catalog = makeCatalog();
 
@@ -188,6 +189,63 @@ describe('generateLeap', () => {
     expect(codeOf(() => generateLeap(makeInput(), { ...catalog, fractures: [] }))).toBe(
       'unknown_fracture',
     );
+  });
+});
+
+describe('prémisses de saison', () => {
+  const day = (m: number, d: number): number => Date.UTC(2026, m - 1, d, 12);
+  const seasonal: Catalog = {
+    ...catalog,
+    premises: [
+      ...catalog.premises.slice(0, 2),
+      {
+        ...catalog.premises[2]!,
+        id: 'fete',
+        season: { from: '10-20', to: '11-10', label: 'La fête' },
+      },
+    ],
+  };
+
+  it('la fenêtre comprend ses bornes et enjambe le nouvel an', () => {
+    const noel = { from: '12-01', to: '01-06', label: 'Noël' };
+    expect(inSeason(noel, day(12, 1))).toBe(true);
+    expect(inSeason(noel, day(1, 6))).toBe(true);
+    expect(inSeason(noel, day(1, 7))).toBe(false);
+    expect(inSeason(noel, day(11, 30))).toBe(false);
+    expect(inSeason(noel, day(12, 25))).toBe(true);
+  });
+
+  it('hors saison, la prémisse de saison n’est jamais tirée', () => {
+    for (let seed = 0; seed < 200; seed++) {
+      const { leap } = generateLeap(makeInput({ seed, now: day(6, 15) }), seasonal);
+      expect(leap.premiseId).not.toBe('fete');
+    }
+  });
+
+  it('en saison, elle sort souvent, mais pas toujours', () => {
+    let hits = 0;
+    for (let seed = 0; seed < 400; seed++) {
+      const { leap } = generateLeap(makeInput({ seed, now: day(10, 31) }), seasonal);
+      if (leap.premiseId === 'fete') hits++;
+    }
+    expect(hits).toBeGreaterThan(100);
+    expect(hits).toBeLessThan(400);
+  });
+
+  it('une prémisse de saison jouée récemment ne revient pas tout de suite', () => {
+    const history = [makeResult(0, 'fete')];
+    for (let seed = 0; seed < 100; seed++) {
+      const { leap } = generateLeap(
+        makeInput({ seed, history, now: day(10, 31) }),
+        seasonal,
+      );
+      expect(leap.premiseId).not.toBe('fete');
+    }
+  });
+
+  it('nomme la fête en cours', () => {
+    expect(currentSeason(seasonal.premises, day(11, 1))?.label).toBe('La fête');
+    expect(currentSeason(seasonal.premises, day(3, 1))).toBeNull();
   });
 });
 
