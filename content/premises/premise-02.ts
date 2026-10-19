@@ -39,7 +39,11 @@ export const premise02: Premise = {
     },
     {
       kind: 'material',
-      text: 'Par la fenêtre, une place pleine : bannières brodées, coiffes blanches, pèlerins à genoux. Au loin, deux flèches de pierre taillées dans un ciel pâle.',
+      text: 'Par la fenêtre, une place pleine : bannières brodées, coiffes blanches, pèlerins à genoux. Entre deux flèches de pierre, un roi de pierre à cheval, tourné vers l’ouest.',
+    },
+    {
+      kind: 'material',
+      text: 'Dans l’angle de la sacristie, une statue de bois recouverte d’un drap. Le drap dessine un crâne, des épaules maigres et, contre le mur, un long manche.',
     },
     {
       kind: 'material',
@@ -208,11 +212,19 @@ export const premise02: Premise = {
     },
     {
       kind: 'social',
+      text: 'Le porteur de bannière dit à voix basse : « On a entendu la cloche d’en dessous, cette nuit. Celle qui sonne sous la rivière. Tu l’as entendue, toi aussi ? »',
+    },
+    {
+      kind: 'social',
       text: 'Une vieille, sur le seuil, te tend un cierge sans rien dire. Elle te regarde comme on regarde quelqu’un qui va tomber.',
     },
     {
       kind: 'social',
       text: 'Par la fenêtre, tu vois la femme du haut. Elle porte un enfant sur le dos, trop grand pour être porté. Elle ne pleure pas. Elle attend.',
+    },
+    {
+      kind: 'material',
+      text: 'On a recouvert la statue de bois pour le pardon. Un jour par an, on ne regarde pas celui qui vient chercher les vivants. Le drap a été soulevé, cette nuit.',
     },
     {
       kind: 'bodily',

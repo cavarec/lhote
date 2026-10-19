@@ -10,6 +10,16 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.6.0] - 2026-10-19
+
+### Modifié
+
+- Les légendes bretonnes sont plus présentes dans les trois histoires, toujours en sous-texte : un essieu qui grince sans charrette, une cloche qui sonne sous la baie, une statue voilée à la faux suggérée, un roi de pierre tourné vers la mer, une fontaine qui appelle l'orage, une femme sous une aubépine, une lueur verte qu'on ne regarde pas. Aucune n'est nommée ni expliquée.
+
+### Ajouté
+
+- Un écran « Sources », accessible depuis l'accueil, qui cite les collecteurs dont le travail a nourri le jeu (Luzel, Le Braz, Sébillot).
+
 ## [0.5.1] - 2026-10-19
 
 ### Corrigé

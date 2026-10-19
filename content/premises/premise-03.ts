@@ -38,7 +38,11 @@ export const premise03: Premise = {
     },
     {
       kind: 'material',
-      text: 'À dix pas, une fontaine de pierre bordée de mousse. Une écuelle de fer attend sur la margelle. L’eau est noire, immobile, très ancienne.',
+      text: 'À dix pas, une fontaine de pierre bordée de mousse. Une écuelle de fer attend sur la margelle, près d’une dalle noircie par les gestes. L’eau est noire, très ancienne.',
+    },
+    {
+      kind: 'material',
+      text: 'Au-delà du feu, entre les troncs, une lueur basse et verte. Personne ne la regarde. Tout le monde sait comment ne pas la regarder.',
     },
     {
       kind: 'material',
@@ -127,7 +131,7 @@ export const premise03: Premise = {
           },
           {
             speaker: 'npc',
-            text: 'Quelqu’un l’attend. Quelqu’un lui doit quelque chose, ou le contraire. On ne sait pas encore.',
+            text: 'Une femme l’attend, sous une aubépine, et elle ne le laisse pas repartir. Il lui doit quelque chose, ou le contraire. On ne sait pas encore.',
           },
           {
             speaker: 'narration',
@@ -188,6 +192,10 @@ export const premise03: Premise = {
     {
       kind: 'material',
       text: 'Le carnet du conteur est sorti de la sacoche. Ses pages sont couvertes d’une écriture fine, penchée, qui ressemble à celle de ton registre, trait pour trait.',
+    },
+    {
+      kind: 'material',
+      text: 'La dalle noire de la margelle est mouillée. On dit que verser l’écuelle dessus fait venir l’orage. Quelqu’un l’a fait cette nuit, ou veut le faire.',
     },
     {
       kind: 'material',

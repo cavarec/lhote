@@ -25,6 +25,7 @@ export const premise01: Premise = {
     'Tu cherches ton nom. Tu trouves un mot à la place : une cloche, très loin, qui ne sonne pas.',
     'Au cou, quelque chose de rêche : une cordelette, un nœud, un petit poids de coquille. Tes doigts le serrent sans toi.',
     'Derrière une cloison, une voix chante trois notes, toujours les mêmes. Elle les a chantées des centaines de fois.',
+    'Dans la nuit finissante, un essieu a grincé sur le chemin de la grève. Il avançait au pas, sans s’approcher. Il s’est tu avant l’aube.',
     'On frappe trois coups à plat sur du bois. Une pause. Trois autres. Le rythme est celui d’un usage, pas d’une urgence.',
     'La porte s’ouvre sur la mer. Le vent entre, passe sur ta nuque et sort. Tu sais une chose : on t’attend.',
     'Tu ouvres les yeux.',
@@ -59,6 +60,10 @@ export const premise01: Premise = {
     {
       kind: 'social',
       text: 'Au mur, un tablier de toile cirée et un chapelet de coquilles. Sur le seuil, des sabots d’adulte et une paire de sabots d’enfant.',
+    },
+    {
+      kind: 'social',
+      text: 'Une vieille, au seuil, dit à personne : « Trois nuits qu’il grince, cet essieu. Et pas de charrette. » Les autres font semblant de ne pas entendre.',
     },
     {
       kind: 'social',
@@ -207,6 +212,10 @@ export const premise01: Premise = {
     },
     {
       kind: 'social',
+      text: 'Une femme, près de la fenêtre, murmure : « Ce matin, la cloche d’en dessous a sonné. Celle de la baie. Elle n’avait pas sonné depuis longtemps. »',
+    },
+    {
+      kind: 'social',
       text: 'Un enfant glisse la tête dans l’encadrement et dit à voix basse : « Ce n’est pas lui, hein ? » Une main l’attire en arrière.',
     },
     {
@@ -216,6 +225,10 @@ export const premise01: Premise = {
     {
       kind: 'bodily',
       text: 'Ton pouce trouve une cicatrice ancienne au creux de l’autre paume. Une corde y a glissé, il y a longtemps, et ce corps s’en souvient.',
+    },
+    {
+      kind: 'material',
+      text: 'Dans les cheveux du mort, un peigne d’os est resté pris, aux dents cassées. Il ressemble à celui de ton étagère, à deux dents près.',
     },
     {
       kind: 'material',

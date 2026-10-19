@@ -26,6 +26,24 @@ Le ton et l'échantillon de référence sont dans `VOIX.md`.
   personnage ; on écrit « la personne », « quelqu'un », jamais « il » ni « elle » pour lui.
 - **Résultats** : `resultText` fait de 2 à 5 lignes, séparées par `\n`.
 
+## Légendes en sous-texte
+
+Chaque légende est suggérée par un détail fonctionnel, jamais nommée ni expliquée (cahier des charges §2.7).
+Le joueur qui la connaît la reconnaît ; l'autre passe à côté sans rien perdre.
+
+| Scénario                      | Détail dans le texte                                                         | Écho                            |
+| ----------------------------- | ---------------------------------------------------------------------------- | ------------------------------- |
+| La mer rend un corps          | un essieu qui grince sans charrette, trois nuits de suite                    | le char de l'Ankou              |
+| La mer rend un corps          | la cloche d'en dessous qui sonne dans la baie                                | la ville engloutie              |
+| La mer rend un corps          | un peigne d'os aux dents cassées, pris dans les cheveux du mort              | le peigne, objet-trace          |
+| Le jour du pardon             | un roi de pierre à cheval tourné vers l'ouest, la cloche sous la rivière     | la ville engloutie              |
+| Le jour du pardon             | une statue de bois voilée, un crâne, un long manche, drap soulevé cette nuit | l'Ankou, la faux jamais montrée |
+| Une histoire qui te ressemble | la dalle noire et l'écuelle qui appellent l'orage                            | la fontaine de la forêt         |
+| Une histoire qui te ressemble | la femme sous l'aubépine qui ne laisse pas repartir l'homme                  | l'enchanteur et sa captive      |
+| Une histoire qui te ressemble | une lueur verte que personne ne regarde, qui mène au marais                  | les feux follets                |
+
+L'écran « Sources » de l'application cite les collecteurs (Luzel, Le Braz, Sébillot).
+
 ## Inventaire (MVP)
 
 | Contenu                    | Quantité                                                         | Fichier                        |
