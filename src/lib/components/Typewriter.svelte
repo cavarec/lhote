@@ -49,5 +49,14 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <span class="typewriter" onclick={skip} onkeydown={skip}>
   <span class="sr-only">{text}</span>
-  <span aria-hidden="true">{text.slice(0, shown)}</span>
+  <!-- Le reste du texte est déjà mis en page, mais invisible : les lignes ne bougent pas pendant l'écriture. -->
+  <span aria-hidden="true"
+    >{text.slice(0, shown)}<span class="rest">{text.slice(shown)}</span></span
+  >
 </span>
+
+<style>
+  .rest {
+    visibility: hidden;
+  }
+</style>

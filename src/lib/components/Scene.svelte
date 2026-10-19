@@ -34,26 +34,45 @@
     if (finished) ondone?.();
   });
 
-  // Le texte s'écrit sous le bas de l'écran : on fait remonter la page au fil de l'écriture.
-  // Si le joueur a remonté la page pour relire, on ne le ramène pas de force.
+  // Le texte d'un paragraphe est mis en page avant d'être écrit : rien ne bouge pendant la lecture.
+  // La page ne défile qu'une fois par nouveau paragraphe, doucement, pour le poser au tiers haut de
+  // l'écran. Si le joueur a remonté la page pour relire, on ne le ramène pas de force.
   let box = $state<HTMLDivElement>();
   let end = $state<HTMLSpanElement>();
   const FOLLOW_MARGIN = 28;
+  const TOP_SHARE = 0.3;
+
+  function calm(): boolean {
+    return (
+      document.documentElement.dataset.reduceMotion === 'true' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+  }
 
   function follow(): void {
     if (!end) return;
     const over =
       end.getBoundingClientRect().bottom - (window.innerHeight - FOLLOW_MARGIN);
     if (over > 0 && over < window.innerHeight * 0.6) {
-      window.scrollBy({ top: over, behavior: 'auto' });
+      window.scrollBy({ top: over, behavior: calm() ? 'auto' : 'smooth' });
     }
   }
 
+  function settleLastParagraph(): void {
+    const last = box?.querySelector('p:last-of-type');
+    if (!last) return;
+    const rect = last.getBoundingClientRect();
+    const fold = window.innerHeight - FOLLOW_MARGIN;
+    // Déjà entièrement visible, ou très loin sous l'écran (le joueur relit plus haut) : on ne touche à rien.
+    if (rect.bottom <= fold || rect.top > window.innerHeight * 1.3) return;
+    const target = rect.top - window.innerHeight * TOP_SHARE;
+    window.scrollBy({ top: Math.max(0, target), behavior: calm() ? 'auto' : 'smooth' });
+  }
+
   $effect(() => {
-    if (!box || typeof ResizeObserver === 'undefined') return;
-    const observer = new ResizeObserver(follow);
-    observer.observe(box);
-    return () => observer.disconnect();
+    if (revealed < 2) return;
+    const frame = requestAnimationFrame(() => requestAnimationFrame(settleLastParagraph));
+    return () => cancelAnimationFrame(frame);
   });
 
   // Les choix qui apparaissent à la fin du texte doivent eux aussi être visibles.
