@@ -102,6 +102,17 @@ liste avec un commentaire qui justifie le choix.
 - Chaque histoire commence par un commentaire de colonne vertébrale : qui demande quoi, ce qui est en jeu, le piège, ce que le joueur peut faire. Les indices d'une même nature sont lus d'un coup : écris-les pour qu'ils se lisent seuls.
 - Les fragments répondent chacun à une question sur le joueur et en ouvrent une autre (voir `fragments/index.ts`).
 
+## Structure d'un épisode
+
+Un saut suit les temps d'un épisode de Code Quantum :
+
+1. Précédemment : la question du fragment d'avant (au réveil).
+2. Le réveil et le miroir (`wakeup`, `orientation`).
+3. Le premier contact, deux passes (`openingDialogue`), puis l'Observateur (`briefing`, 2 à 4 répliques) : il dit ce qui doit être réparé, sans dire comment, et il peut se tromper.
+4. L'enquête et les « Chances de réparer » (`repairChances` dans `beats.ts` : 30 %, plus 20 % par vérité apprise, moins la méfiance).
+5. Le retournement (`twists`), la fracture, la résolution.
+6. La carte de fin : `Resolution.aftermath` (1 à 2 phrases, ce qui est arrivé ensuite), l'identité du corps, le fragment, puis la dernière image du saut (`LEAP_OUTS`).
+
 ## Histoires hors saison
 
 - `premise-06`, « Le lavoir de minuit » : les lavandières de la nuit demandent d'aider à tordre un drap. On le tord à contre-main. Vérités : `sens-du-poignet` (corps), `drap-de-la-maison-du-bas` (social).

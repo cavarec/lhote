@@ -9,6 +9,11 @@ export interface NewsItem {
 export const news: readonly NewsItem[] = [
   {
     date: '2026-10-19',
+    title: 'Chaque saut est un épisode',
+    text: 'Un « Précédemment » au réveil. Quelqu’un te dit ce qu’il faut réparer. Des chances de réussir qui bougent avec ce que tu apprends. À la fin, on te dit ce qui est arrivé ensuite.',
+  },
+  {
+    date: '2026-10-19',
     title: 'Qui es-tu ?',
     text: 'Les histoires sont réécrites pour mieux se suivre. À chaque saut, tu peux chercher qui était le corps que tu habites. La fin te le dit. Tes souvenirs, eux, répondent un peu plus à chaque fois.',
   },
