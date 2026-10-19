@@ -13,6 +13,9 @@
     startTwist,
     twistPending,
     clueGroups,
+    handMove,
+    handUsed,
+    letHandAct,
     investigationLeft,
     lockedResolutions,
     leanToward,
@@ -35,9 +38,14 @@
       .map((t) => ({ speaker: 'narration', text: t }));
 
   const speaker = $derived(speakerFor(leap, catalog, premise.openingDialogue.npcId));
+  const handDialogue = $derived(handMove(premise, 'dialogue'));
+  const handInvestigation = $derived(handMove(premise, 'investigation'));
   const chosen = $derived(
-    premise.openingDialogue.choices?.find((c) => c.id === leap.choices['dialogue']) ??
-      null,
+    leap.choices['dialogue'] === 'hand' && handDialogue
+      ? { text: 'Tu laisses ta main faire.', reply: handDialogue.lines }
+      : (premise.openingDialogue.choices?.find(
+          (c) => c.id === leap.choices['dialogue'],
+        ) ?? null),
   );
   // Un écho personnel se glisse dans l'orientation d'un saut sur quatre, sans rien le signaler.
   const echo = $derived(pickEcho(leap.seed, catalog.echoes));
@@ -114,6 +122,16 @@
                 <button class="choice" onclick={() => choose(c.id)}>{c.text}</button>
               </li>
             {/each}
+            {#if handDialogue}
+              <li>
+                <button
+                  class="choice choice--hand"
+                  onclick={() => game.update((l) => letHandAct(l, premise, 'dialogue'))}
+                >
+                  Laisser ta main faire.
+                </button>
+              </li>
+            {/if}
           </ul>
         {:else}
           <Scene
@@ -192,6 +210,20 @@
           </li>
         {/each}
       </ul>
+      {#if handInvestigation}
+        {#if handUsed(leap, 'investigation')}
+          {#each handInvestigation.lines as line, i (i)}
+            <p class="narration npc-hand">{line.text}</p>
+          {/each}
+        {:else}
+          <button
+            class="button button--quiet hand"
+            onclick={() => game.update((l) => letHandAct(l, premise, 'investigation'))}
+          >
+            Laisser ta main faire.
+          </button>
+        {/if}
+      {/if}
       <button class="button button--primary next" onclick={afterInvestigation}>
         Continuer
       </button>
@@ -264,6 +296,18 @@
   }
   .next {
     margin-top: var(--space-4);
+  }
+  .choice--hand {
+    font-style: italic;
+    border-style: dashed;
+  }
+  .hand {
+    margin-top: var(--space-3);
+  }
+  .npc-hand {
+    border-left: 2px solid var(--mist);
+    padding-left: var(--space-3);
+    font-style: italic;
   }
   .choice--locked {
     opacity: 0.45;

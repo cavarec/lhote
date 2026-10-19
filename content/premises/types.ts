@@ -34,6 +34,22 @@ export interface SecondRound {
   choices: Choice[];
 }
 
+/**
+ * « Laisser ta main faire » : le corps hérité agit seul (§2.5, la mémoire en gruyère). Ce qui en
+ * résulte est fixé par la prémisse, jamais tiré au hasard : l'hôte sait se battre, mentir ou parler
+ * (« saves »), réagit comme lui et pas comme toi (« betrays »), ou fait un geste que seul le vrai
+ * personnage ferait (« reveals »).
+ */
+export type HandOutcome = 'saves' | 'betrays' | 'reveals';
+
+export interface HandMove {
+  outcome: HandOutcome;
+  /** 2 à 4 lignes, jouées après le geste. */
+  lines: DialogueLine[];
+  /** Pour un geste d'enquête : la vérité que le corps connaît déjà (sans coûter un geste). */
+  revealsTruth?: string;
+}
+
 export interface Season {
   from: string;
   to: string;
@@ -92,6 +108,8 @@ export interface Premise {
   investigation: InvestigationItem[];
   /** Ids des deux fractures possibles (la seed en choisit une). */
   fractures: [string, string];
+  /** Disponible au dialogue (beat 3) et à l'enquête (beat 4). Absent : l'option n'apparaît pas. */
+  handLetGo?: { dialogue: HandMove; investigation: HandMove };
   /**
    * Prémisse de saison : elle ne peut sortir que dans la fenêtre donnée (jours « MM-JJ », en UTC ;
    * `from` après `to` enjambe le nouvel an). Hors saison, elle n'est jamais tirée.

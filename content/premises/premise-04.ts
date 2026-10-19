@@ -421,6 +421,45 @@ export const premise04: Premise = {
     },
   ],
 
+  // « Laisser ta main faire » : ce que le corps hérité fait seul, fixé par la prémisse.
+  handLetGo: {
+    dialogue: {
+      outcome: 'saves',
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Tes doigts prennent le pichet, versent le lait dans le bol du bout de table, le reposent à la place exacte. Tu n’y as pas pensé.',
+        },
+        {
+          speaker: 'narration',
+          text: 'La personne a cessé de trembler. « C’est comme ça qu’on fait, oui. Tu sais ce que tu fais, après tout. »',
+        },
+        {
+          speaker: 'narration',
+          text: 'Ta main a rassuré la maison à ta place. Elle connaissait ce geste mieux que ta tête.',
+        },
+      ],
+    },
+    investigation: {
+      outcome: 'reveals',
+      revealsTruth: 'couvert-de-ta-main',
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Tes doigts reprennent leur compte sur la nappe : un, deux, trois, jusqu’à douze, puis un treizième, qu’ils posent sur le bol.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Ils le tiennent par le bord, comme on tient une chose qu’on a déjà tenue. La terre est tiède.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu comprends que ce couvert n’est pas arrivé tout seul. Ta main l’a dressé, et elle ne te l’a pas dit.',
+        },
+      ],
+    },
+  },
+
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-07', 'fracture-08'],
 

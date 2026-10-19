@@ -9,6 +9,8 @@ import {
   availableResolutions,
   BeatError,
   activeTwist,
+  handUsed,
+  letHandAct,
   chooseDialogue,
   chooseSecondRound,
   startTwist,
@@ -16,6 +18,7 @@ import {
   clueGroups,
   INVESTIGATION_BUDGET,
   investigationLeft,
+  isLocked,
   knownTruths,
   lockedResolutions,
   revealClues,
@@ -193,6 +196,29 @@ describe('beats', () => {
     expect(activeTwist(premise01, bodily)?.requires).toEqual(['noye-depuis-longtemps']);
     expect(twistPending(bodily)).toBe(false);
     expect(twistPending(startTwist(bodily))).toBe(true);
+  });
+
+  it('laisser la main faire : un geste par beat, décidé par l’histoire', () => {
+    const base = makeLeap({ suspicion: 40 });
+    const done = letHandAct(base, premise01, 'dialogue');
+    expect(done.choices['dialogue']).toBe('hand');
+    expect(done.choices['hand']).toBe('1');
+    expect(done.suspicion).toBe(25); // premise01 : la main sauve (-15)
+    expect(handUsed(done, 'dialogue')).toBe(true);
+    expect(() => letHandAct(done, premise01, 'dialogue')).toThrow(BeatError);
+    // Le dialogue peut alors se poursuivre (seconde passe).
+    expect(chooseSecondRound(done, premise01, 'gagner-du-temps').leap.suspicion).toBe(25);
+    expect(() =>
+      letHandAct(chooseDialogue(base, premise01, 'preparer').leap, premise01, 'dialogue'),
+    ).toThrow(BeatError);
+  });
+
+  it('à l’enquête, la main révèle une vérité sans coûter de geste', () => {
+    const leap = letHandAct(makeLeap(), premise01, 'investigation');
+    expect(knownTruths(premise01, leap).has('noye-depuis-longtemps')).toBe(true);
+    expect(investigationLeft(clueGroups(premise01, leap))).toBe(INVESTIGATION_BUDGET);
+    const wash = premise01.resolutions.find((r) => r.id === 'laver-et-taire')!;
+    expect(isLocked(premise01, leap, wash)).toBe(false);
   });
 
   it('impose l’issue exposée quand la suspicion est au maximum', () => {
