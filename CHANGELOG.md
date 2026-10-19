@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.9.1] - 2026-10-19
+
+### Modifié
+
+- Le lien « S'abonner aux nouveautés » menait à une impasse sur iPhone (Safari propose de chercher un lecteur de flux dans l'App Store). Il est remplacé par un bouton « Nouveautés » qui ouvre une page lisible dans le jeu. Le flux Atom reste disponible, en lien discret au bas de cette page, pour ceux qui ont un lecteur de flux.
+
 ## [0.9.0] - 2026-10-19
 
 ### Ajouté
