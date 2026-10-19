@@ -139,16 +139,30 @@ a {
   color: var(--mist);
 }
 
-/* Boutons et choix : toujours au moins 48 px de haut. */
+/* Boutons et choix : toujours au moins 48 px de haut.
+   Cadre de manuscrit, pas de boîte : deux filets ocre, en haut et en bas, terminés par une volute.
+   Le bouton principal est plein, avec un filet ocre intérieur. */
+:root {
+  --volute-left: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M12 7C12 3 6 2 4 5C2 8 6 10 7 7C7.5 5.5 5.5 5 5 6.5' fill='none' stroke='%239a6532' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  --volute-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7C2 3 8 2 10 5C12 8 8 10 7 7C6.5 5.5 8.5 5 9 6.5' fill='none' stroke='%239a6532' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
 .button,
 .choice {
   display: block;
   width: 100%;
   min-height: var(--touch-min);
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  background: transparent;
+  padding: var(--space-2) 2.25rem;
+  border: 0;
+  border-block: 1px solid var(--ochre);
+  border-radius: 0;
+  background-color: transparent;
+  background-image: var(--volute-left), var(--volute-right);
+  background-repeat: no-repeat;
+  background-position:
+    left 10px center,
+    right 10px center;
+  background-size: 14px 14px;
   color: var(--ink);
   font-family: var(--font-narration);
   font-size: var(--narration-size);
@@ -160,14 +174,18 @@ a {
     color var(--fade) var(--ease);
 }
 
+.button {
+  text-align: center;
+}
+
 .button:hover,
 .choice:hover {
-  background: var(--veil);
+  background-color: var(--veil);
 }
 
 .button:active,
 .choice:active {
-  background: var(--ink);
+  background-color: var(--ink);
   color: var(--parchment);
 }
 
@@ -176,21 +194,31 @@ a {
 .choice:disabled {
   color: var(--mist);
   border-color: var(--mist);
+  background-image: none;
   cursor: default;
 }
 
 .button--primary {
-  background: var(--ink);
+  border-block: 0;
+  background-color: var(--ink);
+  background-image: none;
+  outline: 1px solid var(--ochre);
+  outline-offset: -5px;
   color: var(--parchment);
   text-align: center;
 }
 
 .button--primary:hover {
-  background: var(--blood);
+  background-color: var(--blood);
+}
+
+.button--primary:disabled {
+  opacity: 0.45;
 }
 
 .button--quiet {
-  border-color: transparent;
+  border-block: 0;
+  background-image: none;
   font-family: var(--font-ui);
   font-size: var(--ui-size);
   color: var(--mist);
@@ -285,4 +313,13 @@ a {
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
+}
+
+/* Une liste de choix est un seul registre : le filet entre deux choix est partagé. */
+ul.choices {
+  gap: 0;
+}
+
+ul.choices li + li > .choice {
+  border-top: 0;
 }
