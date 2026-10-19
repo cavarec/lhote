@@ -2,7 +2,7 @@
   import Vignette from '../lib/components/Vignette.svelte';
   import Scene from '../lib/components/Scene.svelte';
   import { installPrompt } from '../lib/pwa/install.svelte';
-  import { pickObserverMessage } from '../lib/engine/extras';
+  import { pickLeapOut, pickObserverMessage } from '../lib/engine/extras';
   import { game } from '../lib/stores/game.svelte';
 
   const outcome = $derived(game.outcome!);
@@ -17,6 +17,7 @@
   const observer = $derived(
     pickObserverMessage(done.leap.seed, done.catalog.observerMessages),
   );
+  const leapOut = $derived(pickLeapOut(done.leap.seed));
   const lines = $derived(
     outcome.resolution.resultText
       .split(/\n+/)
@@ -28,6 +29,12 @@
 <main class="page">
   <Vignette mood={outcome.resolution.outcome} />
   <Scene {lines} {instant}>
+    {#if outcome.resolution.aftermath}
+      <aside class="aftermath fade-in" aria-label="Ce qui est arrivé ensuite">
+        <p class="ui muted">Ce qui est arrivé ensuite</p>
+        <p class="narration">{outcome.resolution.aftermath}</p>
+      </aside>
+    {/if}
     {#if host}
       <aside class="host fade-in" aria-label="Qui était ce corps">
         <p class="ui muted">Qui était ce corps</p>
@@ -48,6 +55,7 @@
         <p class="narration"><em>{observer.text}</em></p>
       </aside>
     {/if}
+    <p class="narration leap-out fade-in"><em>{leapOut}</em></p>
     {#if outcome.queued}
       <p class="ui notice" role="status">
         Hors connexion : cette fin sera enregistrée dès que le réseau reviendra.
@@ -76,6 +84,15 @@
 </main>
 
 <style>
+  .aftermath {
+    margin-top: var(--space-4);
+    padding: var(--space-3);
+    border-top: 1px solid var(--ochre);
+  }
+  .leap-out {
+    margin-top: var(--space-4);
+    text-align: center;
+  }
   .host {
     margin-top: var(--space-4);
     padding: var(--space-3);

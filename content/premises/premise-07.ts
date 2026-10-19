@@ -477,6 +477,14 @@ export const premise07: Premise = {
   fractures: ['fracture-13', 'fracture-14'],
 
   // Qui était ce corps : la réponse que donne l'écran de fin, quelle que soit l'issue.
+  // L'Observateur parle après le premier contact : il dit ce qui doit être réparé, pas comment.
+  briefing: [
+    'Je te vois, tu sais. Pas de panique, respire. Enfin, c’est une façon de parler : ce corps a l’air de se passer de buée.',
+    'Voilà ce que j’ai. Cette grève cache une porte, celle d’Ys, et elle n’est pas fermée comme elle devrait l’être. Les cloches appellent. Quelqu’un a manqué à son devoir.',
+    'Je crois que c’est à toi de réparer ça avant que la mer revienne. Mais je ne sais pas comment. Là-dessus, je ne te mentirai pas.',
+    'Et ce sel que tu portes au cou… Je ne jurerais de rien. Mais à ta place, je ne le lâcherais pas.',
+  ],
+
   host: {
     name: 'Nolig',
     role: 'qui referme la porte d’Ys à chaque grande marée',
@@ -501,6 +509,8 @@ export const premise07: Premise = {
         'Tu es Nolig, celui ou celle qui referme la porte. Ce soir, la porte est refermée, et ce corps a retrouvé son devoir.',
         'Sur la dalle, un petit tas de sel brille. Dessous, très bas, quelqu’un frappe un coup, un seul, comme on vérifie une serrure.',
       ].join('\n'),
+      aftermath:
+        'Les grandes marées passèrent sans que les cloches reviennent. Au printemps suivant, les ramasseurs descendirent sur la grève sans plus regarder derrière eux, et Nolig reprit le panier.',
       mutations: [
         {
           type: 'addTruth',
@@ -536,6 +546,8 @@ export const premise07: Premise = {
         'Au matin, on retrouve ton panier sur le sable, plein d’un goémon blanc que personne n’a jamais vu pousser ici.',
         'Dans la dalle, la porte est restée ouverte. Quelqu’un, en bas, a dit un mot de plus que toi.',
       ].join('\n'),
+      aftermath:
+        'La porte resta entrouverte tout l’hiver. À chaque grande marée, quelqu’un du bourg disait avoir entendu son nom monter du sable, et personne ne descendait plus seul.',
       mutations: [
         {
           type: 'addDoor',
@@ -561,6 +573,8 @@ export const premise07: Premise = {
         'Tu as jeté la seule clé. Plus personne ne pourra refermer la porte : elle restera entrouverte à chaque grande marée.',
         'Tu cours vers la dune, et tes pas laissent des traces, que la mer efface aussitôt. Le charretier t’attend et ne dit rien.',
       ].join('\n'),
+      aftermath:
+        'Le sel ne revint jamais. Les années suivantes, les cloches sonnèrent à chaque grande marée, et les vieux apprirent aux enfants à ne pas compter les coups.',
       mutations: [
         {
           type: 'addScar',
@@ -586,6 +600,8 @@ export const premise07: Premise = {
         'Sur la grève, la personne est restée seule devant la dalle. Au troisième coup, elle crie : « Qui est là ? » Personne ne lui répond.',
         'Quand tu redescends, il ne reste que ses sabots, rangés côte à côte, et un petit morceau de bronze vert dans ta poche, tiède.',
       ].join('\n'),
+      aftermath:
+        'Les sabots restèrent sur la grève jusqu’à l’hiver, sans qu’on ose les ramasser. Depuis, la cloche de la chapelle sonne parfois toute seule, un coup de plus que les autres.',
       mutations: [
         {
           type: 'addDoor',
@@ -620,6 +636,8 @@ export const premise07: Premise = {
         'On te retire le sac de sel. Un autre ramassera le goémon, quelqu’un qui sait ce qu’il porte, et ce que la mer lui demande.',
         'Mais la porte, elle, ne sait pas qu’on a changé de gardien. Elle attend encore Nolig.',
       ].join('\n'),
+      aftermath:
+        'Un autre prit le panier à la grande marée suivante et ne sut pas poser le sel. La porte resta entrouverte, et Nolig, resté au bourg, regardait la mer chaque soir.',
       mutations: [],
     },
     {
@@ -634,6 +652,8 @@ export const premise07: Premise = {
         'Des gens t’attendent, sans visage précis. Ils disent « Nolig », comme on appelle quelqu’un qu’on attend depuis un an.',
         'En haut, la dalle retombe. La mer passe dessus, tranquille. Sur le sable, il ne reste qu’un anneau vert et un grain de sel.',
       ].join('\n'),
+      aftermath:
+        'On chercha Nolig trois jours sur la grève, puis on cessa. À chaque grande marée, quelqu’un jurait avoir vu une lumière dorée sous le sable, et personne ne s’en approchait.',
       mutations: [
         {
           type: 'addScar',

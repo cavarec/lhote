@@ -32,3 +32,16 @@ export function pickObserverMessage(
   const type = types.find((t) => (roll -= OBSERVER_WEIGHTS[t]) < 0) ?? types[0]!;
   return rng.pick(available.filter((m) => m.type === type));
 }
+
+/** La dernière image d'un saut : le corps se défait, un autre souffle commence déjà. */
+export const LEAP_OUTS: readonly string[] = [
+  'Le bleu monte derrière tes paupières. Un autre souffle, un autre froid, une autre nuit t’attendent déjà.',
+  'Tes mains sont déjà moins les siennes. Quelque part, quelqu’un vient de manquer à sa place.',
+  'Le monde se défait par les bords, sans bruit. Tu entends une porte s’ouvrir, très loin, pour toi.',
+  'Tu quittes ce corps comme on quitte un manteau chaud. Un autre est déjà posé sur le dossier d’une chaise.',
+  'Le goût de pierre mouillée revient. Il revient toujours juste avant. Tu sais ce que ça veut dire.',
+];
+
+export function pickLeapOut(seed: number): string {
+  return LEAP_OUTS[Math.abs(Math.floor(seed)) % LEAP_OUTS.length] ?? LEAP_OUTS[0]!;
+}

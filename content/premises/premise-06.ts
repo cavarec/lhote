@@ -37,6 +37,14 @@ export const premise06: Premise = {
     truth: 'nom-sur-le-savon',
   },
 
+  // L'Observateur : ce qui doit être réparé, sans le comment.
+  briefing: [
+    'Je te vois, tu sais. Ne cherche pas où : je suis là, sur le bord du lavoir, avec les pieds au sec.',
+    'Voilà ce que j’ai : un drap, des lavandières, et quelqu’un de la maison du bas qui ne dort pas. Il faut finir ce drap avant l’aube, et bien le finir.',
+    'Pour le comment, je ne sais pas. Je crois qu’il y a un sens qui te perd et un sens qui les délivre. Lequel, je ne sais plus.',
+    'Regarde tes mains, en tout cas. Ce corps a l’habitude de ce linge, et il en sait plus que toi.',
+  ],
+
   // Beat 1 : l'eau, le froid, le bruit. Aucune information.
   wakeup: [
     'Le noir sent le savon de cendre, la pierre mouillée et la fougère écrasée. Une odeur de fer passe dessous, comme celle d’une vieille lame.',
@@ -521,6 +529,8 @@ export const premise06: Premise = {
         'Quand le coq chante, tes bras sont entiers. Tes mains sont mouillées, enfin, comme celles de tout le monde. Au bas du chemin, une lampe s’éteint pour de bon.',
         'Sur la corde, un petit drap goutte, à ta taille. Personne ne l’y a pendu.',
       ].join('\n'),
+      aftermath:
+        'Le drap de la maison du bas sécha au soleil, et le mort fut enterré à l’heure, sans que personne sache qui avait tordu. Au bourg, on raconta des années que Main-sèche avait fini son dernier drap.',
       mutations: [
         {
           type: 'addTruth',
@@ -555,6 +565,8 @@ export const premise06: Premise = {
         'Les lavandières reprennent leurs battoirs. La vieille te regarde, désolée, comme on regarde un linge qu’on n’a pas pu sauver.',
         'Au matin, on te retrouve au bord du lavoir, les bras de travers. Le drap est essoré, mais plus personne ne te confiera de linge.',
       ].join('\n'),
+      aftermath:
+        'La maison du bas enterra son mort à l’aube, avec un drap essoré de travers. Mael ne lava plus jamais rien, et le bourg confia ses morts à un lavoir bien plus loin.',
       mutations: [
         {
           type: 'addScar',
@@ -581,6 +593,8 @@ export const premise06: Premise = {
         'Le drap tombe d’un coup sur la dalle, comme un oiseau touché. La vieille s’éloigne sans te regarder. Il n’est pas essoré.',
         'Dans la maison du bas, on a appris la mort par une voix inconnue, avant l’aube. On te cherchera longtemps pour savoir qui tu étais.',
       ].join('\n'),
+      aftermath:
+        'Le deuil de la maison du bas fut pleuré avant l’heure, et personne ne sut dire qui avait crié. Au printemps, on parlait encore d’une voix venue de la lande, sans visage.',
       mutations: [
         {
           type: 'addDoor',
@@ -606,6 +620,8 @@ export const premise06: Premise = {
         'Quand tu sors du lavoir, le bruit te suit sur la lande, jusqu’au bourg. Il passera la nuit à ta porte.',
         'Dans ta poche, tu trouves un petit morceau de bois mouillé. Il est tiède, et il bat à petits coups, comme un cœur.',
       ].join('\n'),
+      aftermath:
+        'Le battoir suivit quelqu’un jusqu’au bourg tout l’hiver, et les chiens se couchèrent devant les portes. Au printemps, le coup devint plus lent, comme s’il attendait.',
       mutations: [
         {
           type: 'addDoor',
@@ -639,6 +655,8 @@ export const premise06: Premise = {
         'La vieille pose son drap et te regarde enfin. Elle dit : « Alors tu n’es pas Mael. Tu tiens sa place, et tu n’es pas à nous non plus. »',
         'On te retire le sachet de sel. Un autre viendra laver, un soir, quelqu’un qui sait ce qu’il risque. Et toi, tu portes encore la place de Mael.',
       ].join('\n'),
+      aftermath:
+        'Le bourg appela Mael quelques semaines, au bord du lavoir, puis cessa. Un autre vint laver au bout d’un mois, et tordit à contre-main, par prudence.',
       mutations: [],
     },
     {
@@ -652,6 +670,8 @@ export const premise06: Premise = {
         'Quand tu comprends que ce lavoir n’a pas de fond, tu ne vois plus le ciel. Tu n’entends plus les battoirs, ni ton cœur.',
         'Sur la dalle, tes sabots restent côte à côte, rangés comme pour dormir. Au matin, le bourg cherchera qui lavera ses morts.',
       ].join('\n'),
+      aftermath:
+        'On ne retrouva que les sabots, et le bourg dut laver ses morts lui-même pendant tout l’hiver. Au dégel, l’eau du bassin sentait de nouveau le savon de cendre.',
       mutations: [
         {
           type: 'addScar',

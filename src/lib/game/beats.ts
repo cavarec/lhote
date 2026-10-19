@@ -204,6 +204,17 @@ export function knownTruths(premise: Premise, leap: LeapState): Set<string> {
   return truths;
 }
 
+/**
+ * « Chances de réparer » : l'équivalent des probabilités de Ziggy dans Code Quantum. Elles montent
+ * avec ce que tu as appris et baissent avec la méfiance. Ce n'est qu'une estimation : l'issue juste
+ * reste praticable quoi qu'il arrive.
+ */
+export function repairChances(premise: Premise, leap: LeapState): number {
+  const truths = Math.min(knownTruths(premise, leap).size, 3);
+  const raw = 30 + truths * 20 - Math.floor(leap.suspicion / 4);
+  return Math.min(95, Math.max(5, Math.round(raw / 5) * 5));
+}
+
 /** Variation de suspicion d'un geste de la main : elle sauve, trahit ou révèle. */
 export const HAND_SUSPICION: Record<HandMove['outcome'], number> = {
   saves: -15,

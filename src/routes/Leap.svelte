@@ -20,6 +20,7 @@
     lockedResolutions,
     leanToward,
     revealClues,
+    repairChances,
     speakerFor,
   } from '../lib/game/beats';
   import { game } from '../lib/stores/game.svelte';
@@ -64,6 +65,19 @@
   const locked = $derived(lockedResolutions(premise, leap));
   const left = $derived(investigationLeft(groups));
 
+  const chances = $derived(repairChances(premise, leap));
+  const briefing = $derived(
+    (premise.briefing ?? []).map((text) => ({ speaker: 'npc' as const, text })),
+  );
+  // « Précédemment » : la question laissée par le fragment du saut d'avant, comme au début d'un épisode.
+  const recap = $derived.by(() => {
+    const ordered = [...catalog.fragments].sort(
+      (a, b) => a.act - b.act || a.order - b.order,
+    );
+    const at = ordered.findIndex((f) => f.id === leap.fragmentId);
+    return at > 0 ? (ordered[at - 1]?.text ?? null) : null;
+  });
+
   const sceneKind = $derived<SceneKind | undefined>(
     game.beat === 'wakeup' ||
       game.beat === 'orientation' ||
@@ -88,6 +102,21 @@
   }
 </script>
 
+{#snippet briefed()}
+  {#if briefing.length > 0}
+    <Scene lines={briefing} npcName="L’Observateur" {instant}>
+      <p class="ui muted chances" aria-live="polite">Chances de réparer : {chances} %</p>
+      <button class="button button--primary next" onclick={() => game.advance()}>
+        Continuer
+      </button>
+    </Scene>
+  {:else}
+    <button class="button button--primary next" onclick={() => game.advance()}>
+      Continuer
+    </button>
+  {/if}
+{/snippet}
+
 <main class="page">
   {#if game.beat !== 'wakeup'}
     <Progress dots={game.dots} label="Progression du saut" />
@@ -98,6 +127,12 @@
   {#key game.beat}
     <Vignette premiseId={premise.id} kind={sceneKind} />
     {#if game.beat === 'wakeup'}
+      {#if recap}
+        <aside class="recap fade-in" aria-label="Précédemment">
+          <p class="ui muted">Précédemment, derrière tes paupières…</p>
+          <p class="narration"><em>{recap}</em></p>
+        </aside>
+      {/if}
       <Scene lines={paragraphs(premise.wakeup)} {instant}>
         <button class="button button--primary next" onclick={() => game.advance()}>
           Ouvrir les yeux
@@ -140,9 +175,7 @@
             {instant}
           >
             {#if !round}
-              <button class="button button--primary next" onclick={() => game.advance()}>
-                Continuer
-              </button>
+              {@render briefed()}
             {:else}
               <Scene lines={round.lines} npcName={speaker?.name ?? null} {instant}>
                 {#if !chosen2}
@@ -161,12 +194,7 @@
                     npcName={speaker?.name ?? null}
                     {instant}
                   >
-                    <button
-                      class="button button--primary next"
-                      onclick={() => game.advance()}
-                    >
-                      Continuer
-                    </button>
+                    {@render briefed()}
                   </Scene>
                 {/if}
               </Scene>
@@ -190,6 +218,7 @@
             ? `Il te reste ${left} ${left > 1 ? 'gestes' : 'geste'}.`
             : 'Le temps te manque. Tu sais ce que tu sais.'}
         </p>
+        <p class="ui muted" aria-live="polite">Chances de réparer : {chances} %</p>
       </div>
       <ul class="choices">
         {#each groups as group (group.kind)}
@@ -230,6 +259,7 @@
     {:else if game.beat === 'fracture' && fracture}
       <div class="narration fade-in">
         <h2>{fracture.title}</h2>
+        <p class="ui muted">Chances de réparer : {chances} %</p>
         <p class="muted">Deux lectures sont possibles. Tu penches pour…</p>
       </div>
       <ul class="choices">
@@ -293,6 +323,12 @@
     margin: var(--space-3) 0;
     text-align: center;
     font-weight: 400;
+  }
+  .recap {
+    margin-bottom: var(--space-4);
+  }
+  .chances {
+    margin-top: var(--space-3);
   }
   .next {
     margin-top: var(--space-4);

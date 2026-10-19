@@ -183,6 +183,14 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
         texts.push({ where: `${at}.twists[${i}].lines[${j}]`, text: line.text }),
       ),
     );
+    premise.briefing?.forEach((text, i) =>
+      texts.push({ where: `${at}.briefing[${i}]`, text }),
+    );
+    premise.resolutions.forEach((r) => {
+      if (r.aftermath) {
+        texts.push({ where: `${at}.resolution ${r.id}.aftermath`, text: r.aftermath });
+      }
+    });
     if (premise.host) {
       texts.push(
         { where: `${at}.host.role`, text: premise.host.role },
@@ -353,6 +361,24 @@ export function checkPremise(premise: Premise): Violation[] {
         where: `${at}.host`,
         rule: 'identite',
         message: 'Identité trop courte.',
+      });
+    }
+  }
+  // L'Observateur dit ce qui doit être réparé ; chaque issue a sa carte de fin.
+  const briefingLines = premise.briefing?.length ?? 0;
+  if (briefingLines < 2 || briefingLines > 4) {
+    violations.push({
+      where: `${at}.briefing`,
+      rule: 'episode',
+      message: `${briefingLines} réplique(s) d'Observateur (2 à 4 attendues).`,
+    });
+  }
+  for (const r of premise.resolutions) {
+    if (!r.aftermath || r.aftermath.length < 30) {
+      violations.push({
+        where: `${at}.resolution ${r.id}`,
+        rule: 'episode',
+        message: 'aftermath manquant ou trop court.',
       });
     }
   }

@@ -504,6 +504,14 @@ export const premise01: Premise = {
   },
 
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
+  // L'Observateur parle après le premier contact : il dit ce qui doit être réparé, pas comment.
+  briefing: [
+    'Je te vois, ne te retourne pas. Je suis arrivé aussi vite que j’ai pu, et crois-moi, ça n’a pas été simple.',
+    'Voilà ce que je sais : la mer a rendu un corps, et quelqu’un, ici, est en train de poser un mauvais nom dessus. Il faut que ça cesse.',
+    'Comment ? Je n’en sais rien. Je crois que la mère est la clé, mais je me trompe souvent sur les mères.',
+    'Et ces mains qui tremblent, elles sont à quelqu’un d’ici. Cherche son nom, ça aide toujours.',
+  ],
+
   fractures: ['fracture-01', 'fracture-02'],
 
   // Beat 6 : résolution. Chaque issue est une histoire, aucune n'est un game over annoncé.
@@ -521,6 +529,8 @@ export const premise01: Premise = {
         'Elle part vers la grève et regarde la mer avec d’autres yeux. Sous la table, la flaque se retire vers la porte, goutte à goutte.',
         'Sur le seuil, un homme serre sa cordelette. Il a entendu ton nom et celui de Jakez, et il n’a pas décidé ce qu’il en fera.',
       ].join('\n'),
+      aftermath:
+        'La mère fit enterrer Jakez sous son vrai nom, avant le premier gel. Le village ne reparla plus de la promesse, mais on fit un détour pour ne pas passer devant la maison de Gwenn.',
       mutations: [
         {
           type: 'addTruth',
@@ -554,6 +564,8 @@ export const premise01: Premise = {
         'On enterre le soir même, sous ce nom qui n’est pas le bon. Tu tiens ta langue, comme tu l’as promis aux hommes il y a vingt hivers.',
         'Cette nuit-là, l’essieu grince jusqu’à l’aube. Cette fois, il va jusqu’à la tombe, et il s’y arrête.',
       ].join('\n'),
+      aftermath:
+        'La tombe resta sous le nom du petit, et la mère y porta des fleurs chaque dimanche. Gwenn lava les noyés encore longtemps, et ses mains ne tremblèrent plus jamais.',
       mutations: [
         {
           type: 'addScar',
@@ -579,6 +591,8 @@ export const premise01: Premise = {
         'Les portes se ferment, l’une après l’autre. En disant ce nom, tu as rompu la promesse du village, et tu le sais.',
         'Seule la cloche de la baie répond. Elle sonne trois fois, sous l’eau, et plus personne ne fait semblant de ne pas l’entendre.',
       ].join('\n'),
+      aftermath:
+        'Le village mit Gwenn à l’écart pendant tout l’hiver. Au printemps, la mère vint frapper à la porte et demanda le reste de l’histoire.',
       mutations: [
         {
           type: 'addDoor',
@@ -602,6 +616,8 @@ export const premise01: Premise = {
         'Au retour, la nuit tombe. La mère est sur la grève, immobile, et ne dit pas si elle espère encore.',
         'Dans le fond de la barque, un éclat de bois peint, mouillé, que tu n’y avais pas mis. On y lit la moitié d’un nom de barque.',
       ].join('\n'),
+      aftermath:
+        'La barque fut rendue à sa place, sans un mot. La mère guetta la mer jusqu’à l’automne, puis cessa d’en parler, et le corps fut enterré sans nom.',
       mutations: [
         {
           type: 'addDoor',
@@ -634,6 +650,8 @@ export const premise01: Premise = {
         'On te retire le tablier. Une autre lavera le corps, et ce sera quelqu’un qui sait ce qu’elle fait.',
         'Sur le seuil, en partant, tu entends l’essieu. Il grince derrière toi, au pas, et il te suit jusqu’à la dernière maison.',
       ].join('\n'),
+      aftermath:
+        'Une autre personne lava le corps et l’enterra sous le nom du petit, sans poser de question. Gwenn ne fut plus appelé que pour les nœuds de filets.',
       mutations: [],
     },
     {
@@ -647,6 +665,8 @@ export const premise01: Premise = {
         'La mer revient avant que tu l’aies compris. Elle n’a pas de hâte. Elle a toute la journée.',
         'Sous l’eau qui monte, tu entends une cloche. Elle sonne pour toi, et tu comprends enfin que c’était le sens du bruit.',
       ].join('\n'),
+      aftermath:
+        'On retrouva le tablier de Gwenn sur les roches noires, à la marée suivante. Chaque grande marée, les hommes entendirent la cloche sous l’eau et ne se dirent plus rien.',
       mutations: [
         {
           type: 'addScar',

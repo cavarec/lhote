@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.12.0] - 2026-10-19
+
+### Ajouté
+
+- Chaque saut suit maintenant la structure d'un épisode de Code Quantum : un « Précédemment » au réveil (la question laissée par le souvenir d'avant), l'Observateur qui dit ce qui doit être réparé une fois le premier contact passé, des « Chances de réparer » qui montent avec ce que tu apprends et baissent avec la méfiance, puis, à la fin, « Ce qui est arrivé ensuite » pour chaque issue et une dernière image du saut vers le corps suivant.
+
 ## [0.11.0] - 2026-10-19
 
 ### Modifié
