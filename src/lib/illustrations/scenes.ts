@@ -519,6 +519,100 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<path d="M230 192 C250 170 280 170 300 192" ${oc(0.6, 1.8)}/>` +
       triskele(300, 160, 22, oc(0.7, 1.5)),
   },
+  // ─── Le lavoir de minuit : l'eau noire, les draps, les battoirs.
+  'premise-06': {
+    wakeup:
+      frame() +
+      `<path d="M30 150 H370 V200 H30Z" ${ink(0.85)}/>` +
+      waves(150, 30, 370, 40, 8, oc(0.7, 1.6), 'drift') +
+      Array.from(
+        { length: 5 },
+        (_, i) =>
+          `<circle class="pulse" style="animation-delay:-${(i * 0.7).toFixed(1)}s" cx="${70 + i * 60}" cy="168" r="${6 + (i % 3) * 3}" ${oc(0.4, 1.2)}/>`,
+      ).join('') +
+      `<path d="M60 40 H340" ${oc(0.6, 2)}/>` +
+      triskele(200, 90, 34, oc(0.55, 1.4)),
+    orientation:
+      frame() +
+      `<path d="M40 60 H360" ${oc(0.8, 2.4)}/>` +
+      `<path d="M60 60 V100 C60 108 90 108 90 100 V60 M130 60 V112 C130 122 170 122 170 112 V60 M210 60 V104 C210 112 240 112 240 104 V60 M280 60 V116 C280 126 320 126 320 116 V60" ${of(0.18)} stroke="var(--ochre)" stroke-width="1.8"/>` +
+      `<path d="M30 170 H370 V196 H30Z" ${ink(0.88)}/>` +
+      `<path d="M46 170 L90 150 H310 L354 170Z" ${of(0.16)} stroke="var(--ochre)" stroke-width="2"/>` +
+      `<path d="M120 154 l6 -18 M150 154 l6 -18 M250 154 l-6 -18" ${oc(0.85, 3)}/>` +
+      triskele(340, 44, 22, oc(0.55, 1.3)),
+    dialogue:
+      frame() +
+      `<path d="M30 176 H370" ${ink(0.88)} stroke="var(--ochre)" stroke-width="2"/>` +
+      person(300, 176, 112) +
+      `<g class="flick"><path d="M70 176 V110 C70 80 150 80 150 110 V176Z" ${ink(0.97)}/><circle cx="110" cy="76" r="14" ${ink(0.97)}/></g>` +
+      `<path d="M150 118 C176 106 200 118 226 112 C250 106 266 118 280 122" ${oc(0.9, 2.6)}/>` +
+      `<path d="M150 130 C176 120 200 132 226 126 C250 120 266 132 280 136" ${oc(0.5, 1.6)}/>` +
+      spiral(212, 90, 1, 12, 1.5, oc(0.6, 1.4)),
+    investigation:
+      frame() +
+      `<path d="M50 178 H350" ${oc(0.8, 2)}/>` +
+      `<ellipse cx="200" cy="170" rx="120" ry="14" ${ink(0.85)}/>` +
+      `<path d="M150 170 C150 120 250 120 250 170" ${oc(0.85, 2.4)}/>` +
+      `<path d="M160 150 L240 120 M160 120 L240 150" ${oc(0.9, 3)}/>` +
+      spiral(200, 138, 1, 10, 1.4, oc(0.9, 1.6)) +
+      `<g transform="translate(300 90) rotate(-30)"><rect x="-8" y="-40" width="16" height="70" rx="6" ${of(0.5)}/></g>` +
+      `<circle class="pulse" cx="96" cy="100" r="3" ${of(0.9)}/>`,
+    fracture:
+      frame() +
+      `<ellipse class="glow pulse" cx="200" cy="108" rx="90" ry="50" ${of(0.28)}/>` +
+      `<path d="M110 60 C150 90 150 130 110 170 M290 60 C250 90 250 130 290 170" ${oc(0.9, 3)}/>` +
+      `<path d="M120 112 C160 90 190 130 230 108 S270 120 282 112" ${oc(0.95, 2.8)}/>` +
+      `<path d="M30 192 H370" ${oc(0.5, 2)}/>` +
+      triskele(200, 160, 22, oc(0.8, 1.5)),
+  },
+
+  // ─── Les cloches d'Ys : une grève à marée basse, une dalle et son anneau.
+  'premise-07': {
+    wakeup:
+      frame() +
+      `<path d="M0 150 C100 140 300 140 400 150 V220 H0Z" ${ink(0.6)}/>` +
+      `<path d="M0 118 H400" ${oc(0.55, 1.6)}/>` +
+      waves(118, 0, 400, 50, 6, oc(0.6, 1.4), 'drift') +
+      Array.from(
+        { length: 4 },
+        (_, i) =>
+          `<ellipse class="pulse" style="animation-delay:-${(i * 0.9).toFixed(1)}s" cx="${70 + i * 90}" cy="${170 + (i % 2) * 8}" rx="${22 + i * 3}" ry="5" ${oc(0.45, 1.3)}/>`,
+      ).join('') +
+      `<circle class="glow pulse" cx="200" cy="60" r="26" ${of(0.2)}/>`,
+    orientation:
+      frame() +
+      `<path d="M0 160 H400 V220 H0Z" ${ink(0.7)}/>` +
+      `<path d="M30 160 C40 130 80 130 96 160 M300 160 C312 124 360 126 372 160" ${ink(0.9)}/>` +
+      `<path d="M0 112 H400" ${oc(0.5, 1.6)}/>` +
+      `<rect x="150" y="164" width="100" height="26" ${of(0.18)} stroke="var(--ochre)" stroke-width="2.2"/>` +
+      `<circle cx="200" cy="177" r="8" ${oc(0.95, 2.6)}/>` +
+      `<path d="M140 150 l12 -22 M158 150 l10 -20" ${oc(0.7, 2)}/>` +
+      triskele(340, 56, 24, oc(0.55, 1.3)),
+    dialogue:
+      frame() +
+      `<path d="M0 176 H400" ${ink(0.88)} stroke="var(--ochre)" stroke-width="1.6"/>` +
+      person(100, 176, 112) +
+      `<ellipse cx="230" cy="178" rx="70" ry="10" ${of(0.18)} stroke="var(--ochre)" stroke-width="2"/>` +
+      `<circle cx="230" cy="178" r="9" ${oc(0.95, 2.6)}/>` +
+      bell(310, 100, 26, oc(0.9, 2), of(0.22)) +
+      `<circle class="pulse" cx="310" cy="100" r="46" ${oc(0.3, 1.3)}/><circle class="pulse" style="animation-delay:-1.3s" cx="310" cy="100" r="66" ${oc(0.18, 1.2)}/>`,
+    investigation:
+      frame() +
+      `<rect x="130" y="130" width="140" height="56" ${ink(0.9)}/>` +
+      `<rect x="136" y="136" width="128" height="44" ${of(0.18)} stroke="var(--ochre)" stroke-width="2.2"/>` +
+      `<circle cx="200" cy="158" r="14" ${oc(0.95, 3)}/>` +
+      spiral(200, 158, 1, 8, 1.4, oc(0.9, 1.6)) +
+      `<path d="M60 190 l8 -12 l8 12 M300 192 l8 -12 l8 12" ${oc(0.8, 1.8)}/>` +
+      `<circle class="pulse" cx="200" cy="100" r="3" ${of(0.9)}/>`,
+    fracture:
+      frame() +
+      `<ellipse class="glow pulse" cx="200" cy="130" rx="100" ry="40" ${of(0.3)}/>` +
+      bell(120, 90, 30, oc(0.95, 2), of(0.2)) +
+      bell(280, 90, 30, oc(0.95, 2), of(0.2)) +
+      `<path d="M30 168 H370" ${oc(0.6, 2)}/>` +
+      `<path d="M150 168 H250 V190 H150Z" ${of(0.2)} stroke="var(--ochre)" stroke-width="2"/>` +
+      triskele(200, 130, 22, oc(0.8, 1.5)),
+  },
 };
 
 const MOODS: Record<Mood, string> = {

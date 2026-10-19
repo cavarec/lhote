@@ -10,11 +10,13 @@ import { premise02 } from './premises/premise-02';
 import { premise03 } from './premises/premise-03';
 import { premise04 } from './premises/premise-04';
 import { premise05 } from './premises/premise-05';
+import { premise06 } from './premises/premise-06';
+import { premise07 } from './premises/premise-07';
 
-// Catalogue de contenu injecté dans le moteur : 5 prémisses (dont 2 de saison), 8 personnages, 10 fractures,
+// Catalogue de contenu injecté dans le moteur : 7 prémisses (dont 2 de saison), 12 personnages, 14 fractures,
 // 6 objets-traces et 10 fragments.
 export const catalog: Catalog = {
-  premises: [premise01, premise02, premise03, premise04, premise05],
+  premises: [premise01, premise02, premise03, premise04, premise05, premise06, premise07],
   echoes,
   observerMessages,
   characters,
