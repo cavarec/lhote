@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.9.2] - 2026-10-19
+
+### Corrigé
+
+- Pendant que le texte s'écrit, la page suit : le dernier paragraphe et les choix restent visibles sur un petit écran au lieu de disparaître sous le bas. Si tu remontes la page pour relire, elle ne te ramène pas de force.
+
 ## [0.9.1] - 2026-10-19
 
 ### Modifié
