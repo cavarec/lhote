@@ -262,6 +262,22 @@ describe('GameController', () => {
     expect(await storage.getPlayerId()).toBe(first.playerId);
   });
 
+  it('complète les réglages d’une version plus ancienne', async () => {
+    const { controller, storage } = setup();
+    await storage.setSettings({
+      textSize: 'large',
+      vibration: false,
+      reduceMotion: true,
+    } as never);
+    await controller.init();
+    expect(controller.settings).toMatchObject({
+      textSize: 'large',
+      vibration: false,
+      reduceMotion: true,
+      textSpeed: 'normal',
+    });
+  });
+
   it('exige init() et enregistre les réglages', async () => {
     const { controller } = setup();
     await expect(controller.startLeap()).rejects.toThrow('init()');

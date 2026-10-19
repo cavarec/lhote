@@ -18,6 +18,8 @@ import {
   type Session,
 } from '../game/controller';
 
+const TYPING_MS = { slow: 62, normal: 38, fast: 16, instant: 0 } as const;
+
 // Magasin réactif (runes Svelte 5) au-dessus du contrôleur. Il ne contient aucune règle de jeu :
 // il expose l'état à l'interface et recopie chaque action dans le stockage.
 
@@ -152,7 +154,16 @@ class GameStore {
     const system =
       typeof matchMedia === 'function' &&
       matchMedia('(prefers-reduced-motion: reduce)').matches;
-    return system || (this.settings?.reduceMotion ?? false);
+    return (
+      system ||
+      (this.settings?.reduceMotion ?? false) ||
+      this.settings?.textSpeed === 'instant'
+    );
+  }
+
+  /** Millisecondes par caractère de la machine à écrire. */
+  get typingSpeed(): number {
+    return TYPING_MS[this.settings?.textSpeed ?? 'normal'];
   }
 
   get game(): GameController {

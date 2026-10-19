@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import type { DialogueLine } from '../../../content/premises/types';
+  import { game } from '../stores/game.svelte';
   import Typewriter from './Typewriter.svelte';
 
   // Un texte de narration : paragraphes ou répliques, joués l'un après l'autre.
@@ -17,6 +18,7 @@
   let skipped = $state(false);
   const quick = $derived(instant || skipped);
   const finished = $derived(revealed >= lines.length);
+  const speed = $derived(game.typingSpeed);
 
   function next(): void {
     revealed = Math.min(revealed + 1, lines.length);
@@ -75,20 +77,28 @@
           ><Typewriter
             text={line.text}
             instant={quick}
+            {speed}
             ondone={i === revealed - 1 ? next : undefined}
           /></em
         >{:else}<Typewriter
           text={line.text}
           instant={quick}
+          {speed}
           ondone={i === revealed - 1 ? next : undefined}
         />{/if}
     </p>
   {/each}
 </div>
+{#if !finished && !quick}
+  <button class="button button--quiet skip ui" onclick={skipAll}>Tout afficher</button>
+{/if}
 {#if finished}{@render children?.()}{/if}
 <span class="scene-end" bind:this={end} aria-hidden="true"></span>
 
 <style>
+  .skip {
+    margin-top: var(--space-2);
+  }
   .scene-end {
     display: block;
     height: 0;

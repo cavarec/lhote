@@ -1,6 +1,6 @@
 <script lang="ts">
   import { game } from '../lib/stores/game.svelte';
-  import type { TextSize } from '../lib/db/schema';
+  import type { TextSize, TextSpeed } from '../lib/db/schema';
 
   let { onback }: { onback: () => void } = $props();
 
@@ -11,6 +11,13 @@
     { value: 'normal', label: 'Normal' },
     { value: 'large', label: 'Grand' },
     { value: 'xlarge', label: 'Très grand' },
+  ];
+
+  const speeds: { value: TextSpeed; label: string }[] = [
+    { value: 'slow', label: 'Lente' },
+    { value: 'normal', label: 'Normale' },
+    { value: 'fast', label: 'Rapide' },
+    { value: 'instant', label: 'Tout d’un coup' },
   ];
 
   async function download(): Promise<void> {
@@ -54,6 +61,15 @@
           class="button"
           aria-pressed={game.settings?.textSize === s.value}
           onclick={() => game.saveSettings({ textSize: s.value })}>{s.label}</button
+        >
+      {/each}
+    </div>
+    <div class="row" role="group" aria-label="Vitesse d’écriture du texte">
+      {#each speeds as s (s.value)}
+        <button
+          class="button"
+          aria-pressed={game.settings?.textSpeed === s.value}
+          onclick={() => game.saveSettings({ textSpeed: s.value })}>{s.label}</button
         >
       {/each}
     </div>

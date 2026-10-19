@@ -9,8 +9,12 @@ export const KEPT_LEAPS = 3;
 
 export type TextSize = 'normal' | 'large' | 'xlarge';
 
+/** Vitesse de la machine à écrire : « instant » affiche chaque bloc d'un coup. */
+export type TextSpeed = 'slow' | 'normal' | 'fast' | 'instant';
+
 export interface Settings {
   textSize: TextSize;
+  textSpeed: TextSpeed;
   /** Vibration de 30 ms à la bascule de scène (si l'appareil la propose). */
   vibration: boolean;
   /** Force l'absence d'animation, en plus de la préférence du système. */
@@ -19,6 +23,7 @@ export interface Settings {
 
 export const DEFAULT_SETTINGS: Settings = {
   textSize: 'normal',
+  textSpeed: 'normal',
   vibration: true,
   reduceMotion: false,
 };
