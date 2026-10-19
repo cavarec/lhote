@@ -46,13 +46,13 @@ L'écran « Sources » de l'application cite les collecteurs (Luzel, Le Braz, S�
 
 ## Inventaire (MVP)
 
-| Contenu                    | Quantité                                                         | Fichier                        |
-| -------------------------- | ---------------------------------------------------------------- | ------------------------------ |
-| Prémisses                  | 3 : la mer rend un corps, le jour du pardon, la veillée en forêt | `premises/premise-0{1,2,3}.ts` |
-| Personnages                | 8 (2 par archétype : sûr de lui, inquiet, hostile, innocent)     | `characters/archetypes.ts`     |
-| Fractures                  | 6 (2 par prémisse)                                               | `fractures/index.ts`           |
-| Objets-traces              | 6                                                                | `artifacts/index.ts`           |
-| Fragments de méta-histoire | 10 (3 / 3 / 3 / 1 sur les 4 actes)                               | `fragments/index.ts`           |
+| Contenu                    | Quantité                                                      | Fichier                       |
+| -------------------------- | ------------------------------------------------------------- | ----------------------------- |
+| Prémisses                  | 7 (dont 2 de saison, voir plus bas)                           | `premises/premise-0{1..7}.ts` |
+| Personnages                | 12 (3 par archétype : sûr de lui, inquiet, hostile, innocent) | `characters/archetypes.ts`    |
+| Fractures                  | 14 (2 par prémisse)                                           | `fractures/index.ts`          |
+| Objets-traces              | 6                                                             | `artifacts/index.ts`          |
+| Fragments de méta-histoire | 10 (3 / 3 / 3 / 1 sur les 4 actes)                            | `fragments/index.ts`          |
 
 Le budget du §6.2 prévoyait 4 fractures. Chaque prémisse en a deux, qui tournent autour du même
 objet, pour que ses six résolutions restent justes quelle que soit la fracture tirée.
@@ -95,3 +95,16 @@ liste avec un commentaire qui justifie le choix.
 - Hors saison, la prémisse n'est jamais tirée. En saison, quand elle n'a pas été jouée dans les deux derniers sauts, elle sort une fois sur deux (`SEASONAL_PROBABILITY`). Sans prémisse de saison ouverte, le tirage est identique à avant.
 - `label` s'affiche sur l'accueil pendant la saison : « Ces jours-ci, c'est {label}. »
 - Saisons en place : Kalan Goañv (`premise-04`, 20 octobre au 10 novembre) et Nedeleg (`premise-05`, 1er décembre au 6 janvier). Chaque saison a deux fractures qui tournent autour du même objet.
+
+## Histoires hors saison
+
+- `premise-06`, « Le lavoir de minuit » : les lavandières de la nuit demandent d'aider à tordre un drap. On le tord à contre-main. Vérités : `sens-du-poignet` (corps), `drap-de-la-maison-du-bas` (social).
+- `premise-07`, « Les cloches d'Ys » : une grève à marée basse, une dalle et son anneau de bronze. Le sel que tu portes est la clé. Vérités : `le-sel-est-la-cle` (corps), `la-porte-est-ouverte` (social).
+- Ces deux histoires se jouent toute l'année, au même rang que les trois premières.
+
+## Observateur, échos, geste de la main
+
+- `content/observers/` : messages de l'Observateur, tirés à la fin d'un saut (poids 40 / 30 / 20 / 10 : utile, inutile, faux, personnel). Le message est un aparté : jamais signalé comme faux.
+- `content/echoes/` : un écho personnel, une fois sur quatre, glissé dans l'orientation. Il ne dit jamais qu'il vient du joueur.
+- `Premise.handLetGo` : « Laisser ta main faire ». Un geste pour le dialogue, un pour l'enquête, fixés par l'histoire. Résultat : `saves` (suspicion −15), `betrays` (+25) ou `reveals` (+10). Un geste d'enquête peut révéler une vérité qui existe vraiment dans l'enquête.
+- Les tirages supplémentaires utilisent leur propre graine salée : les suites de tirage existantes ne changent pas.

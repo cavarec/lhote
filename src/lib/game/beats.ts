@@ -4,10 +4,11 @@ import type {
   DialogueLine,
   InvestigationItem,
   Premise,
+  HandMove,
   Resolution,
   Twist,
 } from '../../../content/premises/types';
-import { applySuspicion, isExposed } from '../engine/suspicion';
+import { applySuspicion, clampSuspicion, isExposed } from '../engine/suspicion';
 import type { Catalog, LeapState } from '../engine/types';
 
 // Déroulé d'un saut (§6.4) en fonctions pures : chaque action reçoit l'état du saut et en renvoie
@@ -198,7 +199,53 @@ export function knownTruths(premise: Premise, leap: LeapState): Set<string> {
       truths.add(item.revealsTruth);
     }
   });
+  const fromHand = leap.choices['hand-truth'];
+  if (fromHand !== undefined) truths.add(fromHand);
   return truths;
+}
+
+/** Variation de suspicion d'un geste de la main : elle sauve, trahit ou révèle. */
+export const HAND_SUSPICION: Record<HandMove['outcome'], number> = {
+  saves: -15,
+  betrays: 25,
+  reveals: 10,
+};
+
+export type HandBeat = 'dialogue' | 'investigation';
+
+/** La main a-t-elle déjà agi à ce beat ? Une seule fois par beat. */
+export function handUsed(leap: LeapState, beat: HandBeat): boolean {
+  return leap.choices[`hand-${beat}`] !== undefined;
+}
+
+/** Le geste que la prémisse prévoit à ce beat, ou `null`. */
+export function handMove(premise: Premise, beat: HandBeat): HandMove | null {
+  return premise.handLetGo?.[beat] ?? null;
+}
+
+/**
+ * Laisser le corps agir. Au dialogue, il tient lieu de choix (avant la première réponse). À l'enquête,
+ * il ne coûte aucun geste. Le résultat vient de la prémisse, jamais du hasard.
+ */
+export function letHandAct(leap: LeapState, premise: Premise, beat: HandBeat): LeapState {
+  const move = handMove(premise, beat);
+  if (!move) throw new BeatError('Cette histoire ne prévoit pas ce geste.');
+  if (handUsed(leap, beat)) throw new BeatError('La main a déjà agi à ce moment.');
+  if (beat === 'dialogue' && leap.choices['dialogue'] !== undefined) {
+    throw new BeatError('Le dialogue est déjà engagé.');
+  }
+  const choices: Record<string, string> = {
+    ...leap.choices,
+    hand: '1',
+    [`hand-${beat}`]: move.outcome,
+  };
+  if (beat === 'dialogue') choices['dialogue'] = 'hand';
+  if (move.revealsTruth !== undefined) choices['hand-truth'] = move.revealsTruth;
+  return {
+    ...leap,
+    suspicion: clampSuspicion(leap.suspicion + HAND_SUSPICION[move.outcome]),
+    choices,
+  };
 }
 
 export function revealClues(

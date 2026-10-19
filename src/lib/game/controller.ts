@@ -91,7 +91,8 @@ export class GameController {
     }
     this.playerId = playerId;
     this.api = this.deps.createApi(playerId);
-    this.settings = (await storage.getSettings()) ?? DEFAULT_SETTINGS;
+    // Les réglages d'une version plus ancienne n'ont pas les champs ajoutés depuis : on les complète.
+    this.settings = { ...DEFAULT_SETTINGS, ...(await storage.getSettings()) };
     await this.flushPending();
     return { playerId, firstVisit };
   }

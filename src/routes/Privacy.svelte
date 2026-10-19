@@ -1,6 +1,6 @@
 <script lang="ts">
   import { game } from '../lib/stores/game.svelte';
-  import type { TextSize } from '../lib/db/schema';
+  import type { TextSize, TextSpeed } from '../lib/db/schema';
 
   let { onback }: { onback: () => void } = $props();
 
@@ -11,6 +11,13 @@
     { value: 'normal', label: 'Normal' },
     { value: 'large', label: 'Grand' },
     { value: 'xlarge', label: 'Très grand' },
+  ];
+
+  const speeds: { value: TextSpeed; label: string }[] = [
+    { value: 'slow', label: 'Lente' },
+    { value: 'normal', label: 'Normale' },
+    { value: 'fast', label: 'Rapide' },
+    { value: 'instant', label: 'Tout d’un coup' },
   ];
 
   async function download(): Promise<void> {
@@ -24,7 +31,7 @@
       a.download = 'lhote-mes-donnees.json';
       a.click();
       URL.revokeObjectURL(a.href);
-      message = 'Vos données ont été téléchargées.';
+      message = 'Tes données ont été téléchargées.';
     } catch {
       message = 'Export impossible sans connexion.';
     }
@@ -57,6 +64,15 @@
         >
       {/each}
     </div>
+    <div class="row" role="group" aria-label="Vitesse d’écriture du texte">
+      {#each speeds as s (s.value)}
+        <button
+          class="button"
+          aria-pressed={game.settings?.textSpeed === s.value}
+          onclick={() => game.saveSettings({ textSpeed: s.value })}>{s.label}</button
+        >
+      {/each}
+    </div>
     <label class="check">
       <input
         type="checkbox"
@@ -76,15 +92,15 @@
   </section>
 
   <section class="ui">
-    <h2>Vos données</h2>
+    <h2>Tes données</h2>
     <p>
       L'Hôte ne demande ni compte ni adresse. Un identifiant aléatoire, stocké sur cet
-      appareil, relie votre partie à ses sauvegardes. Le serveur garde votre monde et
-      votre historique pendant un an sans activité, puis les efface. Aucune mesure
-      d'audience, aucun traceur.
+      appareil, relie ta partie à ses sauvegardes. Le serveur garde ton monde et ton
+      historique pendant un an sans activité, puis les efface. Aucune mesure d'audience,
+      aucun traceur.
     </p>
     <p>
-      Un fragment de vos sauts, une seule phrase sans identifiant, peut être lu par un
+      Un fragment de tes sauts, une seule phrase sans identifiant, peut être lu par un
       autre joueur comme une trace discrète. Il disparaît après 90 jours.
     </p>
     <button class="button" onclick={download}>Télécharger mes données</button>

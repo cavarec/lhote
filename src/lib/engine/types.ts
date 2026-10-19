@@ -3,6 +3,8 @@ import type { Character } from '../../../content/characters/types';
 import type { Fracture } from '../../../content/fractures/types';
 import type { Fragment } from '../../../content/fragments/types';
 import type { Outcome, Premise } from '../../../content/premises/types';
+import type { Echo } from '../../../content/echoes/types';
+import type { ObserverMessage } from '../../../content/observers/types';
 
 // Modèle de données (§5.2). Ajouts de l'étape 2 par rapport au prompt, tous motivés
 // par le générateur (§5.8) :
@@ -113,6 +115,8 @@ export type ChoiceKind = 'neutral' | 'risky' | 'informative';
 /** Tout le contenu, injecté dans le moteur (le moteur ne l'importe jamais en dur). */
 export interface Catalog {
   premises: readonly Premise[];
+  echoes: readonly Echo[];
+  observerMessages: readonly ObserverMessage[];
   characters: readonly Character[];
   fractures: readonly Fracture[];
   artifacts: readonly ArtifactDef[];

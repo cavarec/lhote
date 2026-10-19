@@ -173,6 +173,11 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
       texts.push({ where: `${at}.investigation[${i}]`, text: item.text }),
     );
     texts.push(...dialogueTexts(`${at}.openingDialogue`, premise.openingDialogue));
+    for (const beat of ['dialogue', 'investigation'] as const) {
+      premise.handLetGo?.[beat].lines.forEach((line, j) =>
+        texts.push({ where: `${at}.handLetGo.${beat}.lines[${j}]`, text: line.text }),
+      );
+    }
     premise.twists?.forEach((twist, i) =>
       twist.lines.forEach((line, j) =>
         texts.push({ where: `${at}.twists[${i}].lines[${j}]`, text: line.text }),
@@ -210,6 +215,12 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
   }
   for (const fragment of catalog.fragments) {
     texts.push({ where: `fragment ${fragment.id}.text`, text: fragment.text });
+  }
+  for (const echo of catalog.echoes) {
+    texts.push({ where: `echo ${echo.id}.text`, text: echo.text });
+  }
+  for (const message of catalog.observerMessages) {
+    texts.push({ where: `observer ${message.id}.text`, text: message.text });
   }
   return texts;
 }
@@ -304,6 +315,20 @@ export function checkPremise(premise: Premise): Violation[] {
         choices: round.choices,
       }),
     );
+  }
+  // Le geste de la main révèle une vérité qui existe vraiment dans l'enquête.
+  const truths = new Set(
+    premise.investigation.flatMap((c) => (c.revealsTruth ? [c.revealsTruth] : [])),
+  );
+  for (const beat of ['dialogue', 'investigation'] as const) {
+    const move = premise.handLetGo?.[beat];
+    if (move?.revealsTruth !== undefined && !truths.has(move.revealsTruth)) {
+      violations.push({
+        where: `${at}.handLetGo.${beat}`,
+        rule: 'main',
+        message: `Vérité inconnue : ${move.revealsTruth}.`,
+      });
+    }
   }
   // Un coup de théâtre sans condition sert de repli : il doit être le dernier.
   premise.twists?.forEach((twist, i, all) => {

@@ -18,6 +18,8 @@ import {
   type Session,
 } from '../game/controller';
 
+const TYPING_MS = { slow: 62, normal: 38, fast: 16, instant: 0 } as const;
+
 // Magasin réactif (runes Svelte 5) au-dessus du contrôleur. Il ne contient aucune règle de jeu :
 // il expose l'état à l'interface et recopie chaque action dans le stockage.
 
@@ -123,7 +125,7 @@ class GameStore {
   get problemMessage(): string {
     switch (this.problem) {
       case 'offline':
-        return 'Pas de connexion. Réessayez dans un instant.';
+        return 'Pas de connexion. Réessaie dans un instant.';
       case 'no_leap_offline':
         return 'Il faut une connexion pour recevoir un nouveau saut.';
       case 'stale_leap':
@@ -131,9 +133,9 @@ class GameStore {
       case 'invalid':
         return 'Cette action n’a pas pu être validée.';
       case 'rate_limited':
-        return 'Trop de demandes. Patientez quelques secondes.';
+        return 'Trop de demandes. Patiente quelques secondes.';
       default:
-        return 'Quelque chose s’est mal passé. Réessayez.';
+        return 'Quelque chose s’est mal passé. Réessaie.';
     }
   }
 
@@ -152,7 +154,16 @@ class GameStore {
     const system =
       typeof matchMedia === 'function' &&
       matchMedia('(prefers-reduced-motion: reduce)').matches;
-    return system || (this.settings?.reduceMotion ?? false);
+    return (
+      system ||
+      (this.settings?.reduceMotion ?? false) ||
+      this.settings?.textSpeed === 'instant'
+    );
+  }
+
+  /** Millisecondes par caractère de la machine à écrire. */
+  get typingSpeed(): number {
+    return TYPING_MS[this.settings?.textSpeed ?? 'normal'];
   }
 
   get game(): GameController {

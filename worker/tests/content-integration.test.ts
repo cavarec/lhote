@@ -38,8 +38,8 @@ describe('toutes les issues du contenu réel', () => {
   const cases = catalog.premises.flatMap((premise) =>
     premise.resolutions.map((resolution) => [premise.id, resolution.id] as const),
   );
-  it('couvre 30 issues', () => {
-    expect(cases).toHaveLength(30);
+  it('couvre 42 issues', () => {
+    expect(cases).toHaveLength(42);
   });
 
   it.each(cases)(

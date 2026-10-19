@@ -3,7 +3,7 @@ import { catalog } from '../../content';
 import { countWords } from './rules';
 
 describe('catalogue de prémisses', () => {
-  it('contient cinq prémisses aux identifiants neutres et uniques', () => {
+  it('contient sept prémisses aux identifiants neutres et uniques', () => {
     const ids = catalog.premises.map((p) => p.id);
     expect(ids).toEqual([
       'premise-01',
@@ -11,6 +11,8 @@ describe('catalogue de prémisses', () => {
       'premise-03',
       'premise-04',
       'premise-05',
+      'premise-06',
+      'premise-07',
     ]);
   });
 

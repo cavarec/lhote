@@ -421,6 +421,45 @@ export const premise05: Premise = {
     },
   ],
 
+  // « Laisser ta main faire » : ce que le corps hérité fait seul, fixé par la prémisse.
+  handLetGo: {
+    dialogue: {
+      outcome: 'betrays',
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Ta main s’avance et se pose sur le front du grand bœuf, sans trembler, sans hésiter, comme on salue un vieil ami.',
+        },
+        {
+          speaker: 'narration',
+          text: 'La personne étouffe un cri. « Tu le touches ? Tu n’as jamais osé. Qui es-tu, ce soir ? »',
+        },
+        {
+          speaker: 'narration',
+          text: 'Le corps n’avait pas peur. Tu aurais dû en avoir, pour deux.',
+        },
+      ],
+    },
+    investigation: {
+      outcome: 'reveals',
+      revealsTruth: 'oreille-qui-sait',
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Ton oreille se tourne vers la bête avant qu’elle ouvre la bouche. Elle devine l’inspiration, la longueur du souffle, la place où viendra le mot.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Ce n’est pas la première fois. Ce corps a déjà attendu ici, debout, ce que la bête allait dire.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu en as la certitude, nette, sans souvenir : tu as déjà entendu cette voix.',
+        },
+      ],
+    },
+  },
+
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-09', 'fracture-10'],
 

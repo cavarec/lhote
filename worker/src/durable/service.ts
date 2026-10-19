@@ -76,7 +76,7 @@ export class ChronologyService {
         throw new ApiError(
           429,
           'rate_limited',
-          'Trop de requêtes, réessayez dans un instant.',
+          'Trop de requêtes, réessaie dans un instant.',
           {
             headers: { 'Retry-After': String(decision.retryAfterSeconds) },
           },

@@ -85,4 +85,36 @@ export const fractures: readonly Fracture[] = [
       'Le sonneur se tait parce qu’il a peur de ce qu’elle annonce. Il faut le laisser se taire.',
     ],
   },
+  {
+    id: 'fracture-11',
+    title: 'Un drap sort de l’eau sans que personne ne l’y ait plongé',
+    interpretations: [
+      'Les lavandières ont lavé le linceul d’une maison du village, et il manque une paire de bras pour le tordre. Il faut les aider, à contre-main.',
+      'Quelqu’un a jeté ce drap pour t’attirer dans le bassin. Il faut le laisser flotter, et n’y toucher sous aucun prétexte.',
+    ],
+  },
+  {
+    id: 'fracture-12',
+    title: 'Le battoir frappe sans bras',
+    interpretations: [
+      'Les lavandières attendent qu’on leur réponde, et elles ne partiront pas avant. Il faut leur répondre en breton, à voix basse.',
+      'Le battoir est un signal pour la maison du bas, où quelqu’un attend d’être pleuré. Il faut le briser avant qu’on l’entende.',
+    ],
+  },
+  {
+    id: 'fracture-13',
+    title: 'La cloche sonne sous la grève',
+    interpretations: [
+      'Ys remonte, et la ville demande qu’on lui ouvre sa porte avant l’aube. Il faut l’ouvrir, avec ton sel.',
+      'Ys a laissé sa porte entrouverte, et ses cloches appellent qui voudra l’entendre. Il faut la refermer, avec ton sel.',
+    ],
+  },
+  {
+    id: 'fracture-14',
+    title: 'Une dalle sans trace dans le sable',
+    interpretations: [
+      'Quelqu’un a effacé ses pas pour ne pas être suivi jusqu’à la porte. Il faut retrouver ce chemin, et y descendre.',
+      'La porte a rejeté ses visiteurs, un à un, sans jamais les laisser entrer. Il faut cesser de la forcer, et la laisser dormir.',
+    ],
+  },
 ];

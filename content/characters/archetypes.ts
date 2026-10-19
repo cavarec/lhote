@@ -1,6 +1,6 @@
 import type { Character } from './types';
 
-// Huit personnages réutilisables, deux par archétype. Ils n'appartiennent à aucune prémisse :
+// Douze personnages réutilisables, trois par archétype. Ils n'appartiennent à aucune prémisse :
 // le générateur en tire deux pour chaque saut. Leurs répliques ne citent donc ni lieu ni époque.
 //
 // Clés de `dialogues` (voir content/README.md) :
@@ -225,6 +225,140 @@ export const characters: readonly Character[] = [
         {
           speaker: 'narration',
           text: 'Il sourit à quelqu’un derrière toi, que tu ne vois pas.',
+        },
+      ],
+    },
+  },
+  // Quatre personnages de métier breton : un passeur, une gardienne de veillée, un sonneur, un enfant
+  // qui écoute. Leur voix suggère le pays sans le nommer.
+  {
+    id: 'character-09',
+    archetype: 'confident',
+    name: 'Erwan',
+    voice:
+      'Pose chaque phrase comme une pierre sur l’eau. Parle de traversées, de marées, de ce qu’on laisse derrière soi.',
+    dialogues: {
+      greeting: [
+        { speaker: 'npc', text: 'Monte. Je te mène où tu dois aller. C’est mon métier.' },
+        {
+          speaker: 'npc',
+          text: 'Je ne demande jamais pourquoi. L’eau ne le demande pas non plus.',
+        },
+      ],
+      doubt: [
+        { speaker: 'npc', text: 'Tu rames comme quelqu’un qui découvre la rive.' },
+        {
+          speaker: 'narration',
+          text: 'Il te regarde un long moment, puis hausse une épaule. Il en a vu d’autres.',
+        },
+      ],
+      farewell: [
+        {
+          speaker: 'npc',
+          text: 'Voilà. L’autre bord, c’est toujours le même, et jamais pareil.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Il repousse sa barque d’un coup de perche, sans un regard en arrière.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'character-10',
+    archetype: 'worried',
+    name: 'Soazig',
+    voice:
+      'Murmure. Garde une lumière ou une braise entre les mains. S’arrête au milieu des phrases pour écouter la nuit.',
+    dialogues: {
+      greeting: [
+        {
+          speaker: 'npc',
+          text: 'Je garde cette flamme depuis hier. Elle ne veut pas rester.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Chut. Écoute. Tu entends ? Non. Moi non plus. C’est ça, le pire.',
+        },
+      ],
+      doubt: [
+        { speaker: 'npc', text: 'Tu n’as pas fait le signe. Tu fais toujours le signe.' },
+        {
+          speaker: 'narration',
+          text: 'Elle ramène la lumière contre elle, comme pour la cacher à ton regard.',
+        },
+      ],
+      farewell: [
+        { speaker: 'npc', text: 'Elle brûle encore. Je crois que c’est bon signe.' },
+        {
+          speaker: 'narration',
+          text: 'Elle s’éloigne à petits pas, la flamme penchée devant elle.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'character-11',
+    archetype: 'hostile',
+    name: 'Goulven',
+    voice:
+      'Bourru. Parle par sentences, comme un proverbe renversé. Méprise les hésitations et ceux qui en ont.',
+    dialogues: {
+      greeting: [
+        {
+          speaker: 'npc',
+          text: 'Tu tires la corde ou tu te tais. Il n’y a pas de troisième manière.',
+        },
+        { speaker: 'npc', text: 'Ceux qui doutent, on les enterre les derniers.' },
+      ],
+      doubt: [
+        {
+          speaker: 'npc',
+          text: 'Tu as la voix de quelqu’un d’autre. Je l’entends, moi.',
+        },
+        { speaker: 'narration', text: 'Il crache de côté, sans te quitter des yeux.' },
+      ],
+      farewell: [
+        { speaker: 'npc', text: 'Fait ou pas fait. Le reste, c’est de la fumée.' },
+        {
+          speaker: 'narration',
+          text: 'Il tourne le dos. Ses épaules disent que la conversation est close.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'character-12',
+    archetype: 'innocent',
+    name: 'Maï',
+    voice:
+      'Dit tout ce qu’elle voit. Pose des questions trop justes. Ne comprend pas pourquoi les grands se taisent.',
+    dialogues: {
+      greeting: [
+        {
+          speaker: 'npc',
+          text: 'Tu as les mains froides. Moi aussi, quand j’écoute des histoires.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Tu me racontes la fin ? Personne ne veut me dire la fin.',
+        },
+      ],
+      doubt: [
+        { speaker: 'npc', text: 'Tu n’es pas comme hier. Tu sens différent.' },
+        {
+          speaker: 'narration',
+          text: 'Elle te regarde sans méfiance, avec rien que de la curiosité.',
+        },
+      ],
+      farewell: [
+        {
+          speaker: 'npc',
+          text: 'Je savais que tu reviendrais. Enfin, quelqu’un comme toi.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Elle te fait un petit signe de la main, comme à un voisin qui part.',
         },
       ],
     },

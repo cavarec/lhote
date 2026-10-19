@@ -37,6 +37,25 @@ test.describe('parcours complet', () => {
     );
   });
 
+  test('« Laisser ta main faire » tient lieu de choix, au dialogue puis à l’enquête', async ({
+    page,
+  }) => {
+    await startLeap(page);
+    await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.getByRole('button', { name: 'Laisser ta main faire.' }).click();
+    await page.getByText('Tu laisses ta main faire.').first().waitFor();
+    await page.locator('.choice').first().click(); // seconde passe
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    const hand = page.getByRole('button', { name: 'Laisser ta main faire.' });
+    await hand.click();
+    await expect(hand).toHaveCount(0);
+    await expect(page.locator('.npc-hand').first()).toBeVisible();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await page.getByRole('button', { name: 'Faire face' }).click();
+    await page.getByRole('button', { name: 'Décider' }).waitFor({ state: 'attached' });
+  });
+
   test('l’enquête ne propose jamais deux fois le même libellé', async ({ page }) => {
     await startLeap(page);
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();

@@ -50,7 +50,7 @@
   <p class="narration muted">
     {game.firstVisit
       ? 'Quelqu’un dort dans un corps qui n’est pas le sien.'
-      : 'Le monde vous attend.'}
+      : 'Le monde t’attend.'}
   </p>
 
   {#if season}
@@ -68,7 +68,7 @@
   {#if !game.online}
     <p class="ui notice" role="status">
       Hors connexion. {game.hasProgress
-        ? 'Votre saut en cours reste jouable.'
+        ? 'Ton saut en cours reste jouable.'
         : 'Le dernier saut reçu reste jouable ; un nouveau saut demande une connexion.'}
       Connexion requise pour résoudre.
     </p>

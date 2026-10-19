@@ -2,6 +2,7 @@
   import Vignette from '../lib/components/Vignette.svelte';
   import Scene from '../lib/components/Scene.svelte';
   import { installPrompt } from '../lib/pwa/install.svelte';
+  import { pickObserverMessage } from '../lib/engine/extras';
   import { game } from '../lib/stores/game.svelte';
 
   const outcome = $derived(game.outcome!);
@@ -9,6 +10,9 @@
   const instant = $derived(game.instant);
   const fragment = $derived(
     done.catalog.fragments.find((f) => f.id === done.leap.fragmentId) ?? null,
+  );
+  const observer = $derived(
+    pickObserverMessage(done.leap.seed, done.catalog.observerMessages),
   );
   const lines = $derived(
     outcome.resolution.resultText
@@ -23,8 +27,14 @@
   <Scene {lines} {instant}>
     {#if fragment}
       <aside class="fragment fade-in" aria-label="Fragment retrouvé">
-        <p class="ui muted">Un souvenir qui n’est pas le vôtre</p>
+        <p class="ui muted">Un souvenir qui n’est pas le tien</p>
         <p class="narration"><em>{fragment.text}</em></p>
+      </aside>
+    {/if}
+    {#if observer}
+      <aside class="observer fade-in" aria-label="Un message te parvient">
+        <p class="ui muted">Quelqu’un te parle, de l’autre côté</p>
+        <p class="narration"><em>{observer.text}</em></p>
       </aside>
     {/if}
     {#if outcome.queued}
@@ -34,7 +44,7 @@
     {/if}
     {#if installPrompt.available}
       <div class="install ui">
-        <p>Retrouvez L'Hôte sur votre écran d'accueil, même sans réseau.</p>
+        <p>Retrouve L'Hôte sur ton écran d'accueil, même sans réseau.</p>
         <button class="button" onclick={() => installPrompt.install()}>Installer</button>
         <button class="button button--quiet" onclick={() => installPrompt.dismiss()}>
           Plus tard

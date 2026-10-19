@@ -19,7 +19,7 @@ test.describe('accessibilité (WCAG AA)', () => {
     await audit(page);
     await page.getByRole('button', { name: 'Retour' }).click();
     await page.getByRole('button', { name: 'Confidentialité et réglages' }).click();
-    await page.getByRole('heading', { name: 'Vos données' }).waitFor();
+    await page.getByRole('heading', { name: 'Tes données' }).waitFor();
     await audit(page);
   });
 
@@ -107,6 +107,26 @@ test.describe('accessibilité (WCAG AA)', () => {
       .poll(async () => page.evaluate(() => window.scrollY), { timeout: 30_000 })
       .toBeGreaterThan(0);
     await expect(page.locator('.narration p').last()).toBeInViewport();
+    await context.close();
+  });
+  test('« Tout afficher » montre le texte d’un coup, et la vitesse se règle', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ reducedMotion: 'no-preference' });
+    const page = await context.newPage();
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Confidentialité et réglages' }).click();
+    await page.getByRole('button', { name: 'Rapide' }).click();
+    await expect(page.getByRole('button', { name: 'Rapide' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await page.getByRole('button', { name: 'Retour' }).click();
+    await page.getByRole('button', { name: 'Sauter' }).click();
+    await page.getByRole('button', { name: 'Tout afficher' }).click();
+    await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toBeVisible({
+      timeout: 2000,
+    });
     await context.close();
   });
 });

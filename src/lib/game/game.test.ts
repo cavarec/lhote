@@ -9,6 +9,8 @@ import {
   availableResolutions,
   BeatError,
   activeTwist,
+  handUsed,
+  letHandAct,
   chooseDialogue,
   chooseSecondRound,
   startTwist,
@@ -16,6 +18,7 @@ import {
   clueGroups,
   INVESTIGATION_BUDGET,
   investigationLeft,
+  isLocked,
   knownTruths,
   lockedResolutions,
   revealClues,
@@ -195,6 +198,29 @@ describe('beats', () => {
     expect(twistPending(startTwist(bodily))).toBe(true);
   });
 
+  it('laisser la main faire : un geste par beat, décidé par l’histoire', () => {
+    const base = makeLeap({ suspicion: 40 });
+    const done = letHandAct(base, premise01, 'dialogue');
+    expect(done.choices['dialogue']).toBe('hand');
+    expect(done.choices['hand']).toBe('1');
+    expect(done.suspicion).toBe(25); // premise01 : la main sauve (-15)
+    expect(handUsed(done, 'dialogue')).toBe(true);
+    expect(() => letHandAct(done, premise01, 'dialogue')).toThrow(BeatError);
+    // Le dialogue peut alors se poursuivre (seconde passe).
+    expect(chooseSecondRound(done, premise01, 'gagner-du-temps').leap.suspicion).toBe(25);
+    expect(() =>
+      letHandAct(chooseDialogue(base, premise01, 'preparer').leap, premise01, 'dialogue'),
+    ).toThrow(BeatError);
+  });
+
+  it('à l’enquête, la main révèle une vérité sans coûter de geste', () => {
+    const leap = letHandAct(makeLeap(), premise01, 'investigation');
+    expect(knownTruths(premise01, leap).has('noye-depuis-longtemps')).toBe(true);
+    expect(investigationLeft(clueGroups(premise01, leap))).toBe(INVESTIGATION_BUDGET);
+    const wash = premise01.resolutions.find((r) => r.id === 'laver-et-taire')!;
+    expect(isLocked(premise01, leap, wash)).toBe(false);
+  });
+
   it('impose l’issue exposée quand la suspicion est au maximum', () => {
     const forced = availableResolutions(premise01, makeLeap({ suspicion: 100 }));
     expect(forced.length).toBeGreaterThan(0);
@@ -260,6 +286,22 @@ describe('GameController', () => {
     expect(second.firstVisit).toBe(false);
     expect(second.playerId).toBe(first.playerId);
     expect(await storage.getPlayerId()).toBe(first.playerId);
+  });
+
+  it('complète les réglages d’une version plus ancienne', async () => {
+    const { controller, storage } = setup();
+    await storage.setSettings({
+      textSize: 'large',
+      vibration: false,
+      reduceMotion: true,
+    } as never);
+    await controller.init();
+    expect(controller.settings).toMatchObject({
+      textSize: 'large',
+      vibration: false,
+      reduceMotion: true,
+      textSpeed: 'normal',
+    });
   });
 
   it('exige init() et enregistre les réglages', async () => {
