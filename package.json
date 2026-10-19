@@ -1,6 +1,6 @@
 {
   "name": "lhote",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "bash scripts/dev.sh",
     "dev:vite": "vite --port 5173 --strictPort",
-    "build": "vite build",
+    "build": "vite build && node scripts/gen-feed.mjs",
     "preview": "vite preview",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",

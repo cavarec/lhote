@@ -88,3 +88,10 @@ liste avec un commentaire qui justifie le choix.
 - `openingDialogue.secondRound` : une seconde passe de dialogue (réplique d'ouverture, puis 3 ou 4 choix) après la réponse au premier choix. Mêmes règles que le premier : au moins un choix neutre, un informatif et un risqué. La suspicion s'ajoute.
 - `twists` : coups de théâtre joués entre l'enquête et la fracture. Le premier dont toutes les vérités de `requires` sont connues est joué ; celui sans `requires` est le repli et vient en dernier. Chaque prémisse en a quatre : deux vérités, la nature du corps, la nature sociale, repli.
 - Chaque résolution se termine par une ligne de chute, qui laisse une inquiétude plutôt qu'une conclusion.
+
+## Prémisses de saison
+
+- `Premise.season` : `{ from: 'MM-JJ', to: 'MM-JJ', label }`, en UTC, bornes comprises. `from` après `to` enjambe le nouvel an (Noël : `12-01` à `01-06`).
+- Hors saison, la prémisse n'est jamais tirée. En saison, quand elle n'a pas été jouée dans les deux derniers sauts, elle sort une fois sur deux (`SEASONAL_PROBABILITY`). Sans prémisse de saison ouverte, le tirage est identique à avant.
+- `label` s'affiche sur l'accueil pendant la saison : « Ces jours-ci, c'est {label}. »
+- Saisons en place : Kalan Goañv (`premise-04`, 20 octobre au 10 novembre) et Nedeleg (`premise-05`, 1er décembre au 6 janvier). Chaque saison a deux fractures qui tournent autour du même objet.

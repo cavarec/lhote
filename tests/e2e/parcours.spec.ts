@@ -16,6 +16,21 @@ test.describe('parcours complet', () => {
     await page.getByRole('button', { name: 'Retour' }).click();
   });
 
+  test('l’accueil propose de partager et de s’abonner, sans bruit', async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('/');
+    const feed = page.getByRole('link', { name: 'S’abonner aux nouveautés' });
+    await expect(feed).toHaveAttribute('href', '/nouveautes.xml');
+    await page.getByRole('button', { name: 'Partager' }).click();
+    await expect(page.getByText('Le lien est copié.')).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      'https://lhote.atao.dev/',
+    );
+  });
+
   test('l’enquête ne propose jamais deux fois le même libellé', async ({ page }) => {
     await startLeap(page);
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();

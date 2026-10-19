@@ -10,6 +10,14 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.9.0] - 2026-10-19
+
+### Ajouté
+
+- Deux histoires de saison, dans l'esprit des légendes bretonnes. « La table des absents » se joue autour de Kalan Goañv, la nuit des morts, du 20 octobre au 10 novembre : une table dressée, un couvert de trop, une lanterne de navet au carrefour. « La nuit où les bêtes parlent » se joue pour Nedeleg, de décembre à l'Épiphanie : à minuit, dans l'étable, les bêtes parlent, et celui qui les entend ne passe pas l'année. Chacune a sa seconde passe de dialogue, ses coups de théâtre, ses illustrations et six fins.
+- Une prémisse peut être réservée à une fenêtre de dates. Hors saison, elle ne sort jamais. En saison, elle sort une fois sur deux quand elle n'a pas été jouée récemment. L'accueil nomme la fête en cours.
+- Sur l'accueil, deux liens discrets : « Partager » (la feuille de partage du téléphone, sinon le lien est copié) et « S'abonner aux nouveautés » (un flux Atom généré depuis ce journal des versions, sans compteur ni traceur).
+
 ## [0.8.0] - 2026-10-19
 
 ### Ajouté

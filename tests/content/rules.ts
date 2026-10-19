@@ -15,6 +15,10 @@ export const MAX_RESULT_LINES = 5;
  */
 export const MENT_EXCEPTIONS: ReadonlySet<string> = new Set([
   'comment',
+  'forment',
+  'fument',
+  'bourdonnement',
+  'entrebâillement',
   // Formes verbales (3e personne du pluriel) qui finissent en -ment.
   'ferment',
   'referment',

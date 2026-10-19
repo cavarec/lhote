@@ -402,6 +402,123 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<circle class="flick" cx="338" cy="112" r="4.5" ${sea(0.98)}/><circle class="glow flick" cx="338" cy="112" r="15" ${sea(0.6)}/>` +
       triskele(60, 176, 22, oc(0.55, 1.2)),
   },
+  // ─── La table des absents : Kalan Goañv, une table dressée, une lanterne de navet.
+  'premise-04': {
+    wakeup:
+      frame() +
+      `<ellipse class="glow pulse" cx="200" cy="150" rx="140" ry="44" ${warm(0.38)}/>` +
+      `<path d="M120 196 V120 C120 90 280 90 280 120 V196Z" ${ink(0.85)}/>` +
+      `<g class="flick"><path d="M200 190 C170 180 170 150 188 134 C188 150 198 152 200 142 C198 128 206 114 212 100 C220 120 236 134 232 160 C228 178 216 188 200 190Z" ${warm(0.85)}/></g>` +
+      spiral(200, 158, 1, 14, 1.6, oc(0.9, 1.8)) +
+      `<g transform="translate(330 150)"><circle r="20" ${of(0.3)} stroke="var(--ochre)" stroke-width="2"/><path d="M-8 -4 l5 5 M8 -4 l-5 5 M-6 8 q6 5 12 0" ${oc(0.95, 2)}/><circle class="flick" r="26" ${oc(0.35, 1.2)}/></g>` +
+      embers(10, 200, 110, 90, of(0.75)),
+    orientation:
+      frame() +
+      `<rect x="40" y="150" width="320" height="10" ${ink(0.9)}/>` +
+      `<rect x="56" y="160" width="6" height="40" ${ink(0.8)}/><rect x="338" y="160" width="6" height="40" ${ink(0.8)}/>` +
+      Array.from({ length: 13 }, (_, i) => {
+        const x = 62 + i * 23.5;
+        const last = i === 12;
+        return (
+          `<ellipse cx="${f(x)}" cy="144" rx="9" ry="3.4" ${last ? of(0.7) : ink(0.7)}/>` +
+          `<path d="M${f(x - 5)} 142 q5 -9 10 0" ${last ? oc(0.95, 1.6) : oc(0.45, 1.2)}/>`
+        );
+      }).join('') +
+      candle(110, 150, 26, 0.2) +
+      candle(200, 150, 32, 1.4) +
+      candle(290, 150, 24, 2.6) +
+      `<ellipse class="glow pulse" cx="342" cy="136" rx="26" ry="10" ${of(0.3)}/>` +
+      triskele(200, 78, 34, oc(0.7, 1.6)),
+    dialogue:
+      frame() +
+      `<path d="M110 200 V44 C110 22 290 22 290 44 V200Z" ${ink(0.9)}/>` +
+      `<path class="glow flick" d="M170 54 H282 V200 H170Z" ${of(0.5)}/>` +
+      `<path d="M170 54 H282 V200 H170Z" ${oc(0.85, 2)}/>` +
+      `<path d="M110 200 V44 C110 40 150 36 170 54 V200Z" ${ink(0.98)}/>` +
+      person(232, 200, 112) +
+      `<g transform="translate(46 160)"><circle r="18" ${of(0.3)} stroke="var(--ochre)" stroke-width="2"/><path d="M-7 -3 l4 4 M7 -3 l-4 4 M-5 7 q5 4 10 0" ${oc(0.95, 1.8)}/></g>` +
+      `<circle class="pulse" cx="46" cy="160" r="28" ${oc(0.3, 1.2)}/>` +
+      triskele(340, 150, 30, oc(0.6, 1.4)),
+    investigation:
+      frame() +
+      `<rect x="50" y="172" width="300" height="9" ${ink(0.88)}/>` +
+      `<ellipse cx="200" cy="168" rx="52" ry="9" ${of(0.2)} stroke="var(--ochre)" stroke-width="2.4"/>` +
+      `<path d="M158 168 C158 124 242 124 242 168 Z" ${of(0.22)} stroke="var(--ochre)" stroke-width="2.6" stroke-linejoin="round"/>` +
+      `<path class="drift" d="M190 118 C184 104 196 96 190 82 M210 118 C204 104 216 96 210 82" ${oc(0.6, 1.6)}/>` +
+      triskele(200, 146, 24, oc(0.95, 1.6)) +
+      `<path d="M262 190 l12 -10 l12 10 M282 190 l12 -10 l12 10" ${oc(0.85, 2)}/>` +
+      candle(84, 172, 24, 0.5) +
+      candle(112, 172, 14, 1.6) +
+      `<g transform="translate(320 150)"><circle r="8" ${oc(0.95, 2.2)}/><path d="M8 0 H40" ${oc(0.95, 2.4)}/></g>`,
+    fracture:
+      frame() +
+      `<path d="M200 214 C200 170 196 140 190 112 C184 92 120 70 70 70 M200 214 C200 170 204 140 210 112 C216 92 280 70 330 70" ${oc(0.8, 3)}/>` +
+      `<path d="M0 0" ${oc(0)}/>` +
+      `<ellipse class="glow pulse" cx="200" cy="112" rx="60" ry="40" ${of(0.32)}/>` +
+      `<circle cx="200" cy="104" r="20" ${of(0.4)} stroke="var(--ochre)" stroke-width="2.2"/>` +
+      `<path class="flick" d="M192 100 l4 4 M208 100 l-4 4 M194 112 q6 5 12 0" ${oc(0.95, 2)}/>` +
+      triskele(200, 168, 22, oc(0.9, 1.6)) +
+      `<path d="M30 190 H370" ${oc(0.5, 2)}/>`,
+  },
+
+  // ─── La nuit où les bêtes parlent : Nedeleg, une étable sous la neige.
+  'premise-05': {
+    wakeup:
+      frame() +
+      `<path d="M0 60 L200 20 L400 60" ${oc(0.75, 2.4)}/><path d="M60 52 V200 M340 52 V200 M200 20 V200" ${oc(0.4, 2)}/>` +
+      `<circle class="glow pulse" cx="200" cy="70" r="40" ${of(0.2)}/>` +
+      `<path d="M200 54 l4 10 l11 1 l-9 7 l3 11 l-9 -6 l-9 6 l3 -11 l-9 -7 l11 -1Z" ${of(0.85)}/>` +
+      Array.from(
+        { length: 22 },
+        (_, i) =>
+          `<circle class="fall" style="animation-delay:-${((i * 0.6) % 6).toFixed(1)}s;animation-duration:${4 + (i % 5)}s" cx="${20 + ((i * 53) % 360)}" cy="${30 + ((i * 29) % 150)}" r="${1.2 + (i % 3) * 0.5}" ${ink(0.7)}/>`,
+      ).join('') +
+      `<path d="M0 190 C100 176 300 176 400 190 V220 H0Z" ${ink(0.7)}/>`,
+    orientation:
+      frame() +
+      `<rect x="30" y="176" width="340" height="8" ${ink(0.88)}/>` +
+      `<g ${ink(0.85)}><path d="M60 176 V146 C60 128 110 128 110 146 V176Z"/><circle cx="116" cy="136" r="9"/><path d="M122 130 l12 -8 M112 128 l-8 -10" ${oc(0.9, 2.4)}/></g>` +
+      `<g ${ink(0.85)}><path d="M150 176 V142 C150 124 206 124 206 142 V176Z"/><circle cx="212" cy="132" r="10"/><path d="M219 126 l13 -10 M208 124 l-9 -12" ${oc(0.9, 2.4)}/></g>` +
+      `<g ${ink(0.8)}><path d="M246 176 V146 C246 130 292 130 292 146 V176Z"/><circle cx="298" cy="138" r="8"/></g>` +
+      `<path d="M312 176 V150 h26 V176Z" ${of(0.2)} stroke="var(--ochre)" stroke-width="2"/>` +
+      `<path d="M316 150 l22 -18 l22 18" ${oc(0.9, 2)}/>` +
+      `<g class="flick"><path d="M200 40 C192 54 196 62 200 62 C206 62 208 54 200 40Z" ${warm(0.85)}/></g>` +
+      `<path d="M200 20 V38" ${oc(0.9, 2)}/>` +
+      triskele(80, 70, 26, oc(0.6, 1.4)),
+    dialogue:
+      frame() +
+      `<path d="M90 200 V70 C90 40 310 40 310 70 V200Z" ${ink(0.88)}/>` +
+      `<g ${ink(0.98)}><path d="M60 200 V120 C60 90 180 90 180 120 V200Z"/><path d="M180 112 C196 100 214 104 222 116 C230 128 220 142 204 142 C196 142 186 134 180 128Z"/></g>` +
+      `<path d="M214 106 l16 -16 M200 100 l-10 -18" ${oc(0.95, 2.6)}/>` +
+      `<circle cx="212" cy="120" r="3" fill="var(--parchment)"/>` +
+      person(300, 200, 116) +
+      `<circle class="pulse" cx="312" cy="96" r="3" ${of(0.0)}/>` +
+      Array.from(
+        { length: 5 },
+        (_, i) =>
+          `<circle class="drift" style="animation-delay:-${(i * 0.8).toFixed(1)}s" cx="${236 + i * 9}" cy="${116 - i * 4}" r="${2.6 - i * 0.3}" ${of(0.5 - i * 0.07)}/>`,
+      ).join('') +
+      triskele(344, 150, 26, oc(0.55, 1.3)),
+    investigation:
+      frame() +
+      `<rect x="60" y="150" width="280" height="40" ${ink(0.9)}/>` +
+      `<path d="M72 150 H328 V162 H72Z" ${of(0.2)} stroke="var(--ochre)" stroke-width="2.2"/>` +
+      `<path d="M120 154 l28 -4 l24 6 M190 156 l24 -5 l40 7" ${oc(0.9, 1.8)}/>` +
+      `<path d="M170 154 L182 150 L194 158 M194 150 L208 156" ${oc(0.8, 1.6)}/>` +
+      spiral(220, 156, 1, 10, 1.4, oc(0.9, 1.6)) +
+      `<path d="M120 120 C120 96 150 94 150 118 M246 118 C246 92 280 94 280 122" ${oc(0.7, 2)}/>` +
+      `<circle class="pulse" cx="200" cy="100" r="3" ${of(0.9)}/>` +
+      `<path d="M96 192 l8 -10 l8 10" ${oc(0.8, 1.8)}/>`,
+    fracture:
+      frame() +
+      `<circle class="glow pulse" cx="300" cy="64" r="30" ${of(0.35)}/><circle cx="300" cy="64" r="22" ${of(0.5)}/>` +
+      bell(150, 100, 34, oc(0.95, 2), of(0.2)) +
+      `<path d="M150 34 V56" ${oc(0.9, 2)}/>` +
+      `<circle class="pulse" cx="150" cy="100" r="54" ${oc(0.3, 1.3)}/><circle class="pulse" style="animation-delay:-1.4s" cx="150" cy="100" r="76" ${oc(0.18, 1.2)}/>` +
+      `<path d="M30 192 H370" ${oc(0.6, 2)}/>` +
+      `<path d="M230 192 C250 170 280 170 300 192" ${oc(0.6, 1.8)}/>` +
+      triskele(300, 160, 22, oc(0.7, 1.5)),
+  },
 };
 
 const MOODS: Record<Mood, string> = {

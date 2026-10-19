@@ -73,10 +73,10 @@ describe('fragments de méta-histoire', () => {
 
 describe('catalogue', () => {
   it('est branché dans son ensemble', () => {
-    expect(catalog.premises).toHaveLength(3);
+    expect(catalog.premises).toHaveLength(5);
     expect(catalog.characters).toBe(characters);
     expect(catalog.artifacts).toBe(artifacts);
     expect(catalog.fragments).toBe(fragments);
-    expect(catalog.fractures).toHaveLength(6);
+    expect(catalog.fractures).toHaveLength(10);
   });
 });

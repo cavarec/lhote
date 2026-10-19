@@ -34,6 +34,13 @@ export interface SecondRound {
   choices: Choice[];
 }
 
+export interface Season {
+  from: string;
+  to: string;
+  /** Nom de la fête, affiché sur l'accueil pendant la saison. */
+  label: string;
+}
+
 export interface Dialogue {
   npcId: string;
   lines: DialogueLine[];
@@ -85,6 +92,11 @@ export interface Premise {
   investigation: InvestigationItem[];
   /** Ids des deux fractures possibles (la seed en choisit une). */
   fractures: [string, string];
+  /**
+   * Prémisse de saison : elle ne peut sortir que dans la fenêtre donnée (jours « MM-JJ », en UTC ;
+   * `from` après `to` enjambe le nouvel an). Hors saison, elle n'est jamais tirée.
+   */
+  season?: Season;
   /** Coups de théâtre, du plus précis au repli. Absent : on passe directement à la fracture. */
   twists?: Twist[];
   resolutions: Resolution[];

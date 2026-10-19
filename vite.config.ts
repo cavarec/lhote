@@ -41,10 +41,10 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // App shell + contenu narratif (les 3 prémisses sont dans un seul chunk) + polices.
+        // App shell + contenu narratif (les prémisses sont dans un seul chunk) + polices.
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest}'],
         navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/api\//],
+        navigateFallbackDenylist: [/^\/api\//, /^\/nouveautes\.xml$/],
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           // Les envois ne passent jamais par le cache : le client gère lui-même file d'attente et reprises.
