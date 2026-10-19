@@ -54,6 +54,10 @@
       ? 'Quelqu’un dort dans un corps qui n’est pas le sien.'
       : 'Le monde t’attend.'}
   </p>
+  <p class="narration muted intro">
+    À chaque nouvelle lecture, tu es l’hôte d’un nouveau corps. Tu ne sais pas qui il
+    était, et il ne sait pas que tu es là.
+  </p>
 
   {#if season}
     <p class="narration muted season">
@@ -96,10 +100,8 @@
           ? 'Reprendre le saut'
           : 'Sauter'}
     </button>
-    <button class="button button--rule" onclick={onjournal}>Journal</button>
-    {#if epilogueReady}<button class="button button--rule" onclick={onepilogue}
-        >Épilogue</button
-      >{/if}
+    <button class="button" onclick={onjournal}>Journal</button>
+    {#if epilogueReady}<button class="button" onclick={onepilogue}>Épilogue</button>{/if}
   </div>
 
   <div class="quiet-links muted">
@@ -148,38 +150,11 @@
     font-size: 2.5rem;
     margin: var(--space-3) 0 var(--space-2);
   }
-  .season {
+  .intro {
     margin-top: var(--space-2);
   }
-
-  /* Boutons de l'accueil : un cadre de manuscrit plutôt qu'une boîte.
-     Le bouton principal est plein, avec un filet ocre intérieur ;
-     les autres n'ont que deux filets ocre, en haut et en bas, terminés par une volute. */
-  .button {
-    border: 0;
-    border-radius: 0;
-    text-align: center;
-  }
-  .button--primary {
-    outline: 1px solid var(--ochre);
-    outline-offset: -5px;
-  }
-  .button--rule {
-    border-block: 1px solid var(--ochre);
-    background-repeat: no-repeat;
-    background-position:
-      left 10px center,
-      right 10px center;
-    background-size: 14px 14px;
-    background-image: var(--volute-left), var(--volute-right);
-    --volute-left: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M12 7C12 3 6 2 4 5C2 8 6 10 7 7C7.5 5.5 5.5 5 5 6.5' fill='none' stroke='%239a6532' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
-    --volute-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7C2 3 8 2 10 5C12 8 8 10 7 7C6.5 5.5 8.5 5 9 6.5' fill='none' stroke='%239a6532' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
-  }
-  .button--rule:hover {
-    background-color: var(--veil);
-  }
-  .button--rule:active {
-    background-color: var(--ink);
+  .season {
+    margin-top: var(--space-2);
   }
 
   .quiet-links {

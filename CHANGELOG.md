@@ -10,6 +10,13 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.10.5] - 2026-10-19
+
+### Modifié
+
+- Accueil : une introduction explique qu'à chaque nouvelle lecture, tu es l'hôte d'un nouveau corps.
+- Le cadre de l'accueil s'étend à tout le jeu : choix, boutons et réglages n'ont plus de boîte à bord fin. Deux filets ocre, en haut et en bas, terminés par une volute. Les filets entre deux choix sont partagés. Le bouton principal reste plein, avec un filet ocre intérieur.
+
 ## [0.10.4] - 2026-10-19
 
 ### Modifié

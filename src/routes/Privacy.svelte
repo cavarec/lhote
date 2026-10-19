@@ -135,7 +135,10 @@
   }
   .row {
     display: grid;
-    gap: var(--space-2);
+    gap: 0;
+  }
+  .row .button + .button {
+    border-top: 0;
   }
   .check {
     display: flex;
@@ -147,8 +150,13 @@
     width: 1.5rem;
     height: 1.5rem;
   }
+  .row .button {
+    background-image: none;
+    padding-inline: var(--space-2);
+    text-align: center;
+  }
   [aria-pressed='true'] {
-    background: var(--ink);
+    background-color: var(--ink);
     color: var(--parchment);
   }
   .next {
