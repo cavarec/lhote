@@ -5,16 +5,16 @@ import { catalog } from '../../content';
 import { fragments } from '../../content/fragments';
 
 describe('personnages', () => {
-  it('sont huit, deux par archétype, aux identifiants uniques', () => {
-    expect(characters).toHaveLength(8);
-    expect(new Set(characters.map((c) => c.id)).size).toBe(8);
+  it('sont douze, trois par archétype, aux identifiants uniques', () => {
+    expect(characters).toHaveLength(12);
+    expect(new Set(characters.map((c) => c.id)).size).toBe(12);
     for (const archetype of ['confident', 'worried', 'hostile', 'innocent'] as const) {
-      expect(characters.filter((c) => c.archetype === archetype)).toHaveLength(2);
+      expect(characters.filter((c) => c.archetype === archetype)).toHaveLength(3);
     }
   });
 
   it('ont un nom distinct et les trois répliques de base', () => {
-    expect(new Set(characters.map((c) => c.name)).size).toBe(8);
+    expect(new Set(characters.map((c) => c.name)).size).toBe(12);
     for (const character of characters) {
       expect(Object.keys(character.dialogues).sort()).toEqual([
         'doubt',
