@@ -129,7 +129,7 @@ class GameStore {
       case 'no_leap_offline':
         return 'Il faut une connexion pour recevoir un nouveau saut.';
       case 'stale_leap':
-        return 'Ce saut n’est plus d’actualité. Relancez l’application.';
+        return 'Ce saut n’est plus d’actualité. Relance l’application.';
       case 'invalid':
         return 'Cette action n’a pas pu être validée.';
       case 'rate_limited':

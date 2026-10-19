@@ -183,6 +183,12 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
         texts.push({ where: `${at}.twists[${i}].lines[${j}]`, text: line.text }),
       ),
     );
+    if (premise.host) {
+      texts.push(
+        { where: `${at}.host.role`, text: premise.host.role },
+        { where: `${at}.host.story`, text: premise.host.story },
+      );
+    }
     premise.resolutions.forEach((r) => {
       texts.push(
         { where: `${at}.resolution ${r.id}.choiceText`, text: r.choiceText },
@@ -315,6 +321,34 @@ export function checkPremise(premise: Premise): Violation[] {
         choices: round.choices,
       }),
     );
+  }
+  // Qui es-tu ? Un choix du dialogue pose la question, une vérité d'enquête donne le nom,
+  // et l'écran de fin donne la réponse (premise.host).
+  const askIds = [
+    ...(premise.openingDialogue.choices ?? []),
+    ...(premise.openingDialogue.secondRound?.choices ?? []),
+  ].map((c) => c.id);
+  if (!askIds.includes('qui-es-tu')) {
+    violations.push({
+      where: `${at}.openingDialogue`,
+      rule: 'identite',
+      message: 'Aucun choix « qui-es-tu » : le joueur doit pouvoir demander qui il est.',
+    });
+  }
+  if (!premise.host) {
+    violations.push({ where: `${at}.host`, rule: 'identite', message: 'host manquant.' });
+  } else {
+    const known = premise.investigation.some((c) => c.revealsTruth === premise.host?.truth);
+    if (!known) {
+      violations.push({
+        where: `${at}.host.truth`,
+        rule: 'identite',
+        message: `Aucun indice d'enquête ne révèle la vérité « ${premise.host.truth} ».`,
+      });
+    }
+    if (premise.host.story.length < 40 || premise.host.name.length < 2) {
+      violations.push({ where: `${at}.host`, rule: 'identite', message: 'Identité trop courte.' });
+    }
   }
   // Le geste de la main révèle une vérité qui existe vraiment dans l'enquête.
   const truths = new Set(
