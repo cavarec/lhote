@@ -9,6 +9,7 @@
     onjournal,
     onprivacy,
     onsources,
+    onnews,
     onepilogue,
     epilogueReady,
   }: {
@@ -16,6 +17,7 @@
     onjournal: () => void;
     onprivacy: () => void;
     onsources: () => void;
+    onnews: () => void;
     onepilogue: () => void;
     epilogueReady: boolean;
   } = $props();
@@ -103,9 +105,7 @@
   <div class="quiet-links ui muted">
     <button class="link" onclick={share}>Partager</button>
     <span aria-hidden="true">·</span>
-    <a class="link" href="/nouveautes.xml" rel="alternate" type="application/atom+xml"
-      >S’abonner aux nouveautés</a
-    >
+    <button class="link" onclick={onnews}>Nouveautés</button>
   </div>
   <p class="ui muted" role="status" aria-live="polite">{sharedMessage}</p>
 </main>

@@ -16,14 +16,20 @@ test.describe('parcours complet', () => {
     await page.getByRole('button', { name: 'Retour' }).click();
   });
 
-  test('l’accueil propose de partager et de s’abonner, sans bruit', async ({
+  test('l’accueil propose de partager et de lire les nouveautés, sans bruit', async ({
     page,
     context,
   }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto('/');
-    const feed = page.getByRole('link', { name: 'S’abonner aux nouveautés' });
-    await expect(feed).toHaveAttribute('href', '/nouveautes.xml');
+    await page.getByRole('button', { name: 'Nouveautés' }).click();
+    await expect(
+      page.getByRole('heading', { name: 'Kalan Goañv et Nedeleg' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Le flux des nouveautés' }),
+    ).toHaveAttribute('href', '/nouveautes.xml');
+    await page.getByRole('button', { name: 'Retour' }).click();
     await page.getByRole('button', { name: 'Partager' }).click();
     await expect(page.getByText('Le lien est copié.')).toBeVisible();
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
