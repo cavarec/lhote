@@ -10,6 +10,13 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.10.4] - 2026-10-19
+
+### Modifié
+
+- Accueil : « Nouveautés » et « Partager » remontent sous les boutons, avec une icône devant. « Confidentialité et réglages » et « Sources » descendent en bas de page, en petit et discrets.
+- Accueil : les boutons n'ont plus de cadre en boîte. Le bouton principal garde son fond plein avec un filet ocre intérieur ; les autres ont deux filets ocre, en haut et en bas, terminés par une volute.
+
 ## [0.10.3] - 2026-10-19
 
 ### Modifié
