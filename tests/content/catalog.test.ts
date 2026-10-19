@@ -78,5 +78,7 @@ describe('catalogue', () => {
     expect(catalog.artifacts).toBe(artifacts);
     expect(catalog.fragments).toBe(fragments);
     expect(catalog.fractures).toHaveLength(10);
+    expect(catalog.echoes).toHaveLength(8);
+    expect(catalog.observerMessages).toHaveLength(12);
   });
 });

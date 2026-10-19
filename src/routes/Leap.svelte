@@ -3,6 +3,7 @@
   import Progress from '../lib/components/Progress.svelte';
   import Scene from '../lib/components/Scene.svelte';
   import Vignette from '../lib/components/Vignette.svelte';
+  import { pickEcho } from '../lib/engine/extras';
   import type { SceneKind } from '../lib/illustrations/scenes';
   import {
     activeTwist,
@@ -38,6 +39,12 @@
     premise.openingDialogue.choices?.find((c) => c.id === leap.choices['dialogue']) ??
       null,
   );
+  // Un écho personnel se glisse dans l'orientation d'un saut sur quatre, sans rien le signaler.
+  const echo = $derived(pickEcho(leap.seed, catalog.echoes));
+  const orientation = $derived([
+    ...premise.orientation.map((o) => ({ speaker: 'narration' as const, text: o.text })),
+    ...(echo ? [{ speaker: 'narration' as const, text: echo.text }] : []),
+  ]);
   const round = $derived(premise.openingDialogue.secondRound ?? null);
   const chosen2 = $derived(
     round?.choices.find((c) => c.id === leap.choices['dialogue2']) ?? null,
@@ -89,10 +96,7 @@
         </button>
       </Scene>
     {:else if game.beat === 'orientation'}
-      <Scene
-        lines={premise.orientation.map((o) => ({ speaker: 'narration', text: o.text }))}
-        {instant}
-      >
+      <Scene lines={orientation} {instant}>
         <button class="button button--primary next" onclick={() => game.advance()}>
           Continuer
         </button>

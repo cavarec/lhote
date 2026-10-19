@@ -47,6 +47,13 @@ export function makeCatalog(): Catalog {
       name: `Objet ${n}`,
       description: 'x',
     })),
+    echoes: [{ id: 'e1', kind: 'phrase', text: 'un écho' }],
+    observerMessages: [
+      { id: 'o1', type: 'useful', text: 'utile' },
+      { id: 'o2', type: 'useless', text: 'inutile' },
+      { id: 'o3', type: 'false', text: 'faux' },
+      { id: 'o4', type: 'personal', text: 'personnel' },
+    ],
     fragments: [
       { id: 'g1', act: 1, order: 1, text: 'un' },
       { id: 'g2', act: 1, order: 2, text: 'deux' },

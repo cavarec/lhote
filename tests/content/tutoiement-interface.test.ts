@@ -22,7 +22,7 @@ describe('interface', () => {
   it.each(FILES)('%s tutoie', (file) => {
     const text = readFileSync(file, 'utf8');
     expect(text).not.toMatch(
-      /\b(vous|votre|vos|voulez|souhaitez|pouvez|réessayez|patientez)\b/i,
+      /\b(vous|votre|vos|voulez|souhaitez|pouvez|réessayez|patientez|vôtre)\b/i,
     );
   });
 });

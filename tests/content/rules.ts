@@ -211,6 +211,12 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
   for (const fragment of catalog.fragments) {
     texts.push({ where: `fragment ${fragment.id}.text`, text: fragment.text });
   }
+  for (const echo of catalog.echoes) {
+    texts.push({ where: `echo ${echo.id}.text`, text: echo.text });
+  }
+  for (const message of catalog.observerMessages) {
+    texts.push({ where: `observer ${message.id}.text`, text: message.text });
+  }
   return texts;
 }
 

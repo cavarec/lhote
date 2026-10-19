@@ -264,6 +264,8 @@ describe('prémisses', () => {
 describe('collecte du texte joueur', () => {
   it('parcourt tous les types de contenu et exclut les champs techniques', () => {
     const full: Catalog = {
+      echoes: [{ id: 'e', kind: 'phrase', text: 'Un écho.' }],
+      observerMessages: [{ id: 'o', type: 'useful', text: 'Un conseil.' }],
       premises: [
         {
           ...makePremise('p', ['f1', 'f2']),
@@ -318,6 +320,8 @@ describe('collecte du texte joueur', () => {
         'A.',
         'Clé',
         'Un.',
+        'Un écho.',
+        'Un conseil.',
         'Fin.\nSuite.',
       ]),
     );
