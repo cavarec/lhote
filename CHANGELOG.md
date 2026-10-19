@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.10.1] - 2026-10-19
+
+### Ajouté
+
+- Un logo sur l'accueil : l'œil du jeu, avec un parasite enroulé dans la pupille, comme un hôte qui en loge un autre. Un fil en sort par la paupière. Il bouge doucement, sauf si tu as demandé moins de mouvement. Les icônes de l'application et du navigateur reprennent le même dessin.
+
 ## [0.10.0] - 2026-10-19
 
 ### Ajouté

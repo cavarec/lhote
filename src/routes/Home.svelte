@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Logo from '../lib/components/Logo.svelte';
   import { catalog } from '../../content';
   import { currentSeason } from '../lib/engine/season';
   import { game } from '../lib/stores/game.svelte';
@@ -46,6 +47,7 @@
 </script>
 
 <main class="page fade-in">
+  <Logo size={132} />
   <h1 class="narration home-title">L'Hôte</h1>
   <p class="narration muted">
     {game.firstVisit
