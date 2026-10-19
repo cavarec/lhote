@@ -123,7 +123,7 @@ class GameStore {
   get problemMessage(): string {
     switch (this.problem) {
       case 'offline':
-        return 'Pas de connexion. Réessayez dans un instant.';
+        return 'Pas de connexion. Réessaie dans un instant.';
       case 'no_leap_offline':
         return 'Il faut une connexion pour recevoir un nouveau saut.';
       case 'stale_leap':
@@ -131,9 +131,9 @@ class GameStore {
       case 'invalid':
         return 'Cette action n’a pas pu être validée.';
       case 'rate_limited':
-        return 'Trop de demandes. Patientez quelques secondes.';
+        return 'Trop de demandes. Patiente quelques secondes.';
       default:
-        return 'Quelque chose s’est mal passé. Réessayez.';
+        return 'Quelque chose s’est mal passé. Réessaie.';
     }
   }
 

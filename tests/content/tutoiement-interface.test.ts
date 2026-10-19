@@ -14,11 +14,15 @@ const FILES = [
     .filter((f) => f.endsWith('.svelte'))
     .map((f) => join('src/lib/components', f)),
   'content/news.ts',
+  'src/lib/stores/game.svelte.ts',
+  'worker/src/durable/service.ts',
 ];
 
 describe('interface', () => {
   it.each(FILES)('%s tutoie', (file) => {
     const text = readFileSync(file, 'utf8');
-    expect(text).not.toMatch(/\b(vous|votre|vos|voulez|souhaitez|pouvez)\b/i);
+    expect(text).not.toMatch(
+      /\b(vous|votre|vos|voulez|souhaitez|pouvez|réessayez|patientez)\b/i,
+    );
   });
 });
