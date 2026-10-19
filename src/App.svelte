@@ -3,13 +3,14 @@
   import Home from './routes/Home.svelte';
   import { game } from './lib/stores/game.svelte';
 
-  type View = 'home' | 'journal' | 'privacy' | 'epilogue';
+  type View = 'home' | 'journal' | 'privacy' | 'sources' | 'epilogue';
   let view = $state<View>('home');
 
   const Leap = () => import('./routes/Leap.svelte');
   const End = () => import('./routes/End.svelte');
   const Journal = () => import('./routes/Journal.svelte');
   const Privacy = () => import('./routes/Privacy.svelte');
+  const Sources = () => import('./routes/Sources.svelte');
   const Epilogue = () => import('./routes/Epilogue.svelte');
 
   onMount(() => {
@@ -54,6 +55,8 @@
   {#await Journal() then m}<m.default onback={back} />{/await}
 {:else if view === 'privacy'}
   {#await Privacy() then m}<m.default onback={back} />{/await}
+{:else if view === 'sources'}
+  {#await Sources() then m}<m.default onback={back} />{/await}
 {:else if view === 'epilogue'}
   {#await Epilogue() then m}<m.default onback={back} />{/await}
 {:else}
@@ -61,6 +64,7 @@
     onstart={() => game.start()}
     onjournal={() => (view = 'journal')}
     onprivacy={() => (view = 'privacy')}
+    onsources={() => (view = 'sources')}
     onepilogue={() => (view = 'epilogue')}
     epilogueReady={game.epilogueReady}
   />

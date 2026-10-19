@@ -5,12 +5,14 @@
     onstart,
     onjournal,
     onprivacy,
+    onsources,
     onepilogue,
     epilogueReady,
   }: {
     onstart: () => void;
     onjournal: () => void;
     onprivacy: () => void;
+    onsources: () => void;
     onepilogue: () => void;
     epilogueReady: boolean;
   } = $props();
@@ -66,6 +68,7 @@
     <button class="button button--quiet" onclick={onprivacy}
       >Confidentialité et réglages</button
     >
+    <button class="button button--quiet" onclick={onsources}>Sources</button>
   </div>
 </main>
 
