@@ -31,12 +31,41 @@
   $effect(() => {
     if (finished) ondone?.();
   });
+
+  // Le texte s'écrit sous le bas de l'écran : on fait remonter la page au fil de l'écriture.
+  // Si le joueur a remonté la page pour relire, on ne le ramène pas de force.
+  let box = $state<HTMLDivElement>();
+  let end = $state<HTMLSpanElement>();
+  const FOLLOW_MARGIN = 28;
+
+  function follow(): void {
+    if (!end) return;
+    const over =
+      end.getBoundingClientRect().bottom - (window.innerHeight - FOLLOW_MARGIN);
+    if (over > 0 && over < window.innerHeight * 0.6) {
+      window.scrollBy({ top: over, behavior: 'auto' });
+    }
+  }
+
+  $effect(() => {
+    if (!box || typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(follow);
+    observer.observe(box);
+    return () => observer.disconnect();
+  });
+
+  // Les choix qui apparaissent à la fin du texte doivent eux aussi être visibles.
+  $effect(() => {
+    if (!finished) return;
+    const frame = requestAnimationFrame(() => requestAnimationFrame(follow));
+    return () => cancelAnimationFrame(frame);
+  });
 </script>
 
 <svelte:window onkeydown={(e) => e.key === 'Escape' && skipAll()} />
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
-<div class="narration fade-in" onclick={skipAll}>
+<div class="narration fade-in" onclick={skipAll} bind:this={box}>
   {#each lines.slice(0, revealed) as line, i (i)}
     <p class:npc={line.speaker === 'npc'}>
       {#if line.speaker === 'npc' && npcName}<span class="sr-only"
@@ -57,3 +86,11 @@
   {/each}
 </div>
 {#if finished}{@render children?.()}{/if}
+<span class="scene-end" bind:this={end} aria-hidden="true"></span>
+
+<style>
+  .scene-end {
+    display: block;
+    height: 0;
+  }
+</style>
