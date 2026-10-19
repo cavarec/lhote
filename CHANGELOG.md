@@ -10,6 +10,14 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.8.0] - 2026-10-19
+
+### Ajouté
+
+- Les trois histoires sont plus longues et plus tendues. Le dialogue a une seconde passe : la situation se resserre (la famille arrive en avance, l'envoyé de l'évêché monte l'escalier, le conteur approche de la fin) et tu choisis de nouveau, ce qui pèse sur la suspicion.
+- Un coup de théâtre éclate entre l'enquête et la fracture. Il dépend de ce que tu as appris : deux vérités, une seule, ou aucune. Ce que tu as cherché change donc ce qui t'arrive.
+- Deux indices de plus par histoire et une ligne de chute à chaque fin, qui laisse une inquiétude.
+
 ## [0.7.0] - 2026-10-19
 
 ### Modifié

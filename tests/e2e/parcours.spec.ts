@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { playToResolution, startLeap } from './helpers';
+import { playDialogue, playToResolution, startLeap } from './helpers';
 
 test.describe('parcours complet', () => {
   test('un saut de bout en bout, puis le journal', async ({ page }) => {
@@ -20,8 +20,7 @@ test.describe('parcours complet', () => {
     await startLeap(page);
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
     await page.getByRole('button', { name: 'Continuer' }).click();
-    await page.locator('.choice').first().click();
-    await page.getByRole('button', { name: 'Continuer' }).click();
+    await playDialogue(page);
     await page.getByText('Tu ne peux pas tout examiner.').waitFor();
     const labels = await page.locator('.choice').allTextContents();
     expect(labels.length).toBeGreaterThan(0);
@@ -32,8 +31,7 @@ test.describe('parcours complet', () => {
     await startLeap(page);
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
     await page.getByRole('button', { name: 'Continuer' }).click();
-    await page.locator('.choice').first().click();
-    await page.getByRole('button', { name: 'Continuer' }).click();
+    await playDialogue(page);
     await page.getByText('Il te reste 2 gestes.').waitFor();
     await page.locator('.choice:not([disabled])').first().click();
     await page.getByText('Il te reste 1 geste.').waitFor();

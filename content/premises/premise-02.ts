@@ -183,6 +183,98 @@ export const premise02: Premise = {
         ],
       },
     ],
+
+    // Seconde passe : la troisième cloche, la foule qui s'impatiente.
+    secondRound: {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Une cloche sonne, grave, trois fois. Ce n’est pas la tienne. Elle vient de la place, et elle annonce que la patience a des limites.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Le chantre vient de me le dire. L’évêché a envoyé quelqu’un, ce matin. Il veut voir la chasse avant la procession.',
+        },
+        {
+          speaker: 'npc',
+          text: 'S’il l’ouvre devant tout le monde, qu’est-ce qu’il trouve ? Dis-le-moi, que je sache quoi faire de mes mains.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Par la fenêtre, tu vois le drap de la grande statue bouger sans vent. Le long manche qui dépasse a changé de côté.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Il est dans l’escalier. Qu’est-ce que je fais ?',
+        },
+      ],
+      choices: [
+        {
+          id: 'recevoir-lenvoye',
+          kind: 'neutral',
+          text: '« Fais-le monter. Je le recevrai. »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Comme tu voudras. Mais garde la clé hors de sa vue.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne sort sans te quitter des yeux. Tu entends des pas dans l’escalier, deux paires, une lente et une pressée.',
+            },
+          ],
+        },
+        {
+          id: 'demander-ce-quil-sait',
+          kind: 'informative',
+          text: '« Que savent-ils, sur la place, de cette nuit ? »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Ils savent que la lumière a brûlé jusqu’au matin. Ils savent que la cloche d’en dessous a sonné.',
+            },
+            {
+              speaker: 'npc',
+              text: 'Ils ne savent pas ce que tu as fait. Mais ils attendent que tu le dises, et ils sont nombreux à attendre.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne baisse la voix : « Moi aussi, j’attends. Je n’ose pas le dire. »',
+            },
+          ],
+        },
+        {
+          id: 'renvoyer-lenvoye',
+          kind: 'risky',
+          text: '« Renvoie-le. La chasse n’est pas à lui. »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Le renvoyer ? Un envoyé de l’évêque ? Tu perds la tête, recteur.',
+            },
+            {
+              speaker: 'narration',
+              text: 'Le mot est tombé trop près de la vérité. La personne te regarde comme on regarde un puits dont on a oublié le fond.',
+            },
+          ],
+        },
+        {
+          id: 'prier-un-peu-plus',
+          kind: 'neutral',
+          text: 'Poser la main sur la chasse et ne pas répondre.',
+          reply: [
+            {
+              speaker: 'narration',
+              text: 'Le cuivre est tiède sous ta paume, comme une peau. Tu retires la main trop vite.',
+            },
+            {
+              speaker: 'npc',
+              text: 'Elle est chaude. Moi aussi, je l’ai sentie. Qu’y a-t-il dedans ?',
+            },
+          ],
+        },
+      ],
+    },
   },
 
   // Beat 4 : enquête. La chasse a été ouverte cette nuit ; quelqu'un l'a vu.
@@ -227,6 +319,14 @@ export const premise02: Premise = {
       text: 'On a recouvert la statue de bois pour le pardon. Un jour par an, on ne regarde pas celui qui vient chercher les vivants. Le drap a été soulevé, cette nuit.',
     },
     {
+      kind: 'material',
+      text: 'Dans la poussière d’une niche, une trace nette de doigts, à hauteur d’homme. Quelqu’un s’est appuyé là pour regarder dans la chasse.',
+    },
+    {
+      kind: 'social',
+      text: 'Le chantre murmure à son voisin : « Il a dit qu’il avait laissé une clé de rechange. Je ne sais plus où. » Le voisin hausse les épaules.',
+    },
+    {
       kind: 'bodily',
       text: 'Tu poses la main sur la pierre froide du mur. La fièvre recule un instant. Tu comprends qu’elle revient dès que tu t’en détaches.',
     },
@@ -237,6 +337,85 @@ export const premise02: Premise = {
     {
       kind: 'bodily',
       text: 'Un goût de cire et de larmes sèches reste sur tes lèvres. Tu as pleuré cette nuit, longtemps, sans te l’avouer.',
+    },
+  ],
+
+  // Entre l'enquête et la fracture : un coup de théâtre, selon ce que tu as appris.
+  twists: [
+    {
+      requires: ['tu-as-ouvert-la-chasse', 'sacristain-a-vu'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'La porte du fond s’ouvre. Le sacristain entre, et derrière lui l’envoyé de l’évêché, une main sur la poignée de la chasse.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Je n’ai rien dit, recteur. Je n’ai rien vu. Mais il a des yeux, lui, et il a déjà posé sa main.',
+        },
+        {
+          speaker: 'narration',
+          text: 'L’envoyé sourit, très poli. Il dit : « Le sceau est neuf. Qui l’a refait ? » Le sacristain regarde le sol. Toi aussi.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dehors, les cloches se mettent à sonner ensemble, de plus en plus fort. Sous le tumulte, tu entends celle d’en dessous qui répond.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu as le temps de souffler une fois. Ensuite, il faudra choisir qui, de toi ou de lui, ouvrira la chasse.',
+        },
+      ],
+    },
+    {
+      requires: ['tu-as-ouvert-la-chasse'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Tes doigts retrouvent d’eux-mêmes la bonne dent de la clé. Tu sais ce que tu as vu, cette nuit, quand le couvercle s’est levé.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Ce n’est pas un souvenir. C’est une odeur de rivière, de vase, de bougie noyée. Elle monte de la chasse, et elle emplit la pièce.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dans l’escalier, des pas pressés. La voix de l’envoyé demande où est le recteur. Elle est très près de la porte.',
+        },
+      ],
+    },
+    {
+      requires: ['sacristain-a-vu'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Le sacristain t’a rejoint sans bruit. Il te glisse, au creux de la main, un petit morceau de cire rouge brisée.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Je l’ai ramassé sous l’autel. Je l’ai gardé trois heures dans ma manche. Je ne peux plus le garder.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Il s’éloigne vers la porte, la tête basse. L’envoyé est déjà là, qui t’attend, les mains dans le dos.',
+        },
+      ],
+    },
+    {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Une odeur de vase monte sous la porte, puis le bruit de l’eau, comme si la rivière entrait dans l’église.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu ne sais pas ce que tu as fait cette nuit. Mais le drap de la statue vient de tomber, et personne ne l’a touché.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dehors, la foule se tait d’un coup. Elle a vu. Elle attend que tu sortes lui expliquer.',
+        },
+      ],
     },
   ],
 
@@ -256,6 +435,7 @@ export const premise02: Premise = {
         'Certains se détournent. D’autres s’approchent. La femme du haut pose sa main dans la chasse et dit : « C’est chaud. »',
         'Personne ne sait ce qu’il voit. Personne ne demande. La procession se met en marche, et ce n’est plus la même.',
         'Le soir, ta fièvre tombe. Quelqu’un a laissé un cierge allumé devant ta porte.',
+        'Dans la nuit, sous la rivière, la grande cloche sonne une dernière fois. Cette fois, elle sonne comme on dit merci.',
       ].join('\n'),
       mutations: [
         {
@@ -289,6 +469,7 @@ export const premise02: Premise = {
         'Tu marches en tête, la chape sur le dos. La foule chante. Elle chante juste, comme si de rien n’était.',
         'La femme du haut te touche la manche au passage. Son petit ne marche pas, mais il sourit.',
         'Le soir, tu ne dors pas. Tu sais ce que contient la chasse. Tu es le seul à le savoir.',
+        'Vers minuit, un grincement monte du fond de l’église. Quelqu’un, ou quelque chose, soulève le drap de bois, juste assez pour voir.',
       ].join('\n'),
       mutations: [
         {
@@ -312,6 +493,7 @@ export const premise02: Premise = {
         'Tu fermes la porte. Tu poses la main sur l’épaule du sacristain. Il ne bouge pas.',
         'Il dit : « J’ai vu, recteur. Je n’ai rien vu. » Il répète la phrase, comme une prière à l’envers.',
         'La procession part sans l’un ni l’autre. On entend la foule s’éloigner, puis les cloches se taire une à une.',
+        'Quand tu rouvres la porte, le sacristain n’est plus là. Sur le dallage, des pas mouillés vont de l’autel à la rivière.',
       ].join('\n'),
       mutations: [
         {
@@ -335,6 +517,7 @@ export const premise02: Premise = {
         'Tu descends par la ruelle. La rivière est basse, verte, indifférente aux fêtes.',
         'Tu arraches la chaîne. La clé disparaît sans bruit. Tes mains ne tremblent plus, et c’est ce qui t’inquiète.',
         'Là-haut, les cloches sonnent une dernière fois. La procession part sans chasse, et personne n’ose dire pourquoi.',
+        'Sur l’eau, la clé flotte un instant, puis une main pâle sort de la vase et la prend. Tu ne restes pas pour la voir se refermer.',
       ].join('\n'),
       mutations: [
         {
@@ -366,6 +549,7 @@ export const premise02: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Que ce corps n’est pas le tien.',
         'Le silence qui suit est plus lourd que la chape. Quelqu’un se signe. Quelqu’un pleure.',
         'On t’emmène dans une chambre, en parlant bas. On te donne de l’eau, des draps, une chaise. On te retire la clé.',
+        'À travers la porte, tu entends l’envoyé ouvrir la chasse. Il y a un long silence, puis un seul mot : « Dieu. »',
       ].join('\n'),
       mutations: [],
     },
@@ -378,6 +562,7 @@ export const premise02: Premise = {
         'Tu montes l’escalier de pierre, marche après marche. La fièvre te serre les tempes.',
         'Là-haut, la ville est un damier de toits et de bannières. La foule est un fleuve lent, qui attend.',
         'Tu t’appuies à la balustrade. Elle est plus basse que tu ne croyais. Le ciel est très proche.',
+        'Derrière toi, une voix très douce dit ton nom. Tu te retournes. Il y a un manche long, posé contre le mur, et personne pour le tenir.',
       ].join('\n'),
       mutations: [
         {

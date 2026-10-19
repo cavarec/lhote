@@ -8,7 +8,11 @@ import type { LeapState } from '../engine/types';
 import {
   availableResolutions,
   BeatError,
+  activeTwist,
   chooseDialogue,
+  chooseSecondRound,
+  startTwist,
+  twistPending,
   clueGroups,
   INVESTIGATION_BUDGET,
   investigationLeft,
@@ -165,6 +169,30 @@ describe('beats', () => {
     expect(ids).toContain('laisser-la-mere-voir');
     expect(ids).toContain('laver-et-taire');
     expect(ids).not.toContain('dire-le-vieux-nom');
+  });
+
+  it('la seconde passe suit la première, une seule fois', () => {
+    const base = makeLeap();
+    expect(() => chooseSecondRound(base, premise01, 'gagner-du-temps')).toThrow(
+      BeatError,
+    );
+    const first = chooseDialogue(base, premise01, 'preparer').leap;
+    const second = chooseSecondRound(first, premise01, 'refuser-de-laisser-entrer');
+    expect(second.leap.choices['dialogue2']).toBe('refuser-de-laisser-entrer');
+    expect(second.leap.suspicion).toBe(first.suspicion + 25);
+    expect(() => chooseSecondRound(second.leap, premise01, 'gagner-du-temps')).toThrow(
+      BeatError,
+    );
+    expect(() => chooseSecondRound(first, premise01, 'inconnu')).toThrow(BeatError);
+  });
+
+  it('le coup de théâtre dépend de ce qui a été appris', () => {
+    const fresh = makeLeap();
+    expect(activeTwist(premise01, fresh)?.requires).toBeUndefined();
+    const bodily = revealClues(fresh, [1], premise01);
+    expect(activeTwist(premise01, bodily)?.requires).toEqual(['noye-depuis-longtemps']);
+    expect(twistPending(bodily)).toBe(false);
+    expect(twistPending(startTwist(bodily))).toBe(true);
   });
 
   it('impose l’issue exposée quand la suspicion est au maximum', () => {

@@ -175,6 +175,102 @@ export const premise03: Premise = {
         ],
       },
     ],
+
+    // Seconde passe : le conteur approche de la fin, et il le dit à voix haute.
+    secondRound: {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Le conteur lève la main. Le feu baisse, comme à un signe. Dans la clairière, on cesse de respirer.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Il arrive à la fin. Tu vois ? Les gens se rapprochent. Il ne finit jamais avant la dernière braise.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu lis sur ses lèvres, plus que tu n’entends : « Elle a une femme sous l’aubépine, et c’est toi qui dois lui parler. »',
+        },
+        {
+          speaker: 'npc',
+          text: 'Il a dit ton nom, là. Ou presque. Tu l’as vu, toi aussi ? Dis-moi que tu l’as vu.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Sous les arbres, une lueur verte, très basse, s’approche du cercle. Personne ne la regarde. Tu es le seul à qui elle plaît.',
+        },
+      ],
+      choices: [
+        {
+          id: 'laisser-venir',
+          kind: 'neutral',
+          text: '« Laisse-le finir. Je saurai bien ce que je dois faire. »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Je ne sais pas si tu le sauras. Mais je reste.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne se rapproche. Son épaule contre la tienne est la seule chose chaude de la nuit.',
+            },
+          ],
+        },
+        {
+          id: 'demander-laubepine',
+          kind: 'informative',
+          text: '« Quelle femme ? Sous quelle aubépine ? »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Celle de la lisière, là-bas. Les anciens disent qu’une femme y dort depuis la guerre, et qu’elle attend qu’on lui raconte la fin.',
+            },
+            {
+              speaker: 'npc',
+              text: 'Personne n’y va. Le conteur dit qu’il y va, lui, chaque soir. Je crois qu’il y est déjà allé ce soir.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne montre l’ombre d’un arbre tordu, au-delà du feu.',
+            },
+          ],
+        },
+        {
+          id: 'se-lever',
+          kind: 'risky',
+          text: 'Te lever et marcher vers le conteur.',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Qu’est-ce que tu fais ? Rassieds-toi ! Tout le monde te regarde !',
+            },
+            {
+              speaker: 'narration',
+              text: 'C’est vrai. Cent visages se tournent vers toi, éclairés de bas en haut. Aucun n’est surpris.',
+            },
+          ],
+        },
+        {
+          id: 'surveiller-la-lueur',
+          kind: 'informative',
+          text: '« Tu vois cette lumière verte, près des arbres ? »',
+          reply: [
+            {
+              speaker: 'npc',
+              text: 'Quelle lumière ? Je ne vois que le feu.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne a répondu trop vite. Elle regarde dans la direction que tu montres, puis elle détourne les yeux, pâle.',
+            },
+            {
+              speaker: 'npc',
+              text: 'Ne la regarde pas. Ne la suis pas. Ça, au moins, ça se sait.',
+            },
+          ],
+        },
+      ],
+    },
   },
 
   // Beat 4 : enquête. Ce qu'on entend à moitié, et ce que les lèvres savent déjà.
@@ -223,8 +319,95 @@ export const premise03: Premise = {
       text: 'Ton cœur bat plus vite à chaque phrase. Ton corps connaît le moment où le conteur va se taire, et il redoute ce silence.',
     },
     {
+      kind: 'social',
+      text: 'Une femme, derrière toi, souffle à sa voisine : « Il a déjà raconté ça avant la guerre. Avec un autre visage, mais la même fin. »',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton oreille sourde bourdonne, d’un bruit d’abeille très précis. Il suit le rythme du conteur, une demi-phrase avant lui.',
+    },
+    {
       kind: 'material',
       text: 'Dans la cendre, au bord du feu, un bouton de manteau militaire et un bout de ruban noirci. Quelqu’un a brûlé un vêtement ici, il n’y a pas longtemps.',
+    },
+  ],
+
+  // Entre l'enquête et la fracture : un coup de théâtre, selon ce que tu as appris.
+  twists: [
+    {
+      requires: ['levres-qui-savent', 'carnet-a-ton-nom'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Le conteur s’arrête au milieu d’une phrase. Pour la première fois de la nuit, il te regarde en face et il ne sourit pas.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Il ouvre le carnet. Il le tourne vers toi. Tu lis ton nom, en haut de la page, d’une écriture qui est la tienne.',
+        },
+        {
+          speaker: 'npc',
+          text: 'Je n’ai jamais su finir celle-ci. Il me faut quelqu’un qui connaît la suite. Tu la connais depuis le début.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Les braises claquent. La lueur verte est tout près maintenant, au bord du cercle. Toute la clairière attend que tu parles.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu sens la fin de l’histoire dans ta bouche, comme un goût. Si tu la dis, tu ne pourras pas la reprendre.',
+        },
+      ],
+    },
+    {
+      requires: ['levres-qui-savent'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Tes lèvres bougent encore. Elles disent la suite avant le conteur, toujours juste, jamais en retard.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Alors il s’arrête, et le silence est si net que tu entends, avec l’oreille qui n’entend pas, une braise qui crépite.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Il dit : « Continue. » Pas à voix haute. Tu l’as lu sur ses lèvres, et tu sais que personne d’autre ne l’a lu.',
+        },
+      ],
+    },
+    {
+      requires: ['carnet-a-ton-nom'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'L’enfant, contre sa mère, a rouvert les yeux. Il te fait signe de la main, tout petit. Il montre la sacoche du conteur.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Le carnet en dépasse, sa tranche de cuir tournée vers toi. Dessus, en lettres pâles, tu lis ton nom.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Le conteur n’a pas bougé. Mais sa main droite s’est refermée sur la sacoche, comme on tient un chien qui veut mordre.',
+        },
+      ],
+    },
+    {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'Le feu s’abaisse d’un coup, comme si quelqu’un avait soufflé dessus. Dans l’ombre, les visages se tournent vers toi.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Tu n’as pas assez regardé pour savoir pourquoi. Mais le conteur s’est arrêté, et il attend, et c’est ta réponse qu’il attend.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Quelque part, au-delà des arbres, une femme chante sans paroles. Tu es le seul à l’entendre.',
+        },
+      ],
     },
   ],
 
@@ -244,6 +427,7 @@ export const premise03: Premise = {
         'La clairière se fige. L’histoire se termine : l’homme se réveille, et il choisit de rester dans le corps qui n’est pas le sien.',
         'Personne n’applaudit. Un vieux jette une branche dans le feu. Le conteur ferme son carnet.',
         'Il te regarde et dit : « Maintenant, elle est à toi. » Tu ne sais pas ce que cela veut dire. Tu sais que c’est vrai.',
+        'Au loin, sous l’aubépine, la lueur verte s’éteint. Quelqu’un, très bas, dit merci avec ta voix.',
       ].join('\n'),
       mutations: [
         {
@@ -277,6 +461,7 @@ export const premise03: Premise = {
         'Tu prends l’écuelle et tu la renverses sur les braises. Une vapeur blanche monte, puis le noir.',
         'Des cris. Des corps qui se heurtent. Une voix d’enfant qui répète ton nom, et ce n’est pas le bon.',
         'Quand quelqu’un rallume, le conteur n’est plus là. Sa souche est vide. Sur la mousse, un carnet ouvert, sans page écrite.',
+        'Dans la nuit, l’histoire reprend, quelque part, sans toi. Tu entends la voix s’éloigner, et elle dit ton nom à chaque pas.',
       ].join('\n'),
       mutations: [
         {
@@ -301,6 +486,7 @@ export const premise03: Premise = {
         'Tu glisses la main dans la sacoche. Le cuir est tiède. Tu ouvres le carnet à la lueur du feu.',
         'La première page est de ta main. La deuxième aussi. Toutes les pages sont de ta main, et tu ne te souviens d’aucune.',
         'Le conteur ne dit rien. Il achève sa phrase. Quand il se tait, il te regarde comme on regarde quelqu’un qu’on a attendu.',
+        'À la dernière page, une ligne n’est pas encore écrite. Elle commence par ton nom, et le crayon est dans ta main.',
       ].join('\n'),
       mutations: [
         {
@@ -322,6 +508,7 @@ export const premise03: Premise = {
         'Tu te lèves sans bruit. Personne ne te retient. Le feu rapetisse dans ton dos.',
         'Les troncs se resserrent. Le sentier se divise, puis se divise encore. Tu choisis à chaque fois la même main.',
         'Plus loin, la voix du conteur te suit. Elle ne dit plus l’histoire. Elle dit où tu en es.',
+        'Au matin, tu retrouves le feu. Il est éteint depuis longtemps, et personne ne se souvient que tu étais parti.',
       ].join('\n'),
       mutations: [
         {
@@ -353,6 +540,7 @@ export const premise03: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Que ce corps n’est pas le tien.',
         'Le silence est total. Même le feu semble se retenir. Puis quelqu’un rit, tout bas, et ce rire se propage.',
         'On te prend le sifflet. On te reconduit au village, entre deux hommes, en parlant de la guerre.',
+        'Derrière toi, dans la clairière, le conteur reprend où il s’était arrêté. Il ajoute une phrase. Elle parle d’un homme qu’on emmène.',
       ].join('\n'),
       mutations: [],
     },
@@ -365,6 +553,7 @@ export const premise03: Premise = {
         'Tu l’as vue depuis longtemps, au bord de ton regard : une lueur verte, basse, qui bouge.',
         'Tu la suis. Elle t’attend à chaque tournant, jamais plus près, jamais plus loin. Le sol devient mou.',
         'Quand tu comprends que l’eau monte à tes genoux, tu ne vois plus le feu. Tu ne l’entends plus non plus.',
+        'La lueur s’arrête devant toi, tout près. Elle a un visage, et ce n’est pas celui d’une inconnue.',
       ].join('\n'),
       mutations: [
         {
