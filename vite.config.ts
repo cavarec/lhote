@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: "L'Hôte",
         short_name: "L'Hôte",
-        description: 'Un jeu narratif : vous ouvrez les yeux dans le corps d’un inconnu.',
+        description: 'Un jeu narratif : tu ouvres les yeux dans le corps d’un inconnu.',
         lang: 'fr',
         start_url: '/',
         scope: '/',

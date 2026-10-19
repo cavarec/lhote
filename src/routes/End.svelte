@@ -34,7 +34,7 @@
     {/if}
     {#if installPrompt.available}
       <div class="install ui">
-        <p>Retrouvez L'Hôte sur votre écran d'accueil, même sans réseau.</p>
+        <p>Retrouve L'Hôte sur ton écran d'accueil, même sans réseau.</p>
         <button class="button" onclick={() => installPrompt.install()}>Installer</button>
         <button class="button button--quiet" onclick={() => installPrompt.dismiss()}>
           Plus tard

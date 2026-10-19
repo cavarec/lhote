@@ -19,7 +19,7 @@ test.describe('accessibilité (WCAG AA)', () => {
     await audit(page);
     await page.getByRole('button', { name: 'Retour' }).click();
     await page.getByRole('button', { name: 'Confidentialité et réglages' }).click();
-    await page.getByRole('heading', { name: 'Vos données' }).waitFor();
+    await page.getByRole('heading', { name: 'Tes données' }).waitFor();
     await audit(page);
   });
 

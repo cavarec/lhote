@@ -24,7 +24,7 @@
       a.download = 'lhote-mes-donnees.json';
       a.click();
       URL.revokeObjectURL(a.href);
-      message = 'Vos données ont été téléchargées.';
+      message = 'Tes données ont été téléchargées.';
     } catch {
       message = 'Export impossible sans connexion.';
     }
@@ -76,15 +76,15 @@
   </section>
 
   <section class="ui">
-    <h2>Vos données</h2>
+    <h2>Tes données</h2>
     <p>
       L'Hôte ne demande ni compte ni adresse. Un identifiant aléatoire, stocké sur cet
-      appareil, relie votre partie à ses sauvegardes. Le serveur garde votre monde et
-      votre historique pendant un an sans activité, puis les efface. Aucune mesure
-      d'audience, aucun traceur.
+      appareil, relie ta partie à ses sauvegardes. Le serveur garde ton monde et ton
+      historique pendant un an sans activité, puis les efface. Aucune mesure d'audience,
+      aucun traceur.
     </p>
     <p>
-      Un fragment de vos sauts, une seule phrase sans identifiant, peut être lu par un
+      Un fragment de tes sauts, une seule phrase sans identifiant, peut être lu par un
       autre joueur comme une trace discrète. Il disparaît après 90 jours.
     </p>
     <button class="button" onclick={download}>Télécharger mes données</button>
