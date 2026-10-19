@@ -98,6 +98,21 @@ export interface Resolution {
   requiresAny?: string[];
 }
 
+/**
+ * Qui était le corps que tu habitais. Le joueur se demande « qui suis-je ici ? » pendant tout le saut
+ * (un choix du dialogue, des indices d'enquête) ; l'écran de fin donne la réponse, quelle que soit l'issue.
+ */
+export interface HostIdentity {
+  /** Un prénom breton qui ne dit pas le genre (Gwenn, Maï, Alan…). */
+  name: string;
+  /** Ce que cette personne était pour les autres, en quelques mots (« la laveuse des noyés »). */
+  role: string;
+  /** Une à trois phrases, à la troisième personne : ce que ce corps cachait, ce qu'il avait fait. */
+  story: string;
+  /** Identifiant de la vérité d'enquête qui donne ce nom au joueur avant la fin. */
+  truth: string;
+}
+
 export interface Premise {
   id: string;
   title: string;
@@ -117,5 +132,7 @@ export interface Premise {
   season?: Season;
   /** Coups de théâtre, du plus précis au repli. Absent : on passe directement à la fracture. */
   twists?: Twist[];
+  /** Obligatoire dans le contenu réel (vérifié par les tests de contenu) : voir HostIdentity. */
+  host?: HostIdentity;
   resolutions: Resolution[];
 }

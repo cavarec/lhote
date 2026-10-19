@@ -11,6 +11,9 @@
   const fragment = $derived(
     done.catalog.fragments.find((f) => f.id === done.leap.fragmentId) ?? null,
   );
+  const host = $derived(
+    done.catalog.premises.find((p) => p.id === done.leap.premiseId)?.host ?? null,
+  );
   const observer = $derived(
     pickObserverMessage(done.leap.seed, done.catalog.observerMessages),
   );
@@ -25,6 +28,14 @@
 <main class="page">
   <Vignette mood={outcome.resolution.outcome} />
   <Scene {lines} {instant}>
+    {#if host}
+      <aside class="host fade-in" aria-label="Qui était ce corps">
+        <p class="ui muted">Qui était ce corps</p>
+        <p class="narration">
+          <strong>{host.name}</strong>, {host.role}. {host.story}
+        </p>
+      </aside>
+    {/if}
     {#if fragment}
       <aside class="fragment fade-in" aria-label="Fragment retrouvé">
         <p class="ui muted">Un souvenir qui n’est pas le tien</p>
@@ -51,13 +62,25 @@
         </button>
       </div>
     {/if}
-    <button class="button button--primary next" onclick={() => game.home()}>
-      Revenir
+    <button
+      class="button button--primary next"
+      onclick={() => {
+        game.home();
+        void game.start();
+      }}
+    >
+      Sauter encore
     </button>
+    <button class="button button--quiet" onclick={() => game.home()}>Revenir</button>
   </Scene>
 </main>
 
 <style>
+  .host {
+    margin-top: var(--space-4);
+    padding: var(--space-3);
+    border-top: 1px solid var(--ochre);
+  }
   .fragment {
     margin-top: var(--space-4);
     padding: var(--space-3);

@@ -9,6 +9,11 @@ export interface NewsItem {
 export const news: readonly NewsItem[] = [
   {
     date: '2026-10-19',
+    title: 'Qui es-tu ?',
+    text: 'Les histoires sont réécrites pour mieux se suivre. À chaque saut, tu peux chercher qui était le corps que tu habites. La fin te le dit. Tes souvenirs, eux, répondent un peu plus à chaque fois.',
+  },
+  {
+    date: '2026-10-19',
     title: 'Deux histoires de plus',
     text: '« Le lavoir de minuit » : des lavandières te demandent d’aider à tordre un drap. « Les cloches d’Ys » : la mer se retire, et une porte de bronze t’attend. Elles se jouent toute l’année.',
   },
