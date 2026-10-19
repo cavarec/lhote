@@ -38,6 +38,14 @@ export const premise05: Premise = {
     truth: 'nom-du-veilleur',
   },
 
+  // L'Observateur parle après le premier contact : il dit ce qui doit être réparé, pas comment.
+  briefing: [
+    'Je te vois, tu sais. Mauvaise nuit pour avoir froid aux orteils : on est le soir de Noël, et tu veilles des bêtes qui s’apprêtent à parler.',
+    'Voilà ce que je sais. Il y a un nom qui court dans cette étable, et quelqu’un en paiera le prix. À toi de réparer ça avant que la maison arrive.',
+    'Comment ? Là, je sèche. Je me suis déjà trompé de bœuf une fois, alors ne me demande pas de trancher.',
+    'Une chose encore : ce corps te connaît mieux que moi. Écoute-le, mais regarde bien qui il protège.',
+  ],
+
   // Beat 1 : la paille, la neige, les bêtes. Aucune information.
   wakeup: [
     'Le noir sent la paille, la bouse chaude et le givre. Une odeur de lait tourné passe dessous, avec celle de la graisse de lampe.',
@@ -520,6 +528,8 @@ export const premise05: Premise = {
         'Quand la maison arrive, la porte est ouverte, la paille propre. Le plus petit des enfants pose la main sur le bœuf, sans peur.',
         'Au matin, la corne recollée du bœuf de terre tient sans cire. Mais le grand bœuf ne baisse pas les yeux : il regarde déjà quelqu’un d’autre.',
       ].join('\n'),
+      aftermath:
+        'Soaz veilla les bêtes encore bien des Noëls, sans jamais se taire. Le voisin du haut fut le dernier que le bœuf nomma sans réponse, et la maison le pleura une fois pour toutes.',
       mutations: [
         {
           type: 'addTruth',
@@ -554,6 +564,8 @@ export const premise05: Premise = {
         'Le matin, quand on revient, les enfants chantent encore. Le vieux berger, lui, ne dit plus rien. Il a compris que tu t’étais tu de nouveau.',
         'Au printemps, on enterrera quelqu’un de la maison. Personne ne dira que tu savais. Ce n’est pas la peine : tout le monde le saura.',
       ].join('\n'),
+      aftermath:
+        'Au printemps, on enterra quelqu’un de la maison, et personne n’osa regarder Soaz. L’hiver suivant, le grand bœuf parla de nouveau, et Soaz se tut encore.',
       mutations: [
         {
           type: 'addScar',
@@ -579,6 +591,8 @@ export const premise05: Premise = {
         'Le silence tombe sur le chemin comme un drap mouillé. Une femme laisse tomber sa lanterne. Le frère du voisin du haut se met à pleurer, sans bruit.',
         'Ils se tournent vers toi, puis ils se détournent, et reprennent la route sans un mot. Personne ne veut plus passer l’hiver près du veilleur.',
       ].join('\n'),
+      aftermath:
+        'La maison passa l’hiver sans se parler, et Soaz fut renvoyé de l’étable avant la fin de janvier. On dit que le frère du voisin du haut garda les bêtes seul, la nuit, sans rien entendre.',
       mutations: [
         {
           type: 'addDoor',
@@ -602,6 +616,8 @@ export const premise05: Premise = {
         'Quand tu redescends, la messe s’est arrêtée. Tous te regardent. Le recteur, sur les marches, ne dit que ceci : « Qu’as-tu fait ? »',
         'Dans ta poche, tu trouves un grelot que tu n’y avais pas mis. Il est tiède, et il ne sonne pas.',
       ].join('\n'),
+      aftermath:
+        'Le recteur punit le sonneur absent, et le village garda cette cloche trop tôt pendant des années. À chaque Noël, quelqu’un monta vérifier qu’on ne la tirait pas.',
       mutations: [
         {
           type: 'addDoor',
@@ -634,6 +650,8 @@ export const premise05: Premise = {
         'On te retire le sac de sel. Un autre veillera, quelqu’un qui sait ce qu’il fait, et qui n’a pas peur de ce qu’il entend.',
         'Derrière toi, quand tu pars, le grand bœuf ouvre la bouche. Tu ne te retournes pas. Tu sais que c’est ton nom qu’il dit.',
       ].join('\n'),
+      aftermath:
+        'Un autre veilleur prit l’étable avant l’aube, un homme qui ne dit jamais son nom aux bêtes. Soaz resta dans la maison, mais personne ne le fit plus asseoir près du feu.',
       mutations: [],
     },
     {
@@ -647,6 +665,8 @@ export const premise05: Premise = {
         'Quand tu comprends que le vent s’est tu, tu ne vois plus l’église. Tu n’entends plus la cloche, ni les bêtes, ni ton cœur.',
         'Dans la neige, tes pas s’arrêtent. Les autres continuent, seuls, vers le sud, et la lueur s’éteint derrière eux.',
       ].join('\n'),
+      aftermath:
+        'On retrouva les traces de Soaz au jour levé, et elles ne menaient nulle part. Le grand bœuf refusa de manger trois jours, puis cessa de lever la tête quand on passait.',
       mutations: [
         {
           type: 'addScar',

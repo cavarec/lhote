@@ -96,6 +96,11 @@ export interface Resolution {
    * choisi d'examiner décide de ce qu'il peut tenter.
    */
   requiresAny?: string[];
+  /**
+   * Ce qui est arrivé ensuite, une à deux phrases, à la troisième personne, comme la carte de fin
+   * d'un épisode de Code Quantum. Affichée sur l'écran de fin, quelle que soit l'issue.
+   */
+  aftermath?: string;
 }
 
 /**
@@ -132,6 +137,11 @@ export interface Premise {
   season?: Season;
   /** Coups de théâtre, du plus précis au repli. Absent : on passe directement à la fracture. */
   twists?: Twist[];
+  /**
+   * L'Observateur parle une fois le premier contact passé : il dit, à sa façon, ce qui doit être réparé.
+   * 2 à 4 répliques. Il sait presque tout et il se trompe parfois : il ne dit jamais comment faire.
+   */
+  briefing?: string[];
   /** Obligatoire dans le contenu réel (vérifié par les tests de contenu) : voir HostIdentity. */
   host?: HostIdentity;
   resolutions: Resolution[];

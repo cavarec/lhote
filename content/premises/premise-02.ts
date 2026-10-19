@@ -502,6 +502,14 @@ export const premise02: Premise = {
   fractures: ['fracture-03', 'fracture-04'],
 
   // Qui était ce corps : l'écran de fin le dit, quelle que soit l'issue.
+  // L'Observateur parle après le premier contact : ce qui doit être réparé, sans dire comment.
+  briefing: [
+    'Je te vois, tu as une tête de cierge fondu. Écoute vite : ce corps porte quelque chose qui ne doit pas rester caché.',
+    'Il y a une chasse, une foule, une mère qui attend un miracle. Quelque chose est faux là-dedans, et ça va se voir avant la fin du jour.',
+    'Ce qui doit être réparé, c’est ce mensonge-là, ou ce secret-là, je ne sais pas encore lequel. Je ne sais pas non plus comment.',
+    'Je crois que ce corps est connu de tous ici. Ne me demande pas son nom : ce n’est pas moi qui te le dirai.',
+  ],
+
   host: {
     name: 'Loeiz',
     role: 'recteur de la paroisse et gardien de la chasse aux guérisons',
@@ -525,6 +533,8 @@ export const premise02: Premise = {
         'Le soir, ta fièvre tombe. Quelqu’un a laissé un cierge allumé devant ta porte.',
         'Dans la nuit, sous la rivière, la grande cloche sonne comme on dit merci. Puis, plus bas, une seconde cloche répond, que personne n’a jamais entendue.',
       ].join('\n'),
+      aftermath:
+        'Loeiz tint la paroisse dix ans de plus, le galet posé sur l’autel. Chaque printemps, la mère du haut revint le toucher, et son petit marcha un peu mieux.',
       mutations: [
         {
           type: 'addTruth',
@@ -560,6 +570,8 @@ export const premise02: Premise = {
         'Le soir, tu ne dors pas. Tu sais ce que contient la chasse. Tu es le seul à le savoir, avec la rivière.',
         'Vers minuit, un grincement monte du fond de l’église. Quelqu’un soulève le drap de la statue, juste assez pour voir.',
       ].join('\n'),
+      aftermath:
+        'La chasse resta scellée, et la foule continua d’y croire. Douze hivers plus tard, la fièvre revint, et Loeiz mourut sans avoir ouvert le papier.',
       mutations: [
         {
           type: 'addScar',
@@ -584,6 +596,8 @@ export const premise02: Premise = {
         'La procession part sans l’un ni l’autre. On entend la foule s’éloigner, puis les cloches se taire une à une.',
         'Quand tu rouvres la porte, le sacristain n’est plus là. Sur le dallage, des pas mouillés vont de l’autel à la rivière.',
       ].join('\n'),
+      aftermath:
+        'Le sacristain quitta la paroisse avant l’hiver. On ne sut jamais ce qu’il avait vu, et la chasse resta fermée sous la cire.',
       mutations: [
         {
           type: 'addPerson',
@@ -608,6 +622,8 @@ export const premise02: Premise = {
         'Là-haut, les cloches sonnent une dernière fois. La procession part sans chasse, et personne n’ose dire pourquoi.',
         'Sur l’eau, la clé flotte un instant, puis une main pâle sort de la vase et la prend. Tu ne restes pas pour la voir se refermer.',
       ].join('\n'),
+      aftermath:
+        'La clé ne fut jamais retrouvée. Au printemps, la chasse dut être forcée, et l’on y trouva un galet et un papier gonflé d’eau.',
       mutations: [
         {
           type: 'addDoor',
@@ -640,6 +656,8 @@ export const premise02: Premise = {
         'On t’emmène dans une chambre, en parlant bas. On te donne de l’eau, des draps, une chaise. On te retire la clé.',
         'À travers la porte, tu entends l’envoyé ouvrir la chasse. Il y a un long silence, puis il lit à voix haute un papier plié, jusqu’au bout.',
       ].join('\n'),
+      aftermath:
+        'Loeiz passa l’hiver dans une chambre de l’évêché, sans plus porter de chape. L’aveu circula, et l’on se mit à dire que la fièvre l’avait guéri d’un secret.',
       mutations: [],
     },
     {
@@ -653,6 +671,8 @@ export const premise02: Premise = {
         'Tu t’appuies à la balustrade. Elle est plus basse que tu ne croyais. Le ciel est très proche.',
         'Derrière toi, une voix très douce dit ton nom. Tu te retournes. Il y a un manche long, posé contre le mur, et personne pour le tenir.',
       ].join('\n'),
+      aftermath:
+        'On retrouva Loeiz au pied du clocher à la fin de la procession. La chasse fut ouverte l’année suivante, devant un évêque venu de loin.',
       mutations: [
         {
           type: 'addScar',

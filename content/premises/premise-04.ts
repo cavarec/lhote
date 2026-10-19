@@ -38,6 +38,14 @@ export const premise04: Premise = {
     truth: 'nom-du-corps',
   },
 
+  // L'Observateur, après le premier contact : ce qui doit être réparé, sans dire comment.
+  briefing: [
+    'Je te vois, tu peux respirer. Tu es dans une ferme, la nuit des morts. Il y a un couvert de trop sur cette table.',
+    'Voilà ce qui cloche, d’après ce que je sais : quelqu’un est venu avant l’heure, et on l’a oublié. Il faut que la maison le sache.',
+    'Ou alors il faut que personne ne le sache. Là, j’avoue, je n’en suis pas sûr. Je ne sais pas non plus comment t’y prendre.',
+    'Une chose me frappe : ces mains savent compter les couverts mieux que toi. Fais-leur un peu confiance.',
+  ],
+
   // Beat 1 : la braise, le lait, la cire. Aucune information.
   wakeup: [
     'Le noir sent la tourbe qui couve, le lait tiède et la crêpe froide. Une odeur de navet creusé passe dessous, âcre et sucrée.',
@@ -504,6 +512,8 @@ export const premise04: Premise = {
         'À l’aube, tu comprends à qui sont ces mains : à celui ou celle qui tenait la ferme, et avait promis un couvert à son enfant.',
         'Sur la nappe, un chemin de gouttes de lait va de la table à la porte, et plus loin. Quelqu’un d’autre a faim, ailleurs.',
       ].join('\n'),
+      aftermath:
+        'Chaque Kalan, on dressa treize couverts, et la maison dit le nom de Loïk à voix haute. Alix finit sa vie à tenir la ferme, sans plus rien cacher.',
       mutations: [
         {
           type: 'addTruth',
@@ -538,6 +548,8 @@ export const premise04: Premise = {
         'Vers le matin, on frappe à la porte, trois coups. Tu ne réponds pas. Rien ne répond non plus, de l’autre côté.',
         'À l’aube, la nappe est tachée de lait, devant la place que tu as débarrassée. Le linge est froid, comme si l’on s’y était assis.',
       ].join('\n'),
+      aftermath:
+        'La ferme dormit tranquille jusqu’à l’hiver. Puis le lait tourna dans les pots, chaque nuit de Kalan, et personne ne sut dire pourquoi.',
       mutations: [
         {
           type: 'addScar',
@@ -562,6 +574,8 @@ export const premise04: Premise = {
         'Le silence tombe sur la salle comme un filet mouillé. Un homme sort, d’un pas qui n’a plus rien de calme. Une femme crie.',
         'On se renvoie le blâme : qui a gardé ce nom ? Qui a dressé ? Tous se tournent vers toi, qui tiens les clefs. Les portes se ferment dans la cour.',
       ].join('\n'),
+      aftermath:
+        'Le nom de Loïk fit le tour de la paroisse avant la Chandeleur. Les voisins ne revinrent qu’au printemps, et la honte resta sur la ferme bien plus longtemps.',
       mutations: [
         {
           type: 'addDoor',
@@ -585,6 +599,8 @@ export const premise04: Premise = {
         'Tu appelles. Un oiseau de nuit répond, puis plus rien. Pendant ce temps, la table est restée sans veilleur, et le bol est vide.',
         'Au retour, la porte de la ferme est fermée, et on ne t’ouvre pas. Dans ta poche, un petit objet tiède que tu n’y avais pas mis.',
       ].join('\n'),
+      aftermath:
+        'La lanterne du carrefour brûla jusqu’à l’aube, puis on la retrouva éteinte, au pied de la pierre. L’année suivante, un navet creusé attendit au même endroit.',
       mutations: [
         {
           type: 'addDoor',
@@ -617,6 +633,8 @@ export const premise04: Premise = {
         'On te retire le trousseau de la maison. Un autre veillera, quelqu’un qui sait ce qu’il fait, et qui dressera pour l’enfant, ou non.',
         'Sur le seuil, en partant, tu entends l’essieu. Il grince derrière toi, au pas, et il te suit jusqu’à la dernière ferme.',
       ].join('\n'),
+      aftermath:
+        'Un autre prit les clefs et ne dressa plus rien. À chaque Kalan, quelqu’un frappa trois coups à la porte, et la ferme finit par s’y habituer.',
       mutations: [],
     },
     {
@@ -631,6 +649,8 @@ export const premise04: Premise = {
         'Une silhouette longue, sous un chapeau large, tient un manche. Elle se retourne. Elle n’a pas de visage, rien qu’une attention.',
         'Elle te désigne le char. Il y a de la place, juste pour un. Tu montes, et le grincement continue, sans toi, vers la mer.',
       ].join('\n'),
+      aftermath:
+        'On trouva la cour vide au matin, et le chien couché devant la porte. Alix ne revint pas, et la table resta dressée pour douze, puis pour treize.',
       mutations: [
         {
           type: 'addScar',

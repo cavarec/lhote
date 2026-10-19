@@ -471,6 +471,13 @@ export const premise03: Premise = {
   fractures: ['fracture-05', 'fracture-06'],
 
   // Qui était ce corps : l'écran de fin donne la réponse, quelle que soit l'issue.
+  // L'Observateur parle après le premier contact : ce qui doit être réparé, sans dire comment.
+  briefing: [
+    'Je te vois, tu as l’air d’avoir dormi dans un fossé. Bon. Écoute, j’ai peu de temps, ce corps a une histoire qui ne se finit pas.',
+    'Il faut que cette histoire trouve sa fin, ou que quelqu’un l’arrête avant. Ce qui doit être réparé, c’est elle. Je ne sais pas laquelle des deux fins est la bonne.',
+    'Je ne sais pas non plus comment. J’aimerais bien. Et puis, entre nous, ce corps n’entend que d’une oreille. Tu as l’air d’y être habitué.',
+  ],
+
   host: {
     name: 'Maï',
     role: 'garde de la forêt depuis la guerre, que tout le village appelle Demi-Oreille',
@@ -495,6 +502,8 @@ export const premise03: Premise = {
         'Le conteur ferme le carnet. Il dit : « Maintenant, elle est à toi. » Tu ne sais pas ce que cela veut dire. Tu sais que c’est vrai.',
         'Sous l’aubépine, la lueur verte s’éteint. Ton oreille gauche s’ouvre une seconde, et très loin, quelqu’un prononce un autre nom que le tien.',
       ].join('\n'),
+      aftermath:
+        'Le conteur raconta cette fin dans toutes les veillées de l’hiver. Au printemps, quelqu’un replanta l’aubépine, et personne ne vit plus de lueur dans la forêt.',
       mutations: [
         {
           type: 'addTruth',
@@ -530,6 +539,8 @@ export const premise03: Premise = {
         'Quand quelqu’un rallume, le conteur n’est plus là. Sur sa souche, un carnet ouvert, dont toutes les pages sont blanches.',
         'Sous l’aubépine, la lueur verte brille encore. Elle n’a plus d’histoire à attendre, et tu entends qu’elle a compris.',
       ].join('\n'),
+      aftermath:
+        'Le conteur ne revint pas à la clairière. Pendant des hivers, on dit l’histoire du garde à moitié, et les enfants en inventèrent chacun la fin.',
       mutations: [
         {
           type: 'addScar',
@@ -556,6 +567,8 @@ export const premise03: Premise = {
         'Le conteur achève sa phrase sans protester. Quand il se tait, il te regarde comme on regarde quelqu’un qu’on a attendu.',
         'À la dernière page, une ligne n’est pas écrite. Elle commence par « Je reviens avant l’aube », et le crayon est déjà dans ta main.',
       ].join('\n'),
+      aftermath:
+        'Maï resta au village, et l’on prit l’habitude de lui laisser le carnet sur la table. Elle ou lui écrivait chaque soir une page, jamais la dernière.',
       mutations: [
         {
           type: 'addTruth',
@@ -579,6 +592,8 @@ export const premise03: Premise = {
         'Plus loin, la voix du conteur te suit. Elle ne dit plus l’histoire. Elle dit où tu en es, pas après pas.',
         'Au matin, tu retrouves le feu. Il est éteint depuis longtemps, et personne ne se souvient que tu étais parti.',
       ].join('\n'),
+      aftermath:
+        'Le conteur finit la veillée sans fin ni garde. À la neige, on retrouva la sacoche vide au pied de la fontaine, et personne ne sut dire à qui elle était.',
       mutations: [
         {
           type: 'addDoor',
@@ -611,6 +626,8 @@ export const premise03: Premise = {
         'On pense que la guerre t’a repris. On te prend le sifflet. On te reconduit au village, entre deux voisins, en parlant d’autre chose.',
         'Derrière toi, dans la clairière, le conteur reprend où il s’était arrêté. Il ajoute une phrase. Elle parle d’un garde qu’on emmène.',
       ].join('\n'),
+      aftermath:
+        'On garda Maï près du feu cet hiver-là, sans plus lui confier la forêt. Au printemps, un autre garde fit la ronde, et le conteur partit sans rien promettre.',
       mutations: [],
     },
     {
@@ -624,6 +641,8 @@ export const premise03: Premise = {
         'Quand tu comprends que l’eau monte à tes genoux, tu ne vois plus le feu. Tu ne l’entends plus non plus.',
         'La lueur s’arrête devant toi, tout près. Elle a un visage. C’est celui que ce corps n’a jamais osé revoir.',
       ].join('\n'),
+      aftermath:
+        'On chercha Maï trois jours dans le marais, puis on cessa. Depuis, certains soirs de veillée, une lueur verte traverse la lisière et semble attendre quelqu’un.',
       mutations: [
         {
           type: 'addScar',
