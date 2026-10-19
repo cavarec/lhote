@@ -1,14 +1,24 @@
 import type { Premise } from './types';
 
-// Prémisse 7 : les cloches d'Ys. Une grève à marée basse, un soir d'équinoxe, devant la baie.
-// L'hôte est un ramasseur de goémon resté sur le sable : on dit que, certains soirs, la ville d'Ys remonte
-// sous les vagues et que ses cloches sonnent. Celui qui les entend sonner trois fois doit répondre.
-// Inspirée de : la légende bretonne de la ville engloutie d'Ys et de sa princesse Dahut.
+// Prémisse 7 : les cloches d'Ys. Une grève à marée basse, un soir de grande marée d'équinoxe.
+// Inspirée de : la légende bretonne de la ville engloutie d'Ys et de la porte que Dahut laissa ouverte.
+//
+// Colonne vertébrale :
+// - Qui demande quoi : une personne de la maison d'à côté vient te chercher sur la grève. La charrette part à la
+//   nuit, et elle veut que tu remontes sans répondre aux cloches qui sonnent sous la dalle.
+// - Ce qui est en jeu : au troisième coup, la porte d'Ys demande qu'on lui réponde. La mer revient d'un coup,
+//   et celui ou celle qui répond est pris. Quelqu'un de Penhir y est déjà passé, l'an dernier.
+// - Le piège : ce corps est celui de Nolig, qui devait refermer la porte avec son sel à chaque grande marée.
+//   L'an dernier, Nolig a eu peur et n'est pas descendu. La porte est restée entrouverte.
+// - Ce que tu peux faire : refermer la porte avec le sel que tu portes (la bonne issue), ou répondre aux
+//   cloches, jeter le sel, courir sonner la chapelle, avouer que tu ne sais pas qui tu es, ou descendre.
+// - Qui es-tu ici : le nom (Nolig), gravé sur l'anneau et dit par un ramasseur, et le devoir, que dit le vieux.
+//
 // Conventions : voir content/README.md.
 // - `npcId` est un emplacement (« 0 » ou « 1 »), pas un personnage : le texte ne dit donc ni « il »
 //   ni « elle » du personnage qui parle.
 // - Miroir : ton reflet dans la flaque garde la bouche pleine d’eau de mer.
-// - Corps hérité : tu as le goût du sel sur la langue en permanence, et tes pas ne laissent pas de trace.
+// - Corps hérité : le goût du sel sur la langue, et des pas qui ne laissent pas de trace.
 
 const EPOCH =
   'une grève de la baie, un soir de grande marée, au temps du goémon et des charrettes';
@@ -21,16 +31,16 @@ export const premise07: Premise = {
   // Beat 1 : le sable, le vent, la mer qui s'est retirée trop loin. Aucune information.
   wakeup: [
     'Le noir sent le sel, la vase tiède et le goémon qui sèche. Dessous, une odeur de bronze mouillé, comme celle d’une vieille cloche.',
-    'Tu écoutes. La mer, très loin, qui murmure et ne revient pas. Du sable qui boit l’eau. Des coquilles qui craquent sous un pas.',
-    'Tu es debout, les pieds nus, dans une flaque tiède. Tu le sais aux orteils, enfoncés dans la vase, et au vent qui te lève les cheveux.',
+    'Tu écoutes. La mer, très loin, murmure et ne revient pas. Le sable boit l’eau. Des coquilles craquent sous un pas.',
+    'Tu es debout, les pieds nus, dans une flaque tiède. Tu le sais aux orteils enfoncés dans la vase, et au vent qui te lève les cheveux.',
     'Tes lèvres ont un goût de sel, épais, tenace, comme si tu avais bu la mer. Tu n’as pas soif. Tu n’as jamais soif.',
-    'Tu cherches ton nom. Tu trouves un mot à la place : un son de bronze, grave, qui roule sous le sable et fait trembler tes genoux.',
+    'Tu cherches ton nom. Tu trouves un son à la place, un son de bronze, grave, qui roule sous le sable et fait trembler tes genoux.',
     'À la ceinture, un sac de toile rêche, noué d’une ficelle, avec un grain de sel dedans. Tes doigts le serrent sans toi.',
-    'Une charrette grince, loin derrière, sur la route de la dune. Elle s’est arrêtée. Quelqu’un attend là-haut, et ne descend pas.',
+    'Une charrette grince, loin derrière, sur la route de la dune. Elle s’est arrêtée. Quelqu’un attend là-haut et ne descend pas.',
     'Au ras de l’eau, un oiseau de mer marche d’un pas raide, la tête tournée vers le large. Il ne cherche rien. Il écoute.',
-    'Le vent change. Il porte un autre bruit, très loin, sous la mer : un seul coup de cloche, long, qui fait vibrer le sable.',
-    'Un deuxième coup suit. Plus près, ou plus fort. Tu comptes sans le vouloir, et ta bouche s’ouvre sur un troisième que tu attends.',
-    'Il n’y a pas de lune. Pourtant, la grève luit, d’un gris de coquillage, et chaque flaque garde un petit morceau de ciel.',
+    'Le vent change. Il porte un bruit venu de sous le sable : un seul coup de cloche, long, qui fait vibrer les coquilles.',
+    'Un deuxième coup suit, plus près. Tu comptes sans le vouloir, et ta bouche attend le troisième.',
+    'Il n’y a pas de lune. Pourtant la grève luit, d’un gris de coquillage, et chaque flaque garde un morceau de ciel.',
     'Tu ouvres les yeux.',
   ].join('\n\n'),
 
@@ -42,11 +52,11 @@ export const premise07: Premise = {
     },
     {
       kind: 'material',
-      text: 'À tes pieds, un panier de goémon, une fourche à trois dents, un râteau de bois. Le panier est lourd, mouillé, et il n’a pas l’odeur d’algues, mais de pierre.',
+      text: 'À tes pieds, un panier de goémon noir, une fourche à trois dents et un râteau de bois. Le goémon est frais : tu travaillais encore, il y a un instant.',
     },
     {
       kind: 'material',
-      text: 'Sur le sable, à dix pas, une dalle carrée, usée, que la marée a dégagée. Elle porte un anneau de bronze vert, et le sable autour est lisse comme un seuil.',
+      text: 'À dix pas, une dalle carrée, usée, que la marée a dégagée. Elle porte un anneau de bronze vert. Le sable autour est lisse comme un seuil.',
     },
     {
       kind: 'bodily',
@@ -54,19 +64,19 @@ export const premise07: Premise = {
     },
     {
       kind: 'bodily',
-      text: 'Tu te penches sur la flaque. Ton reflet te regarde, la bouche entrouverte et pleine d’eau, qui coule de ses lèvres sans jamais s’arrêter.',
+      text: 'Tu te penches sur la flaque. Ton reflet te regarde, la bouche entrouverte et pleine d’eau de mer, qui coule de ses lèvres sans jamais s’arrêter.',
     },
     {
       kind: 'bodily',
-      text: 'Tes mains sont gercées, rouges, durcies d’avoir tiré le goémon trop longtemps. Ce corps a ramassé cette grève toute sa vie, et elle le sait.',
+      text: 'Tes mains sont gercées, rouges, durcies par le froid. Ce corps tire le goémon depuis l’enfance, et la grève le connaît.',
     },
     {
       kind: 'social',
-      text: 'Des ramasseurs rentrent avec leurs paniers, courbés, en silence. Quand ils passent près de toi, ils changent de côté, sans te saluer, sans te regarder.',
+      text: 'Des ramasseurs rentrent avec leurs paniers, courbés, en silence. Quand ils passent près de toi, ils changent de côté et ne te regardent pas.',
     },
     {
       kind: 'social',
-      text: 'Un vieux, assis sur une pierre, tourne le dos à la mer. Il dit à son chien : « Ce soir, elle remonte. Compte avec moi, mon beau, et ne réponds pas. »',
+      text: 'Personne ne dit ton nom. Ils murmurent « bonsoir » et rien d’autre, comme on évite de nommer quelqu’un devant la mer.',
     },
     {
       kind: 'social',
@@ -80,23 +90,23 @@ export const premise07: Premise = {
     lines: [
       {
         speaker: 'narration',
-        text: 'Quelqu’un descend de la dune, en sabots, la tête rentrée dans les épaules. Les sabots s’enfoncent, collent, puis claquent à chaque pas.',
+        text: 'Quelqu’un descend de la dune, en sabots, la tête rentrée dans les épaules. Les sabots collent à la vase, puis claquent à chaque pas.',
       },
       {
         speaker: 'npc',
-        text: 'Je t’ai cherché sur toute la grève. Le charretier part à la nuit, il ne t’attend plus. Remonte avec moi.',
+        text: 'Je t’ai cherché sur toute la grève. Le charretier part à la nuit. Remonte avec moi, tout de suite.',
       },
       {
         speaker: 'narration',
-        text: 'La personne ne regarde pas la mer. Elle regarde la dalle au sol, l’anneau vert, puis tes pieds, et ils ne laissent pas de traces.',
+        text: 'La personne ne regarde pas la mer. Elle regarde la dalle, l’anneau vert, puis tes pieds, qui ne laissent pas de traces.',
       },
       {
         speaker: 'npc',
-        text: 'Tu as entendu ? Dis-moi que tu n’as rien entendu. Une cloche, une seule, dans le sable.',
+        text: 'Tu as entendu ? Une cloche, sous le sable. Dis-moi que tu n’as rien entendu.',
       },
       {
         speaker: 'npc',
-        text: 'On ne les compte pas. Mon père disait : jamais à voix haute. À trois, elles demandent quelque chose.',
+        text: 'On ne les compte pas. À trois coups, elles demandent qu’on leur réponde. Mon père le disait.',
       },
       {
         speaker: 'narration',
@@ -115,7 +125,7 @@ export const premise07: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'Alors finis vite. La mer va revenir d’un coup. Elle fait ça, ici, quand on ne la regarde plus.',
+            text: 'Alors finis vite. La mer revient d’un coup, ici, quand on ne la regarde plus.',
           },
           {
             speaker: 'narration',
@@ -130,11 +140,11 @@ export const premise07: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'Qu’on ouvre. La porte, là, sous l’anneau. Dahut la gardait, dans le temps. Elle a laissé la clé à quelqu’un.',
+            text: 'Qu’on ouvre la porte, sous l’anneau, ou qu’on la ferme. Ça dépend de qui répond.',
           },
           {
             speaker: 'npc',
-            text: 'À qui, on ne sait pas. Le vieux de la pierre dit que c’est à quelqu’un du bord. Quelqu’un comme toi.',
+            text: 'Quelqu’un de Penhir a répondu, l’an dernier. On a retrouvé ses sabots sur le sable, côte à côte. Lui, jamais.',
           },
           {
             speaker: 'narration',
@@ -145,11 +155,11 @@ export const premise07: Premise = {
       {
         id: 'avouer-que-tu-sais',
         kind: 'risky',
-        text: '« J’ai déjà entendu les trois. Je sais ce qu’elles demandent. »',
+        text: '« J’ai déjà entendu les trois coups. Je sais ce qu’elles demandent. »',
         reply: [
           {
             speaker: 'npc',
-            text: 'Les trois ? Et tu es là, debout, avec ta bouche, et tes yeux ? Ce n’est pas possible.',
+            text: 'Les trois ? Et tu es encore là, debout, la bouche pleine de sel ? Ce n’est pas possible.',
           },
           {
             speaker: 'narration',
@@ -157,7 +167,7 @@ export const premise07: Premise = {
           },
           {
             speaker: 'npc',
-            text: 'Ne le dis à personne. Pas à la charrette, pas au recteur. Pas avant d’avoir compris pourquoi tu es seul.',
+            text: 'Ne le dis à personne, pas à la charrette, pas au recteur. Pas avant d’avoir compris pourquoi tu tiens debout.',
           },
         ],
       },
@@ -168,7 +178,7 @@ export const premise07: Premise = {
         reply: [
           {
             speaker: 'narration',
-            text: 'Le métal est tiède, et il vibre. Sous ta paume, la dalle bat, très lent, comme un grand cœur couché sous le sable.',
+            text: 'Le métal est tiède, et il vibre. Sous ta paume, la dalle bat, très lente, comme un grand cœur couché sous le sable.',
           },
           {
             speaker: 'npc',
@@ -176,7 +186,7 @@ export const premise07: Premise = {
           },
           {
             speaker: 'narration',
-            text: 'Tu as senti, dans le bronze, une petite encoche. Elle a la forme d’un doigt, le tien, comme si l’anneau t’attendait.',
+            text: 'Ton pouce a trouvé, dans le bronze, une petite encoche. Elle semble creusée pour lui, et pour rien d’autre.',
           },
         ],
       },
@@ -191,7 +201,7 @@ export const premise07: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Elle revient. Elle va nous prendre les pieds. Il reste un coup. Un seul, et on saura.',
+          text: 'Elle revient. Elle va nous prendre les pieds. Il reste un coup, un seul, et la mer arrive.',
         },
         {
           speaker: 'narration',
@@ -199,7 +209,7 @@ export const premise07: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'Les flaques se remplissent, l’une après l’autre, d’une eau plus noire. Elles montent vers tes chevilles, sans vague, sans vent.',
+          text: 'Les flaques se remplissent, l’une après l’autre, d’une eau plus noire. Elle monte vers tes chevilles, sans vague, sans vent.',
         },
         {
           speaker: 'npc',
@@ -225,19 +235,19 @@ export const premise07: Premise = {
         {
           id: 'demander-la-cle',
           kind: 'informative',
-          text: '« La clé de la porte. Où Dahut l’a-t-elle laissée ? »',
+          text: '« Pour fermer cette porte, que faut-il ? »',
           reply: [
             {
               speaker: 'npc',
-              text: 'Le vieux dit : au cou de celui qui sale encore la mer. Il fait un signe vers ton sachet, sans le nommer.',
-            },
-            {
-              speaker: 'npc',
-              text: 'Mais ce n’est pas une clé, c’est ce qu’il y a dedans. Ne le dis pas devant la charrette. Elle écoute aussi.',
+              text: 'Du sel, dit-on, posé sur la serrure par celui ou celle qui garde. Moi, je ne sais pas qui garde.',
             },
             {
               speaker: 'narration',
-              text: 'Elle ajoute plus bas : « Et ne l’ouvre pas avant le troisième coup. Pas avant. »',
+              text: 'Le regard de la personne va vers ton sac de toile, puis revient. Elle n’ose pas finir sa pensée.',
+            },
+            {
+              speaker: 'npc',
+              text: 'Ne parle pas de sel devant la charrette. Là-haut, on dit que ça porte malheur de le nommer.',
             },
           ],
         },
@@ -257,21 +267,21 @@ export const premise07: Premise = {
           ],
         },
         {
-          id: 'regarder-leau',
+          id: 'qui-es-tu',
           kind: 'informative',
-          text: '« Regarde l’eau des flaques. Qu’y a-t-il dedans ? »',
+          text: '« Dis-moi qui je suis. Comment m’appelles-tu ? »',
           reply: [
             {
               speaker: 'npc',
-              text: 'Du ciel. Des nuages. Rien d’autre.',
-            },
-            {
-              speaker: 'narration',
-              text: 'La personne a répondu trop vite. Elle se penche, puis recule, la main sur la bouche, et ne dit plus rien.',
+              text: 'Tu te moques de moi, à cette heure ? Chez nous, on t’appelle Grain-de-sel, à cause du sac que tu portes.',
             },
             {
               speaker: 'npc',
-              text: 'Il y a des toits dedans, des tours. Une ville, à l’envers, qui a ses fenêtres allumées.',
+              text: 'Je suis de la maison d’à côté. Je t’ai vu descendre ici, chaque grande marée, jusqu’à l’an dernier.',
+            },
+            {
+              speaker: 'narration',
+              text: 'La personne ne dit pas ton vrai nom. On dirait que ça porterait malheur, ici, avec les cloches si proches.',
             },
           ],
         },
@@ -279,66 +289,69 @@ export const premise07: Premise = {
     },
   },
 
-  // Beat 4 : enquête. Le sel est la clé ; la dalle est une porte.
+  // Beat 4 : enquête. Le sel est la clé ; la dalle est une porte ; ce corps s'appelle Nolig.
+  // Chaque nature d'indice s'affiche d'un bloc : aucun indice ne dépend d'un autre.
   investigation: [
     {
       kind: 'material',
-      text: 'Dans la vase, à côté de la dalle, quelque chose de lourd et de froid, enveloppé dans une toile de lin. Ta main ne tremble pas en le touchant.',
+      text: 'Dans la vase, contre la dalle, quelque chose de lourd et de froid, enveloppé dans une toile de lin. Ta main ne tremble pas en le touchant.',
       revealsArtifact: 'leap',
     },
     {
+      kind: 'material',
+      text: 'Sur l’anneau, entre les écailles vertes, un nom gravé à la pointe d’un clou : Nolig. Dessous, des traits, un par grande marée. Le dernier est inachevé.',
+      revealsTruth: 'ton-nom-est-nolig',
+    },
+    {
+      kind: 'material',
+      text: 'Autour de la dalle, le sable est piétiné en rond sur l’épaisseur d’un pas. Quelqu’un a tourné là, longtemps, sans oser poser la main.',
+    },
+    {
+      kind: 'material',
+      text: 'Un râteau est planté droit dans le sable, avec un ruban de laine rouge au manche. Les ramasseurs le nouent pour marquer l’endroit qu’on ne franchit pas.',
+    },
+    {
+      kind: 'material',
+      text: 'Au fond d’une flaque, une pièce très ancienne : un visage de femme, couronné de coquillages, la bouche close. On dit que c’est Dahut, qui laissa sa porte ouverte.',
+    },
+    {
       kind: 'bodily',
-      text: 'Tu poses la langue contre ton palais. Le sel y est dur comme une pierre, un cristal, une clé. Tu comprends qu’il ne vient pas de la mer, mais de toi.',
+      text: 'Tu poses la langue contre ton palais. Le sel y est dur comme un cristal. Il ne vient pas de la mer : il vient de toi, comme une clé que ce corps garde sous la langue.',
       revealsTruth: 'le-sel-est-la-cle',
     },
     {
-      kind: 'material',
-      text: 'Autour de la dalle, des petits trous dans le sable, en cercle. Des pieds nus ont dansé là, en ronde, pendant des années.',
+      kind: 'bodily',
+      text: 'Ta paume droite porte une marque ronde, brûlée en creux, de la taille de l’anneau. Ce corps a posé la main sur le bronze, grande marée après grande marée.',
     },
     {
-      kind: 'material',
-      text: 'Sur l’anneau, entre les écailles vertes, des lettres presque effacées. Tu en reconnais une : celle que tu tenais en rêve, la première.',
+      kind: 'bodily',
+      text: 'Quand tu regardes la dalle, tes jambes veulent reculer. Ce corps a eu peur ici, une fois, plus fort que le devoir qui l’appelait.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton cœur bat à coups espacés, trop espacés. Sur cette grève ouverte au vent, il devrait cogner. Ce corps vit au ralenti, comme un coquillage.',
     },
     {
       kind: 'social',
-      text: 'Le vieux assis sur la pierre se retourne enfin. Il te regarde, puis il dit très bas : « Elle n’a pas fermé la porte. On l’a oubliée ouverte. »',
+      text: 'Le vieux assis sur la pierre se retourne enfin et te dit : « La porte n’a pas été refermée, l’an dernier. Quelqu’un devait descendre, et n’est pas descendu. »',
       revealsTruth: 'la-porte-est-ouverte',
     },
     {
       kind: 'social',
-      text: 'Le charretier, sur la dune, a levé son fouet sans frapper. Il regarde la mer, puis toi, puis le chapelet sur son genou.',
+      text: 'Un ramasseur qui remonte te salue en passant : « Bonsoir, Nolig. Tu descends, cette année ? » Il n’attend pas la réponse et file vers la dune.',
+      revealsTruth: 'ton-nom-est-nolig',
     },
     {
       kind: 'social',
-      text: 'Une femme, qui remonte avec son panier, murmure à son fils : « Ne le regarde pas. C’est celui qu’elles appellent, ce soir. »',
+      text: 'Une vieille, près des paniers, murmure à sa voisine : « Le cadet de Penhir a répondu aux cloches, l’an dernier. On n’a trouvé que ses sabots. »',
     },
     {
       kind: 'social',
-      text: 'Un enfant, en haut de la dune, agite la main dans ta direction. Il a un petit sachet de sel au cou. On le rappelle d’une voix sèche.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton cœur bat à coups espacés, trop espacés. Sur cette grève ouverte, il devrait cogner. Ce corps vit au ralenti, comme un coquillage.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton pouce trouve, dans ta paume, une brûlure ancienne en forme de croix. Le bronze d’un anneau l’a laissée, il y a bien longtemps.',
-    },
-    {
-      kind: 'material',
-      text: 'Un peu plus loin, un râteau est planté droit dans le sable, comme une borne. Au bout du manche, quelqu’un a noué un ruban de laine rouge.',
-    },
-    {
-      kind: 'material',
-      text: 'Dans une flaque, une pièce de monnaie très ancienne brille au fond. Elle porte un visage de femme, la bouche close, et une couronne de coquillages.',
+      text: 'Un enfant, en haut de la dune, porte un petit sachet de sel au cou, comme le tien. On le rappelle d’une voix sèche.',
     },
     {
       kind: 'social',
-      text: 'Un pêcheur, assis dans sa barque échouée, chante en breton une complainte. Le refrain revient sans cesse : « Ys, Ys, la porte est à moi. »',
-    },
-    {
-      kind: 'bodily',
-      text: 'Tes dents claquent sans que tu aies froid. Une peur très ancienne, qui n’est pas la tienne, remonte de tes jambes jusqu’à ta gorge.',
+      text: 'Un pêcheur, assis dans sa barque échouée, chante en breton : « Ys la belle, Ys la noire, qui répond n’en revient pas. »',
     },
   ],
 
@@ -353,19 +366,19 @@ export const premise07: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'Tu le comprends d’un seul coup. Dahut a laissé sa porte ouverte, et la clé, c’est ce sel que tu portes depuis toujours.',
+          text: 'Tu comprends d’un coup. La porte est restée entrouverte depuis l’an dernier, parce que ce corps n’est pas descendu la fermer.',
         },
         {
           speaker: 'npc',
-          text: 'Si tu refermes la porte avec ton sel, la ville dort. Si tu la laisses, elle remonte, et nous avec elle.',
+          text: 'Que fais-tu ? Ne touche pas à l’anneau. Dis-moi que tu ne vas pas répondre.',
         },
         {
           speaker: 'narration',
-          text: 'La mer est à vingt pas. Tu sens dans ta bouche le goût dur du sel, lourd comme une pièce, comme un serment.',
+          text: 'La mer est à vingt pas. Dans ta bouche, le sel est lourd comme une pièce, comme une promesse.',
         },
         {
           speaker: 'narration',
-          text: 'Si tu l’avales, tu es la clé. Si tu le jettes, la porte reste ouverte, et quelqu’un d’autre en paiera le prix.',
+          text: 'Si tu poses ce sel dans l’encoche, la porte se ferme. Si tu l’abandonnes, quelqu’un d’autre en paiera le prix.',
         },
       ],
     },
@@ -374,15 +387,15 @@ export const premise07: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Le sel sur ta langue se met à chanter, d’une note aiguë qui répond aux cloches sous la dalle. Tu sens qu’il va t’échapper.',
+          text: 'Le troisième coup sonne. Le sel sur ta langue se met à chanter, d’une note aiguë qui répond aux cloches sous la dalle.',
         },
         {
           speaker: 'narration',
-          text: 'Alors la dalle tremble. L’anneau de bronze se tourne seul, d’un quart de tour, vers ta bouche, comme une serrure vers sa clé.',
+          text: 'L’anneau de bronze se tourne seul d’un quart de tour, vers ta bouche, comme une serrure vers sa clé.',
         },
         {
           speaker: 'narration',
-          text: 'La mer, à vingt pas, retient son souffle. Tu n’as pas assez regardé pour savoir ce qu’elle fera si tu ouvres.',
+          text: 'La mer, à vingt pas, retient son souffle. Tu ne sais pas ce que la porte veut, mais ton sel, lui, le sait.',
         },
       ],
     },
@@ -391,15 +404,15 @@ export const premise07: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Le vieux est descendu de sa pierre. Il marche vers toi sur le sable, sans enfoncer le pied, avec un sac de toile dans la main.',
+          text: 'Le troisième coup sonne. Le vieux est descendu de sa pierre et marche vers toi sur le sable, sans enfoncer le pied.',
         },
         {
           speaker: 'npc',
-          text: 'Prends. C’est du sel de l’an dernier. Il ne vaut plus rien pour la mer, mais il vaut quelque chose pour la porte.',
+          text: 'Le sel se pose dans l’encoche de l’anneau, à main nue. Ensuite on ne se retourne pas. C’est tout ce que je sais.',
         },
         {
           speaker: 'narration',
-          text: 'Il repart sans attendre ta réponse. Au loin, la mer a recommencé à monter, d’un pas régulier, en comptant.',
+          text: 'Il repart sans attendre ta réponse. Au loin, la mer reprend sa montée, d’un pas régulier, comme si elle comptait.',
         },
       ],
     },
@@ -407,15 +420,15 @@ export const premise07: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Les flaques se rejoignent, et la grève n’est plus qu’une seule nappe noire, où les étoiles descendent une à une.',
+          text: 'Le troisième coup sonne. La dalle se soulève d’un doigt, et une lumière dorée glisse sous le sable.',
         },
         {
           speaker: 'narration',
-          text: 'Tu n’as pas assez regardé pour savoir pourquoi. Mais, sous tes pieds, la dalle s’est mise à battre au rythme de ton cœur.',
+          text: 'Sur l’anneau, à hauteur de pouce, une petite encoche t’attend. Ton sac de sel est chaud contre ta poitrine.',
         },
         {
           speaker: 'narration',
-          text: 'Au loin, la cloche sonne un coup, bas, qui monte de la mer. Il va être l’heure de répondre, et tu n’es pas prêt.',
+          text: 'Les flaques se rejoignent, la grève n’est plus qu’une nappe noire. Il faut décider, avant que la mer arrive.',
         },
       ],
     },
@@ -432,11 +445,11 @@ export const premise07: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'La personne a suivi le geste. Elle étouffe un cri. « Tu fais le signe. Celui du sel et de la porte. »',
+          text: 'La personne a suivi le geste. Elle étouffe un cri. « Le signe du sel. Je ne te l’ai pas vu faire depuis l’an dernier. »',
         },
         {
           speaker: 'npc',
-          text: 'Mon père le faisait, avant de mourir. Dis-moi que tu sais ce que tu fais. Dis-le, même si tu mens.',
+          text: 'Dis-moi que tu sais ce que tu fais. Dis-le, même si tu mens.',
         },
       ],
     },
@@ -446,7 +459,7 @@ export const premise07: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Ta main s’ouvre, tire sur ton sachet de toile, et prend le grain de sel entre deux doigts. Elle le porte à ta bouche, sans hésiter.',
+          text: 'Ta main s’ouvre, tire sur ton sac de toile et prend le grain de sel entre deux doigts. Elle le porte à ta bouche, sans hésiter.',
         },
         {
           speaker: 'narration',
@@ -463,21 +476,30 @@ export const premise07: Premise = {
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-13', 'fracture-14'],
 
+  // Qui était ce corps : la réponse que donne l'écran de fin, quelle que soit l'issue.
+  host: {
+    name: 'Nolig',
+    role: 'qui referme la porte d’Ys à chaque grande marée',
+    story:
+      'Nolig ramassait le goémon sur la grève et gardait un devoir transmis de bouche à oreille : poser un grain de sel sur la serrure d’Ys. L’an dernier, Nolig a eu peur et n’est pas descendu. Depuis, la porte est restée entrouverte.',
+    truth: 'ton-nom-est-nolig',
+  },
+
   // Beat 6 : résolution. Chaque issue est une histoire, aucune n'est un game over annoncé.
   resolutions: [
     {
       id: 'refermer-la-porte',
       requiresAny: ['le-sel-est-la-cle', 'la-porte-est-ouverte'],
       choiceText:
-        'Poser ton sel sur la serrure de bronze et refermer la porte d’Ys, avant que la mer ne revienne.',
+        'Poser ton sel dans l’encoche de l’anneau et refermer la porte d’Ys, avant que la mer ne revienne.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu t’agenouilles devant la dalle. Tu poses ton grain de sel dans l’encoche en forme de doigt, et tu dis tout bas : « Dors. »',
-        'L’anneau tourne d’un quart de tour. La dalle s’abaisse, avec le bruit d’une grande porte qu’on ferme à la main, sans colère.',
-        'Les cloches se taisent, une à une. La mer arrive, calme, sur un sable plat, et la grève redevient une grève.',
-        'Quand tu te retournes, tes pas laissent des traces. Elles s’enfoncent dans la vase, comme celles de tout le monde.',
-        'Le lendemain, le charretier t’attend, un pain à la main. Sur la dalle, un petit tas de sel brille, au soleil, et la mer l’a laissé.',
+        'Tu t’agenouilles devant la dalle. Tes doigts savent le geste : tu l’as fait vingt fois. Tu poses le grain dans l’encoche et tu dis : « Dors. »',
+        'L’anneau tourne d’un quart de tour. La dalle s’abaisse avec le bruit d’une grande porte qu’on ferme à la main, sans colère.',
+        'Les cloches se taisent, une à une. La mer arrive, calme, sur un sable plat. Tes pas laissent enfin des traces, comme ceux de tout le monde.',
+        'Tu es Nolig, celui ou celle qui referme la porte. Ce soir, la porte est refermée, et ce corps a retrouvé son devoir.',
+        'Sur la dalle, un petit tas de sel brille. Dessous, très bas, quelqu’un frappe un coup, un seul, comme on vérifie une serrure.',
       ].join('\n'),
       mutations: [
         {
@@ -485,7 +507,7 @@ export const premise07: Premise = {
           truth: {
             id: 'la-porte-dys-est-refermee',
             summary:
-              'Celui qui ramassait le goémon a refermé la porte d’Ys avec son sel, et les cloches se sont tues.',
+              'Nolig est descendu refermer la porte d’Ys avec son sel, et les cloches se sont tues.',
             leapId: '',
           },
         },
@@ -510,8 +532,9 @@ export const premise07: Premise = {
       resultText: [
         'Au troisième coup, tu réponds. Tu ne sais pas ce que tu dis. Ta bouche s’ouvre, et ce sont des mots que tu ne connais pas.',
         'La dalle se soulève. Une lueur dorée sort de la fente, avec une odeur de miel et de vin chaud, très ancienne.',
-        'Derrière toi, la personne crie ton nom, puis se tait. La mer est là, et elle est tiède comme un souffle.',
+        'Derrière toi, la personne crie : « Nolig ! » Puis elle se tait. La mer est là, tiède comme un souffle.',
         'Au matin, on retrouve ton panier sur le sable, plein d’un goémon blanc que personne n’a jamais vu pousser ici.',
+        'Dans la dalle, la porte est restée ouverte. Quelqu’un, en bas, a dit un mot de plus que toi.',
       ].join('\n'),
       mutations: [
         {
@@ -533,10 +556,10 @@ export const premise07: Premise = {
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu arraches le sachet de ton cou et tu le jettes de toutes tes forces. Il tourne dans l’air, très haut, et tombe dans la mer.',
+        'Tu arraches le sac de ta ceinture et tu le jettes de toutes tes forces. Il tourne dans l’air, très haut, et tombe dans la mer.',
         'Un grand silence suit. Puis, sous la dalle, les cloches reprennent, d’un seul coup, comme si on leur avait retiré une main de la gorge.',
-        'La mer se précipite sur la grève. Tu cours vers la dune, et tes pas, enfin, laissent des traces, qu’elle efface aussitôt.',
-        'Sur la route, le charretier t’a attendu. Il ne dit rien. Il te tend une couverture, puis il regarde longtemps l’eau monter.',
+        'Tu as jeté la seule clé. Plus personne ne pourra refermer la porte : elle restera entrouverte à chaque grande marée.',
+        'Tu cours vers la dune, et tes pas laissent des traces, que la mer efface aussitôt. Le charretier t’attend et ne dit rien.',
       ].join('\n'),
       mutations: [
         {
@@ -544,7 +567,7 @@ export const premise07: Premise = {
           scar: {
             id: 'sel-jete-a-la-mer',
             description:
-              'Un sachet de sel jeté à la mer, un soir de grande marée, et une porte qui n’a jamais été fermée.',
+              'Un sac de sel jeté à la mer, un soir de grande marée, et une porte qui ne pourra plus se fermer.',
             leapId: '',
             epoch: EPOCH,
           },
@@ -560,8 +583,8 @@ export const premise07: Premise = {
       resultText: [
         'Tu cours. Le sable colle, retient, mais tu ne ralentis pas. La chapelle est blanche, au bout de la dune, sans lumière.',
         'Tu tires la corde, de toutes tes forces. La petite cloche sonne, grêle, ridicule, et les cloches d’Ys, dessous, la couvrent.',
-        'Quand tu redescends, la grève est noire d’eau, et la personne a disparu. Il ne reste que ses sabots, rangés côte à côte.',
-        'Dans ta poche, tu trouves un petit morceau de bronze vert. Il est tiède, et il ne sonne pas.',
+        'Sur la grève, la personne est restée seule devant la dalle. Au troisième coup, elle crie : « Qui est là ? » Personne ne lui répond.',
+        'Quand tu redescends, il ne reste que ses sabots, rangés côte à côte, et un petit morceau de bronze vert dans ta poche, tiède.',
       ].join('\n'),
       mutations: [
         {
@@ -594,7 +617,8 @@ export const premise07: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Que ce corps n’a pas de traces, et que tu ne te souviens pas de l’avoir habité.',
         'Personne ne rit. Les cloches se taisent. Quelqu’un recule jusqu’au pied de la dune, puis plus loin, vers les lumières du bourg.',
         'Le vieux, sur sa pierre, hoche la tête, comme on le fait pour une chose que l’on savait depuis longtemps.',
-        'On te retire le sachet de sel. Un autre ramassera le goémon, quelqu’un qui sait ce qu’il porte, et ce que la mer lui demande.',
+        'On te retire le sac de sel. Un autre ramassera le goémon, quelqu’un qui sait ce qu’il porte, et ce que la mer lui demande.',
+        'Mais la porte, elle, ne sait pas qu’on a changé de gardien. Elle attend encore Nolig.',
       ].join('\n'),
       mutations: [],
     },
@@ -607,7 +631,7 @@ export const premise07: Premise = {
       resultText: [
         'Tu tires l’anneau. La dalle se soulève sans effort, et un escalier de pierre claire descend dans la lumière, tiède, dorée.',
         'Tu descends. Les marches sont sèches. Au bas, une rue, des toits, des fenêtres allumées, et des cloches qui sonnent à petits coups.',
-        'Des gens t’attendent, sans visage précis, avec des sourires de gens qui ont attendu longtemps. Ils disent ton nom, sans l’accent d’ici.',
+        'Des gens t’attendent, sans visage précis. Ils disent « Nolig », comme on appelle quelqu’un qu’on attend depuis un an.',
         'En haut, la dalle retombe. La mer passe dessus, tranquille. Sur le sable, il ne reste qu’un anneau vert et un grain de sel.',
       ].join('\n'),
       mutations: [

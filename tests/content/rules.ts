@@ -338,7 +338,9 @@ export function checkPremise(premise: Premise): Violation[] {
   if (!premise.host) {
     violations.push({ where: `${at}.host`, rule: 'identite', message: 'host manquant.' });
   } else {
-    const known = premise.investigation.some((c) => c.revealsTruth === premise.host?.truth);
+    const known = premise.investigation.some(
+      (c) => c.revealsTruth === premise.host?.truth,
+    );
     if (!known) {
       violations.push({
         where: `${at}.host.truth`,
@@ -347,7 +349,11 @@ export function checkPremise(premise: Premise): Violation[] {
       });
     }
     if (premise.host.story.length < 40 || premise.host.name.length < 2) {
-      violations.push({ where: `${at}.host`, rule: 'identite', message: 'Identité trop courte.' });
+      violations.push({
+        where: `${at}.host`,
+        rule: 'identite',
+        message: 'Identité trop courte.',
+      });
     }
   }
   // Le geste de la main révèle une vérité qui existe vraiment dans l'enquête.

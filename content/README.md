@@ -96,6 +96,12 @@ liste avec un commentaire qui justifie le choix.
 - `label` s'affiche sur l'accueil pendant la saison : « Ces jours-ci, c'est {label}. »
 - Saisons en place : Kalan Goañv (`premise-04`, 20 octobre au 10 novembre) et Nedeleg (`premise-05`, 1er décembre au 6 janvier). Chaque saison a deux fractures qui tournent autour du même objet.
 
+## Qui était ce corps
+
+- `Premise.host` : `{ name, role, story, truth }`. Obligatoire. Le joueur se demande qui il est : un choix `qui-es-tu` au dialogue (réponse partielle du personnage), une vérité d'enquête (`truth`) qui donne le nom, et l'écran de fin qui donne la réponse complète (`story`, 1 à 3 phrases sans « il » ni « elle »).
+- Chaque histoire commence par un commentaire de colonne vertébrale : qui demande quoi, ce qui est en jeu, le piège, ce que le joueur peut faire. Les indices d'une même nature sont lus d'un coup : écris-les pour qu'ils se lisent seuls.
+- Les fragments répondent chacun à une question sur le joueur et en ouvrent une autre (voir `fragments/index.ts`).
+
 ## Histoires hors saison
 
 - `premise-06`, « Le lavoir de minuit » : les lavandières de la nuit demandent d'aider à tordre un drap. On le tord à contre-main. Vérités : `sens-du-poignet` (corps), `drap-de-la-maison-du-bas` (social).

@@ -1,14 +1,25 @@
 import type { Premise } from './types';
 
 // Prémisse 6 : le lavoir de minuit. Une nuit de lessive au bord d'une lande de Basse-Bretagne.
-// L'hôte est celui qui est resté battre le linge trop tard : les lavandières de la nuit l'ont trouvé.
 // Inspirée de : la légende bretonne des Kannerezed-noz, qui demandent à un passant de les aider à tordre
 // un drap. Qui tord dans leur sens a les bras brisés ; qui tord à contre-sens les délivre.
+//
+// COLONNE VERTÉBRALE
+// - Qui demande quoi : les lavandières de la nuit demandent à qui passe de tordre l'autre bout d'un drap.
+// - Ce qui est en jeu : le drap est le linceul d'un mort de la maison du bas. Tant qu'il n'est pas
+//   essoré, ce mort ne dort pas. L'aube approche.
+// - Le piège : ton corps tord toujours du même côté, et c'est le sens des lavandières. Y céder, c'est
+//   perdre les bras.
+// - Ce que le joueur peut faire : tordre à contre-main, nommer le mort, briser les battoirs,
+//   avouer qu'il ne sait pas qui il est, ou entrer dans l'eau.
+// - Qui tu es : Mael, qui lavait le linge du bourg et celui des morts. Le nom est gravé sur le savon.
+//
 // Conventions : voir content/README.md.
 // - `npcId` est un emplacement (« 0 » ou « 1 »), pas un personnage : le texte ne dit donc ni « il »
 //   ni « elle » du personnage qui parle.
 // - Miroir : ton reflet dans l'eau noire du lavoir tient un drap que tu n'as pas dans les mains.
 // - Corps hérité : tes mains restent sèches dans l'eau, et ton poignet tourne toujours du même côté.
+// - Les indices sont regroupés par nature et s'affichent tous ensemble : aucun ne dépend d'un autre.
 
 const EPOCH =
   'un lavoir de lande en Basse-Bretagne, une nuit de grande lessive, au temps des battoirs';
@@ -18,14 +29,22 @@ export const premise06: Premise = {
   title: 'Le lavoir de minuit',
   epoch: EPOCH,
 
+  host: {
+    name: 'Mael',
+    role: 'la personne qui lavait le linge du bourg, jusqu’à celui des morts',
+    story:
+      'Tout le bourg l’appelait Main-sèche, parce que Mael sortait de l’eau sans mouiller ses manches. Tordre du même côté, toute une vie, avait usé les poignets. Cette nuit-là, au lavoir, Mael finissait un drap que personne n’avait apporté.',
+    truth: 'nom-sur-le-savon',
+  },
+
   // Beat 1 : l'eau, le froid, le bruit. Aucune information.
   wakeup: [
     'Le noir sent le savon de cendre, la pierre mouillée et la fougère écrasée. Une odeur de fer passe dessous, comme celle d’une vieille lame.',
     'Tu écoutes. De l’eau, tout près, qui coule dans un bassin et tombe d’une pierre à l’autre, sans hâte, sans arrêt.',
     'Sous le bruit de l’eau, un autre : des coups sourds, réguliers, d’un bois plat sur du linge mouillé. Ils s’arrêtent, puis reprennent.',
-    'Tu es agenouillé. Tu le sais aux genoux, enfoncés dans une planche trempée, et au dos plié depuis longtemps.',
+    'Tu es à genoux. Tu le sais aux rotules enfoncées dans une planche trempée, et au dos plié depuis longtemps.',
     'Tes bras sont dans l’eau jusqu’aux coudes. Elle est glacée. Et pourtant, quand tu les regardes, tes mains sont sèches.',
-    'Tu cherches ton nom. Tu trouves un mot à la place : le bruit d’un drap qu’on tord, long, grinçant, comme une porte.',
+    'Tu cherches ton nom. Il y avait un mot, là, au bord de ta bouche. Tu trouves à la place le bruit d’un drap qu’on tord, long, grinçant, comme une porte.',
     'Dans ta manche, un sachet de toile rêche, noué d’une ficelle, avec un grain de sel dedans. Tes doigts le serrent sans toi.',
     'Plus loin, sur la lande, un oiseau de nuit pousse un cri. Il se tait aussitôt, comme s’il avait vu quelque chose.',
     'Les coups de battoir se rapprochent. Un, puis deux, puis trois : ils prennent ton rythme, sans te demander ton avis.',
@@ -42,15 +61,15 @@ export const premise06: Premise = {
     },
     {
       kind: 'material',
-      text: 'Sur la corde, entre deux poteaux, des draps blancs pendent sans bouger. Aucun ne goutte. L’air est pourtant humide, et la lande, dehors, luit de rosée.',
+      text: 'Sur la corde, entre deux poteaux, des draps blancs pendent, secs malgré l’humidité. Dans le bassin, un autre drap, très long, est resté à tremper.',
     },
     {
       kind: 'material',
-      text: 'À tes pieds, un panier d’osier, à moitié plein de linge tordu. Dessus, un savon gris, usé en forme de cœur, et une cuillère de bois noircie.',
+      text: 'À tes pieds, un panier d’osier à moitié plein de linge tordu. Dessus, un savon gris usé en forme de cœur, et une cuillère de bois noircie.',
     },
     {
       kind: 'bodily',
-      text: 'Tu plonges les mains dans le bassin. L’eau est si froide qu’elle devrait mordre. Tes doigts en ressortent secs, et nets, comme sortis d’un four.',
+      text: 'Tu plonges les mains dans le bassin. L’eau est si froide qu’elle devrait mordre. Tes doigts en ressortent secs, comme sortis d’un four.',
     },
     {
       kind: 'bodily',
@@ -61,8 +80,12 @@ export const premise06: Premise = {
       text: 'Ton poignet droit tourne tout seul, vers l’extérieur, d’un petit geste d’habitude. Ce corps a tordu du linge toute sa vie, toujours dans le même sens.',
     },
     {
+      kind: 'bodily',
+      text: 'Tu cherches ton nom. Tes lèvres en forment le premier son, puis tout s’efface. Ce corps en a un, tu le sais, et il ne te le donne pas.',
+    },
+    {
       kind: 'social',
-      text: 'Une vieille, accroupie à l’autre bout, savonne un drap qui n’en finit pas. Elle ne lève pas la tête. Elle dit : « Tu es resté bien tard, toi. »',
+      text: 'Au fond du lavoir, une vieille, accroupie, savonne un drap qui n’en finit pas. Elle ne lève pas la tête. Elle dit : « Tu es encore là, à cette heure. »',
     },
     {
       kind: 'social',
@@ -80,19 +103,19 @@ export const premise06: Premise = {
     lines: [
       {
         speaker: 'narration',
-        text: 'Quelqu’un descend le sentier en courant à moitié, un panier de linge sur la hanche. Il s’arrête net à l’entrée du lavoir, hors d’haleine.',
+        text: 'Quelqu’un descend le sentier en courant à moitié, un panier de linge sur la hanche. La personne s’arrête net à l’entrée du lavoir, hors d’haleine.',
       },
       {
         speaker: 'npc',
-        text: 'Tu es encore là ? On t’a cherché toute la soirée. Ta mère a posé ton couvert, et l’a repris.',
+        text: 'Te voilà. On t’a cherché toute la soirée. Ta soupe est froide, et ta porte est restée ouverte.',
       },
       {
         speaker: 'narration',
-        text: 'La personne ne regarde pas les lavandières au fond. Elle regarde l’eau, puis tes mains sèches, puis l’eau de nouveau.',
+        text: 'La personne ne regarde pas les lavandières, au fond. Elle regarde l’eau noire, puis tes mains sèches, puis l’eau de nouveau.',
       },
       {
         speaker: 'npc',
-        text: 'Il est minuit passé. On ne lave pas à minuit. Tu le sais, tout le monde le sait. Ce n’est pas ton linge, là.',
+        text: 'Il est minuit passé. On ne lave pas à minuit. Et personne n’a apporté ce linge-là, je le sais, j’ai fait la tournée.',
       },
       {
         speaker: 'npc',
@@ -100,7 +123,7 @@ export const premise06: Premise = {
       },
       {
         speaker: 'narration',
-        text: 'Un drap claque derrière toi, sans vent. Les battoirs ont cessé. Le silence est tel qu’on entend couler l’eau d’une pierre à l’autre.',
+        text: 'Un drap claque derrière toi, sans vent. Les battoirs ont cessé. Le silence est tel qu’on entend l’eau couler d’une pierre à l’autre.',
       },
       {
         speaker: 'npc',
@@ -115,11 +138,11 @@ export const premise06: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'Alors laisse-le. Ne le tords pas. Pose-le dans le panier et marche.',
+            text: 'Alors laisse-le sur la dalle et marche. Ne le tords pas. Ne le touche plus.',
           },
           {
             speaker: 'narration',
-            text: 'La personne te tend la main, sans te regarder. Sa paume est mouillée de sueur. Elle regarde la lande.',
+            text: 'La personne te tend la main, sans te regarder. Sa paume est mouillée de sueur. Ses yeux restent sur la lande.',
           },
         ],
       },
@@ -130,11 +153,11 @@ export const premise06: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'De les aider. À tordre un drap, à deux, chacun un bout. Ce n’est pas grand-chose. C’est comme ça que ça commence.',
+            text: 'De les aider à tordre un drap, chacun un bout. Ce n’est pas grand-chose. C’est comme ça que ça commence.',
           },
           {
             speaker: 'npc',
-            text: 'Il y a un sens où ça se passe bien. Il y en a un autre. Ma grand-mère disait lequel. Je ne m’en souviens plus.',
+            text: 'Il y a un sens où ça se passe bien. Il y en a un autre, où l’on y laisse les bras. Ma grand-mère disait lequel. Je l’ai oublié.',
           },
           {
             speaker: 'narration',
@@ -145,38 +168,38 @@ export const premise06: Premise = {
       {
         id: 'avouer-que-tu-sais',
         kind: 'risky',
-        text: '« Elles m’ont déjà demandé. Je leur ai dit oui. »',
+        text: '« Elles m’ont déjà demandé. J’ai répondu que je verrais. »',
         reply: [
           {
             speaker: 'npc',
-            text: 'Tu as dit oui ? Et tu es encore là, avec tes deux bras ? Ce n’est pas possible.',
+            text: 'Tu leur as répondu ? À elles ? Et tu as encore tes deux bras ? Ce n’est pas possible.',
           },
           {
             speaker: 'narration',
-            text: 'La voix est devenue très basse. Elle a quitté l’inquiétude pour la peur nette, celle de quelqu’un qui recule d’un pas.',
+            text: 'La voix est devenue très basse. L’inquiétude a laissé la place à la peur nette, celle de quelqu’un qui recule d’un pas.',
           },
           {
             speaker: 'npc',
-            text: 'Ne le dis à personne. Pas au village, pas au recteur. Pas avant d’avoir compris pourquoi tu tiens debout.',
+            text: 'Ne le dis à personne. Pas au bourg, pas au recteur. Pas avant d’avoir compris pourquoi elles t’ont laissé la parole.',
           },
         ],
       },
       {
-        id: 'regarder-les-draps',
-        kind: 'neutral',
-        text: 'Ne rien dire et toucher un des draps, sur la corde.',
+        id: 'qui-es-tu',
+        kind: 'informative',
+        text: '« Dis-moi comment tu m’appelles. J’ai la tête vide, ce soir. »',
         reply: [
           {
-            speaker: 'narration',
-            text: 'Le tissu est lourd, glacé, d’une blancheur qui fait mal aux yeux. Au coin, une initiale est brodée, au fil rouge, à peine visible.',
+            speaker: 'npc',
+            text: 'La tête vide ? Là, devant elles ? Écoute-moi : au bourg, les gamins t’appellent Main-sèche.',
           },
           {
             speaker: 'npc',
-            text: 'Lâche-le. Ne regarde pas la lettre. On n’y reconnaît jamais personne, et puis on y reconnaît quelqu’un.',
+            text: 'Parce que tu sors de l’eau sans mouiller tes manches. Tu es celui ou celle qu’on prévient, quand un mort attend son linge.',
           },
           {
             speaker: 'narration',
-            text: 'Tu as eu le temps de la lire. Elle ressemble à la première lettre d’un nom que tu connais, sans savoir lequel.',
+            text: 'La personne jette un regard vers le fond du lavoir, puis se penche vers toi : « Ton vrai nom, je ne le dis pas ici. Elles écoutent. »',
           },
         ],
       },
@@ -191,15 +214,15 @@ export const premise06: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Elle vient. Elle vient pour toi, pas pour moi. Je n’ai rien dit. Je n’ai rien fait.',
+          text: 'Elle vient pour toi, pas pour moi. Je n’ai rien dit. Je n’ai rien fait.',
         },
         {
           speaker: 'narration',
-          text: 'La plus jeune, derrière, a repris son chant. Elle chante plus fort, comme pour couvrir un autre bruit, celui d’un os qui ne plie pas.',
+          text: 'La plus jeune, derrière, reprend son chant. Elle chante plus fort, comme pour couvrir le grincement du drap qu’on tord, là-bas.',
         },
         {
           speaker: 'narration',
-          text: 'Les battoirs se lèvent d’eux-mêmes sur le bord du bassin, un à un, et se tournent vers toi, d’un mouvement très lent.',
+          text: 'Les battoirs se lèvent d’eux-mêmes sur le bord du bassin, un à un, et se tournent vers toi d’un mouvement très lent.',
         },
         {
           speaker: 'npc',
@@ -210,11 +233,11 @@ export const premise06: Premise = {
         {
           id: 'rester-ensemble',
           kind: 'neutral',
-          text: '« Reste. À deux, il y aura deux paires de bras. »',
+          text: '« Reste. À deux, on tiendra jusqu’à l’aube. »',
           reply: [
             {
               speaker: 'npc',
-              text: 'Deux paires, c’est deux fois plus à perdre. Je reste quand même. Mais je ne tords rien.',
+              text: 'Je reste. Mais je ne touche à rien. Ni au drap, ni aux battoirs.',
             },
             {
               speaker: 'narration',
@@ -229,22 +252,18 @@ export const premise06: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'Ma grand-mère disait : celui qui tord comme elles ne reprend jamais ses bras. Il faut tordre contre elles.',
+              text: 'Ma grand-mère disait : celui qui tord comme elles ne reprend jamais ses bras. Il faut tordre contre leurs mains.',
             },
             {
               speaker: 'npc',
-              text: 'Mais contre qui ? Contre leurs mains, ou contre le fil ? Je ne sais plus. Il y en a un, et on le sent au poignet.',
-            },
-            {
-              speaker: 'narration',
-              text: 'Elle ajoute plus bas : « Ton poignet sait, peut-être. Il tourne toujours du même côté, depuis toujours. »',
+              text: 'Leur sens, c’est celui que fait tout le monde. Ton poignet tourne toujours de ce côté-là. Il faudra le forcer.',
             },
           ],
         },
         {
           id: 'refuser-net',
           kind: 'risky',
-          text: '« Non. Je ne tords rien pour elles. Laisse-moi passer. »',
+          text: '« Non. Je ne tords rien pour elles. Je pars. »',
           reply: [
             {
               speaker: 'npc',
@@ -263,15 +282,15 @@ export const premise06: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'À personne. À une vieille. À toutes les vieilles qui ont lavé trop tard dans ce lavoir.',
+              text: 'À personne. À toutes les vieilles qui ont lavé trop tard dans ce lavoir.',
             },
             {
               speaker: 'narration',
-              text: 'La personne a répondu trop vite. Elle regarde mieux, puis elle recule, la main sur la bouche, et ne dit plus rien.',
+              text: 'La personne a répondu trop vite. Elle regarde mieux, puis elle recule, la main sur la bouche.',
             },
             {
               speaker: 'npc',
-              text: 'C’est le drap, que je connais. Pas elle. Ce drap-là, on l’a cousu chez nous.',
+              text: 'C’est le drap que je connais, pas elle. Ce drap-là, on l’a cousu au bourg.',
             },
           ],
         },
@@ -279,30 +298,60 @@ export const premise06: Premise = {
     },
   },
 
-  // Beat 4 : enquête. Le poignet sait ; le drap a un nom.
+  // Beat 4 : enquête. Les indices d'une même nature s'affichent ensemble ; chacun se lit seul.
+  // Matière : le nom sur le savon. Corps : le sens du poignet. Autres : le drap de la maison du bas.
   investigation: [
     {
       kind: 'material',
-      text: 'Au fond du panier, sous le linge, une petite chose lourde et froide, enveloppée dans un lange. Ta main ne tremble pas en la touchant.',
+      text: 'Au fond du panier, sous le linge, un petit objet lourd et froid, enveloppé dans un lange. Ta main ne tremble pas en le touchant.',
       revealsArtifact: 'leap',
     },
     {
+      kind: 'material',
+      text: 'Le long drap du bassin traîne jusqu’au fond de la dalle. Il est tordu à moitié, en spirale serrée, et il tient seul, sans que personne le touche.',
+    },
+    {
+      kind: 'material',
+      text: 'Au dos du savon gris, quatre lettres sont gravées à la pointe d’un clou : MAEL. Le savon n’a servi qu’à ce nom, pendant des années.',
+      revealsTruth: 'nom-sur-le-savon',
+    },
+    {
+      kind: 'material',
+      text: 'Sur la dalle, des empreintes de mains mouillées, deux pas plus loin que toi. Les lavandières se tenaient là, de l’autre côté du drap.',
+    },
+    {
+      kind: 'material',
+      text: 'Un battoir est tombé à l’eau et il flotte à la surface, sans rien dessous. Le courant ne l’emporte pas. Il tourne sur lui-même.',
+    },
+    {
       kind: 'bodily',
-      text: 'Tu tords un coin de drap, pour voir. Ton poignet part vers l’extérieur, sans hésiter. Une douleur ancienne se réveille dans l’os, au même endroit, à chaque tour.',
+      text: 'Tu tords un coin de drap, pour voir. Ton poignet part vers l’extérieur, sans hésiter. Une douleur ancienne se réveille dans l’os, à chaque tour.',
       revealsTruth: 'sens-du-poignet',
     },
     {
-      kind: 'material',
-      text: 'Sur la dalle, des traces rondes, côte à côte, comme si quelqu’un avait tordu là un très long drap, tour après tour, pendant des années.',
+      kind: 'bodily',
+      text: 'Tes avant-bras sont marqués de petites brûlures rondes, des cendres de lessive. Ce corps a lavé toute sa vie, et pas que du linge ordinaire.',
     },
     {
-      kind: 'material',
-      text: 'Le savon gris, de près, porte un petit nom gravé dans la pâte. Trop usé pour être lu, mais assez pour sentir les lettres au pouce.',
+      kind: 'bodily',
+      text: 'Ton cœur bat à coups espacés, trop espacés. Dans cette eau glacée, il devrait cogner. Ce corps vit au ralenti, comme un galet au fond du bassin.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes lèvres répètent, sans voix, le refrain de la complainte. Ce corps connaît le chant des lavandières. Il l’a déjà entendu, bien des nuits.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tes dents claquent sans que tu aies froid. Une peur très ancienne, qui n’est pas la tienne, monte de tes bras jusqu’à ta gorge.',
     },
     {
       kind: 'social',
-      text: 'Un vieux, qui traverse la lande avec un sac de sel sur l’épaule, s’arrête loin du lavoir. Il murmure, assez fort pour que tu l’entendes : « C’est le drap de la maison du bas. »',
+      text: 'Un vieux, qui traverse la lande avec un sac de sel sur l’épaule, s’arrête loin du lavoir. Il dit, assez fort : « C’est le drap de la maison du bas. »',
       revealsTruth: 'drap-de-la-maison-du-bas',
+    },
+    {
+      kind: 'social',
+      text: 'Une voisine, de l’autre côté du muret, te glisse : « C’est toi qui laves nos morts, quand personne n’ose. Ne reste pas ici cette nuit. »',
     },
     {
       kind: 'social',
@@ -314,31 +363,7 @@ export const premise06: Premise = {
     },
     {
       kind: 'social',
-      text: 'Un enfant a posé ses sabots dans l’herbe, à l’entrée, rangés comme pour dormir. Une main les a repris avant que tu approches.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton cœur bat à coups espacés, trop espacés. Dans cette eau glacée, il devrait cogner. Ce corps vit au ralenti, comme un galet au fond du bassin.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton pouce trouve, dans ta paume, une brûlure en forme de croix. Une braise de la veillée l’a faite, un soir de grande lessive.',
-    },
-    {
-      kind: 'material',
-      text: 'Près du bassin, un battoir est tombé à l’eau, et il flotte à la surface sans rien dessous. Le courant ne l’emporte pas. Il tourne sur lui-même.',
-    },
-    {
-      kind: 'material',
-      text: 'Sur la corde, un drap est plus court que les autres, comme si on en avait coupé un coin. Dessous, par terre, un ciseau d’argent est resté ouvert.',
-    },
-    {
-      kind: 'social',
       text: 'La vieille chante en breton, tout bas. Un mot revient, que tu connais : « nom ». Elle te sourit chaque fois qu’elle le dit.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Tes dents claquent sans que tu aies froid. Une peur très ancienne, qui n’est pas la tienne, remonte de tes bras jusqu’à ta gorge.',
     },
   ],
 
@@ -357,7 +382,7 @@ export const premise06: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Tords avec moi. Dans le sens du fil, et vite. Tu es du village. Tu connais le chemin.',
+          text: 'Tords avec moi. Dans le sens du fil, et vite. Tu es du bourg. Tu connais le geste.',
         },
         {
           speaker: 'narration',
@@ -365,7 +390,7 @@ export const premise06: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'Tu serres la ficelle du sachet de sel. Il faut tordre contre elle, contre le fil, et contre ton propre corps.',
+          text: 'Tu serres la ficelle du sachet de sel. Il faut tordre contre elles, contre le fil, et contre ton propre corps.',
         },
       ],
     },
@@ -374,15 +399,15 @@ export const premise06: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Ton poignet se tend vers le drap avant que la vieille ne l’offre. Il connaît ce geste, il a tordu cent fois ce linge-là, dans ce sens-là.',
+          text: 'Ton poignet se tend vers le drap avant que la vieille ne l’offre. Il connaît ce geste. Il l’a fait cent fois, dans ce sens-là.',
         },
         {
           speaker: 'narration',
-          text: 'La vieille tend le drap. Il est lourd de quelqu’un. Tu ne sais pas qui. Tu sais une chose : il faut tordre à contre-main.',
+          text: 'La vieille tend le drap. Il est lourd de quelqu’un. Tu ne sais pas qui. Tu sais une chose : si tu tords comme ton poignet, tu perds les bras.',
         },
         {
           speaker: 'narration',
-          text: 'Les battoirs se mettent à frapper, tous ensemble. Le rythme monte, comme si l’eau elle-même attendait.',
+          text: 'Les battoirs se mettent à frapper, tous ensemble. Le rythme monte, comme si l’eau elle-même attendait ta réponse.',
         },
       ],
     },
@@ -391,15 +416,32 @@ export const premise06: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Le vieux au sac de sel est revenu jusqu’au muret, sans entrer. Il te jette un nom par-dessus la pierre, très vite, comme un caillou.',
+          text: 'Le vieux au sac de sel est revenu jusqu’au muret, sans entrer. Il te jette par-dessus la pierre ce qu’il sait, très vite, comme un caillou.',
         },
         {
           speaker: 'npc',
-          text: 'C’est elle, au bas du chemin. Elle est partie ce soir. Elles lavent son drap avant l’aube. Sinon elle ne dort pas.',
+          text: 'Elle est partie ce soir, au bas du chemin. Les lavandières lavent son drap avant l’aube. Tant qu’il n’est pas essoré, elle ne dort pas.',
         },
         {
           speaker: 'narration',
-          text: 'Il s’éloigne en courant à moitié. Dans la maison du bas, une lampe vient de s’allumer, puis de s’éteindre.',
+          text: 'Il s’éloigne en courant à moitié. Dans la maison du bas, une lampe s’allume, puis s’éteint.',
+        },
+      ],
+    },
+    {
+      requires: ['nom-sur-le-savon'],
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'La vieille lève les yeux vers toi, et pour la première fois elle prononce ton nom, celui du savon : « Mael. »',
+        },
+        {
+          speaker: 'npc',
+          text: 'Mael, tu as lavé pour tout le bourg, trente ans. Les vivants, les morts. Tu connais le drap. Prends l’autre bout.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Elle dit ton nom avec tendresse, sans haine. C’est ce qui te fait peur : elle te connaît, et elle attend depuis longtemps.',
         },
       ],
     },
@@ -410,12 +452,12 @@ export const premise06: Premise = {
           text: 'Le bassin se met à bouillonner, sans feu. Les draps de la corde se gonflent, comme si quelqu’un respirait dedans.',
         },
         {
-          speaker: 'narration',
-          text: 'Tu n’as pas assez regardé pour savoir pourquoi. Mais la vieille est à un pas de toi, le drap tendu, et ses doigts sont d’eau.',
+          speaker: 'npc',
+          text: 'Prends ce bout. Tords, et vite : le coq chantera bientôt. Tant que le drap n’est pas essoré, celui qu’il enveloppe ne dort pas.',
         },
         {
           speaker: 'narration',
-          text: 'Dehors, le coq chante une fois, trop tôt, et se tait. Il va être l’heure de décider, et tu n’es pas prêt.',
+          text: 'La vieille est à un pas de toi, le drap tendu. Ses doigts sont d’eau. Dehors, le coq chante une fois, trop tôt, et se tait.',
         },
       ],
     },
@@ -432,7 +474,7 @@ export const premise06: Premise = {
         },
         {
           speaker: 'npc',
-          text: '« Du sel ? Pour moi ? » Elle le prend. Elle le pose sur sa langue, et quelque chose, dans son visage, se desserre.',
+          text: '« Du sel ? Pour moi ? » La personne le prend. Elle le pose sur sa langue, et quelque chose, dans son visage, se desserre.',
         },
         {
           speaker: 'narration',
@@ -446,11 +488,11 @@ export const premise06: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Ta main saisit un coin de drap et le tord, sans toi. Elle tourne vers l’extérieur, d’un coup sec, avec l’aisance de mille lessives.',
+          text: 'Ta main saisit un coin du drap et le tord, sans toi. Elle tourne vers l’extérieur, d’un coup sec, avec l’aisance de mille lessives.',
         },
         {
           speaker: 'narration',
-          text: 'Une douleur te traverse l’os, très nette, du même côté qu’hier. Ce corps a déjà tordu ce linge-là, dans ce sens-là.',
+          text: 'Une douleur te traverse l’os, très nette. Ce corps a déjà tordu ce linge-là, dans ce sens-là, bien des fois.',
         },
         {
           speaker: 'narration',
@@ -467,17 +509,17 @@ export const premise06: Premise = {
   resolutions: [
     {
       id: 'tordre-a-contre-main',
-      requiresAny: ['sens-du-poignet', 'drap-de-la-maison-du-bas'],
+      requiresAny: ['sens-du-poignet', 'drap-de-la-maison-du-bas', 'nom-sur-le-savon'],
       choiceText:
-        'Prendre le bout du drap et le tordre à contre-main, contre le sens de ton poignet et celui des lavandières.',
+        'Prendre le bout du drap et le tordre à contre-main, contre ton poignet et contre les mains des lavandières.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu prends le bout du drap. Ton poignet veut partir vers l’extérieur. Tu le forces, à rebours, d’un tour lent et douloureux.',
+        'Tu prends le bout du drap. Ton poignet veut partir vers l’extérieur, comme depuis toujours. Tu le forces, à rebours, d’un tour lent et douloureux.',
         'Le drap grince. Les mains d’eau de la vieille se tendent, puis se défont. Elle te regarde, et pour la première fois, ses yeux ont une couleur.',
-        'Elle dit un seul mot, en breton, que tu comprends : « Merci. » Elle se dissout dans le bassin, avec le linge, avec les battoirs.',
-        'Quand le coq chante, tes bras sont entiers. Tes mains sont mouillées, enfin, comme celles de tout le monde. Elles fument dans l’air.',
-        'Au matin, quelqu’un a laissé un grain de sel sur le bord du lavoir. Le drap de la maison du bas sèche, blanc, sur la corde.',
+        'Elle dit un mot, en breton, que tu comprends : « Merci, Mael. » Puis elle se dissout dans le bassin, avec le linge et les battoirs.',
+        'Quand le coq chante, tes bras sont entiers. Tes mains sont mouillées, enfin, comme celles de tout le monde. Au bas du chemin, une lampe s’éteint pour de bon.',
+        'Sur la corde, un petit drap goutte, à ta taille. Personne ne l’y a pendu.',
       ].join('\n'),
       mutations: [
         {
@@ -504,14 +546,14 @@ export const premise06: Premise = {
     {
       id: 'tordre-dans-leur-sens',
       choiceText:
-        'Prendre le bout du drap et le tordre comme elles, vite, pour en finir avant l’aube.',
+        'Prendre le bout du drap et le tordre comme elles, d’un geste vif, pour en finir avant l’aube.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
         'Tu prends le drap, et ton poignet part d’un coup, sûr de lui, dans le sens de toutes les lessives. Tout va si vite.',
         'Quelque chose craque dans ton bras. Puis dans l’autre. Tu n’as pas mal, pas encore : tu entends le bruit.',
         'Les lavandières reprennent leurs battoirs. La vieille te regarde, désolée, comme on regarde un linge qu’on n’a pas pu sauver.',
-        'Au matin, on te retrouve au bord du lavoir, les bras de travers. Tu dis que tu ne te souviens de rien. Personne ne s’étonne.',
+        'Au matin, on te retrouve au bord du lavoir, les bras de travers. Le drap est essoré, mais plus personne ne te confiera de linge.',
       ].join('\n'),
       mutations: [
         {
@@ -530,13 +572,14 @@ export const premise06: Premise = {
       id: 'nommer-le-drap',
       requiresAny: ['drap-de-la-maison-du-bas'],
       choiceText:
-        'Dire à voix haute le nom de la maison du bas, et à qui appartient le drap.',
+        'Dire à voix haute, au-dessus du bassin, à qui appartient le drap : à la maison du bas.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu dis le nom, de toute ta voix, au-dessus du bassin. Les lavandières se figent, les mains dans l’eau.',
-        'Sur le chemin de la lande, un volet claque. Quelqu’un a entendu. Quelqu’un a compris, et quelqu’un se met à pleurer.',
-        'Le drap tombe, d’un coup, sur la dalle, comme un oiseau qu’on a touché. Il ne bouge plus. La vieille s’éloigne sans te regarder.',
+        'Tu cries le nom de la maison du bas, de toute ta voix, au-dessus du bassin. Les lavandières se figent, les mains dans l’eau.',
+        'Sur le chemin de la lande, un volet claque. Quelqu’un a entendu, et quelqu’un se met à pleurer.',
+        'Le drap tombe d’un coup sur la dalle, comme un oiseau touché. La vieille s’éloigne sans te regarder. Il n’est pas essoré.',
+        'Dans la maison du bas, on a appris la mort par une voix inconnue, avant l’aube. On te cherchera longtemps pour savoir qui tu étais.',
       ].join('\n'),
       mutations: [
         {
@@ -593,8 +636,8 @@ export const premise06: Premise = {
       resultText: [
         'Tu dis que tu ne sais pas qui tu es. Que ce corps ne se mouille pas, et que tu ne te souviens pas de l’avoir habité.',
         'Personne ne rit. Les battoirs se taisent. Quelqu’un recule jusqu’au bord de la lande, puis plus loin, vers les lumières du bourg.',
-        'La vieille pose son drap et te regarde enfin. Elle dit : « Alors tu n’es pas d’ici. Tu n’es pas à nous non plus. »',
-        'On te retire le sachet de sel. Un autre viendra laver, un soir, quelqu’un qui sait ce qu’il fait et ce qu’il risque.',
+        'La vieille pose son drap et te regarde enfin. Elle dit : « Alors tu n’es pas Mael. Tu tiens sa place, et tu n’es pas à nous non plus. »',
+        'On te retire le sachet de sel. Un autre viendra laver, un soir, quelqu’un qui sait ce qu’il risque. Et toi, tu portes encore la place de Mael.',
       ].join('\n'),
       mutations: [],
     },
@@ -607,7 +650,7 @@ export const premise06: Premise = {
         'Tu descends les marches du bassin. L’eau monte aux genoux, puis à la taille. Elle n’est pas froide. Elle n’est rien du tout.',
         'Tu marches. Le fond ne se rapproche pas. Au-dessus de toi, les lavandières chantent leur complainte, de plus en plus loin.',
         'Quand tu comprends que ce lavoir n’a pas de fond, tu ne vois plus le ciel. Tu n’entends plus les battoirs, ni ton cœur.',
-        'Sur la dalle, tes sabots restent côte à côte, rangés comme pour dormir. Quelqu’un les a posés bien droits.',
+        'Sur la dalle, tes sabots restent côte à côte, rangés comme pour dormir. Au matin, le bourg cherchera qui lavera ses morts.',
       ].join('\n'),
       mutations: [
         {

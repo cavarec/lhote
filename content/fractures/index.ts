@@ -7,114 +7,114 @@ import type { Fracture } from './types';
 export const fractures: readonly Fracture[] = [
   {
     id: 'fracture-01',
-    title: 'Ce n’est pas l’enfant que la mer devait rendre',
+    title: 'Le corps n’est pas celui du petit',
     interpretations: [
-      'L’enfant vit encore quelque part. Il faut le dire à la mère et reprendre les recherches.',
-      'L’enfant est mort lui aussi. Il faut laisser la mère pleurer ce corps, puisque la mer ne rendra pas l’autre.',
+      'Le petit vit encore : dis-le à la mère et reprends les recherches.',
+      'Le petit est mort aussi : laisse la mère pleurer, la mer ne le rendra pas.',
     ],
   },
   {
     id: 'fracture-02',
-    title: 'Quelqu’un a reconnu le corps',
+    title: 'Les hommes veulent l’enterrer sous le nom du petit',
     interpretations: [
-      'Quelqu’un au village sait depuis des années à qui appartient ce corps, et il s’est tu. Il faut le faire parler.',
-      'Quelqu’un veut qu’on croie à l’enfant noyé, pour que cesse la recherche. Il faut laisser la vérité venir seule.',
+      'Quelqu’un sait depuis vingt ans à qui est ce corps et s’est tu : fais-le parler.',
+      'Quelqu’un veut qu’on croie au petit noyé pour que cessent les recherches : laisse la vérité venir seule.',
     ],
   },
   {
     id: 'fracture-03',
-    title: 'La chasse est vide',
+    title: 'La chasse ne contient plus de relique',
     interpretations: [
-      'Le recteur a vidé la chasse lui-même, parce qu’il ne croit plus à ce qu’elle contenait. Il faut l’avouer à tous.',
-      'Quelqu’un a vidé la chasse dans la nuit, pour que la procession tourne mal. Il faut laisser la foi faire son œuvre.',
+      'Le saint n’est plus là depuis la crue. Il faut le dire à tous.',
+      'Le saint est parti pour une autre raison. Il faut laisser la foule croire.',
     ],
   },
   {
     id: 'fracture-04',
-    title: 'Une lettre dormait dans la chasse',
+    title: 'Un aveu dort dans la chasse',
     interpretations: [
-      'Un fidèle y a laissé un aveu écrit, et le recteur n’ose pas le rendre. Il faut le lire devant tous.',
-      'Le recteur a écrit cette lettre lui-même, pour se forcer à dire la vérité. Il faut la garder, et se taire encore.',
+      'Cet aveu est celui du recteur. Il faut le lire devant tous.',
+      'Cet aveu est trop lourd pour la foule. Il faut le garder caché.',
     ],
   },
   {
     id: 'fracture-05',
-    title: 'Le conteur lit dans un carnet qui n’est pas le sien',
+    title: 'Le conteur lit dans un carnet écrit de ta main',
     interpretations: [
-      'Le garde a donné sa vie au conteur, mot après mot, il y a longtemps. Il faut le laisser dire la suite.',
-      'Quelqu’un a écrit la vie du garde pour le piéger devant tous. Il faut arrêter l’histoire avant sa fin.',
+      'Tu lui as confié ton histoire toi-même : laisse-le la dire.',
+      'Quelqu’un a pris ton histoire pour te piéger devant tous : fais-la taire avant la fin.',
     ],
   },
   {
     id: 'fracture-06',
-    title: 'L’histoire s’arrête avant sa fin',
+    title: 'L’histoire s’arrête juste avant la fin',
     interpretations: [
-      'Le conteur connaît la fin et attend que le garde la dise lui-même. Il faut la dire.',
-      'Le conteur ne connaît pas la fin et attend que le garde la lui donne. Il faut lui laisser croire qu’elle n’existe pas.',
+      'Le conteur attend que tu dises la fin : dis-la.',
+      'Le conteur ne connaît pas la fin : ne la lui donne pas.',
     ],
   },
   {
     id: 'fracture-07',
-    title: 'Un couvert de trop est dressé au bout de la table',
+    title: 'Un treizième couvert est dressé, et son bol est vide',
     interpretations: [
-      'Un mort venu trop tôt réclame sa place. Il faut le servir et dire son nom.',
-      'Un vivant joue aux morts pour entrer dans la maison. Il faut fermer la porte et le démasquer.',
+      'L’enfant sans nom est venu avant l’heure. Il faut le servir et dire son nom.',
+      'Quelqu’un de la maison a dressé ce couvert pour faire parler les morts. Il faut tout débarrasser et se taire.',
     ],
   },
   {
     id: 'fracture-08',
-    title: 'La lanterne de navet brûle avant l’heure',
+    title: 'La lanterne de navet brûle avant minuit',
     interpretations: [
-      'Quelqu’un attend au carrefour qu’on vienne le chercher. Il faut y aller avec de la lumière.',
-      'Quelqu’un laisse ce feu pour attirer la maison hors de ses murs. Il faut laisser la lanterne s’éteindre.',
+      'L’enfant attend au carrefour qu’on vienne le chercher. Il faut y aller avec de la lumière.',
+      'Quelqu’un a allumé ce feu pour faire sortir la maison de ses murs. Il faut le laisser s’éteindre.',
     ],
   },
   {
     id: 'fracture-09',
     title: 'Le grand bœuf a parlé avant minuit',
     interpretations: [
-      'La bête a donné un nom trop tôt, et la mort est déjà en route. Il faut le dire à la maison, pour qu’elle se prépare.',
-      'La bête n’a rien dit : quelqu’un lui a prêté sa voix pour semer la peur. Il faut se taire.',
+      'La bête a donné un nom trop tôt, la mort est déjà en route. Il faut l’écouter jusqu’au bout.',
+      'Quelqu’un a prêté sa voix à la bête pour faire peur. Il faut rester près d’elle et lui répondre.',
     ],
   },
   {
     id: 'fracture-10',
     title: 'La cloche de minuit n’a pas sonné',
     interpretations: [
-      'Les morts retiennent la cloche, et la nuit ne finira pas. Il faut la sonner soi-même.',
-      'Le sonneur se tait parce qu’il a peur de ce qu’elle annonce. Il faut le laisser se taire.',
+      'Les morts retiennent la cloche. Rien ne finira avant qu’on réponde aux bêtes.',
+      'Le sonneur se tait, il a peur de ce que la bête annonce. Il faut l’affronter à sa place.',
     ],
   },
   {
     id: 'fracture-11',
-    title: 'Un drap sort de l’eau sans que personne ne l’y ait plongé',
+    title: 'Le drap du bassin n’a été apporté par personne',
     interpretations: [
-      'Les lavandières ont lavé le linceul d’une maison du village, et il manque une paire de bras pour le tordre. Il faut les aider, à contre-main.',
-      'Quelqu’un a jeté ce drap pour t’attirer dans le bassin. Il faut le laisser flotter, et n’y toucher sous aucun prétexte.',
+      'Les lavandières lavent le linceul d’un mort du bourg et il leur faut tes bras pour l’essorer. Aide-les, à contre-main.',
+      'Ce drap est un appât pour t’attirer dans leur nuit. N’y touche pas comme elles.',
     ],
   },
   {
     id: 'fracture-12',
-    title: 'Le battoir frappe sans bras',
+    title: 'Les battoirs frappent sans mains',
     interpretations: [
-      'Les lavandières attendent qu’on leur réponde, et elles ne partiront pas avant. Il faut leur répondre en breton, à voix basse.',
-      'Le battoir est un signal pour la maison du bas, où quelqu’un attend d’être pleuré. Il faut le briser avant qu’on l’entende.',
+      'Les lavandières attendent une réponse et ne partiront pas sans elle. Réponds-leur, à voix basse.',
+      'Ce bruit prévient la maison du bas qu’un deuil approche. Fais-le cesser avant qu’on l’entende.',
     ],
   },
   {
     id: 'fracture-13',
-    title: 'La cloche sonne sous la grève',
+    title: 'Les cloches d’Ys sonnent à la grande marée',
     interpretations: [
-      'Ys remonte, et la ville demande qu’on lui ouvre sa porte avant l’aube. Il faut l’ouvrir, avec ton sel.',
-      'Ys a laissé sa porte entrouverte, et ses cloches appellent qui voudra l’entendre. Il faut la refermer, avec ton sel.',
+      'La ville demande qu’on lui ouvre sa porte avant l’aube. Il faut répondre au troisième coup.',
+      'La porte est restée entrouverte, et les cloches appellent qui veut. Il faut la refermer avec du sel.',
     ],
   },
   {
     id: 'fracture-14',
-    title: 'Une dalle sans trace dans le sable',
+    title: 'Personne n’est descendu refermer la porte',
     interpretations: [
-      'Quelqu’un a effacé ses pas pour ne pas être suivi jusqu’à la porte. Il faut retrouver ce chemin, et y descendre.',
-      'La porte a rejeté ses visiteurs, un à un, sans jamais les laisser entrer. Il faut cesser de la forcer, et la laisser dormir.',
+      'Quelqu’un a oublié son devoir. Il faut le reprendre à sa place.',
+      'La porte ne veut plus se fermer. Il faut la laisser dormir ouverte, et partir.',
     ],
   },
 ];

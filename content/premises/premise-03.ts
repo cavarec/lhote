@@ -490,7 +490,7 @@ export const premise03: Premise = {
       fractureRepaired: true,
       resultText: [
         'Tu te lèves. Tes lèvres disent les mots avant que ta tête les cherche. Le conteur les dit avec toi, à la même seconde.',
-        'La fin est simple et terrible : le garde est revenu avant l’aube, mais trop tard. L’aubépine était vide, et il garde la forêt depuis, pour que personne n’oublie.',
+        'La fin est simple et terrible : le garde est revenu à l’aube, mais trop tard. L’aubépine était vide, et il garde la forêt depuis, pour que personne n’oublie.',
         'Personne n’applaudit. Un vieux jette une branche dans le feu. Pour la première fois de la nuit, quelqu’un dit ton nom : Maï.',
         'Le conteur ferme le carnet. Il dit : « Maintenant, elle est à toi. » Tu ne sais pas ce que cela veut dire. Tu sais que c’est vrai.',
         'Sous l’aubépine, la lueur verte s’éteint. Ton oreille gauche s’ouvre une seconde, et très loin, quelqu’un prononce un autre nom que le tien.',

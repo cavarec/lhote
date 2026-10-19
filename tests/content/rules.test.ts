@@ -161,6 +161,23 @@ describe('prémisses', () => {
   function premise(overrides: Partial<Premise> = {}): Premise {
     return {
       ...makePremise('premise-01', ['f1', 'f2']),
+      openingDialogue: {
+        npcId: '0',
+        lines: [],
+        choices: [
+          { id: 'a', kind: 'neutral', text: 'Rien.', reply: [] },
+          { id: 'qui-es-tu', kind: 'informative', text: 'Qui suis-je ?', reply: [] },
+          { id: 'c', kind: 'risky', text: 'Tout dire.', reply: [] },
+        ],
+      },
+      investigation: [{ kind: 'social', text: 'Un nom.', revealsTruth: 't0' }],
+      host: {
+        name: 'Gwenn',
+        role: 'gardien des barques',
+        story:
+          'Gwenn gardait les barques du village et cachait un secret depuis dix ans.',
+        truth: 't0',
+      },
       orientation: [
         { kind: 'material', text: 'Un seau.' },
         { kind: 'bodily', text: 'Une cicatrice.' },
@@ -254,7 +271,10 @@ describe('prémisses', () => {
       openingDialogue: {
         npcId: '0',
         lines: [],
-        choices: [{ id: 'a', kind: 'neutral', text: 'x', reply: [] }],
+        choices: [
+          { id: 'a', kind: 'neutral', text: 'x', reply: [] },
+          { id: 'qui-es-tu', kind: 'informative', text: 'y', reply: [] },
+        ],
       },
     });
     expect(checkPremise(bad).every((v) => v.rule === 'choix')).toBe(true);

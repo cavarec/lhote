@@ -183,7 +183,7 @@ export const premise01: Premise = {
       {
         id: 'qui-es-tu',
         kind: 'informative',
-        text: '« Dis-moi une chose, simplement : qui suis-je, pour le village ? »',
+        text: '« Dis-moi une chose : qui suis-je, pour le village ? »',
         reply: [
           {
             speaker: 'npc',
@@ -387,15 +387,15 @@ export const premise01: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'La vieille est là, à ton coude. Elle n’a pas bougé et pourtant elle est là. Elle prononce le nom une deuxième fois.',
+          text: 'La vieille est là, à ton coude. Elle n’a pas bougé et pourtant elle est là. Elle prononce le nom une deuxième fois : Jakez.',
         },
         {
           speaker: 'npc',
-          text: 'Celui-là a quitté le village il y a longtemps, sur une nuit sans lune. Il devait revenir. On a juré qu’on ne le dirait pas.',
+          text: 'Il est parti il y a vingt hivers, une nuit sans lune. Les hommes sont rentrés sans lui. Ils ont juré de ne pas dire pourquoi.',
         },
         {
           speaker: 'narration',
-          text: 'Sur la table, le poing fermé du mort s’est ouvert tout seul. Dans la paume, il y a un morceau de peigne d’os. Il manque deux dents au tien.',
+          text: 'Sur la table, le poing fermé du mort s’est ouvert tout seul. Dans la paume, il y a un morceau de peigne d’os. Il complète le tien.',
         },
         {
           speaker: 'narration',
@@ -416,7 +416,7 @@ export const premise01: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'La mère frappe à la porte. « Ouvrez. Je sais que c’est lui. » Sa voix n’a plus d’espoir. Elle a de l’entêtement, ce qui est pire.',
+          text: 'La mère frappe à la porte. « Ouvre. Je sais que c’est lui. » Sa voix n’a plus d’espoir. Elle a de l’entêtement, ce qui est pire.',
         },
       ],
     },
@@ -429,7 +429,7 @@ export const premise01: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Ne le redis pas ici. Le sable a des oreilles. Il y a des hommes qui ont creusé pour que ce nom reste en dessous.',
+          text: 'Ne le redis pas ici. Le sable a des oreilles. Il y a des hommes qui ont juré que ce nom resterait en dessous.',
         },
         {
           speaker: 'narration',
@@ -441,15 +441,15 @@ export const premise01: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Tu n’as pas fini de regarder quand la porte s’ouvre. La mère entre sans attendre, suivie du froid de la grève et de deux hommes.',
+          text: 'Tu n’as rien trouvé de sûr quand la porte s’ouvre. La mère entre sans attendre, suivie du froid de la grève et de deux hommes.',
         },
         {
           speaker: 'narration',
-          text: 'Elle s’arrête devant la table. Ses yeux passent sur le drap, puis sur toi. Elle dit, très bas : « Tu sais déjà, toi. »',
+          text: 'Elle s’arrête devant la table. Ses yeux passent sur le drap, puis sur toi. Elle dit, très bas : « Toi, tu sais déjà. »',
         },
         {
           speaker: 'narration',
-          text: 'Tu ne sais pas encore. Mais tu as l’impression que tout le monde, ici, a pris de l’avance sur toi.',
+          text: 'Tout le monde, dans la pièce, te regarde comme on regarde quelqu’un qui doit parler. Personne ne dit ce qu’il attend de toi.',
         },
       ],
     },
@@ -470,7 +470,7 @@ export const premise01: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'Elle respire plus bas. Tu n’as rien dit, et tout le monde a cru que tu savais.',
+          text: 'Elle sort guetter la famille, plus calme. Tu n’as rien dit, et tout le monde a cru que tu savais.',
         },
       ],
     },
@@ -494,6 +494,15 @@ export const premise01: Premise = {
     },
   },
 
+  // Qui était ce corps : la réponse de l'écran de fin, quelle que soit l'issue.
+  host: {
+    name: 'Gwenn',
+    role: 'celui ou celle qui lave les noyés du village',
+    story:
+      'Gwenn lave les noyés depuis la nuit, il y a vingt hivers, où Jakez, de même sang, n’est pas rentré de la mer. Gwenn a juré aux hommes de se taire sur cette nuit, et a gardé le nœud de leur promesse au cou. Ce matin, la mer a rendu Jakez.',
+    truth: 'nom-du-corps',
+  },
+
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-01', 'fracture-02'],
 
@@ -507,10 +516,10 @@ export const premise01: Premise = {
       fractureRepaired: true,
       resultText: [
         'Tu ouvres la porte. La mère entre sans bruit et reste longtemps devant la table.',
-        'Elle touche la chemise brodée du bout du doigt. Elle dit : « Ce n’est pas lui. » Elle ne pleure pas. Elle respire enfin.',
-        'Les hommes sur le seuil ne bougent pas. Dehors, quelqu’un retire son bonnet.',
-        'Elle dit : « Merci de m’avoir laissée voir. » Elle part vers la grève, et elle regarde la mer avec d’autres yeux.',
-        'Derrière toi, le drap retombe. Sous la table, la flaque s’est retirée vers la porte, goutte à goutte, comme si on venait de la rappeler.',
+        'Elle touche la chemise brodée du bout du doigt. Elle dit : « Ce n’est pas mon petit. » Elle ne pleure pas. Elle respire enfin.',
+        'Tu dis alors, tout haut, le nom que tu tais depuis vingt hivers : « Jakez. Il était de mon sang. » Les hommes baissent les yeux.',
+        'Elle part vers la grève et regarde la mer avec d’autres yeux. Sous la table, la flaque se retire vers la porte, goutte à goutte.',
+        'Sur le seuil, un homme serre sa cordelette. Il a entendu ton nom et celui de Jakez, et il n’a pas décidé ce qu’il en fera.',
       ].join('\n'),
       mutations: [
         {
@@ -540,10 +549,9 @@ export const premise01: Premise = {
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu laves le corps. Tes mains ne tremblent plus. Elles font ce qu’elles ont toujours fait.',
-        'À midi, la famille entre. La mère se jette sur le drap et dit le nom du petit, très fort.',
-        'Personne ne la corrige. On enterre demain, sous ce nom qui n’est pas le bon.',
-        'Tu vois la vieille, au fond, qui hoche la tête. Elle ne te regarde pas.',
+        'Tu laves le corps. Tes mains ne tremblent plus. Elles trouvent dans les cheveux un peigne d’os, jumeau du tien.',
+        'À midi, la famille entre. La mère se jette sur le drap et dit le nom du petit, très fort. Personne ne la corrige.',
+        'On enterre le soir même, sous ce nom qui n’est pas le bon. Tu tiens ta langue, comme tu l’as promis aux hommes il y a vingt hivers.',
         'Cette nuit-là, l’essieu grince jusqu’à l’aube. Cette fois, il va jusqu’à la tombe, et il s’y arrête.',
       ].join('\n'),
       mutations: [
@@ -561,13 +569,14 @@ export const premise01: Premise = {
     {
       id: 'dire-le-vieux-nom',
       requiresAny: ['vieux-nom'],
-      choiceText: 'Dire à voix haute le nom que la vieille a prononcé.',
+      choiceText: 'Dire à voix haute le nom que la vieille a prononcé : Jakez.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu dis le nom. Le silence tombe sur la pièce comme un filet mouillé.',
+        'Tu dis « Jakez ». Le silence tombe sur la pièce comme un filet mouillé.',
         'La vieille ferme les yeux. L’homme du seuil s’en va, d’un pas qui n’a plus rien de calme.',
-        'La mère demande : « Qui est-ce ? » Personne ne répond. Les portes se ferment, l’une après l’autre.',
+        'La mère demande : « Qui est-ce ? » Personne ne répond. Un homme regarde ton cou, où pend le même nœud que le sien.',
+        'Les portes se ferment, l’une après l’autre. En disant ce nom, tu as rompu la promesse du village, et tu le sais.',
         'Seule la cloche de la baie répond. Elle sonne trois fois, sous l’eau, et plus personne ne fait semblant de ne pas l’entendre.',
       ].join('\n'),
       mutations: [
@@ -584,14 +593,14 @@ export const premise01: Premise = {
     },
     {
       id: 'chercher-au-large',
-      choiceText: 'Prendre une barque et chercher l’enfant au large.',
+      choiceText: 'Prendre une barque et chercher le petit au large.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
         'Tu pousses la plus petite barque à l’eau. Tes mains tiennent les rames comme si elles avaient toujours su.',
-        'La côte devient une ligne grise. Tu appelles un nom. Une mouette répond, puis plus rien.',
+        'La côte devient une ligne grise. Tu appelles le nom du petit. Une mouette répond, puis plus rien.',
         'Au retour, la nuit tombe. La mère est sur la grève, immobile, et ne dit pas si elle espère encore.',
-        'Dans le fond de la barque, une chose que tu n’y avais pas mise : un peigne d’os, mouillé, dont il manque deux dents.',
+        'Dans le fond de la barque, un éclat de bois peint, mouillé, que tu n’y avais pas mis. On y lit la moitié d’un nom de barque.',
       ].join('\n'),
       mutations: [
         {
@@ -634,7 +643,7 @@ export const premise01: Premise = {
       fractureRepaired: false,
       resultText: [
         'Tu descends à la marée basse. Les roches sont noires, luisantes, couvertes d’algues glissantes.',
-        'Tu trouves la crevasse où le corps a dormi. Tu t’y penches. Au fond, quelque chose de blanc.',
+        'Tu trouves la crevasse où le corps a dormi. Tu t’y penches. Au fond, quelque chose de blanc : un éclat de bois peint, jumeau de celui du poing.',
         'La mer revient avant que tu l’aies compris. Elle n’a pas de hâte. Elle a toute la journée.',
         'Sous l’eau qui monte, tu entends une cloche. Elle sonne pour toi, et tu comprends enfin que c’était le sens du bruit.',
       ].join('\n'),

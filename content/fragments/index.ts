@@ -28,7 +28,7 @@ export const fragments: readonly Fragment[] = [
     id: 'fragment-03',
     act: 1,
     order: 3,
-    text: 'Tu sais laver, veiller, conduire, parce que ces gestes sont à toi, d’avant. Tu étais de ceux qui accompagnent les autres. Jusqu’où ?',
+    text: 'Tu sais laver, veiller, conduire : ces gestes sont à toi, d’avant. Tu étais de ceux qui accompagnent les autres. Jusqu’où ?',
   },
   {
     id: 'fragment-04',

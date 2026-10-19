@@ -201,28 +201,28 @@ export const premise02: Premise = {
       },
     ],
 
-    // Seconde passe : la troisième cloche, la foule qui s'impatiente.
+    // Seconde passe : l'envoyé de l'évêché monte l'escalier.
     secondRound: {
       lines: [
         {
           speaker: 'narration',
-          text: 'Une cloche sonne, grave, trois fois. Ce n’est pas la tienne. Elle vient de la place, et elle annonce que la patience a des limites.',
+          text: 'Une cloche sonne, grave, trois fois. Ce n’est pas la tienne. Elle vient de la place, et elle dit que la patience a des limites.',
         },
         {
           speaker: 'npc',
-          text: 'Le chantre vient de me le dire. L’évêché a envoyé quelqu’un, ce matin. Il veut voir la chasse avant la procession.',
+          text: 'Le chantre vient de me le dire : l’évêché a envoyé quelqu’un ce matin. Il veut voir la chasse ouverte avant la procession.',
         },
         {
           speaker: 'npc',
-          text: 'S’il l’ouvre devant tout le monde, qu’est-ce qu’il trouve ? Dis-le-moi, que je sache quoi faire de mes mains.',
+          text: 'S’il l’ouvre devant tout le monde, qu’est-ce qu’il y trouve ? Dis-le-moi, que je sache quoi faire de mes mains.',
         },
         {
           speaker: 'narration',
-          text: 'Par la fenêtre, tu vois le drap de la grande statue bouger sans vent. Le long manche qui dépasse a changé de côté.',
+          text: 'Dans l’angle, le drap de la grande statue bouge sans vent. Le long manche qui dépasse a changé de côté.',
         },
         {
           speaker: 'npc',
-          text: 'Il est dans l’escalier. Qu’est-ce que je fais ?',
+          text: 'Il monte l’escalier. Que fais-je ?',
         },
       ],
       choices: [
@@ -237,7 +237,7 @@ export const premise02: Premise = {
             },
             {
               speaker: 'narration',
-              text: 'La personne sort sans te quitter des yeux. Tu entends des pas dans l’escalier, deux paires, une lente et une pressée.',
+              text: 'La personne ouvre la porte et guette. Tu entends des pas dans l’escalier, deux paires, une lente et une pressée.',
             },
           ],
         },
@@ -248,7 +248,7 @@ export const premise02: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'Ils savent que la lumière a brûlé jusqu’au matin. Ils savent que la cloche d’en dessous a sonné.',
+              text: 'Ils savent que la lumière a brûlé jusqu’au matin. Ils savent que la cloche d’en dessous a sonné : celle qu’on dit enterrée sous la rivière.',
             },
             {
               speaker: 'npc',
@@ -256,7 +256,7 @@ export const premise02: Premise = {
             },
             {
               speaker: 'narration',
-              text: 'La personne baisse la voix : « Moi aussi, j’attends. Je n’ose pas le dire. »',
+              text: 'La personne baisse la voix : « Moi aussi, j’attends. Je n’ose pas le demander. »',
             },
           ],
         },
@@ -282,11 +282,11 @@ export const premise02: Premise = {
           reply: [
             {
               speaker: 'narration',
-              text: 'Le cuivre est tiède sous ta paume, comme une peau. Tu retires la main trop vite.',
+              text: 'L’argent est tiède sous ta paume, comme une peau. Tu retires la main trop vite.',
             },
             {
               speaker: 'npc',
-              text: 'Elle est chaude. Moi aussi, je l’ai sentie. Qu’y a-t-il dedans ?',
+              text: 'Elle est chaude. Moi aussi, je l’ai sentie, tout à l’heure. Qu’y a-t-il dedans ?',
             },
           ],
         },
@@ -294,7 +294,8 @@ export const premise02: Premise = {
     },
   },
 
-  // Beat 4 : enquête. La chasse a été ouverte cette nuit ; quelqu'un l'a vu.
+  // Beat 4 : enquête. Un indice de chaque nature mène à une vérité : la chasse a été ouverte cette nuit,
+  // le sacristain l'a vu, et le nom du corps est brodé sous le col de la chape. Le joueur n'en examine que deux.
   investigation: [
     {
       kind: 'material',
@@ -302,50 +303,26 @@ export const premise02: Premise = {
       revealsArtifact: 'leap',
     },
     {
+      kind: 'material',
+      text: 'Tu soulèves le couvercle de la chasse d’un doigt. Au fond, pas d’os de saint : un galet gris de rivière, lisse, et un papier plié en quatre.',
+    },
+    {
+      kind: 'material',
+      text: 'Sous le col de la chape, un nom brodé au fil rouge, déjà usé : « Loeiz ». C’est le nom que ce corps a porté vingt ans.',
+      revealsTruth: 'nom-dans-la-chape',
+    },
+    {
+      kind: 'material',
+      text: 'Sur le bord de la chasse, des éclats de cire rouge. Le sceau a été rompu, puis recollé avec de la salive et du pouce, cette nuit.',
+    },
+    {
+      kind: 'material',
+      text: 'Trois cierges, consumés jusqu’au bout, au pied de l’autel. Quelqu’un a veillé ici toute la nuit, et n’a pas voulu qu’on le voie.',
+    },
+    {
       kind: 'bodily',
-      text: 'Ta clé entre dans la serrure de la chasse sans résistance. Elle a l’habitude de ce geste. Le cuivre est usé là où tes doigts reposent : tu l’as ouverte cette nuit.',
+      text: 'Ta clé entre dans la serrure de la chasse sans résistance. Elle a l’habitude de ce geste. Le métal est usé là où tes doigts reposent : tu l’as ouverte cette nuit.',
       revealsTruth: 'tu-as-ouvert-la-chasse',
-    },
-    {
-      kind: 'material',
-      text: 'Sur le bord de la chasse, des éclats de cire rouge brisée. Le sceau a été rompu, puis recollé avec de la salive et du pouce.',
-    },
-    {
-      kind: 'material',
-      text: 'Trois cierges, consumés jusqu’au bout, au pied de l’autel. Quelqu’un a veillé ici, longtemps, et n’a pas voulu qu’on le voie.',
-    },
-    {
-      kind: 'social',
-      text: 'Le sacristain, ou celui qui en tient lieu, évite ton regard. Quand tu approches de la chasse, il retient son souffle.',
-      revealsTruth: 'sacristain-a-vu',
-    },
-    {
-      kind: 'social',
-      text: 'Le porteur de bannière dit à voix basse : « On a entendu la cloche d’en dessous, cette nuit. Celle qui sonne sous la rivière. Tu l’as entendue, toi aussi ? »',
-    },
-    {
-      kind: 'social',
-      text: 'Une vieille, sur le seuil, te tend un cierge sans rien dire. Elle te regarde comme on regarde quelqu’un qui va tomber.',
-    },
-    {
-      kind: 'social',
-      text: 'Par la fenêtre, tu vois la femme du haut. Elle porte un enfant sur le dos, trop grand pour être porté. Elle ne pleure pas. Elle attend.',
-    },
-    {
-      kind: 'material',
-      text: 'On a recouvert la statue de bois pour le pardon. Un jour par an, on ne regarde pas celui qui vient chercher les vivants. Le drap a été soulevé, cette nuit.',
-    },
-    {
-      kind: 'material',
-      text: 'Dans la poussière d’une niche, une trace nette de doigts, à hauteur d’homme. Quelqu’un s’est appuyé là pour regarder dans la chasse.',
-    },
-    {
-      kind: 'social',
-      text: 'Le chantre murmure à son voisin : « Il a dit qu’il avait laissé une clé de rechange. Je ne sais plus où. » Le voisin hausse les épaules.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Tu poses la main sur la pierre froide du mur. La fièvre recule un instant. Tu comprends qu’elle revient dès que tu t’en détaches.',
     },
     {
       kind: 'bodily',
@@ -353,7 +330,36 @@ export const premise02: Premise = {
     },
     {
       kind: 'bodily',
+      text: 'Du bout des doigts, de l’encre noire, encore fraîche sous l’ongle. Ces mains bénissent plus qu’elles n’écrivent. Cette nuit, elles ont écrit longtemps.',
+    },
+    {
+      kind: 'bodily',
       text: 'Un goût de cire et de larmes sèches reste sur tes lèvres. Tu as pleuré cette nuit, longtemps, sans te l’avouer.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Tu poses la main sur la pierre froide du mur. La fièvre recule un instant. Elle revient dès que tu t’en détaches.',
+    },
+    {
+      kind: 'social',
+      text: 'Le sacristain évite ton regard. Il dit tout bas, sans qu’on l’interroge : « Cette nuit, je t’ai vu à genoux devant la chasse. Tu parlais à la rivière. »',
+      revealsTruth: 'sacristain-a-vu',
+    },
+    {
+      kind: 'social',
+      text: 'Le porteur de bannière dit à voix basse : « On a entendu la cloche d’en dessous, cette nuit, celle qui sonne sous la rivière. L’as-tu entendue, toi aussi ? »',
+    },
+    {
+      kind: 'social',
+      text: 'Une vieille, sur le seuil, te tend un cierge. « C’est toi qui as enterré mon petit, il y a douze ans, après la crue. Tu n’as plus bien dormi depuis. »',
+    },
+    {
+      kind: 'social',
+      text: 'Par la fenêtre, tu vois la mère du haut. Elle porte son petit sur le dos, trop grand pour être porté. Elle ne pleure pas. Elle attend.',
+    },
+    {
+      kind: 'social',
+      text: 'Le chantre murmure à son voisin : « Le sceau n’avait pas bougé depuis la crue, douze ans. Quelqu’un l’a touché. » Le voisin hausse les épaules.',
     },
   ],
 
@@ -364,11 +370,11 @@ export const premise02: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'La porte du fond s’ouvre. Le sacristain entre, et derrière lui l’envoyé de l’évêché, une main sur la poignée de la chasse.',
+          text: 'La porte du fond s’ouvre. Le sacristain entre, et derrière lui l’envoyé de l’évêché, une main déjà posée sur la chasse.',
         },
         {
           speaker: 'npc',
-          text: 'Je n’ai rien dit, recteur. Je n’ai rien vu. Mais il a des yeux, lui, et il a déjà posé sa main.',
+          text: 'Je n’ai rien dit, recteur. Je n’ai rien vu. Mais il a des yeux, lui, et il a déjà touché le sceau.',
         },
         {
           speaker: 'narration',
@@ -389,11 +395,11 @@ export const premise02: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Tes doigts retrouvent d’eux-mêmes la bonne dent de la clé. Tu sais ce que tu as vu, cette nuit, quand le couvercle s’est levé.',
+          text: 'Tes doigts retrouvent d’eux-mêmes la bonne dent de la clé. Ce corps a rouvert la chasse cette nuit, et il s’en souvient mieux que toi.',
         },
         {
           speaker: 'narration',
-          text: 'Ce n’est pas un souvenir. C’est une odeur de rivière, de vase, de bougie noyée. Elle monte de la chasse, et elle emplit la pièce.',
+          text: 'Un souvenir te revient, à peine : de l’encre, une plume, et la peur d’être lu. Puis l’odeur de rivière monte de la chasse et emplit la pièce.',
         },
         {
           speaker: 'narration',
@@ -410,7 +416,7 @@ export const premise02: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Je l’ai ramassé sous l’autel. Je l’ai gardé trois heures dans ma manche. Je ne peux plus le garder.',
+          text: 'Je l’ai ramassé sous l’autel, cette nuit. Je l’ai gardé dans ma manche. Je ne peux plus le garder.',
         },
         {
           speaker: 'narration',
@@ -419,18 +425,35 @@ export const premise02: Premise = {
       ],
     },
     {
+      requires: ['nom-dans-la-chape'],
       lines: [
         {
           speaker: 'narration',
-          text: 'Une odeur de vase monte sous la porte, puis le bruit de l’eau, comme si la rivière entrait dans l’église.',
+          text: 'Par la fenêtre, une voix de femme monte de la place, claire, sans peur. Elle crie ton nom : « Loeiz ! »',
         },
         {
           speaker: 'narration',
-          text: 'Tu ne sais pas ce que tu as fait cette nuit. Mais le drap de la statue vient de tomber, et personne ne l’a touché.',
+          text: 'C’est la mère du haut. Elle ne crie pas pour toi, mais pour la chasse. Elle appelle celui qui sait, et elle sait ton nom.',
         },
         {
           speaker: 'narration',
-          text: 'Dehors, la foule se tait d’un coup. Elle a vu. Elle attend que tu sortes lui expliquer.',
+          text: 'Derrière toi, la porte s’ouvre. L’envoyé de l’évêché est là. Il demande, très poli, que le recteur Loeiz lui montre la chasse.',
+        },
+      ],
+    },
+    {
+      lines: [
+        {
+          speaker: 'narration',
+          text: 'La porte s’ouvre sans que personne ait frappé. L’envoyé de l’évêché est là, les mains dans le dos, et il regarde la chasse.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Une odeur de vase monte sous la porte, puis le bruit de l’eau. Dans l’angle, le drap de la statue tombe, et personne ne l’a touché.',
+        },
+        {
+          speaker: 'narration',
+          text: 'Dehors, la foule se tait d’un coup. Elle a vu l’envoyé monter. Elle attend que le recteur sorte lui expliquer.',
         },
       ],
     },
@@ -465,7 +488,7 @@ export const premise02: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'Le cuivre est usé là où tes doigts reposent. La clé tourne sans résistance. Ce geste, tu l’as déjà fait, et plus d’une fois.',
+          text: 'Le métal est usé là où tes doigts reposent. La clé tourne sans résistance. Ce geste, tu l’as déjà fait, et plus d’une fois.',
         },
         {
           speaker: 'narration',
@@ -478,27 +501,37 @@ export const premise02: Premise = {
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   fractures: ['fracture-03', 'fracture-04'],
 
+  // Qui était ce corps : l'écran de fin le dit, quelle que soit l'issue.
+  host: {
+    name: 'Loeiz',
+    role: 'recteur de la paroisse et gardien de la chasse aux guérisons',
+    story:
+      'Loeiz tenait la paroisse depuis vingt ans. Quand la crue a emporté l’os du saint, Loeiz l’a remplacé par un galet de rivière et a gardé le silence douze ans. Cette nuit-là, Loeiz a écrit l’aveu et l’a glissé dans la chasse.',
+    truth: 'nom-dans-la-chape',
+  },
+
   // Beat 6 : résolution. Chaque issue est une histoire, aucune n'est un game over annoncé.
   resolutions: [
     {
       id: 'porter-la-chasse-ouverte',
-      requiresAny: ['tu-as-ouvert-la-chasse', 'sacristain-a-vu'],
-      choiceText: 'Porter la chasse ouverte en tête de la procession.',
+      requiresAny: ['tu-as-ouvert-la-chasse', 'sacristain-a-vu', 'nom-dans-la-chape'],
+      choiceText: 'Porter la chasse ouverte en tête de la procession et dire la vérité.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu sors sur la place, la chasse ouverte dans les mains. Un murmure traverse la foule, puis un silence.',
-        'Certains se détournent. D’autres s’approchent. La femme du haut pose sa main dans la chasse et dit : « C’est chaud. »',
-        'Personne ne sait ce qu’il voit. Personne ne demande. La procession se met en marche, et ce n’est plus la même.',
+        'Tu sors sur la place, la chasse ouverte dans les mains. Tu dis ton nom, Loeiz, puis ce qu’elle contient : un galet de rivière, et douze ans de silence.',
+        'Un murmure traverse la foule, puis un silence. La mère du haut s’approche. Elle pose la main sur le galet et dit : « C’est chaud. »',
+        'Tu déplies le papier, ton aveu, et tu le lis jusqu’au bout. Personne ne bouge. L’envoyé de l’évêché baisse la tête le premier.',
         'Le soir, ta fièvre tombe. Quelqu’un a laissé un cierge allumé devant ta porte.',
-        'Dans la nuit, sous la rivière, la grande cloche sonne une dernière fois. Cette fois, elle sonne comme on dit merci.',
+        'Dans la nuit, sous la rivière, la grande cloche sonne comme on dit merci. Puis, plus bas, une seconde cloche répond, que personne n’a jamais entendue.',
       ].join('\n'),
       mutations: [
         {
           type: 'addTruth',
           truth: {
             id: 'la-chasse-a-ete-ouverte',
-            summary: 'La foule a vu l’intérieur de la chasse, et personne ne l’a dit.',
+            summary:
+              'La foule a vu l’intérieur de la chasse, et le recteur a dit la vérité.',
             leapId: '',
           },
         },
@@ -523,9 +556,9 @@ export const premise02: Premise = {
       resultText: [
         'Tu refermes la chasse. La cire rouge coule, se fige, prend ton empreinte. Tu ne trembles plus.',
         'Tu marches en tête, la chape sur le dos. La foule chante. Elle chante juste, comme si de rien n’était.',
-        'La femme du haut te touche la manche au passage. Son petit ne marche pas, mais il sourit.',
-        'Le soir, tu ne dors pas. Tu sais ce que contient la chasse. Tu es le seul à le savoir.',
-        'Vers minuit, un grincement monte du fond de l’église. Quelqu’un, ou quelque chose, soulève le drap de bois, juste assez pour voir.',
+        'La mère du haut te touche la manche au passage. Son petit ne marche pas, mais il sourit.',
+        'Le soir, tu ne dors pas. Tu sais ce que contient la chasse. Tu es le seul à le savoir, avec la rivière.',
+        'Vers minuit, un grincement monte du fond de l’église. Quelqu’un soulève le drap de la statue, juste assez pour voir.',
       ].join('\n'),
       mutations: [
         {
@@ -605,7 +638,7 @@ export const premise02: Premise = {
         'Tu dis que tu ne sais pas qui tu es. Que ce corps n’est pas le tien.',
         'Le silence qui suit est plus lourd que la chape. Quelqu’un se signe. Quelqu’un pleure.',
         'On t’emmène dans une chambre, en parlant bas. On te donne de l’eau, des draps, une chaise. On te retire la clé.',
-        'À travers la porte, tu entends l’envoyé ouvrir la chasse. Il y a un long silence, puis un seul mot : « Dieu. »',
+        'À travers la porte, tu entends l’envoyé ouvrir la chasse. Il y a un long silence, puis il lit à voix haute un papier plié, jusqu’au bout.',
       ].join('\n'),
       mutations: [],
     },

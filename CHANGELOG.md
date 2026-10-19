@@ -10,6 +10,19 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.11.0] - 2026-10-19
+
+### Modifié
+
+- Les sept histoires sont réécrites pour suivre un fil clair : chaque réplique répond à la précédente, chaque indice sert l'histoire ou dit qui tu es, chaque coup de théâtre découle de ce que tu as appris, chaque issue montre ses conséquences.
+- Qui es-tu ? Chaque histoire propose un choix « Qui es-tu ? » au dialogue et un indice d'enquête qui donne le nom du corps que tu habites. L'écran de fin dit qui était ce corps, quelle que soit l'issue.
+- Les dix fragments de méta-histoire répondent chacun à une question sur toi (ton nom, ce que tu as promis, qui te l'a demandé) et en ouvrent une nouvelle.
+- Les fractures sont reformulées en phrases plus simples.
+
+### Ajouté
+
+- Un bouton « Sauter encore » sur l'écran de fin.
+
 ## [0.10.5] - 2026-10-19
 
 ### Modifié
