@@ -10,6 +10,19 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.10.3] - 2026-10-19
+
+### Modifié
+
+- Lecture plus stable : la place de chaque paragraphe est réservée avant qu'il s'écrive, donc les lignes ne bougent plus pendant l'écriture. La page ne défile plus qu'une fois par nouveau paragraphe, doucement, pour le poser au tiers haut de l'écran. Avant, elle montait à chaque ligne et le regard devait rattraper le texte.
+
+## [0.10.2] - 2026-10-19
+
+### Modifié
+
+- Logo : le parasite frémit à peine, sursaute une fois toutes les 14 secondes, et l'œil ne cligne qu'à cet instant (avant : deux fois toutes les 7 secondes).
+- Accueil : tout est composé dans la police du récit. Les boutons discrets, les liens, les avis et le message de partage ne passent plus à une autre police.
+
 ## [0.10.1] - 2026-10-19
 
 ### Ajouté
