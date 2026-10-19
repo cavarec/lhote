@@ -1,13 +1,24 @@
 import type { Premise } from './types';
 
-// Prémisse 2 : un jour de pardon, dans une ville de pierre. Un prêtre doute au moment de porter
-// la chasse en procession. Inspirée de : la foi qui guérit et la vérité qui blesse.
+// Prémisse 2 : un jour de pardon, dans une ville de pierre. Le recteur doit porter la chasse en procession.
+// Inspirée de : la foi qui guérit et la vérité qui blesse.
+//
+// Colonne vertébrale :
+// - Qui demande quoi : une proche du recteur (l'emplacement « 1 ») veut savoir ce qui s'est passé cette nuit
+//   dans la sacristie. Une mère du haut attend un miracle pour son petit. Un envoyé de l'évêché veut voir la chasse.
+// - En jeu : la foi de la ville, et l'enfant qui ne marche plus.
+// - Le piège : la chasse n'a plus de relique. La crue a emporté l'os du saint il y a douze ans. Loeiz l'a remplacé
+//   par un galet de rivière et s'est tu. Cette nuit, pris de fièvre, Loeiz a rouvert la chasse et y a glissé un aveu écrit.
+// - Ce que le joueur peut faire : tout dire en portant la chasse ouverte, la refermer, parler au sacristain,
+//   jeter la clé, avouer qu'il ne sait pas qui il est, ou monter au clocher.
+//
 // Conventions : voir content/README.md.
 // - `npcId` est un emplacement (« 0 » ou « 1 »), pas un personnage : le texte ne dit donc ni « il »
 //   ni « elle » du personnage qui parle.
-// - Miroir : un autre te regarde (« tu as une drôle de tête aujourd'hui »).
+// - Miroir : pas de miroir dans une sacristie. Le nom du corps est brodé sous le col de la chape.
 // - Corps hérité : la fièvre. Elle retire « reste calme » et ajoute « appuie-toi ». Elle explique
 //   aussi pourquoi l'hôte ne se souvient pas de la nuit.
+// - Qui était ce corps : Loeiz, recteur depuis vingt ans (voir `host`).
 
 const EPOCH = 'un jour de pardon, au tournant du siècle';
 
@@ -20,6 +31,7 @@ export const premise02: Premise = {
   wakeup: [
     'Il fait chaud et il fait froid. La chaleur est dans ta tête, le froid dans tes os. Les deux ne se parlent pas.',
     'Tu sens de l’encens, de la cire chaude, de la pierre mouillée. Une odeur de lin amidonné, aussi, très près de ton visage.',
+    'Une autre odeur monte du dallage, très faible : de la rivière, de la vase. Dans une église, c’est étrange.',
     'Dehors, une foule respire. Des milliers de pieds sur des pavés, des toux, des enfants qu’on fait taire. Un chant monte et retombe.',
     'Au-dessus, des cloches. Elles ne sonnent pas ensemble. L’une a de l’avance, l’autre du retard. Elles se rattrapent, puis se perdent.',
     'Une bombarde aiguë reprend le même air, encore et encore. Un air qui n’a pas de fin, rien que des reprises.',
@@ -27,7 +39,8 @@ export const premise02: Premise = {
     'Tu cherches ce que tu as fait cette nuit. Tu ne trouves rien. Rien qu’un blanc propre, lavé, comme un linge.',
     'Tes genoux te font mal. Pas d’une douleur de marche : d’une douleur d’avoir tenu longtemps la même position.',
     'Tu serres quelque chose de froid dans le poing. Du métal, avec des dents. Tu ne sais pas depuis quand.',
-    'On frappe deux fois à une porte de bois épais. Une voix dit un mot que tu reconnais. Elle ne dit pas ton nom. Elle dit ton titre.',
+    'Tu cherches ton nom. Tu ne trouves qu’un titre, que la foule répète au loin : recteur. Ce mot ne dit pas qui tu es.',
+    'On frappe deux fois à une porte de bois épais. Une voix redit ton titre. Elle attend derrière le bois, sans entrer.',
     'Tu ouvres les yeux.',
   ].join('\n\n'),
 
@@ -35,7 +48,7 @@ export const premise02: Premise = {
   orientation: [
     {
       kind: 'material',
-      text: 'Une sacristie voûtée, aux murs nus. Sur la table, une chasse d’argent ternie, grande comme un pain, fermée. Autour, des cierges, un encensoir, une chape pliée.',
+      text: 'Une sacristie voûtée, aux murs nus. Sur la table, une chasse d’argent ternie, grande comme un pain, fermée d’un sceau de cire rouge. Autour, des cierges, un encensoir, une chape pliée.',
     },
     {
       kind: 'material',
@@ -43,11 +56,11 @@ export const premise02: Premise = {
     },
     {
       kind: 'material',
-      text: 'Dans l’angle de la sacristie, une statue de bois recouverte d’un drap. Le drap dessine un crâne, des épaules maigres et, contre le mur, un long manche.',
+      text: 'Dans l’angle, une statue de bois couverte d’un drap. Le drap dessine un crâne, des épaules maigres et un long manche. C’est l’Ankou, celui qui vient chercher les vivants. Un jour par an, on le cache.',
     },
     {
       kind: 'material',
-      text: 'Dans ton poing, une clé de fer à tête ronde. Elle est tiède. Au cou, une chaîne la retient, et elle a laissé sa marque dans la paume.',
+      text: 'Dans ton poing, une clé de fer à tête ronde. Elle est tiède. Une chaîne la retient à ton cou, et elle a laissé sa marque dans ta paume.',
     },
     {
       kind: 'bodily',
@@ -71,7 +84,7 @@ export const premise02: Premise = {
     },
   ],
 
-  // Beat 3 : premier contact. L'emplacement « 1 » entre. Le choix risqué avoue le doute.
+  // Beat 3 : premier contact. L'emplacement « 1 » entre : une proche du recteur, qui a vu de la lumière cette nuit.
   openingDialogue: {
     npcId: '1',
     lines: [
@@ -93,7 +106,7 @@ export const premise02: Premise = {
       },
       {
         speaker: 'npc',
-        text: 'Il y a une femme du haut, avec son petit qui ne marche plus. Elle a fait la route à genoux. Elle dit que tu sais pourquoi.',
+        text: 'Il y a une mère du haut, avec son petit qui ne marche plus. Elle a fait la route à genoux. Elle dit que la chasse guérit, et que tu le sais mieux que personne.',
       },
       {
         speaker: 'narration',
@@ -106,6 +119,10 @@ export const premise02: Premise = {
       {
         speaker: 'narration',
         text: 'Dehors, les cloches se rejoignent un instant, puis s’éloignent. Tu entends ton cœur dans tes tempes.',
+      },
+      {
+        speaker: 'npc',
+        text: 'Alors dis-moi ce que nous faisons. Je suis avec toi, quoi que tu décides.',
       },
     ],
     choices: [
@@ -129,6 +146,25 @@ export const premise02: Premise = {
         ],
       },
       {
+        id: 'qui-es-tu',
+        kind: 'informative',
+        text: '« Dis-moi une chose : depuis quand suis-je recteur ici ? »',
+        reply: [
+          {
+            speaker: 'npc',
+            text: 'Quelle question. Vingt ans. Tu as baptisé la moitié de ceux qui sont sur la place, et enterré l’autre moitié.',
+          },
+          {
+            speaker: 'npc',
+            text: 'Les gosses t’appellent le recteur qui ne dort jamais. Et toi, tu ne dis jamais ton prénom, pas même à moi.',
+          },
+          {
+            speaker: 'narration',
+            text: 'La personne te regarde, inquiète. « Tu me fais peur, ce matin. On dirait que tu demandes à un autre. »',
+          },
+        ],
+      },
+      {
         id: 'demander-la-nuit',
         kind: 'informative',
         text: '« Qu’as-tu vu cette nuit, au juste ? »',
@@ -139,7 +175,7 @@ export const premise02: Premise = {
           },
           {
             speaker: 'npc',
-            text: 'À un moment, j’ai cru t’entendre parler. Pas à moi. À quelqu’un d’autre.',
+            text: 'À un moment, j’ai cru t’entendre parler. Pas à moi. À quelqu’un qui n’était pas là.',
           },
           {
             speaker: 'narration',
@@ -160,25 +196,6 @@ export const premise02: Premise = {
           {
             speaker: 'npc',
             text: 'Redis-le-moi quand ils seront partis. Pas avant. Pas devant eux.',
-          },
-        ],
-      },
-      {
-        id: 'prier-un-instant',
-        kind: 'neutral',
-        text: '« Laisse-moi un instant. Je dois prier. »',
-        reply: [
-          {
-            speaker: 'npc',
-            text: 'Un instant. Pas plus. La femme du haut ne tiendra pas.',
-          },
-          {
-            speaker: 'narration',
-            text: 'La porte se referme. Tu restes devant la table. Tes lèvres bougent. Tu ne sais pas quelles paroles elles prononcent.',
-          },
-          {
-            speaker: 'narration',
-            text: 'Un mot revient, toujours le même. Ce n’est pas une prière. C’est un nom que tu ne connais pas.',
           },
         ],
       },

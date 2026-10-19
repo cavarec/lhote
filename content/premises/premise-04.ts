@@ -10,6 +10,17 @@ import type { Premise } from './types';
 // - Miroir : le reflet dans la vitre noire arrive un battement trop tard.
 // - Corps hérité : les doigts comptent les couverts sans toi. Ils en comptent un de trop.
 
+// COLONNE VERTÉBRALE
+// - Qui demande quoi : la personne qui veille avec toi demande pourquoi un treizième couvert est dressé,
+//   et son bol vidé, avant minuit.
+// - Ce qui est en jeu : un enfant mort sans baptême, enterré au mur du jardin et dont on ne dit plus le
+//   nom, est venu avant l'heure. Ignoré, il reviendra en colère ; nommé devant tous, il fait honte à la ferme.
+// - Le piège : c'est toi, Alix, qui tiens la ferme, qui dresses ce couvert en secret chaque année et qui as
+//   gravé le nom sous le bol. Le corps le sait, pas toi, et la maison ne doit pas le savoir.
+// - Ce que tu peux faire : servir le bol et dire le nom (juste), tout débarrasser, le faire dire par la
+//   vieille, aller au carrefour, avouer ton trou, ou sortir seul au premier coup de minuit.
+// Qui es-tu : Alix, qui tient la ferme (livre de comptes, mains, choix « qui-es-tu »). L'enfant s'appelle Loïk.
+
 const EPOCH = 'une ferme de Basse-Bretagne, la veille de la Toussaint, au siècle dernier';
 
 export const premise04: Premise = {
@@ -17,6 +28,15 @@ export const premise04: Premise = {
   title: 'La table des absents',
   epoch: EPOCH,
   season: { from: '10-20', to: '11-10', label: 'Kalan Goañv, la nuit des morts' },
+
+  // Qui était ce corps : la réponse que l'écran de fin donne, quelle que soit l'issue.
+  host: {
+    name: 'Alix',
+    role: 'celui ou celle qui tenait la ferme, la clef et les comptes',
+    story:
+      'Alix avait perdu un enfant, Loïk, avant qu’on ait pu le baptiser. La maison avait décidé de ne plus prononcer son nom. Chaque nuit de Kalan, Alix dressait pour lui un treizième couvert en secret, et avait gravé son nom sous le bol pour qu’il dure.',
+    truth: 'nom-du-corps',
+  },
 
   // Beat 1 : la braise, le lait, la cire. Aucune information.
   wakeup: [
@@ -54,7 +74,7 @@ export const premise04: Premise = {
     },
     {
       kind: 'bodily',
-      text: 'La vitre noire de la fenêtre te renvoie un visage fatigué. Il bouge un battement après toi, comme s’il hésitait à te suivre. Il n’a pas l’air d’avoir peur.',
+      text: 'La vitre noire te renvoie un visage fatigué. Il bouge un battement après toi, comme s’il hésitait à te suivre. Tu lui cherches un nom. Rien ne vient.',
     },
     {
       kind: 'bodily',
@@ -62,11 +82,11 @@ export const premise04: Premise = {
     },
     {
       kind: 'social',
-      text: 'Au mur, un tablier de toile, une faucille et un chapelet d’os de seiche. Sur le banc, des sabots d’adulte rangés, et une paire d’enfant qui n’a jamais servi.',
+      text: 'Au mur, un tablier de toile, une faucille et un trousseau de clefs. Sur le banc, des sabots d’adulte rangés, et une paire d’enfant qui n’a jamais servi.',
     },
     {
       kind: 'social',
-      text: 'Une vieille, dans l’ombre de la cheminée, marmonne : « Il est venu trop tôt. On n’a jamais vu ça. Il avait faim, celui-là. » Les autres font mine de ne pas entendre.',
+      text: 'Une vieille, dans l’ombre de la cheminée, marmonne : « Il est venu trop tôt. On n’a jamais vu ça. Il avait faim. » Les autres font mine de ne pas entendre.',
     },
     {
       kind: 'social',
@@ -88,23 +108,23 @@ export const premise04: Premise = {
       },
       {
         speaker: 'narration',
-        text: 'La personne pose le menton vers le bout de la table, sans oser la regarder. Elle compte à voix basse, et s’arrête à douze.',
+        text: 'La personne montre le bout de la table du menton, sans oser le regarder. Elle compte à voix basse, et s’arrête à douze.',
       },
       {
         speaker: 'npc',
-        text: 'Il y avait douze places à minuit. J’ai tout vérifié. À présent, il y en a treize. Et le bol est vide.',
+        text: 'Il y avait douze places, une par mort que nous connaissons. À présent, il y en a treize. Et le bol de la dernière est vide.',
       },
       {
         speaker: 'npc',
-        text: 'Les morts viennent à la Kalan, c’est normal. Mais ils viennent après minuit. Pas avant. Pas à ce bout de table.',
+        text: 'Les morts viennent à la Kalan, c’est normal. Mais ils viennent après minuit. Pas avant, et pas à une place que personne n’a donnée.',
       },
       {
         speaker: 'narration',
-        text: 'Elle fixe ton visage, longtemps. Elle cherche quelque chose que tu devrais dire, et que tu ne connais pas.',
+        text: 'La personne fixe ton visage, longtemps. Elle attend de toi quelque chose que tu devrais savoir, et que tu ne sais pas.',
       },
       {
         speaker: 'npc',
-        text: 'C’est toi qui as fermé la maison ce soir. C’est toi qui as dressé. Dis-moi que tu as compté juste.',
+        text: 'C’est toi qui as dressé la table ce soir. Dis-moi que tu as compté juste. Dis-moi que ce couvert n’est pas de ta main.',
       },
     ],
     choices: [
@@ -115,11 +135,11 @@ export const premise04: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'Dormir ? Ici ? Cette nuit ? Tu me prends pour qui ?',
+            text: 'Dormir ? Cette nuit ? Avec ce couvert de trop sur la table ? Non. Je reste avec toi.',
           },
           {
             speaker: 'narration',
-            text: 'La personne s’assied pourtant, au bord du banc, sans quitter la porte des yeux. Elle reste à portée de ta main.',
+            text: 'La personne s’assied au bord du banc, sans quitter la porte des yeux. Elle reste à portée de ta main.',
           },
         ],
       },
@@ -130,11 +150,11 @@ export const premise04: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'Moi, je ne l’ai pas rempli. Le lait était dans le pichet à minuit, plein. Puis j’ai tourné la tête.',
+            text: 'Moi, je ne l’ai pas rempli. Le lait était dans le pichet, plein. Puis j’ai tourné la tête.',
           },
           {
             speaker: 'npc',
-            text: 'Quand j’ai regardé, le bol était là, tiède, avec une cuiller dedans. Aucune porte n’avait bougé.',
+            text: 'Quand j’ai regardé, il y avait un bol de plus, tiède, avec une cuiller dedans. Aucune porte n’avait bougé.',
           },
           {
             speaker: 'narration',
@@ -149,11 +169,11 @@ export const premise04: Premise = {
         reply: [
           {
             speaker: 'npc',
-            text: 'Un vivant ? Dans la maison ? Tu accuses qui ? Tu as dit ça sans réfléchir.',
+            text: 'Un vivant ? Dans la maison ? Tu accuses qui ? Tu parles sans réfléchir.',
           },
           {
             speaker: 'narration',
-            text: 'La voix est devenue très égale, comme celle de quelqu’un qui marche sur la glace. Elle ne te lâche plus du regard.',
+            text: 'La voix est devenue très égale, comme celle de quelqu’un qui marche sur la glace. La personne ne te lâche plus du regard.',
           },
           {
             speaker: 'npc',
@@ -162,21 +182,21 @@ export const premise04: Premise = {
         ],
       },
       {
-        id: 'regarder-le-treizieme',
-        kind: 'neutral',
-        text: 'Ne rien dire et aller voir la treizième place.',
+        id: 'qui-es-tu',
+        kind: 'informative',
+        text: '« Regarde-moi. Dis-moi qui je suis, ce soir. »',
         reply: [
           {
-            speaker: 'narration',
-            text: 'Les dalles sont froides sous tes pieds. Tu avances comme on approche d’un chien inconnu, les mains ouvertes.',
+            speaker: 'npc',
+            text: 'Tu me demandes ça ? Toi qui tiens cette ferme, qui as les clefs et les comptes ? Les enfants t’appellent « la clef ».',
           },
           {
             speaker: 'npc',
-            text: 'Je reste là. Je n’ai pas envie de voir ça de plus près.',
+            text: 'Chaque Kalan, tu dresses seul, avant tout le monde. Je ne t’ai jamais demandé pourquoi. Ce soir, je voudrais bien le savoir.',
           },
           {
             speaker: 'narration',
-            text: 'L’assiette est de la même terre que les autres, ébréchée au même endroit. Quelqu’un l’a prise dans le bahut de la maison.',
+            text: 'La personne te regarde comme on regarde quelqu’un qu’on croyait connaître. Elle n’a pas dit ton nom. Elle a l’air de l’éviter.',
           },
         ],
       },
@@ -187,15 +207,15 @@ export const premise04: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Dans la cour, le chien cesse de gémir tout d’un coup. Ce silence est pire. Le vent aussi a cessé, comme si on retenait son souffle.',
+          text: 'Dans la cour, le chien cesse de gémir d’un coup. Ce silence est pire. Le vent aussi a cessé, comme si on retenait son souffle.',
         },
         {
           speaker: 'npc',
-          text: 'Entends-tu ? Plus rien. Il fait ça quand ils arrivent. Il y a quelqu’un sur le chemin.',
+          text: 'Entends-tu ? Plus rien. Il fait ça quand quelqu’un arrive. Il y a quelqu’un sur le chemin.',
         },
         {
           speaker: 'npc',
-          text: 'Les voisins ont vu la lanterne de navet, au carrefour. Ils disent qu’elle ne devait pas brûler avant minuit.',
+          text: 'Les voisins ont vu la lanterne de navet, au carrefour. Ils disent que personne ne devait l’allumer avant minuit.',
         },
         {
           speaker: 'narration',
@@ -203,7 +223,7 @@ export const premise04: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Ils vont venir ici, avec leurs questions. Je leur dis quoi ?',
+          text: 'Ils vont venir ici, avec leurs questions. Que leur dit-on ?',
         },
       ],
       choices: [
@@ -214,7 +234,7 @@ export const premise04: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'Fermée ? Avec la porte entrouverte ? Ils ne me croiront jamais.',
+              text: 'Fermée ? À la Kalan, la porte reste entrouverte. Ils ne nous croiront jamais.',
             },
             {
               speaker: 'narration',
@@ -229,15 +249,15 @@ export const premise04: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'Personne ne la garde. On la pose le soir, on la laisse. C’est pour guider ceux qui s’égarent.',
+              text: 'Personne ne la garde. On la pose le soir, on la laisse. C’est pour guider ceux qui s’égarent sur le chemin.',
             },
             {
               speaker: 'npc',
-              text: 'Mais celle de ce soir, nul ne l’a posée. On l’a trouvée allumée, avec un navet que personne n’a creusé.',
+              text: 'Mais celle de ce soir, nul ne l’a posée. On l’a trouvée allumée, dans un navet que personne n’a creusé.',
             },
             {
               speaker: 'narration',
-              text: 'Elle jette un coup d’œil vers l’assiette de terre, puis détourne le regard. Elle sait quelque chose, et elle voudrait l’oublier.',
+              text: 'La personne jette un coup d’œil vers le bout de la table, puis détourne le regard. Elle sait quelque chose, et voudrait l’oublier.',
             },
           ],
         },
@@ -248,7 +268,7 @@ export const premise04: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'Non ! Pas ça ! On ne ferme pas la porte à la Kalan ! Ils reviendront quand même, et ils seront en colère !',
+              text: 'Non ! Pas ça ! On ne ferme pas la porte à la Kalan. Ils reviendraient quand même, et en colère !',
             },
             {
               speaker: 'narration',
@@ -263,15 +283,15 @@ export const premise04: Premise = {
           reply: [
             {
               speaker: 'npc',
-              text: 'Sans place ? Il y en a toujours un, dans une maison. Personne n’en parle.',
+              text: 'Sans place ? Il y en a toujours un, dans une maison. Un enfant, le plus souvent. Personne n’en parle.',
             },
             {
               speaker: 'npc',
-              text: 'Demande à la vieille, près du feu. Mais ne demande pas devant les autres. Et ne dis pas que c’est moi qui te l’ai dit.',
+              text: 'Demande à la vieille, près du feu. Mais pas devant les autres. Et ne dis pas que c’est moi qui te l’ai dit.',
             },
             {
               speaker: 'narration',
-              text: 'Elle baisse la voix encore : « C’est un nom qu’on a gardé sous la langue depuis longtemps. »',
+              text: 'La personne baisse la voix encore : « C’est un nom qu’on garde sous la langue depuis longtemps. »',
             },
           ],
         },
@@ -279,7 +299,7 @@ export const premise04: Premise = {
     },
   },
 
-  // Beat 4 : enquête. Le couvert a été dressé de ta main ; quelqu'un connaît le nom.
+  // Beat 4 : enquête. Le couvert est de ta main ; un enfant sans nom ; qui tu es. Chaque nature se lit d'une traite.
   investigation: [
     {
       kind: 'material',
@@ -287,58 +307,63 @@ export const premise04: Premise = {
       revealsArtifact: 'leap',
     },
     {
+      kind: 'material',
+      text: 'Sous le bol, des lettres grattées à la pointe d’un clou : LOÏK. Chaque trait a été creusé avec soin. Quelqu’un a voulu que ce nom dure.',
+    },
+    {
+      kind: 'material',
+      text: 'Sur le bahut, le livre de comptes de la ferme, ouvert. Chaque page est signée « Alix », d’une écriture qui appuie : celle du nom gravé sous le bol.',
+      revealsTruth: 'nom-du-corps',
+    },
+    {
+      kind: 'material',
+      text: 'Par terre, deux petites traces de pieds nus, humides. Elles viennent de la porte, font le tour de la table et s’arrêtent au treizième couvert.',
+    },
+    {
+      kind: 'material',
+      text: 'Au mur, derrière la porte, un crochet qui a longtemps tenu un petit manteau. Le tour du clou est plus clair que le plâtre : le manteau n’est plus là depuis des années.',
+    },
+    {
       kind: 'bodily',
-      text: 'Tes doigts se posent sur le bol. Ils connaissent le grain de la terre cuite. Ils l’ont tenu cette nuit, ils l’ont rempli, ils l’ont posé là : le couvert est de ta main.',
+      text: 'Tes doigts se posent sur le bol. Ils connaissent le grain de la terre cuite. Ils l’ont rempli, ils l’ont posé là : le couvert est de ta main.',
       revealsTruth: 'couvert-de-ta-main',
     },
     {
-      kind: 'material',
-      text: 'Sous le bol, des lettres grattées à la pointe d’un clou. Un nom, très petit, dont chaque trait a été creusé avec soin. Quelqu’un a voulu qu’il dure.',
+      kind: 'bodily',
+      text: 'Ta bouche a un goût de lait et de cire. Tu as bu, cette nuit, sans te le rappeler. Une fatigue douce, qui n’est pas celle d’un veilleur.',
     },
     {
-      kind: 'material',
-      text: 'Sur la nappe, près de l’assiette, une miette de crêpe et trois gouttes de lait. Elles forment un petit chemin qui part du bol et s’arrête au bord de la table.',
+      kind: 'bodily',
+      text: 'Dans ta poche, une petite cuiller de bois, usée, mordillée par des dents de lait. Elle n’est à personne dans cette salle. Elle est dans ta main depuis des années.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton pouce porte une corne, à l’endroit où l’on serre une plume ou une clef. Ce corps tient les comptes et le trousseau de cette ferme.',
+    },
+    {
+      kind: 'bodily',
+      text: 'Ton cœur bat plus fort quand tu regardes la place vide. Ce corps sait ce qu’il y manque, et il ne veut pas que tu le saches.',
     },
     {
       kind: 'social',
-      text: 'La vieille se lève, s’approche du bol, le regarde longtemps. Elle prononce un nom. Pas celui d’un grand. Celui d’un enfant. Puis elle se signe.',
+      text: 'La vieille se lève, s’approche du bol, le regarde longtemps. Elle dit un nom : « Loïk. » Puis, plus bas, pour toi seul : « Tu l’as gardé trois ans, ce nom-là. » Elle se signe.',
       revealsTruth: 'nom-sur-lecuelle',
     },
     {
       kind: 'social',
-      text: 'Un homme au visage fermé reste sur le seuil. Il ne regarde ni la table, ni toi. Quand tu le fixes, il serre sa casquette à la tordre.',
+      text: 'Un homme au visage fermé reste sur le seuil. Il serre sa casquette à la tordre. Il murmure : « C’est moi qui l’ai porté au mur du jardin. Sans prêtre. »',
     },
     {
       kind: 'social',
-      text: 'Une femme, près de la fenêtre, murmure : « Cet enfant-là, on n’a pas le droit d’en parler. Il n’a pas eu d’eau sur la tête. »',
+      text: 'Une femme, près de la fenêtre, souffle : « Cet enfant-là, on n’a pas le droit d’en parler. Il n’a pas eu d’eau sur la tête. »',
     },
     {
       kind: 'social',
       text: 'Un petit, derrière la porte, glisse la tête et dit tout bas : « Il est venu me voir, hier soir. Il voulait jouer. » Une main l’attire en arrière.',
     },
     {
-      kind: 'bodily',
-      text: 'Ta bouche a un goût de lait et de cire. Tu as dû boire, cette nuit, sans te le rappeler. Une fatigue douce, qui n’est pas celle du veilleur.',
-    },
-    {
-      kind: 'bodily',
-      text: 'Dans ta poche, une petite cuiller de bois, usée, mordillée. Elle n’est à personne dans cette salle. Elle est dans ta main depuis longtemps.',
-    },
-    {
-      kind: 'material',
-      text: 'Par terre, près de la table, deux petites traces de pieds nus, humides. Elles viennent de la porte, font le tour de la table, et s’arrêtent au treizième couvert.',
-    },
-    {
-      kind: 'material',
-      text: 'Au mur, derrière la porte, un crochet qui a longtemps tenu un petit manteau. Un tour de clou rouillé, plus clair que le plâtre autour.',
-    },
-    {
       kind: 'social',
-      text: 'Un voisin dit à mi-voix : « Il y a trois nuits, la lanterne s’est allumée toute seule. Cette fois, elle a bougé. Elle est venue jusqu’à la barrière. »',
-    },
-    {
-      kind: 'bodily',
-      text: 'Ton cœur bat plus fort quand tu regardes la place vide. Ce corps connaît ce qu’il y manque, et il ne veut pas que tu le saches.',
+      text: 'Un voisin dit à mi-voix : « Il y a trois nuits, la lanterne s’est allumée toute seule. Cette nuit, elle a bougé. Elle est venue jusqu’à la barrière. »',
     },
   ],
 
@@ -349,7 +374,7 @@ export const premise04: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'La lanterne a quitté le carrefour. Tu la vois par la vitre, qui remonte le chemin, et jamais personne ne la porte.',
+          text: 'La lanterne a quitté le carrefour. Tu la vois par la vitre qui remonte le chemin, et personne ne la porte.',
         },
         {
           speaker: 'narration',
@@ -357,15 +382,15 @@ export const premise04: Premise = {
         },
         {
           speaker: 'npc',
-          text: 'Tu l’as dressé pour lui, chaque année, en secret. Tu croyais que personne ne voyait. Cette année, il a eu faim avant l’heure.',
+          text: 'Tu l’as dressé pour lui chaque année, en secret. Tu croyais que personne ne voyait. Cette année, il a eu faim avant l’heure.',
         },
         {
           speaker: 'narration',
-          text: 'Dans la salle, le feu baisse d’un coup. Sur la treizième chaise, rien ne s’assied. Mais le banc plie, comme sous un poids d’enfant.',
+          text: 'Dans la salle, le feu baisse d’un coup. Sur le treizième banc, rien ne s’assied. Mais le bois plie, comme sous un poids d’enfant.',
         },
         {
           speaker: 'narration',
-          text: 'On frappe trois fois à la porte entrouverte. Tu comprends que celui qui attend dehors ne frappe pas pour entrer. Il frappe pour que tu viennes.',
+          text: 'On frappe trois fois à la porte entrouverte. Celui qui attend dehors ne frappe pas pour entrer. Il frappe pour que tu viennes.',
         },
       ],
     },
@@ -374,11 +399,11 @@ export const premise04: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Tes mains ne tremblent pas. Elles savent ce qu’elles ont fait : tu as dressé ce couvert, et tu l’as oublié aussitôt.',
+          text: 'Tes mains ne tremblent pas. Elles savent ce qu’elles ont fait : elles ont dressé ce couvert, et tu ne sais pas pour qui.',
         },
         {
           speaker: 'narration',
-          text: 'Alors le chien, dehors, se remet à gémir. Une seule note, longue, tournée vers le carrefour. Toute la maison l’entend, tu le sais au silence.',
+          text: 'Dehors, le chien se remet à gémir. Une seule note, longue, tournée vers le carrefour. Toute la maison l’entend, tu le sais au silence.',
         },
         {
           speaker: 'narration',
@@ -407,7 +432,7 @@ export const premise04: Premise = {
       lines: [
         {
           speaker: 'narration',
-          text: 'Tu n’as pas fini de regarder quand la porte s’ouvre en grand. Les voisins entrent sans attendre, avec le froid, et trois lanternes.',
+          text: 'La porte s’ouvre en grand. Les voisins entrent avec le froid et trois lanternes. Ils viennent voir le couvert dont toute la cour parle.',
         },
         {
           speaker: 'narration',
@@ -415,7 +440,7 @@ export const premise04: Premise = {
         },
         {
           speaker: 'narration',
-          text: 'Tu ne sais pas encore pourquoi. Mais tu as l’impression que cette nuit, tout le monde a pris de l’avance sur toi.',
+          text: 'Personne ne dit qui a dressé. Mais tout le monde sait qui tient les clefs de la maison, et qui dresse la table.',
         },
       ],
     },
@@ -467,17 +492,17 @@ export const premise04: Premise = {
   resolutions: [
     {
       id: 'servir-le-bol-et-dire-le-nom',
-      requiresAny: ['couvert-de-ta-main', 'nom-sur-lecuelle'],
+      requiresAny: ['couvert-de-ta-main', 'nom-sur-lecuelle', 'nom-du-corps'],
       choiceText:
-        'Remplir le bol du bout de la table et dire à voix haute le nom gravé dessous.',
+        'Remplir le bol du bout de la table et dire à voix haute le nom gravé dessous : Loïk.',
       outcome: 'resolved',
       fractureRepaired: true,
       resultText: [
-        'Tu verses le lait. Il fume un peu, comme s’il tombait dans une main. Puis tu dis le nom, une seule fois, assez fort pour la salle.',
-        'Personne ne bouge. La vieille ferme les yeux. Un homme retire sa casquette, et il pleure sans bruit, ce qu’il n’avait jamais fait.',
-        'Dans le bol, le lait baisse, à petites gorgées, comme boit un enfant. Le banc se détend. Une chaleur passe dans la pièce, puis part.',
-        'Dehors, la lanterne se pose au sol, et s’éteint. Le chien aboie une fois, content. La nuit continue, et elle est enfin la bonne.',
-        'À l’aube, la treizième assiette est vide et propre. Quelqu’un a rangé la cuiller de bois dans ta poche, sans que tu l’aies sentie.',
+        'Tu verses le lait. Il fume un peu, comme s’il tombait dans une main. Puis tu dis « Loïk », une seule fois, assez fort pour toute la salle.',
+        'Personne ne bouge. La vieille ferme les yeux. L’homme à la casquette la retire et pleure sans bruit, ce qu’il n’avait jamais fait.',
+        'Dans le bol, le lait baisse, à petites gorgées, comme boit un enfant. Le banc se détend. Dehors, la lanterne se pose et s’éteint.',
+        'À l’aube, tu comprends à qui sont ces mains : à celui ou celle qui tenait la ferme, et avait promis un couvert à son enfant.',
+        'Sur la nappe, un chemin de gouttes de lait va de la table à la porte, et plus loin. Quelqu’un d’autre a faim, ailleurs.',
       ].join('\n'),
       mutations: [
         {
@@ -504,14 +529,14 @@ export const premise04: Premise = {
     {
       id: 'retirer-le-couvert',
       requiresAny: ['couvert-de-ta-main'],
-      choiceText: 'Débarrasser le treizième couvert, tout ranger, et fermer le sujet.',
+      choiceText: 'Débarrasser le treizième couvert, tout ranger, et ne plus en parler.',
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu prends l’assiette, le bol, la cuiller. Tu les ranges dans le bahut, à leur place. Le banc est propre, la nappe est lisse.',
+        'Tu prends l’assiette, le bol, la cuiller. Tu les ranges dans le bahut, à leur place. La nappe est lisse, le banc est propre.',
         'Personne ne dit un mot. La famille se lève, rassurée, et monte se coucher. La personne qui veillait avec toi te regarde, puis détourne les yeux.',
-        'Vers le matin, on frappe à la porte, trois coups. Tu ne réponds pas. Ceux qui dorment ne répondent pas non plus.',
-        'À l’aube, la nappe est tachée de lait, juste devant la place que tu as débarrassée, et elle sent le froid.',
+        'Vers le matin, on frappe à la porte, trois coups. Tu ne réponds pas. Rien ne répond non plus, de l’autre côté.',
+        'À l’aube, la nappe est tachée de lait, devant la place que tu as débarrassée. Le linge est froid, comme si l’on s’y était assis.',
       ].join('\n'),
       mutations: [
         {
@@ -533,9 +558,9 @@ export const premise04: Premise = {
       outcome: 'failed',
       fractureRepaired: false,
       resultText: [
-        'Tu la regardes. Elle hésite, puis se lève et dit le nom, très net, devant les voisins serrés dans la porte.',
+        'Tu la regardes. Elle hésite, puis elle se lève et dit « Loïk », très net, devant les voisins serrés dans la porte.',
         'Le silence tombe sur la salle comme un filet mouillé. Un homme sort, d’un pas qui n’a plus rien de calme. Une femme crie.',
-        'On se renvoie le blâme : qui a fait taire ? Qui a su ? Les portes se ferment, une à une, dans la cour.',
+        'On se renvoie le blâme : qui a gardé ce nom ? Qui a dressé ? Tous se tournent vers toi, qui tiens les clefs. Les portes se ferment dans la cour.',
       ].join('\n'),
       mutations: [
         {
@@ -557,8 +582,8 @@ export const premise04: Premise = {
       resultText: [
         'Tu sors dans la cour. Le froid te prend aux chevilles. Tu suis le chemin, une lanterne à la main, jusqu’au bout.',
         'Au carrefour, le navet creusé brûle sur la pierre. Autour, la terre est piétinée de petits pas. Personne n’y est.',
-        'Tu appelles un nom. Un oiseau de nuit répond, puis plus rien. Au retour, la porte de la ferme est fermée, et on ne t’ouvre pas.',
-        'Dans ta poche, tu trouves un petit objet que tu n’y avais pas mis. Il est tiède, comme tenu par une main.',
+        'Tu appelles. Un oiseau de nuit répond, puis plus rien. Pendant ce temps, la table est restée sans veilleur, et le bol est vide.',
+        'Au retour, la porte de la ferme est fermée, et on ne t’ouvre pas. Dans ta poche, un petit objet tiède que tu n’y avais pas mis.',
       ].join('\n'),
       mutations: [
         {
@@ -587,9 +612,9 @@ export const premise04: Premise = {
       outcome: 'exposed',
       fractureRepaired: false,
       resultText: [
-        'Tu dis que tu ne sais pas qui tu es. Que ces mains ne sont pas à toi, et que tu ne sais pas pour qui tu as dressé.',
+        'Tu dis que tu ne sais pas qui tu es. Que ces mains ne sont pas à toi, et que tu ne sais pas pour qui elles ont dressé.',
         'Personne ne rit. Les voisins se signent. Quelqu’un recule jusqu’à la porte, puis dehors, vers la lumière des lanternes.',
-        'On te retire la clef de la maison. Un autre veillera, et ce sera quelqu’un qui sait ce qu’il fait.',
+        'On te retire le trousseau de la maison. Un autre veillera, quelqu’un qui sait ce qu’il fait, et qui dressera pour l’enfant, ou non.',
         'Sur le seuil, en partant, tu entends l’essieu. Il grince derrière toi, au pas, et il te suit jusqu’à la dernière ferme.',
       ].join('\n'),
       mutations: [],
@@ -603,8 +628,8 @@ export const premise04: Premise = {
       resultText: [
         'Tu sors. La cour est blanche de givre, la lune basse. Le chien ne bouge pas, couché, les yeux ouverts.',
         'Un essieu grince, tout près. Un char passe derrière le mur, très lent, tiré par personne. Une odeur de terre fraîche entre dans ta bouche.',
-        'Tu vois une silhouette longue, sous un chapeau large, qui tient un manche. Elle se retourne. Elle n’a pas de visage, rien qu’une attention.',
-        'Elle te désigne le char. Tu comprends qu’il y a de la place. Tu montes, et le grincement continue, sans toi, vers la mer.',
+        'Une silhouette longue, sous un chapeau large, tient un manche. Elle se retourne. Elle n’a pas de visage, rien qu’une attention.',
+        'Elle te désigne le char. Il y a de la place, juste pour un. Tu montes, et le grincement continue, sans toi, vers la mer.',
       ].join('\n'),
       mutations: [
         {
