@@ -92,6 +92,48 @@ test.describe('parcours complet', () => {
     await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toHaveCount(0);
   });
 
+  test('« Écouter » lit le texte affiché à voix haute, et s’arrête', async ({ page }) => {
+    await page.addInitScript(() => {
+      const said: string[] = [];
+      (window as unknown as { said: string[] }).said = said;
+      class Utterance {
+        text: string;
+        lang = '';
+        rate = 1;
+        voice: unknown = null;
+        onend: (() => void) | null = null;
+        onerror: (() => void) | null = null;
+        constructor(text: string) {
+          this.text = text;
+        }
+      }
+      (
+        window as unknown as { SpeechSynthesisUtterance: unknown }
+      ).SpeechSynthesisUtterance = Utterance;
+      Object.defineProperty(window, 'speechSynthesis', {
+        value: {
+          getVoices: () => [],
+          speak: (u: Utterance) => said.push(u.text),
+          cancel: () => undefined,
+        },
+        configurable: true,
+      });
+    });
+    await startLeap(page);
+    await page.getByRole('button', { name: 'Écouter le texte à voix haute' }).click();
+    await expect(
+      page.getByRole('button', { name: 'Arrêter la lecture à voix haute' }),
+    ).toBeVisible();
+    const said = await page.evaluate(
+      () => (window as unknown as { said: string[] }).said,
+    );
+    expect(said.length).toBeGreaterThan(0);
+    await page.getByRole('button', { name: 'Arrêter la lecture à voix haute' }).click();
+    await expect(
+      page.getByRole('button', { name: 'Écouter le texte à voix haute' }),
+    ).toBeVisible();
+  });
+
   test('la partie reprend là où elle s’est arrêtée après un rechargement', async ({
     page,
   }) => {

@@ -9,6 +9,11 @@ export interface NewsItem {
 export const news: readonly NewsItem[] = [
   {
     date: '2026-10-20',
+    title: 'Écouter l’histoire',
+    text: 'Un bouton « Écouter » lit le texte à voix haute pendant le saut et à la fin. Tu peux fermer les yeux, ou garder les mains libres. Il reprend là où tu t’étais arrêté.',
+  },
+  {
+    date: '2026-10-20',
     title: 'Un carnet pour tout suivre',
     text: 'Après chaque geste, on te dit si les autres se méfient plus ou moins de toi. Un carnet garde les indices du saut. Chaque histoire a sa propre épreuve : le temps qui file, le silence, un objet. Le Journal liste les corps que tu as habités et les fins que tu as trouvées.',
   },

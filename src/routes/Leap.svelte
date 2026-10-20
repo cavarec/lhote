@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { DialogueLine } from '../../content/premises/types';
+  import Listen from '../lib/components/Listen.svelte';
   import ClueLog from '../lib/components/ClueLog.svelte';
   import Progress from '../lib/components/Progress.svelte';
   import Scene from '../lib/components/Scene.svelte';
@@ -172,13 +173,16 @@
 {/snippet}
 
 <main class="page">
-  <button
-    class="button button--quiet home-link"
-    aria-label="Retourner à l’accueil. Ton saut est gardé."
-    onclick={() => game.leave()}
-  >
-    Accueil
-  </button>
+  <div class="toolbar">
+    <Listen />
+    <button
+      class="button button--quiet home-link"
+      aria-label="Retourner à l’accueil. Ton saut est gardé."
+      onclick={() => game.leave()}
+    >
+      Accueil
+    </button>
+  </div>
   {#if game.beat !== 'wakeup'}
     <Progress dots={game.dots} label="Progression du saut" />
   {/if}
@@ -406,9 +410,9 @@
 </main>
 
 <style>
-  .home-link {
-    display: block;
-    margin-left: auto;
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
   }
   .scene-title {
     margin: var(--space-3) 0;
