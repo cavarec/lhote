@@ -278,7 +278,9 @@ describe('prémisses', () => {
 
   it('exige une mini-mécanique cohérente', () => {
     const rules = (p: Premise) => checkPremise(p).map((v) => v.rule);
-    expect(rules(premise({ mechanic: undefined }))).toEqual(['mecanique']);
+    const without = premise();
+    delete without.mechanic;
+    expect(rules(without)).toEqual(['mecanique']);
     expect(
       rules(
         premise({
