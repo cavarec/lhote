@@ -42,7 +42,7 @@ export default defineConfig({
       },
       workbox: {
         // App shell + contenu narratif (les prémisses sont dans un seul chunk) + polices.
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest,json}'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//, /^\/nouveautes\.xml$/],
         cleanupOutdatedCaches: true,
