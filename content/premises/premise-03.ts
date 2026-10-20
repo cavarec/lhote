@@ -472,6 +472,13 @@ export const premise03: Premise = {
 
   // Qui était ce corps : l'écran de fin donne la réponse, quelle que soit l'issue.
   // L'Observateur parle après le premier contact : ce qui doit être réparé, sans dire comment.
+  mechanic: {
+    kind: 'object',
+    label: 'La feuille de chêne',
+    button: 'Déplier la feuille de chêne',
+    line: 'Tu déplies la feuille. Un seul mot, d’une main qui n’est pas la tienne : « Reviens. » Au dos, le titre du carnet du conteur, à ton nom.',
+    revealsTruth: 'carnet-a-ton-nom',
+  },
   briefing: [
     'Je te vois, tu as l’air d’avoir dormi dans un fossé. Bon. Écoute, j’ai peu de temps, ce corps a une histoire qui ne se finit pas.',
     'Il faut que cette histoire trouve sa fin, ou que quelqu’un l’arrête avant. Ce qui doit être réparé, c’est elle. Je ne sais pas laquelle des deux fins est la bonne.',

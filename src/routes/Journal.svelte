@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import type { StateResponse } from '../lib/api/types';
   import type { Catalog } from '../lib/engine/types';
+  import { buildCarnet, carnetTotals, OUTCOME_LABEL, OUTCOMES } from '../lib/game/carnet';
   import { game } from '../lib/stores/game.svelte';
 
   let { onback }: { onback: () => void } = $props();
@@ -29,6 +30,10 @@
   const nameOf = (id: string): string =>
     catalog?.characters.find((c) => c.id === id)?.name ?? id;
   const world = $derived(snapshot?.chronology.world ?? null);
+  const carnet = $derived(
+    catalog ? buildCarnet(catalog, snapshot?.chronology.history ?? []) : [],
+  );
+  const totals = $derived(carnetTotals(carnet));
   const history = $derived(snapshot?.chronology.history ?? []);
   const sections = $derived(
     world
@@ -76,6 +81,31 @@
         ? 's'
         : ''}.
     </p>
+    <section class="narration carnet">
+      <h2>Carnet des hôtes</h2>
+      <p class="ui muted">
+        {totals.hosts} corps habité{totals.hosts > 1 ? 's' : ''} sur {carnet.length}. {totals.endings}
+        fin{totals.endings > 1 ? 's' : ''} trouvée{totals.endings > 1 ? 's' : ''} sur {totals.endingsMax}.
+      </p>
+      <ul class="hosts">
+        {#each carnet as entry (entry.premiseId)}
+          <li>
+            {#if entry.visited && entry.host}
+              <strong>{entry.host.name}</strong>, {entry.host.role}.
+              <span class="ui muted">
+                {entry.title}. Fins :
+                {#each OUTCOMES as o, i (o)}{i > 0 ? ' · ' : ' '}<span
+                    class:found={entry.found.includes(o)}
+                    >{entry.found.includes(o) ? OUTCOME_LABEL[o] : '…'}</span
+                  >{/each}
+              </span>
+            {:else}
+              <span class="muted">Un corps que tu n’as pas encore habité.</span>
+            {/if}
+          </li>
+        {/each}
+      </ul>
+    </section>
     {#each sections as section (section.title)}
       <section class="narration">
         <h2>{section.title}</h2>
@@ -95,6 +125,12 @@
 <style>
   section {
     margin-top: var(--space-4);
+  }
+  .hosts li + li {
+    margin-top: var(--space-3);
+  }
+  .found {
+    color: var(--ink);
   }
   h2 {
     font-size: 1.25em;

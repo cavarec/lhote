@@ -10,6 +10,16 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.13.0] - 2026-10-20
+
+### Ajouté
+
+- Conséquences lisibles : après chaque réponse, chaque geste d'enquête et chaque geste de ta main, une ligne dit si les autres se méfient plus ou moins de toi, et si tu tiens quelque chose de solide ou seulement un détail.
+- Carnet d'indices : pendant l'enquête, la fracture et la décision, un volet à ouvrir rassemble tout ce que le saut t'a montré, rangé par nature.
+- Une mini-mécanique propre à chaque histoire : un compte à rebours (la marée, minuit) qui coûte de la méfiance si tu traînes, le silence (te taire et écouter) qui apaise les autres, ou un objet à utiliser (la feuille de chêne, la cuiller, le grain de sel) qui apprend une vérité mais se remarque.
+- Carnet des hôtes dans le Journal : les corps déjà habités, avec leur nom et leur rôle, et les fins trouvées pour chacun.
+- Règle de contenu `mecanique` : chaque histoire en déclare une, et un objet ne révèle qu'une vérité qui existe dans l'enquête.
+
 ## [0.12.0] - 2026-10-19
 
 ### Ajouté

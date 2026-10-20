@@ -113,6 +113,16 @@ Un saut suit les temps d'un épisode de Code Quantum :
 5. Le retournement (`twists`), la fracture, la résolution.
 6. La carte de fin : `Resolution.aftermath` (1 à 2 phrases, ce qui est arrivé ensuite), l'identité du corps, le fragment, puis la dernière image du saut (`LEAP_OUTS`).
 
+### Mini-mécanique (`Premise.mechanic`)
+
+Chaque histoire déclare une mécanique, pour casser la répétition du déroulé. Elle pèse sur la méfiance ou sur ce que le joueur sait, jamais sur le hasard :
+
+- `countdown` (2 à 4 coups) : chaque réponse et chaque geste d'enquête en consomme un. Agir une fois de trop coûte de la méfiance, une seule fois. `strike` dit ce qui se passe alors.
+- `silence` : un geste d'enquête gratuit, une fois. Il apaise les autres. `button` et `line` sont les textes du geste.
+- `object` : un objet à utiliser, une fois. Il apprend la vérité `revealsTruth` (qui doit exister dans l'enquête) mais se remarque.
+
+Tous ces textes passent par les règles d'écriture. La règle `mecanique` des tests les vérifie.
+
 ## Histoires hors saison
 
 - `premise-06`, « Le lavoir de minuit » : les lavandières de la nuit demandent d'aider à tordre un drap. On le tord à contre-main. Vérités : `sens-du-poignet` (corps), `drap-de-la-maison-du-bas` (social).

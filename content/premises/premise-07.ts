@@ -478,6 +478,13 @@ export const premise07: Premise = {
 
   // Qui était ce corps : la réponse que donne l'écran de fin, quelle que soit l'issue.
   // L'Observateur parle après le premier contact : il dit ce qui doit être réparé, pas comment.
+  mechanic: {
+    kind: 'object',
+    label: 'Le grain de sel',
+    button: 'Poser le grain de sel sur ta langue',
+    line: 'Le sel est dur comme un cristal. Il ne vient pas de la mer : il vient de toi, comme une clé que ce corps garde sous la langue.',
+    revealsTruth: 'le-sel-est-la-cle',
+  },
   briefing: [
     'Je te vois, tu sais. Pas de panique, respire. Enfin, c’est une façon de parler : ce corps a l’air de se passer de buée.',
     'Voilà ce que j’ai. Cette grève cache une porte, celle d’Ys, et elle n’est pas fermée comme elle devrait l’être. Les cloches appellent. Quelqu’un a manqué à son devoir.',

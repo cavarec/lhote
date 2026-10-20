@@ -118,6 +118,19 @@ export interface HostIdentity {
   truth: string;
 }
 
+/**
+ * La mini-mécanique propre à une histoire, pour casser la répétition du déroulé. Chacune pèse sur la
+ * suspicion ou sur ce que le joueur sait, jamais sur le hasard.
+ *  - countdown : un compte à rebours. Chaque réponse et chaque geste d'enquête en consomme un ;
+ *    agir une fois de trop coûte de la méfiance (une seule fois).
+ *  - silence : un geste d'enquête gratuit, une fois : te taire et écouter. Il apaise les autres.
+ *  - object : un objet à utiliser, une fois : il apprend une vérité, mais il se remarque.
+ */
+export type Mechanic =
+  | { kind: 'countdown'; label: string; ticks: number; strike: string }
+  | { kind: 'silence'; label: string; button: string; line: string }
+  | { kind: 'object'; label: string; button: string; line: string; revealsTruth: string };
+
 export interface Premise {
   id: string;
   title: string;
@@ -135,6 +148,8 @@ export interface Premise {
    * `from` après `to` enjambe le nouvel an). Hors saison, elle n'est jamais tirée.
    */
   season?: Season;
+  /** Mini-mécanique de l'histoire (voir `Mechanic`). */
+  mechanic?: Mechanic;
   /** Coups de théâtre, du plus précis au repli. Absent : on passe directement à la fracture. */
   twists?: Twist[];
   /**
