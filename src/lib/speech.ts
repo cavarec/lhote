@@ -5,12 +5,27 @@ export function speechAvailable(): boolean {
   return typeof window !== 'undefined' && 'speechSynthesis' in window;
 }
 
-function frenchVoice(): SpeechSynthesisVoice | undefined {
-  const voices = window.speechSynthesis
+/** Les voix françaises de l'appareil (fr-FR, fr-CH, fr-CA…). La liste peut se remplir après coup. */
+export function frenchVoices(): SpeechSynthesisVoice[] {
+  if (!speechAvailable()) return [];
+  return window.speechSynthesis
     .getVoices()
     .filter((v) => v.lang.toLowerCase().startsWith('fr'));
+}
+
+/**
+ * La voix choisie par le joueur ; à défaut, une voix « neuronale » Ariane si l'appareil la propose
+ * (Edge l'appelle « Microsoft Ariane Online (Natural) »), puis une voix fr-FR locale.
+ */
+export function pickVoice(
+  voices: readonly SpeechSynthesisVoice[],
+  preferred = '',
+): SpeechSynthesisVoice | undefined {
   return (
-    voices.find((v) => v.lang.toLowerCase() === 'fr-fr' && v.localService) ?? voices[0]
+    voices.find((v) => preferred !== '' && v.name === preferred) ??
+    voices.find((v) => /ariane/i.test(v.name)) ??
+    voices.find((v) => v.lang.toLowerCase() === 'fr-fr' && v.localService) ??
+    voices[0]
   );
 }
 
@@ -36,10 +51,10 @@ export function stopSpeaking(): void {
 }
 
 /** Lit les paragraphes l'un après l'autre. `onend` est appelé une fois, à la fin ou à l'arrêt. */
-export function speakAll(paragraphs: string[], onend: () => void): void {
+export function speakAll(paragraphs: string[], onend: () => void, preferred = ''): void {
   stopSpeaking();
   if (paragraphs.length === 0) return onend();
-  const voice = frenchVoice();
+  const voice = pickVoice(frenchVoices(), preferred);
   let finished = false;
   const finish = (): void => {
     if (finished) return;

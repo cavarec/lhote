@@ -19,6 +19,8 @@ export interface Settings {
   vibration: boolean;
   /** Force l'absence d'animation, en plus de la préférence du système. */
   reduceMotion: boolean;
+  /** Nom de la voix choisie pour « Écouter » ; vide : la meilleure voix française disponible. */
+  voice: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -26,6 +28,7 @@ export const DEFAULT_SETTINGS: Settings = {
   textSpeed: 'normal',
   vibration: true,
   reduceMotion: false,
+  voice: '',
 };
 
 /** Un saut reçu du serveur, gardé pour le jouer hors-ligne. */

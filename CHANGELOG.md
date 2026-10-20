@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.15.0] - 2026-10-20
+
+### Ajouté
+
+- Voix d'« Écouter » au choix : un menu dans les réglages liste les voix françaises de l'appareil. Sans choix, la voix neuronale Ariane (suisse) est prise quand l'appareil la propose, comme dans Edge.
+
 ## [0.14.0] - 2026-10-20
 
 ### Ajouté
