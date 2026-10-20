@@ -9,7 +9,9 @@ test.describe('parcours complet', () => {
 
     // Écran de fin : le bouton de retour apparaît une fois le texte lu.
     await page.getByRole('button', { name: 'Revenir' }).click();
-    await expect(page.getByRole('button', { name: 'Sauter' })).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }),
+    ).toBeVisible();
 
     await page.getByRole('button', { name: 'Journal' }).click();
     await expect(page.getByText('1 saut accompli.')).toBeVisible();
@@ -188,6 +190,6 @@ test.describe('parcours complet', () => {
 
     await page.getByRole('button', { name: 'Supprimer mes données' }).click();
     await page.getByRole('button', { name: 'Oui, tout effacer' }).click();
-    await expect(page.getByText('Quelqu’un dort dans un corps')).toBeVisible();
+    await expect(page.getByText('Chaque histoire te transforme.')).toBeVisible();
   });
 });
