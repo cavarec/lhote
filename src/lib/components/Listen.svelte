@@ -25,7 +25,7 @@
     const todo = fresh.length > 0 ? fresh : all;
     spoken = all.length;
     playing = true;
-    speakAll(todo, () => (playing = false));
+    speakAll(todo, () => (playing = false), game.settings?.voice ?? '');
   }
 
   // Un nouveau moment du saut : on se tait et on repart de zéro.

@@ -301,6 +301,7 @@ describe('GameController', () => {
       vibration: false,
       reduceMotion: true,
       textSpeed: 'normal',
+      voice: '',
     });
   });
 

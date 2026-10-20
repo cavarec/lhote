@@ -1,6 +1,8 @@
 <script lang="ts">
   import { game } from '../lib/stores/game.svelte';
+  import { onMount } from 'svelte';
   import type { TextSize, TextSpeed } from '../lib/db/schema';
+  import { frenchVoices, speechAvailable } from '../lib/speech';
 
   let { onback }: { onback: () => void } = $props();
 
@@ -19,6 +21,18 @@
     { value: 'fast', label: 'Rapide' },
     { value: 'instant', label: 'Tout d’un coup' },
   ];
+
+  // Les voix d'un navigateur arrivent parfois après l'ouverture de la page.
+  let voices = $state<{ name: string; lang: string }[]>([]);
+  const readVoices = (): void => {
+    voices = frenchVoices().map((v) => ({ name: v.name, lang: v.lang }));
+  };
+  onMount(() => {
+    if (!speechAvailable()) return;
+    readVoices();
+    window.speechSynthesis.addEventListener('voiceschanged', readVoices);
+    return () => window.speechSynthesis.removeEventListener('voiceschanged', readVoices);
+  });
 
   async function download(): Promise<void> {
     try {
@@ -81,6 +95,20 @@
       />
       Réduire les animations
     </label>
+    {#if voices.length > 0}
+      <label class="check voice">
+        Voix pour « Écouter »
+        <select
+          value={game.settings?.voice ?? ''}
+          onchange={(e) => game.saveSettings({ voice: e.currentTarget.value })}
+        >
+          <option value="">Automatique</option>
+          {#each voices as v (v.name)}
+            <option value={v.name}>{v.name} ({v.lang})</option>
+          {/each}
+        </select>
+      </label>
+    {/if}
     <label class="check">
       <input
         type="checkbox"
@@ -137,6 +165,15 @@
   h2 {
     font-size: 1.125em;
     font-weight: 600;
+  }
+  .voice {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .voice select {
+    max-width: 100%;
+    font: inherit;
+    padding: var(--space-2);
   }
   .row {
     display: grid;
