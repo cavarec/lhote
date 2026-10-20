@@ -100,6 +100,11 @@
       aucun traceur.
     </p>
     <p>
+      « Écouter » lit le texte avec la voix de ton appareil ou de ton navigateur. L'Hôte
+      n'envoie rien : selon ton appareil, c'est lui qui peut passer par ses propres
+      serveurs.
+    </p>
+    <p>
       Un fragment de tes sauts, une seule phrase sans identifiant, peut être lu par un
       autre joueur comme une trace discrète. Il disparaît après 90 jours.
     </p>

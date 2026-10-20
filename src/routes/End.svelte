@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Listen from '../lib/components/Listen.svelte';
   import Vignette from '../lib/components/Vignette.svelte';
   import Scene from '../lib/components/Scene.svelte';
   import { installPrompt } from '../lib/pwa/install.svelte';
@@ -27,6 +28,7 @@
 </script>
 
 <main class="page">
+  <div class="listen-row"><Listen /></div>
   <Vignette mood={outcome.resolution.outcome} />
   <Scene {lines} {instant}>
     {#if outcome.resolution.aftermath}
@@ -84,6 +86,10 @@
 </main>
 
 <style>
+  .listen-row {
+    display: flex;
+    justify-content: flex-start;
+  }
   .aftermath {
     margin-top: var(--space-4);
     padding: var(--space-3);

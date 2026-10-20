@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.14.0] - 2026-10-20
+
+### Ajouté
+
+- « Écouter » : un bouton lit à voix haute le texte affiché, pendant le saut et sur l'écran de fin. Il utilise la voix française de l'appareil, sans service externe, et reprend après ce qui a déjà été lu. La page de confidentialité le précise.
+
 ## [0.13.1] - 2026-10-20
 
 ### Corrigé
