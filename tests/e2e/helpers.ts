@@ -14,7 +14,7 @@ export async function playToResolution(page: Page): Promise<void> {
 
 export async function startLeap(page: Page): Promise<void> {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Sauter' }).click();
+  await page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }).click();
   await page.getByRole('button', { name: 'Ouvrir les yeux' }).waitFor();
 }
 

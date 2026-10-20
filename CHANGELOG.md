@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.15.1] - 2026-10-20
+
+### Modifié
+
+- Accueil : titre en capitales, « Le monde t'attend. » pour tous, une introduction en deux strophes (le corps, puis ce que chaque lecture change) et le bouton « Entrer dans une nouvelle vie ». « Reprendre le saut » reste quand un saut est en cours.
+
 ## [0.15.0] - 2026-10-20
 
 ### Ajouté

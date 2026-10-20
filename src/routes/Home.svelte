@@ -49,15 +49,19 @@
 <main class="page fade-in">
   <Logo size={132} />
   <h1 class="narration home-title">L'Hôte</h1>
-  <p class="narration muted">
-    {game.firstVisit
-      ? 'Quelqu’un dort dans un corps qui n’est pas le sien.'
-      : 'Le monde t’attend.'}
-  </p>
-  <p class="narration muted intro">
-    À chaque nouvelle lecture, tu es l’hôte d’un nouveau corps. Tu ne sais pas qui il
-    était, et il ne sait pas que tu es là.
-  </p>
+  <p class="narration muted">Le monde t’attend.</p>
+  <div class="narration muted intro">
+    <p>
+      À chaque nouvelle lecture, tu es l’hôte d’un nouveau corps.<br />
+      Tu ne sais pas qui il était.<br />
+      Il ne sait pas que tu es là.
+    </p>
+    <p>
+      Chaque choix influence sa vie.<br />
+      Chaque souvenir révèle une vérité.<br />
+      Chaque histoire te transforme.
+    </p>
+  </div>
 
   {#if season}
     <p class="narration muted season">
@@ -98,7 +102,7 @@
         ? 'Un instant…'
         : resuming
           ? 'Reprendre le saut'
-          : 'Sauter'}
+          : 'Entrer dans une nouvelle vie'}
     </button>
     <button class="button" onclick={onjournal}>Journal</button>
     {#if epilogueReady}<button class="button" onclick={onepilogue}>Épilogue</button>{/if}
@@ -149,9 +153,14 @@
   .home-title {
     font-size: 2.5rem;
     margin: var(--space-3) 0 var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
   .intro {
     margin-top: var(--space-2);
+  }
+  .intro p + p {
+    margin-top: var(--space-3);
   }
   .season {
     margin-top: var(--space-2);

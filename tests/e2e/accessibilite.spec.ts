@@ -12,7 +12,7 @@ async function audit(page: Page): Promise<void> {
 test.describe('accessibilité (WCAG AA)', () => {
   test('accueil, réglages et journal', async ({ page }) => {
     await page.goto('/');
-    await page.getByRole('button', { name: 'Sauter' }).waitFor();
+    await page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }).waitFor();
     await audit(page);
     await page.getByRole('button', { name: 'Journal' }).click();
     await page.getByRole('button', { name: 'Retour' }).waitFor();
@@ -50,9 +50,11 @@ test.describe('accessibilité (WCAG AA)', () => {
 
   test('tout se joue au clavier et le focus reste visible', async ({ page }) => {
     await page.goto('/');
-    await page.getByRole('button', { name: 'Sauter' }).waitFor();
+    await page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }).waitFor();
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('button', { name: 'Sauter' })).toBeFocused();
+    await expect(
+      page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }),
+    ).toBeFocused();
     await page.keyboard.press('Enter');
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).waitFor();
     await page.getByRole('button', { name: 'Ouvrir les yeux' }).focus();
@@ -76,7 +78,7 @@ test.describe('accessibilité (WCAG AA)', () => {
     const context = await browser.newContext({ reducedMotion: 'no-preference' });
     const page = await context.newPage();
     await page.goto('/');
-    await page.getByRole('button', { name: 'Sauter' }).click();
+    await page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }).click();
     await page.locator('.scene-title').waitFor();
     await page.locator('.narration.fade-in').first().click();
     await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toBeVisible({
@@ -100,7 +102,7 @@ test.describe('accessibilité (WCAG AA)', () => {
     });
     const page = await context.newPage();
     await page.goto('/');
-    await page.getByRole('button', { name: 'Sauter' }).click();
+    await page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }).click();
     await page.locator('.scene-title').waitFor();
     // Au bout de quelques secondes, le texte dépasse l'écran : le dernier paragraphe doit rester visible.
     await expect
@@ -122,7 +124,7 @@ test.describe('accessibilité (WCAG AA)', () => {
       'true',
     );
     await page.getByRole('button', { name: 'Retour' }).click();
-    await page.getByRole('button', { name: 'Sauter' }).click();
+    await page.getByRole('button', { name: 'Entrer dans une nouvelle vie' }).click();
     await page.getByRole('button', { name: 'Tout afficher' }).click();
     await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toBeVisible({
       timeout: 2000,
