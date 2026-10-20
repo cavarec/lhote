@@ -80,6 +80,18 @@ test.describe('parcours complet', () => {
     await expect(page.locator('li .choice:not([disabled])')).toHaveCount(0);
   });
 
+  test('on peut revenir à l’accueil en plein saut et le reprendre', async ({ page }) => {
+    await startLeap(page);
+    await page.getByRole('button', { name: 'Ouvrir les yeux' }).click();
+    await page.getByRole('button', { name: 'Continuer' }).click();
+    await expect(page.locator('.choice').first()).toBeVisible();
+    await page.getByRole('button', { name: /Retourner à l’accueil/ }).click();
+    await expect(page.getByRole('button', { name: 'Reprendre le saut' })).toBeVisible();
+    await page.getByRole('button', { name: 'Reprendre le saut' }).click();
+    await expect(page.locator('.choice').first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Ouvrir les yeux' })).toHaveCount(0);
+  });
+
   test('la partie reprend là où elle s’est arrêtée après un rechargement', async ({
     page,
   }) => {

@@ -114,6 +114,18 @@ class GameStore {
     }, 'playing');
   }
 
+  /**
+   * Quitte le saut en cours pour l'accueil. Rien n'est perdu : chaque action est déjà sauvegardée,
+   * et « Reprendre le saut » rouvre le saut là où il s'était arrêté.
+   */
+  leave(): void {
+    if (!this.session) return;
+    this.session = null;
+    this.problem = null;
+    this.hasProgress = true;
+    this.phase = 'ready';
+  }
+
   /** Retour à l'accueil après un saut ou une erreur. */
   home(): void {
     this.outcome = null;

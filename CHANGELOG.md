@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.13.1] - 2026-10-20
+
+### Corrigé
+
+- En plein saut, un bouton « Accueil » permet de revenir à l'accueil. Le saut est gardé : « Reprendre le saut » le rouvre là où il s'était arrêté.
+
 ## [0.13.0] - 2026-10-20
 
 ### Ajouté

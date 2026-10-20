@@ -172,6 +172,13 @@
 {/snippet}
 
 <main class="page">
+  <button
+    class="button button--quiet home-link"
+    aria-label="Retourner à l’accueil. Ton saut est gardé."
+    onclick={() => game.leave()}
+  >
+    Accueil
+  </button>
   {#if game.beat !== 'wakeup'}
     <Progress dots={game.dots} label="Progression du saut" />
   {/if}
@@ -399,6 +406,10 @@
 </main>
 
 <style>
+  .home-link {
+    display: block;
+    margin-left: auto;
+  }
   .scene-title {
     margin: var(--space-3) 0;
     text-align: center;
