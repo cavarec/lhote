@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.16.0] - 2026-10-20
+
+### Ajouté
+
+- Animations Lottie facultatives pour les illustrations : tout fichier déposé dans `src/assets/lottie/` (`premise-0N.json`, par moment, ou `mood-….json` pour les fins) remplace la gravure SVG. Lecteur léger chargé à la demande, jamais sans fichier. Image fixe avec « Réduire les animations », retour automatique à la gravure si le fichier ne se charge pas. Prompts de génération dans `content/ILLUSTRATIONS.md`.
+
 ## [0.15.1] - 2026-10-20
 
 ### Modifié

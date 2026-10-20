@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { lottieUrl } from '../illustrations/lottie';
   import {
     moodSvg,
     sceneSvg,
@@ -19,9 +20,80 @@
     mood ? moodSvg(mood) : kind ? (sceneSvg(premiseId, kind) ?? '') : '',
   );
   const label = $derived(kind ? SCENE_LABELS[kind] : '');
+
+  // Une animation Lottie déposée dans src/assets/lottie/ remplace la gravure SVG ; si elle ne se
+  // charge pas, la gravure reste.
+  const url = $derived(lottieUrl(premiseId, kind, mood));
+  let host = $state<HTMLDivElement>();
+  let playing = $state(false);
+
+  function calm(): boolean {
+    return (
+      document.documentElement.dataset['reduceMotion'] === 'true' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+  }
+
+  $effect(() => {
+    if (!url || !host) return;
+    const container = host;
+    let animation: { destroy: () => void } | null = null;
+    let cancelled = false;
+    void (async () => {
+      try {
+        const [{ default: lottie }, response] = await Promise.all([
+          import('lottie-web/build/player/lottie_light'),
+          fetch(url),
+        ]);
+        const animationData: unknown = await response.json();
+        if (cancelled) return;
+        const still = calm();
+        const loaded = lottie.loadAnimation({
+          container,
+          renderer: 'svg',
+          loop: !still,
+          autoplay: !still,
+          animationData,
+          rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+        });
+        // Sans mouvement, on garde une image fixe : la première.
+        if (still) loaded.goToAndStop(0, true);
+        animation = loaded;
+        playing = true;
+      } catch {
+        playing = false;
+      }
+    })();
+    return () => {
+      cancelled = true;
+      animation?.destroy();
+      playing = false;
+    };
+  });
 </script>
 
-{#if body}
+{#if url}
+  <figure class="vignette fade-in">
+    <div
+      class="lottie"
+      class:hidden={!playing}
+      role="img"
+      aria-label={label || 'Illustration'}
+      bind:this={host}
+    ></div>
+    {#if !playing && body}
+      <svg
+        viewBox="0 0 400 220"
+        role="img"
+        aria-label={label}
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html body}
+      </svg>
+    {/if}
+  </figure>
+{:else if body}
   <figure class="vignette fade-in">
     <svg
       viewBox="0 0 400 220"
@@ -41,6 +113,11 @@
     margin: 0 0 var(--space-3);
     color: var(--ink);
   }
+  .hidden {
+    height: 0;
+    overflow: hidden;
+  }
+  .lottie,
   svg {
     display: block;
     width: 100%;
