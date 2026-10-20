@@ -503,6 +503,12 @@ export const premise02: Premise = {
 
   // Qui était ce corps : l'écran de fin le dit, quelle que soit l'issue.
   // L'Observateur parle après le premier contact : ce qui doit être réparé, sans dire comment.
+  mechanic: {
+    kind: 'silence',
+    label: 'Le silence de la nef',
+    button: 'Te taire et écouter la nef',
+    line: 'Tu ne dis rien. La nef parle pour toi : un souffle, une goutte, un pas qui s’éloigne. Les autres se détendent.',
+  },
   briefing: [
     'Je te vois, tu as une tête de cierge fondu. Écoute vite : ce corps porte quelque chose qui ne doit pas rester caché.',
     'Il y a une chasse, une foule, une mère qui attend un miracle. Quelque chose est faux là-dedans, et ça va se voir avant la fin du jour.',

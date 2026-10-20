@@ -39,6 +39,12 @@ export const premise05: Premise = {
   },
 
   // L'Observateur parle après le premier contact : il dit ce qui doit être réparé, pas comment.
+  mechanic: {
+    kind: 'countdown',
+    label: 'Minuit approche',
+    ticks: 3,
+    strike: 'Minuit approche, et tu traînes encore. Les bêtes se tournent vers toi.',
+  },
   briefing: [
     'Je te vois, tu sais. Mauvaise nuit pour avoir froid aux orteils : on est le soir de Noël, et tu veilles des bêtes qui s’apprêtent à parler.',
     'Voilà ce que je sais. Il y a un nom qui court dans cette étable, et quelqu’un en paiera le prix. À toi de réparer ça avant que la maison arrive.',

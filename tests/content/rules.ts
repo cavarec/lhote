@@ -191,6 +191,18 @@ export function collectPlayerTexts(catalog: Catalog): PlayerText[] {
         texts.push({ where: `${at}.resolution ${r.id}.aftermath`, text: r.aftermath });
       }
     });
+    if (premise.mechanic) {
+      const m = premise.mechanic;
+      texts.push({ where: `${at}.mechanic.label`, text: m.label });
+      if (m.kind === 'countdown')
+        texts.push({ where: `${at}.mechanic.strike`, text: m.strike });
+      else {
+        texts.push(
+          { where: `${at}.mechanic.button`, text: m.button },
+          { where: `${at}.mechanic.line`, text: m.line },
+        );
+      }
+    }
     if (premise.host) {
       texts.push(
         { where: `${at}.host.role`, text: premise.host.role },
@@ -372,6 +384,31 @@ export function checkPremise(premise: Premise): Violation[] {
       rule: 'episode',
       message: `${briefingLines} réplique(s) d'Observateur (2 à 4 attendues).`,
     });
+  }
+  // Chaque histoire a sa mini-mécanique ; un objet apprend une vérité qui existe dans l'enquête.
+  if (!premise.mechanic) {
+    violations.push({
+      where: `${at}.mechanic`,
+      rule: 'mecanique',
+      message: 'mechanic manquant.',
+    });
+  } else if (premise.mechanic.kind === 'countdown') {
+    if (premise.mechanic.ticks < 2 || premise.mechanic.ticks > 4) {
+      violations.push({
+        where: `${at}.mechanic`,
+        rule: 'mecanique',
+        message: 'Un compte à rebours compte 2 à 4 coups.',
+      });
+    }
+  } else if (premise.mechanic.kind === 'object') {
+    const wanted = premise.mechanic.revealsTruth;
+    if (!premise.investigation.some((c) => c.revealsTruth === wanted)) {
+      violations.push({
+        where: `${at}.mechanic`,
+        rule: 'mecanique',
+        message: `Aucun indice d'enquête ne révèle la vérité « ${wanted} ».`,
+      });
+    }
   }
   for (const r of premise.resolutions) {
     if (!r.aftermath || r.aftermath.length < 30) {

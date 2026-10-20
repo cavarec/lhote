@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { DialogueLine } from '../../content/premises/types';
+  import ClueLog from '../lib/components/ClueLog.svelte';
   import Progress from '../lib/components/Progress.svelte';
   import Scene from '../lib/components/Scene.svelte';
   import Vignette from '../lib/components/Vignette.svelte';
@@ -20,9 +21,26 @@
     lockedResolutions,
     leanToward,
     revealClues,
+    collectedClues,
     repairChances,
     speakerFor,
   } from '../lib/game/beats';
+  import {
+    choiceConsequence,
+    clueConsequence,
+    handConsequence,
+    objectConsequence,
+    silenceConsequence,
+  } from '../lib/game/consequences';
+  import {
+    mechanicOf,
+    mechanicUsable,
+    mechanicUsed,
+    settleCountdown,
+    strikeTaken,
+    ticksLeft,
+    useMechanic,
+  } from '../lib/game/mechanics';
   import { game } from '../lib/stores/game.svelte';
 
   const session = $derived(game.session!);
@@ -89,7 +107,9 @@
   );
 
   function choose2(id: string): void {
-    void game.update((l) => chooseSecondRound(l, premise, id).leap);
+    void game.update((l) =>
+      settleCountdown(chooseSecondRound(l, premise, id).leap, premise),
+    );
   }
 
   function afterInvestigation(): void {
@@ -98,14 +118,48 @@
   }
 
   function choose(id: string): void {
-    void game.update((l) => chooseDialogue(l, premise, id).leap);
+    void game.update((l) =>
+      settleCountdown(chooseDialogue(l, premise, id).leap, premise),
+    );
   }
+
+  // La mini-mécanique de l'histoire et les lignes qui disent ce que chaque geste a changé.
+  const mechanic = $derived(mechanicOf(premise));
+  const clock = $derived(ticksLeft(premise, leap));
+  const clues = $derived(collectedClues(premise, leap));
+  const truthIndices = $derived(
+    new Set(premise.investigation.flatMap((item, i) => (item.revealsTruth ? [i] : []))),
+  );
+  const firstEffect = $derived(
+    leap.choices['dialogue'] === 'hand' && handDialogue
+      ? handConsequence(handDialogue.outcome)
+      : chosen && 'kind' in chosen
+        ? choiceConsequence(chosen.kind)
+        : null,
+  );
+  const secondEffect = $derived(chosen2 ? choiceConsequence(chosen2.kind) : null);
 </script>
+
+{#snippet effect(text: string | null)}
+  {#if text}<p class="ui muted effect" aria-live="polite">{text}</p>{/if}
+{/snippet}
+
+{#snippet clockLine()}
+  {#if mechanic?.kind === 'countdown' && clock !== null}
+    <p class="ui muted chances" aria-live="polite">{mechanic.label} : {clock}</p>
+    {#if strikeTaken(leap)}
+      <p class="ui muted effect">{mechanic.strike}</p>
+    {:else if clock === 0}
+      <p class="ui muted effect">Tout geste de plus se remarquera.</p>
+    {/if}
+  {/if}
+{/snippet}
 
 {#snippet briefed()}
   {#if briefing.length > 0}
     <Scene lines={briefing} npcName="L’Observateur" {instant}>
       <p class="ui muted chances" aria-live="polite">Chances de réparer : {chances} %</p>
+      {@render clockLine()}
       <button class="button button--primary next" onclick={() => game.advance()}>
         Continuer
       </button>
@@ -174,6 +228,7 @@
             npcName={speaker?.name ?? null}
             {instant}
           >
+            {@render effect(firstEffect)}
             {#if !round}
               {@render briefed()}
             {:else}
@@ -194,6 +249,7 @@
                     npcName={speaker?.name ?? null}
                     {instant}
                   >
+                    {@render effect(secondEffect)}
                     {@render briefed()}
                   </Scene>
                 {/if}
@@ -219,6 +275,7 @@
             : 'Le temps te manque. Tu sais ce que tu sais.'}
         </p>
         <p class="ui muted" aria-live="polite">Chances de réparer : {chances} %</p>
+        {@render clockLine()}
       </div>
       <ul class="choices">
         {#each groups as group (group.kind)}
@@ -227,11 +284,15 @@
               {#each group.texts as text, i (i)}
                 <p class="narration npc">{text}</p>
               {/each}
+              <p class="ui muted effect">{clueConsequence(group, truthIndices)}</p>
             {:else}
               <button
                 class="choice"
                 disabled={left === 0}
-                onclick={() => game.update((l) => revealClues(l, group.indices, premise))}
+                onclick={() =>
+                  game.update((l) =>
+                    settleCountdown(revealClues(l, group.indices, premise), premise),
+                  )}
               >
                 {group.label}
               </button>
@@ -239,11 +300,27 @@
           </li>
         {/each}
       </ul>
+      {#if mechanic && mechanic.kind !== 'countdown'}
+        {#if mechanicUsable(premise, leap)}
+          <button
+            class="button button--quiet hand"
+            onclick={() => game.update((l) => useMechanic(l, premise))}
+          >
+            {mechanic.button}
+          </button>
+        {:else if mechanicUsed(leap)}
+          <p class="narration npc-hand">{mechanic.line}</p>
+          <p class="ui muted effect">
+            {mechanic.kind === 'silence' ? silenceConsequence() : objectConsequence()}
+          </p>
+        {/if}
+      {/if}
       {#if handInvestigation}
         {#if handUsed(leap, 'investigation')}
           {#each handInvestigation.lines as line, i (i)}
             <p class="narration npc-hand">{line.text}</p>
           {/each}
+          <p class="ui muted effect">{handConsequence(handInvestigation.outcome)}</p>
         {:else}
           <button
             class="button button--quiet hand"
@@ -253,6 +330,7 @@
           </button>
         {/if}
       {/if}
+      <ClueLog {clues} />
       <button class="button button--primary next" onclick={afterInvestigation}>
         Continuer
       </button>
@@ -275,6 +353,7 @@
           </li>
         {/each}
       </ul>
+      <ClueLog {clues} />
       <button
         class="button button--primary next"
         disabled={leap.choices['fracture'] === undefined}
@@ -313,6 +392,7 @@
           </li>
         {/each}
       </ul>
+      <ClueLog {clues} />
       {#if game.problem}<p class="ui notice" role="alert">{game.problemMessage}</p>{/if}
     {/if}
   {/key}
@@ -329,6 +409,10 @@
   }
   .chances {
     margin-top: var(--space-3);
+  }
+  .effect {
+    margin-top: var(--space-2);
+    font-style: italic;
   }
   .next {
     margin-top: var(--space-4);

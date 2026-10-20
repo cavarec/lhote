@@ -38,6 +38,12 @@ export const premise06: Premise = {
   },
 
   // L'Observateur : ce qui doit être réparé, sans le comment.
+  mechanic: {
+    kind: 'silence',
+    label: 'Le silence du lavoir',
+    button: 'Ne toucher à rien, écouter l’eau',
+    line: 'Tu poses tes mains sur tes genoux. L’eau n’a plus personne à qui parler. Les lavandières baissent leurs battoirs.',
+  },
   briefing: [
     'Je te vois, tu sais. Ne cherche pas où : je suis là, sur le bord du lavoir, avec les pieds au sec.',
     'Voilà ce que j’ai : un drap, des lavandières, et quelqu’un de la maison du bas qui ne dort pas. Il faut finir ce drap avant l’aube, et bien le finir.',

@@ -39,6 +39,13 @@ export const premise04: Premise = {
   },
 
   // L'Observateur, après le premier contact : ce qui doit être réparé, sans dire comment.
+  mechanic: {
+    kind: 'object',
+    label: 'La cuiller de bois',
+    button: 'Sortir la cuiller de bois',
+    line: 'Tu sors la cuiller de ta poche. La vieille se lève et dit le nom gravé sous le bol, comme on dit une prière.',
+    revealsTruth: 'nom-sur-lecuelle',
+  },
   briefing: [
     'Je te vois, tu peux respirer. Tu es dans une ferme, la nuit des morts. Il y a un couvert de trop sur cette table.',
     'Voilà ce qui cloche, d’après ce que je sais : quelqu’un est venu avant l’heure, et on l’a oublié. Il faut que la maison le sache.',

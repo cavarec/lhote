@@ -505,6 +505,13 @@ export const premise01: Premise = {
 
   // Beat 5 : la fracture. Deux lectures possibles ; la seed du saut en retient une.
   // L'Observateur parle après le premier contact : il dit ce qui doit être réparé, pas comment.
+  mechanic: {
+    kind: 'countdown',
+    label: 'La marée monte',
+    ticks: 3,
+    strike:
+      'La marée a monté pendant que tu hésitais. Les hommes te regardent, les yeux durs.',
+  },
   briefing: [
     'Je te vois, ne te retourne pas. Je suis arrivé aussi vite que j’ai pu, et crois-moi, ça n’a pas été simple.',
     'Voilà ce que je sais : la mer a rendu un corps, et quelqu’un, ici, est en train de poser un mauvais nom dessus. Il faut que ça cesse.',

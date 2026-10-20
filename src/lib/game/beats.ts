@@ -201,6 +201,8 @@ export function knownTruths(premise: Premise, leap: LeapState): Set<string> {
   });
   const fromHand = leap.choices['hand-truth'];
   if (fromHand !== undefined) truths.add(fromHand);
+  const fromObject = leap.choices['mech-truth'];
+  if (fromObject !== undefined) truths.add(fromObject);
   return truths;
 }
 
@@ -335,4 +337,17 @@ export function isLocked(premise: Premise, leap: LeapState, r: Resolution): bool
 export function lockedResolutions(premise: Premise, leap: LeapState): Resolution[] {
   if (exposed(leap)) return [];
   return premise.resolutions.filter((r) => isLocked(premise, leap, r));
+}
+
+export interface CollectedClue {
+  kind: ClueKind;
+  text: string;
+}
+
+/** Le carnet d'indices : ce que tu as vu au réveil et ce que l'enquête t'a montré, rien d'autre. */
+export function collectedClues(premise: Premise, leap: LeapState): CollectedClue[] {
+  const seen = visibleInvestigation(premise, leap)
+    .filter(({ index }) => leap.choices[`clue-${index}`] === 'seen')
+    .map(({ item }) => ({ kind: item.kind, text: item.text }));
+  return [...premise.orientation.map((o) => ({ kind: o.kind, text: o.text })), ...seen];
 }

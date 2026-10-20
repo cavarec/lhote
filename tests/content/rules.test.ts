@@ -171,6 +171,12 @@ describe('prémisses', () => {
         ],
       },
       briefing: ['Je te vois.', 'Il faut réparer ce qui s’est défait ici.'],
+      mechanic: {
+        kind: 'silence',
+        label: 'Le silence',
+        button: 'Te taire et écouter',
+        line: 'Tu ne dis rien. Les autres se détendent.',
+      },
       investigation: [{ kind: 'social', text: 'Un nom.', revealsTruth: 't0' }],
       host: {
         name: 'Gwenn',
@@ -268,6 +274,38 @@ describe('prémisses', () => {
       'resultat-lignes',
     ]);
     expect(checkPremise(withText('1\n2\n3\n4\n5'))).toEqual([]);
+  });
+
+  it('exige une mini-mécanique cohérente', () => {
+    const rules = (p: Premise) => checkPremise(p).map((v) => v.rule);
+    const without = premise();
+    delete without.mechanic;
+    expect(rules(without)).toEqual(['mecanique']);
+    expect(
+      rules(
+        premise({
+          mechanic: {
+            kind: 'countdown',
+            label: 'Le temps',
+            ticks: 9,
+            strike: 'Trop tard.',
+          },
+        }),
+      ),
+    ).toEqual(['mecanique']);
+    expect(
+      rules(
+        premise({
+          mechanic: {
+            kind: 'object',
+            label: 'Une clé',
+            button: 'Sortir la clé',
+            line: 'Tu sors la clé.',
+            revealsTruth: 'inconnue',
+          },
+        }),
+      ),
+    ).toEqual(['mecanique']);
   });
 
   it('vérifie aussi les choix du dialogue d’ouverture', () => {
