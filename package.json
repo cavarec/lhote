@@ -47,6 +47,6 @@
   },
   "dependencies": {
     "idb": "^8.0.4",
-    "lottie-web": "^5.12.2"
+    "lottie-web": "^5.13.0"
   }
 }
