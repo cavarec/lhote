@@ -8,6 +8,11 @@ export interface NewsItem {
 
 export const news: readonly NewsItem[] = [
   {
+    date: '2026-10-28',
+    title: 'Des gravures vivantes',
+    text: 'Les vagues roulent, les cloches balancent, les braises montent, les spirales tournent. Les images respirent sans te distraire. Si tu préfères le calme, réduis les animations dans les réglages.',
+  },
+  {
     date: '2026-10-20',
     title: 'Écouter l’histoire',
     text: 'Un bouton « Écouter » lit le texte à voix haute pendant le saut et à la fin. Tu peux fermer les yeux, ou garder les mains libres. Il reprend là où tu t’étais arrêté.',
