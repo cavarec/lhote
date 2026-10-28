@@ -150,6 +150,83 @@
   svg :global(.sweep) {
     animation: sweep 7s ease-in-out infinite alternate;
   }
+  /* Mouvements des gravures : vagues qui roulent, cloches qui balancent, braises qui montent,
+     souffle des silhouettes, spirales qui tournent, cercles qui s'élargissent. */
+  svg :global(.wave) {
+    animation: wave 5.5s ease-in-out infinite alternate;
+  }
+  svg :global(.sway) {
+    animation: sway 3.8s ease-in-out infinite alternate;
+  }
+  svg :global(.rise) {
+    animation: rise 4s linear infinite;
+  }
+  svg :global(.breathe) {
+    animation: breathe 4.4s ease-in-out infinite alternate;
+  }
+  svg :global(.twirl) {
+    animation: twirl 70s linear infinite;
+  }
+  svg :global(.twirl-back) {
+    animation-direction: reverse;
+  }
+  svg :global(.ripple) {
+    animation: ripple 4.6s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  @keyframes wave {
+    from {
+      transform: translate(-12px, 0);
+    }
+    to {
+      transform: translate(12px, 2.5px);
+    }
+  }
+  @keyframes sway {
+    from {
+      transform: rotate(-5deg);
+    }
+    to {
+      transform: rotate(5deg);
+    }
+  }
+  @keyframes rise {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-52px);
+      opacity: 0;
+    }
+  }
+  @keyframes breathe {
+    from {
+      transform: scaleY(1);
+    }
+    to {
+      transform: scaleY(1.03);
+    }
+  }
+  @keyframes twirl {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes ripple {
+    from {
+      transform: scale(0.7);
+      opacity: 0.9;
+    }
+    to {
+      transform: scale(1.3);
+      opacity: 0;
+    }
+  }
   @keyframes flick {
     0%,
     100% {

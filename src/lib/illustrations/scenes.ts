@@ -46,7 +46,7 @@ function spiral(
 
 /** Trois spirales à 120° : le triskèle. */
 function triskele(cx: number, cy: number, r: number, brush: string): string {
-  return [0, 1, 2]
+  const arms = [0, 1, 2]
     .map((k) => {
       const a = (k * 2 * Math.PI) / 3 - Math.PI / 2;
       return spiral(
@@ -61,6 +61,9 @@ function triskele(cx: number, cy: number, r: number, brush: string): string {
       );
     })
     .join('');
+  // Il tourne très lentement, dans un sens ou dans l'autre selon sa place.
+  const turn = Math.round(cx) % 2 === 0 ? 'twirl' : 'twirl twirl-back';
+  return `<g class="${turn}" style="transform-origin:${cx}px ${cy}px">${arms}</g>`;
 }
 
 /** Une volute : un trait qui court puis s'enroule. */
@@ -111,7 +114,9 @@ function waves(
       -1,
     );
   }
-  return `<g class="${cls}"><path d="${d}" ${brush}/>${curls}</g>`;
+  // Chaque rangée ondule à son rythme (décalage selon sa hauteur) ; « drift » est l'ancien nom.
+  const motion = cls === '' || cls === 'drift' ? 'wave' : cls;
+  return `<g class="${motion}" style="animation-delay:-${(y % 5).toFixed(1)}s"><path d="${d}" ${brush}/>${curls}</g>`;
 }
 
 /** Une roue à rayons et moyeu en spirale (le char qui grince). */
@@ -121,19 +126,23 @@ function wheel(cx: number, cy: number, r: number, brush: string): string {
     return `M${f(cx + Math.cos(a) * r * 0.2)} ${f(cy + Math.sin(a) * r * 0.2)} L${f(cx + Math.cos(a) * r * 0.92)} ${f(cy + Math.sin(a) * r * 0.92)}`;
   }).join(' ');
   return (
+    `<g class="twirl" style="transform-origin:${cx}px ${cy}px">` +
     `<circle cx="${cx}" cy="${cy}" r="${r}" ${brush}/><circle cx="${cx}" cy="${cy}" r="${f(r * 0.88)}" ${brush}/>` +
     `<path d="${spokes}" ${brush}/>` +
-    spiral(cx, cy, 0.5, r * 0.2, 1.6, brush)
+    spiral(cx, cy, 0.5, r * 0.2, 1.6, brush) +
+    `</g>`
   );
 }
 
 /** Une cloche : l'anse, le flanc, la lèvre et le battant. */
 function bell(cx: number, cy: number, s: number, brush: string, fill: string): string {
   return (
+    `<g class="sway" style="transform-origin:${cx}px ${f(cy - s * 1.05)}px">` +
     `<path d="M${f(cx - s)} ${f(cy + s * 0.7)} C${f(cx - s)} ${f(cy - s * 0.1)} ${f(cx - s * 0.5)} ${f(cy - s * 0.85)} ${f(cx)} ${f(cy - s * 0.85)} S${f(cx + s)} ${f(cy - s * 0.1)} ${f(cx + s)} ${f(cy + s * 0.7)} Q${f(cx)} ${f(cy + s * 0.95)} ${f(cx - s)} ${f(cy + s * 0.7)}Z" ${fill} stroke="var(--ochre)" stroke-width="2" stroke-linejoin="round"/>` +
     `<circle cx="${cx}" cy="${f(cy - s * 1.05)}" r="${f(s * 0.14)}" ${brush}/>` +
     `<circle cx="${cx}" cy="${f(cy + s * 0.95)}" r="${f(s * 0.14)}" ${of(0.9)}/>` +
-    spiral(cx, cy + s * 0.05, 1, s * 0.34, 1.5, brush)
+    spiral(cx, cy + s * 0.05, 1, s * 0.34, 1.5, brush) +
+    `</g>`
   );
 }
 
@@ -167,8 +176,10 @@ function trunk(x: number, w: number, o = 0.7, knots = 4): string {
 function person(x: number, base: number, h: number, o = 0.95): string {
   const w = h * 0.34;
   return (
+    `<g class="breathe" style="transform-origin:${x}px ${base}px;animation-delay:-${((x % 7) / 2).toFixed(1)}s">` +
     `<path d="M${f(x - w)} ${base} V${f(base - h * 0.55)} C${f(x - w)} ${f(base - h * 0.85)} ${f(x + w)} ${f(base - h * 0.85)} ${f(x + w)} ${f(base - h * 0.55)} V${base}Z" ${ink(o)}/>` +
-    `<circle cx="${x}" cy="${f(base - h * 0.95)}" r="${f(h * 0.14)}" ${ink(o)}/>`
+    `<circle cx="${x}" cy="${f(base - h * 0.95)}" r="${f(h * 0.14)}" ${ink(o)}/>` +
+    `</g>`
   );
 }
 
@@ -188,7 +199,7 @@ function embers(n: number, x: number, y: number, spread: number, brush: string):
   return Array.from({ length: n }, (_, i) => {
     const px = x + ((i * 37) % spread) - spread / 2;
     const py = y - ((i * 23) % 40);
-    return `<circle class="fall" style="animation-delay:-${((i * 0.7) % 5).toFixed(1)}s;animation-duration:${3 + (i % 4)}s" cx="${f(px)}" cy="${f(py)}" r="${f(1 + (i % 3) * 0.4)}" ${brush}/>`;
+    return `<circle class="rise" style="animation-delay:-${((i * 0.7) % 5).toFixed(1)}s;animation-duration:${3 + (i % 4)}s" cx="${f(px)}" cy="${f(py)}" r="${f(1 + (i % 3) * 0.4)}" ${brush}/>`;
   }).join('');
 }
 
@@ -252,7 +263,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<path d="M0 118 L46 92 L96 114 L150 84 L206 112 L262 88 L322 116 L400 90 V220 H0Z" ${ink(0.82)}/>` +
       `<path d="M0 150 C80 140 160 158 240 148 S360 144 400 150 V220 H0Z" ${sea(0.22)}/>` +
       waves(150, 10, 390, 40, 8, oc(0.85, 1.8)) +
-      `<circle class="pulse" cx="200" cy="184" r="22" ${oc(0.4, 1.4)}/><circle class="pulse" style="animation-delay:-1.5s" cx="200" cy="184" r="40" ${oc(0.25, 1.2)}/>` +
+      `<circle class="ripple" cx="200" cy="184" r="22" ${oc(0.4, 1.4)}/><circle class="ripple" style="animation-delay:-1.5s" cx="200" cy="184" r="40" ${oc(0.25, 1.2)}/>` +
       bell(200, 188, 16, oc(0.9, 1.6), of(0.25)) +
       `<ellipse cx="200" cy="112" rx="18" ry="6" ${ink(0.98)}/><path d="M186 110 c8 -8 20 -8 28 0" fill="none" stroke="var(--parchment)" stroke-opacity=".8" stroke-width="2"/>` +
       `<circle class="flick" cx="200" cy="106" r="3" ${warm(0.95)}/>`,
@@ -262,7 +273,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
   'premise-02': {
     wakeup:
       frame() +
-      `<circle class="pulse" cx="200" cy="78" r="46" ${oc(0.5, 1.8)}/><circle class="pulse" style="animation-delay:-1.2s" cx="200" cy="78" r="70" ${oc(0.3, 1.5)}/><circle class="pulse" style="animation-delay:-2.4s" cx="200" cy="78" r="96" ${oc(0.18, 1.3)}/>` +
+      `<circle class="ripple" cx="200" cy="78" r="46" ${oc(0.5, 1.8)}/><circle class="ripple" style="animation-delay:-1.2s" cx="200" cy="78" r="70" ${oc(0.3, 1.5)}/><circle class="ripple" style="animation-delay:-2.4s" cx="200" cy="78" r="96" ${oc(0.18, 1.3)}/>` +
       bell(200, 82, 30, oc(0.95, 2), of(0.22)) +
       `<path d="M200 20 V40" ${oc(0.9, 2)}/>` +
       Array.from({ length: 9 }, (_, i) =>
@@ -296,7 +307,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<path d="M30 200 V116 L66 94 L102 116 V200Z" ${of(0.2)} stroke="var(--ochre)" stroke-width="2"/>` +
       `<path d="M52 150 H80 M66 134 V166" ${oc(0.8, 1.6)}/>` +
       bell(336, 80, 18, oc(0.8, 1.6), of(0.16)) +
-      `<circle class="pulse" cx="336" cy="80" r="30" ${oc(0.3, 1.2)}/>` +
+      `<circle class="ripple" cx="336" cy="80" r="30" ${oc(0.3, 1.2)}/>` +
       triskele(330, 160, 30, oc(0.6, 1.4)),
     investigation:
       frame() +
@@ -396,7 +407,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       trunk(278, 16, 0.4, 3) +
       `<ellipse cx="200" cy="154" rx="86" ry="26" ${of(0.2)} stroke="var(--ochre)" stroke-width="2.4"/>` +
       `<ellipse cx="200" cy="150" rx="68" ry="17" ${ink(0.96)}/>` +
-      `<ellipse class="pulse" cx="200" cy="150" rx="46" ry="10" ${oc(0.35, 1.2)}/><ellipse class="pulse" style="animation-delay:-1.6s" cx="200" cy="150" rx="26" ry="5" ${oc(0.3, 1.2)}/>` +
+      `<ellipse class="ripple" cx="200" cy="150" rx="46" ry="10" ${oc(0.35, 1.2)}/><ellipse class="ripple" style="animation-delay:-1.6s" cx="200" cy="150" rx="26" ry="5" ${oc(0.3, 1.2)}/>` +
       `<g transform="rotate(-18 292 126)"><path d="M274 122 H312 C312 138 274 138 274 122Z" ${ink(0.88)} stroke="var(--ochre)" stroke-width="1.8"/></g>` +
       `<path d="M96 70 C118 90 130 90 150 70 M110 64 c4 -8 12 -8 12 0 M130 66 c4 -8 12 -8 12 0" ${oc(0.8, 1.6)}/>` +
       `<circle class="flick" cx="338" cy="112" r="4.5" ${sea(0.98)}/><circle class="glow flick" cx="338" cy="112" r="15" ${sea(0.6)}/>` +
@@ -437,7 +448,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<path d="M110 200 V44 C110 40 150 36 170 54 V200Z" ${ink(0.98)}/>` +
       person(232, 200, 112) +
       `<g transform="translate(46 160)"><circle r="18" ${of(0.3)} stroke="var(--ochre)" stroke-width="2"/><path d="M-7 -3 l4 4 M7 -3 l-4 4 M-5 7 q5 4 10 0" ${oc(0.95, 1.8)}/></g>` +
-      `<circle class="pulse" cx="46" cy="160" r="28" ${oc(0.3, 1.2)}/>` +
+      `<circle class="ripple" cx="46" cy="160" r="28" ${oc(0.3, 1.2)}/>` +
       triskele(340, 150, 30, oc(0.6, 1.4)),
     investigation:
       frame() +
@@ -514,7 +525,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<circle class="glow pulse" cx="300" cy="64" r="30" ${of(0.35)}/><circle cx="300" cy="64" r="22" ${of(0.5)}/>` +
       bell(150, 100, 34, oc(0.95, 2), of(0.2)) +
       `<path d="M150 34 V56" ${oc(0.9, 2)}/>` +
-      `<circle class="pulse" cx="150" cy="100" r="54" ${oc(0.3, 1.3)}/><circle class="pulse" style="animation-delay:-1.4s" cx="150" cy="100" r="76" ${oc(0.18, 1.2)}/>` +
+      `<circle class="ripple" cx="150" cy="100" r="54" ${oc(0.3, 1.3)}/><circle class="ripple" style="animation-delay:-1.4s" cx="150" cy="100" r="76" ${oc(0.18, 1.2)}/>` +
       `<path d="M30 192 H370" ${oc(0.6, 2)}/>` +
       `<path d="M230 192 C250 170 280 170 300 192" ${oc(0.6, 1.8)}/>` +
       triskele(300, 160, 22, oc(0.7, 1.5)),
@@ -528,7 +539,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       Array.from(
         { length: 5 },
         (_, i) =>
-          `<circle class="pulse" style="animation-delay:-${(i * 0.7).toFixed(1)}s" cx="${70 + i * 60}" cy="168" r="${6 + (i % 3) * 3}" ${oc(0.4, 1.2)}/>`,
+          `<circle class="ripple" style="animation-delay:-${(i * 0.7).toFixed(1)}s" cx="${70 + i * 60}" cy="168" r="${6 + (i % 3) * 3}" ${oc(0.4, 1.2)}/>`,
       ).join('') +
       `<path d="M60 40 H340" ${oc(0.6, 2)}/>` +
       triskele(200, 90, 34, oc(0.55, 1.4)),
@@ -576,7 +587,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       Array.from(
         { length: 4 },
         (_, i) =>
-          `<ellipse class="pulse" style="animation-delay:-${(i * 0.9).toFixed(1)}s" cx="${70 + i * 90}" cy="${170 + (i % 2) * 8}" rx="${22 + i * 3}" ry="5" ${oc(0.45, 1.3)}/>`,
+          `<ellipse class="ripple" style="animation-delay:-${(i * 0.9).toFixed(1)}s" cx="${70 + i * 90}" cy="${170 + (i % 2) * 8}" rx="${22 + i * 3}" ry="5" ${oc(0.45, 1.3)}/>`,
       ).join('') +
       `<circle class="glow pulse" cx="200" cy="60" r="26" ${of(0.2)}/>`,
     orientation:
@@ -595,7 +606,7 @@ const SCENES: Record<string, Record<SceneKind, string>> = {
       `<ellipse cx="230" cy="178" rx="70" ry="10" ${of(0.18)} stroke="var(--ochre)" stroke-width="2"/>` +
       `<circle cx="230" cy="178" r="9" ${oc(0.95, 2.6)}/>` +
       bell(310, 100, 26, oc(0.9, 2), of(0.22)) +
-      `<circle class="pulse" cx="310" cy="100" r="46" ${oc(0.3, 1.3)}/><circle class="pulse" style="animation-delay:-1.3s" cx="310" cy="100" r="66" ${oc(0.18, 1.2)}/>`,
+      `<circle class="ripple" cx="310" cy="100" r="46" ${oc(0.3, 1.3)}/><circle class="ripple" style="animation-delay:-1.3s" cx="310" cy="100" r="66" ${oc(0.18, 1.2)}/>`,
     investigation:
       frame() +
       `<rect x="130" y="130" width="140" height="56" ${ink(0.9)}/>` +
@@ -648,7 +659,7 @@ const MOODS: Record<Mood, string> = {
     `<path d="M70 120 C150 46 270 46 340 120 C270 76 160 76 70 120Z" ${oc(0.8, 2)} fill="var(--ochre)" fill-opacity=".14"/>` +
     `<path d="M338 120 L352 146" ${oc(0.8, 2.4)}/>` +
     embers(14, 200, 60, 300, of(0.7)) +
-    `<circle class="pulse" cx="316" cy="44" r="10" ${oc(0.35, 1.4)}/>`,
+    `<circle class="ripple" cx="316" cy="44" r="10" ${oc(0.35, 1.4)}/>`,
 };
 
 export function sceneSvg(premiseId: string, kind: SceneKind): string | null {

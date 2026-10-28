@@ -10,6 +10,12 @@ Chaque release ajoute une entrée `## [X.Y.Z] - AAAA-MM-JJ` : `scripts/check-tag
 
 ## [Non publié]
 
+## [0.17.0] - 2026-10-28
+
+### Ajouté
+
+- Les gravures bougent : les vagues roulent, les cloches balancent, les braises montent, les silhouettes respirent, les spirales et les triskèles tournent très lentement, et des cercles s'élargissent comme des ondes. Tout est dessiné par le code, sans fichier ni connexion. Avec « Réduire les animations », tout reste immobile.
+
 ## [0.16.0] - 2026-10-20
 
 ### Ajouté

@@ -28,6 +28,15 @@ describe('illustrations', () => {
     ].join('');
     expect(all).not.toMatch(/<script|href=|on\w+=|http/i);
   });
+  it('les gravures bougent : vagues, cloches, braises, souffle, spirales, cercles', () => {
+    const all = [
+      ...catalog.premises.flatMap((p) => kinds.map((k) => sceneSvg(p.id, k) ?? '')),
+      ...moods.map(moodSvg),
+    ].join('');
+    for (const motion of ['wave', 'sway', 'rise', 'breathe', 'twirl', 'ripple']) {
+      expect(all, motion).toContain(`class="${motion}`);
+    }
+  });
   it('une prémisse inconnue ne produit rien', () => {
     expect(sceneSvg('premise-99', 'wakeup')).toBeNull();
   });
